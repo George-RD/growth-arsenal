@@ -8,7 +8,7 @@
       "expectations": [
         "Output avoids Tier-1 AI vocabulary from references/de-ai-prose.md (delve, landscape, tapestry, paradigm, leverage, harness, navigate, realm, embark, journey, myriad, plethora, multifaceted, revolutionize, synergy, ecosystem, resonate, streamline) and avoids 'unprecedented', 'cutting-edge', and 'AI-powered'.",
         "Output sentences average under 15 words.",
-        "Output contains no more than one em dash.",
+        "Output contains zero em dashes (short consumer copy should use commas or full stops).",
         "Flesch-Kincaid grade computed on the output is ≤6."
       ]
     },

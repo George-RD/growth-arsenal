@@ -11,7 +11,7 @@ Use this skill whenever you write or revise customer-facing business copy — of
 
 1. **Read the rules first.** Before writing or editing, scan the plain-language and de-AI references.
 2. **Target ≤5th-grade reading level.** Short sentences. One idea per sentence. Active voice. Concrete nouns. No jargon without a one-line translation.
-3. **Cut AI tells.** Remove inflated significance, formulaic triads, dead vocabulary ("delve", "landscape", "unlock", "robust", "seamless"), em-dash and boldface overuse, hedging, and uniform sentence rhythm.
+3. **Cut AI tells.** Remove inflated significance, formulaic triads, dead vocabulary ("delve", "landscape", "unlock", "robust", "seamless"), crutch transitions ("Moreover", "That said"), synonym cycling, boldface overuse, hedging, and uniform sentence rhythm. Count em dashes and cut them; short copy should have zero.
 4. **Take a position.** If every reasonable person would agree with the line, it is not copy — it is noise. Say something specific, opinionated, or risky.
 5. **Vary sentence length.** Mix short punchy lines with longer ones. Avoid metronomic medium-length sentences.
 6. **No hedging without a reason.** Delete "it's worth noting", "arguably", "could potentially", "studies show", "many believe". Name the source or say the thing directly.
