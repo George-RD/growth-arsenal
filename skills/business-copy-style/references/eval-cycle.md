@@ -47,11 +47,15 @@ still fails the reader. Apply these three:
 
 Score each pass/fail. Any fail → revise and re-run the deterministic gate too.
 
-## Optional: adversarial reader panel
+## Adversarial reader panel — run it when the copy is high-stakes
 
-For high-stakes copy (a paid ad, a homepage hero, a launch email), stress-test it
-the way the workshops stress-test offers. Spawn 2-3 parallel reader subagents,
-each a distinct slice of the avatar, and ask each one blind:
+Run this for anything a stranger judges first or that costs money to get wrong: a
+paid ad, a homepage hero, a pricing page, a launch or cold-outreach email, a lead
+magnet. Skip it only for low-stakes internal or throwaway lines. When unsure, run
+it.
+
+Stress-test the copy the way the workshops stress-test offers. Spawn 2-3 parallel
+reader subagents, each a distinct slice of the avatar, and ask each one blind:
 
 - **The skimmer** — reads for 3 seconds. What did you take away? Would you click?
 - **The skeptic** — what claim here do you not believe, and why?

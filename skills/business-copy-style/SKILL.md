@@ -63,8 +63,10 @@ dashes, Tier-1 AI vocabulary, and average sentence length, and reports advisorie
 No shell? Compute Flesch-Kincaid by hand with the formula in
 `references/plain-language.md`, and count em dashes and Tier-1 words yourself.
 
-Then apply the three qualitative tests — position, read-aloud, specificity — and
-for high-stakes copy the optional adversarial reader panel in `references/eval-cycle.md`.
+Then apply the three qualitative tests — position, read-aloud, specificity. When
+the copy is high-stakes (paid ad, homepage hero, pricing, launch or outreach
+email), also run the adversarial reader panel in `references/eval-cycle.md`; skip
+it only for throwaway lines.
 
 ## Output
 
