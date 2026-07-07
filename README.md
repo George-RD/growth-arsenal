@@ -25,7 +25,7 @@ Three Hormozi-style workshops, run by adversarial AI agent teams. They stress-te
 |---|---|
 | **grandslam-offer** | Turns a vague idea into a priced, named offer with a real guarantee. A skeptical marketer, a margin-obsessed strategist, and simulated customers tear it apart first. Based on Alex Hormozi's *$100M Offers*. |
 | **hundred-million-leads** | Builds your lead magnets, picks your Core Four channels, writes your outreach scripts, and lays out a Rule of 100 plan. Companion to the offer workshop. Based on Alex Hormozi's *$100M Leads*. |
-| **business-copy-style** | Checks every customer-facing line against plain-language and de-AI rules before it ships. Both workshops call it automatically — nothing sounds like a robot wrote it. |
+| **business-copy-style** | Checks every customer-facing line against plain-language and de-AI rules before it ships. Both workshops call it automatically. Nothing sounds like a robot wrote it. |
 
 Each workshop saves its work to markdown files as it runs. That way your progress survives a restart and hands off cleanly to the next skill.
 
@@ -56,7 +56,7 @@ Once installed, just tell your agent what you need:
 - *"I sell an online course for new parents, help me build a lead generation system"* → hundred-million-leads takes over.
 - *"Rewrite this landing page copy so it doesn't sound like AI wrote it"* → business-copy-style takes over.
 
-The agent teams push back on weak ideas. They ask hard questions about pricing, guarantees, channels, and messaging. That's the point — the stress test happens before you go to market, not after.
+The agent teams push back on weak ideas. They ask hard questions about pricing, guarantees, channels, and messaging. That's the point. The stress test happens before you go to market, not after.
 
 ---
 
