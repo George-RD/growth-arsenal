@@ -298,3 +298,32 @@ footer { border-top: 2px solid var(--ink); padding-block: 2.6rem 3.5rem; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto; transition: none !important; }
 }
+
+/* Ko-fi support button: native, square, brand vermilion */
+.kofi-fixed {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.7rem 1.05rem;
+  border: 2px solid var(--ink);
+  background: var(--signal);
+  color: var(--paper);
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.kofi-fixed:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+@media (max-width: 520px) {
+  .kofi-fixed { font-size: 0.75rem; padding: 0.6rem 0.85rem; left: 0.8rem; bottom: 0.8rem; }
+}
