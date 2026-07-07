@@ -9,6 +9,9 @@ description: >-
   Triggers: "create a website", "build a page", "design a frontend", "harness mode",
   "iterate on design", "evaluate the design", "design quality loop".
 version: 1.0.0
+license: MIT
+source: https://github.com/George-RD/design-studio
+homepage: https://george-rd.github.io/design-studio/
 ---
 
 # Design Studio

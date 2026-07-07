@@ -9,6 +9,10 @@
   <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" alt="MIT License">
 </p>
 
+<p align="center">
+  <b><a href="https://george-rd.github.io/growth-arsenal/">See the live site →</a></b>
+</p>
+
 ## Build offers and lead gen systems that survive contact with real customers
 
 Three Hormozi-style workshops, run by adversarial AI agent teams. They stress-test every offer, lead magnet, and script before you ship it, not after.
