@@ -73,7 +73,7 @@ qualitative gates in `references/eval-cycle.md`:
 - **Read-aloud test:** would a real person say this out loud, or is it press-release voice?
 - **Specificity test:** could this copy be pasted onto a competitor by swapping one noun? If yes, it says nothing.
 
-For high-stakes copy, run the optional adversarial reader panel in `eval-cycle.md`.
+Run the adversarial reader panel in `eval-cycle.md` when the copy is high-stakes (paid ad, homepage hero, pricing, launch or outreach email, lead magnet). Skip it only for throwaway internal lines.
 
 ## 6. Decide
 
