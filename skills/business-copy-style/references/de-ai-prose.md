@@ -26,9 +26,11 @@ Fix:
 ## 3. Overused AI Vocabulary
 
 Tier 1 (cut immediately):
+
 - delve, landscape, tapestry, paradigm, leverage, harness, navigate, realm, embark, journey, myriad, plethora, multifaceted, revolutionize, synergy, ecosystem, resonate, streamline
 
 Tier 2 (suspicious in clusters of 3+):
+
 - robust, seamless, cutting-edge, innovative, comprehensive, pivotal, nuanced, compelling, transformative, bolster, underscore, foster, imperative, intricate, overarching, unprecedented
 
 ## 4. Grammar Patterns
@@ -66,6 +68,7 @@ Either name the source with a date or delete the claim.
 ## 7. Chatbot Artifacts
 
 Delete:
+
 - "Great question!", "I hope this helps!", "Let me know if you want me to expand!"
 - "Certainly!", "Absolutely!"
 
