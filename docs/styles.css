@@ -1,0 +1,300 @@
+/* growth-arsenal landing — "interrogation-room severity, plain-spoken warmth"
+   Palette as CSS custom properties. Vermilion signal = the adversarial review.
+   No purple, no card grid, no centered hero. Left-anchored, asymmetric. */
+
+:root {
+  --paper: #f2ede1;
+  --paper-2: #e8e0cf;
+  --ink: #17130d;
+  --ink-soft: #4a4238;
+  --signal: #d8371f;      /* vermilion — the red pen */
+  --signal-ink: #8f1c0c;
+  --line: #17130d1a;
+  --stamp: #d8371f;
+
+  --serif: "Fraunces", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --edge: clamp(1.25rem, 5vw, 6rem);
+  --maxw: 1320px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* faint paper grain / rule lines so the field isn't flat white */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom, transparent 0 39px, var(--line) 39px 40px);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+a { color: inherit; }
+
+.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--edge); position: relative; z-index: 1; }
+
+.mono-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--signal-ink);
+  font-weight: 600;
+}
+
+/* ---------- top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-block: 1.4rem;
+  border-bottom: 2px solid var(--ink);
+}
+.brand {
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: 1.05rem;
+}
+.brand b { color: var(--signal); }
+.topbar nav { display: flex; gap: clamp(0.8rem, 2vw, 2rem); font-size: 0.8rem; letter-spacing: 0.05em; }
+.topbar nav a { text-decoration: none; opacity: 0.75; }
+.topbar nav a:hover { opacity: 1; color: var(--signal); }
+
+/* ---------- hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding-block: clamp(3rem, 7vw, 6.5rem) clamp(3rem, 6vw, 5rem);
+  align-items: end;
+}
+.hero-kicker { margin-bottom: 1.6rem; }
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+  font-size: clamp(2.8rem, 8.5vw, 7.2rem);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.hero h1 .hl {
+  color: var(--signal);
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+}
+.hero p.lede {
+  margin-top: 1.6rem;
+  max-width: 34ch;
+  font-size: clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.hero-cta { margin-top: 2.2rem; display: flex; flex-wrap: wrap; gap: 0.9rem 1.2rem; align-items: center; }
+
+.btn {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.85rem 1.4rem;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: 5px 5px 0 var(--signal);
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--signal); }
+.btn.ghost { background: transparent; color: var(--ink); box-shadow: none; }
+.btn.ghost:hover { box-shadow: none; color: var(--signal); border-color: var(--signal); transform: none; }
+
+/* the dossier panel — 3 skills stacked like a case file, not a grid */
+.dossier {
+  border: 2px solid var(--ink);
+  background: var(--paper-2);
+  position: relative;
+  align-self: end;
+}
+.dossier::before {
+  content: "CASE FILE / 003";
+  position: absolute;
+  top: -1.9rem; left: -0.4rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
+}
+.stamp {
+  position: absolute;
+  top: -1.4rem; right: -0.8rem;
+  transform: rotate(-9deg);
+  border: 2.5px solid var(--stamp);
+  color: var(--stamp);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding: 0.3rem 0.6rem;
+  background: var(--paper);
+  border-radius: 3px;
+}
+.dossier-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  padding: 1.1rem 1.2rem;
+  border-bottom: 1.5px dashed var(--line);
+}
+.dossier-row:last-child { border-bottom: 0; }
+.dossier-row .idx { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--signal); line-height: 1; }
+.dossier-row h4 { font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.04em; margin-bottom: 0.15rem; }
+.dossier-row span { font-size: 0.75rem; color: var(--ink-soft); }
+
+/* ---------- section scaffolding ---------- */
+section { padding-block: clamp(3.5rem, 8vw, 7rem); position: relative; }
+.rule-top { border-top: 2px solid var(--ink); }
+
+.sec-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: clamp(1.8rem, 4vw, 3rem); }
+.sec-head .num { font-family: var(--mono); font-size: 0.8rem; color: var(--signal); }
+.sec-head h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4.5vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+/* ---------- problem ---------- */
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.problem-grid .big {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  line-height: 1.25;
+  font-weight: 500;
+}
+.problem-grid .big em { color: var(--signal); font-style: italic; }
+.problem-grid p { color: var(--ink-soft); margin-bottom: 1rem; }
+.problem-grid p:last-child { margin-bottom: 0; }
+
+/* ---------- workshops: staggered ledger, alternating alignment ---------- */
+.workshop {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr minmax(0, 30ch);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding-block: clamp(1.8rem, 3.5vw, 2.6rem);
+  border-top: 1.5px solid var(--line);
+  align-items: start;
+}
+.workshop:last-child { border-bottom: 1.5px solid var(--line); }
+.workshop .wnum {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 600;
+  color: var(--signal);
+  line-height: 0.8;
+}
+.workshop h3 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.4rem, 2.6vw, 2rem); letter-spacing: -0.01em; }
+.workshop .book { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--signal-ink); margin-top: 0.5rem; text-transform: uppercase; }
+.workshop p { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.55; }
+.workshop:hover .wnum { transform: translateX(6px); transition: transform 0.15s ease; }
+
+/* ---------- loop / how it works ---------- */
+.loop { background: var(--ink); color: var(--paper); }
+.loop::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 39px, #ffffff10 39px 40px);
+  pointer-events: none;
+}
+.loop .sec-head h2 { color: var(--paper); }
+.loop .sec-head .num { color: var(--signal); }
+.loop-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; counter-reset: step; }
+.loop-step { padding: 1.4rem 1.2rem 1.4rem 0; border-top: 2px solid var(--signal); }
+.loop-step .st-n { font-family: var(--mono); font-size: 0.72rem; color: var(--signal); letter-spacing: 0.15em; }
+.loop-step h4 { font-family: var(--serif); font-weight: 600; font-size: 1.25rem; margin: 0.6rem 0 0.5rem; }
+.loop-step p { font-size: 0.85rem; color: #d8d1c2; line-height: 1.5; }
+.loop-note { margin-top: 2.2rem; font-family: var(--mono); font-size: 0.85rem; color: #d8d1c2; max-width: 60ch; }
+.loop-note b { color: var(--signal); }
+
+/* ---------- install ---------- */
+.install-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.install-grid p { color: var(--ink-soft); margin-bottom: 1rem; max-width: 40ch; }
+.code {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  padding: 1.4rem 1.5rem;
+  border: 2px solid var(--ink);
+  overflow-x: auto;
+  box-shadow: 8px 8px 0 var(--signal);
+}
+.code .cm { color: #9c948a; }
+.code .ok { color: var(--signal); }
+.code b { color: #f2ede1; font-weight: 600; }
+.harness-list { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.harness-list span {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
+  border: 1.5px solid var(--ink); padding: 0.3rem 0.6rem;
+}
+
+/* ---------- faq ---------- */
+.faq details {
+  border-top: 1.5px solid var(--line);
+  padding: 1.2rem 0;
+}
+.faq details:last-child { border-bottom: 1.5px solid var(--line); }
+.faq summary {
+  font-family: var(--serif); font-weight: 600; font-size: clamp(1.15rem, 2vw, 1.5rem);
+  cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 1rem;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--signal); font-family: var(--mono); }
+.faq details[open] summary::after { content: "\2212"; }
+.faq p { color: var(--ink-soft); margin-top: 0.8rem; max-width: 66ch; }
+
+/* ---------- footer ---------- */
+footer { border-top: 2px solid var(--ink); padding-block: 2.6rem 3.5rem; }
+.foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem; align-items: baseline; }
+.foot-top .big { font-family: var(--serif); font-weight: 600; font-size: clamp(1.6rem, 4vw, 2.6rem); letter-spacing: -0.01em; max-width: 22ch; }
+.foot-meta { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+.foot-meta a { color: var(--signal-ink); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; align-items: start; }
+  .dossier { margin-top: 2.5rem; }
+  .problem-grid, .install-grid { grid-template-columns: 1fr; }
+  .loop-steps { grid-template-columns: 1fr 1fr; }
+  .workshop { grid-template-columns: 3rem 1fr; }
+  .workshop p.desc { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) {
+  .topbar nav { display: none; }
+  .loop-steps { grid-template-columns: 1fr; }
+  .stamp { right: 0; top: -1.2rem; font-size: 0.64rem; }
+  .hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto; transition: none !important; }
+}
