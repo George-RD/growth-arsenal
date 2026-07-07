@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <b><a href="https://george-rd.github.io/growth-arsenal/">See the live site →</a></b>
+  <b><a href="https://george-rd.github.io/growth-arsenal/">See how it works →</a></b>
 </p>
 
 ## Build offers and lead gen systems that survive contact with real customers
