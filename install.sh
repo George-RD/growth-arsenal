@@ -40,6 +40,7 @@ mkdir -p "$ROOT"
 
 for skill_path in "$BASE/$SKILLS_DIR"/*/; do
   name="$(basename "$skill_path")"
+  [ -f "$skill_path/SKILL.md" ] || continue
   dest="$ROOT/$name"
 
   if [ -e "$dest" ] && [ ! -L "$dest" ]; then
