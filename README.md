@@ -39,12 +39,12 @@ Pick the path for your harness. All commands assume you're in a terminal.
 |---|---|
 | Claude Code (plugin) | `/plugin marketplace add George-RD/growth-arsenal` then `/plugin install growth-arsenal@growth-arsenal` |
 | Claude Code (skills only) | `git clone https://github.com/George-RD/growth-arsenal && cd growth-arsenal && ./install.sh claude` |
-| Oh My Pi (OMP) | Same clone, then `./install.sh omp` (or `./install.sh claude` — OMP inherits `~/.claude/skills/` automatically) |
+| Oh My Pi (OMP) | Same clone, then `./install.sh omp` (or `./install.sh claude`; OMP inherits `~/.claude/skills/` automatically) |
 | Codex | Same clone, then `./install.sh codex` |
 | opencode | Same clone, then `./install.sh opencode` |
 | agents.md-style harnesses | Same clone, then `./install.sh agents` |
 
-Updates: `git pull` in the cloned repo — the install is a symlink, so changes show up immediately. Windows: symlinks aren't reliable, copy the `skills/<name>` directories into your harness's skills folder instead.
+Updates: `git pull` in the cloned repo; the install is a symlink, so changes show up immediately. Windows: symlinks aren't reliable, copy the `skills/<name>` directories into your harness's skills folder instead.
 
 ---
 
@@ -81,7 +81,7 @@ Every customer-facing line runs through business-copy-style first. Plain languag
 
 ## Contributing
 
-Found a bug? Got an idea? [Open an issue](https://github.com/George-RD/growth-arsenal/issues). PRs welcome — see `CLAUDE.md` for repo conventions.
+Found a bug? Got an idea? [Open an issue](https://github.com/George-RD/growth-arsenal/issues). PRs welcome. See `CLAUDE.md` for repo conventions.
 
 ## Credits
 
@@ -89,7 +89,7 @@ These workshops implement methodologies from Alex Hormozi's *$100M Offers* and *
 
 ## License
 
-MIT — see `LICENSE`.
+MIT. See `LICENSE`.
 
 <picture>
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,100:16213e&height=100&section=footer" width="100%" alt="footer">
