@@ -19,7 +19,7 @@ usage() {
   echo "  omp       -> ~/.omp/agent/skills/"
   echo "  claude    -> ~/.claude/skills/ (also inherited by OMP)"
   echo "  codex     -> ~/.codex/skills/"
-  echo "  opencode  -> document only (see README; no confirmed stable user-skills path)"
+  echo "  opencode  -> ~/.config/opencode/skills/"
   echo "  agents    -> ~/.agents/skills/"
   exit 1
 }
@@ -31,12 +31,7 @@ case "$1" in
   claude)   ROOT="$HOME/.claude/skills" ;;
   codex)    ROOT="$HOME/.codex/skills" ;;
   agents)   ROOT="$HOME/.agents/skills" ;;
-  opencode)
-    echo "opencode has no confirmed stable user-skills path yet."
-    echo "Run './install.sh claude' instead — OMP and several other harnesses"
-    echo "inherit ~/.claude/skills/ automatically. See README for details."
-    exit 1
-    ;;
+  opencode) ROOT="$HOME/.config/opencode/skills" ;;
   *) usage ;;
 esac
 
