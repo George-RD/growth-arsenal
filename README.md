@@ -7,6 +7,7 @@
   <img src="https://img.shields.io/badge/skills-3-blue?style=flat-square" alt="Skills">
   <img src="https://img.shields.io/badge/Claude_Code-compatible-green?style=flat-square" alt="Claude Code">
   <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" alt="MIT License">
+  <a href="https://ko-fi.com/george_builds"><img src="https://img.shields.io/badge/Ko--fi-Support-ff5e5b?style=flat-square&logo=ko-fi&logoColor=white" alt="Support on Ko-fi"></a>
 </p>
 
 <p align="center">
