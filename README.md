@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,100:16213e&height=180&section=header&text=growth-arsenal&fontSize=42&fontColor=e0e0e0&animation=fadeIn&fontAlignY=35&desc=Business%20growth%20workshops%20for%20AI%20coding%20agents&descSize=15&descAlignY=55">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:667eea,100:764ba2&height=180&section=header&text=growth-arsenal&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Business%20growth%20workshops%20for%20AI%20coding%20agents&descSize=15&descAlignY=55" width="100%" alt="growth-arsenal header">
+  <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,100:16213e&height=180&section=header&text=growth-arsenal&fontSize=42&fontColor=e0e0e0&animation=fadeIn&fontAlignY=35&desc=Business%20growth%20workshops%20run%20inside%20your%20AI%20coding%20agent&descSize=15&descAlignY=55">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:667eea,100:764ba2&height=180&section=header&text=growth-arsenal&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Business%20growth%20workshops%20run%20inside%20your%20AI%20coding%20agent&descSize=15&descAlignY=55" width="100%" alt="growth-arsenal header">
 </picture>
 
 <p align="center">
@@ -64,6 +64,9 @@ The agent teams push back on weak ideas. They ask hard questions about pricing, 
 
 **Isn't this just a chatbot with extra steps?**
 No. A plain chat call skips the adversarial review. Each phase gets torn apart by a skeptical marketer, a strategist, and simulated customers before you move on.
+
+**Does this replace talking to real customers?**
+No. It kills the obvious weak spots first, cheaply, before real buyers see them. You still have to talk to real people. They just meet a stronger offer.
 
 **Do I need to know the Hormozi books first?**
 No. The workshop asks the questions and builds the offer with you, phase by phase.
