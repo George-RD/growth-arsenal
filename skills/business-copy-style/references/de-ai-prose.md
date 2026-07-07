@@ -2,6 +2,8 @@
 
 Run this checklist before finalizing any customer-facing copy.
 
+**Before you flag anything, count and stack.** Do not claim "too many em dashes" or "overused triads" from a general impression — actually count them in the copy first. And when several tells land on the same phrase (boldface + scare quotes + a dramatic aside on one coined term), that is *one* strong tell, not three. Fix it once; do not pad the list.
+
 ## 1. Inflated Significance
 
 Cut or replace:
@@ -37,15 +39,17 @@ Fix:
 - Superficial -ing phrases: "highlighting...", "underscoring...", "showcasing..."
 - Negative parallelisms: "It's not just X, it's Y" more than once per short piece.
 - False ranges: "from X to Y" where X and Y aren't on a real scale.
+- Synonym cycling (elegant variation): "the offer... the deal... the package... the bundle" in one passage. Pick one word and repeat it. Repetition beats fake variety.
 
 ## 5. Rhythm and Style
 
 - Vary sentence length: add short punchy sentences under 8 words.
 - Avoid every sentence starting with "The" or a noun.
 - Start some sentences with "But", "And", "So", or "Look,".
-- No em dash overuse: more than one per 3-4 paragraphs is a flag.
+- **Em dashes: count them, then cut them.** In short consumer copy aim for zero; use commas or full stops. Even a single em dash is an AI tell when it injects a dramatic aside mid-line (e.g. "our tool — built for speed — wins under load"). In longer copy, more than one per 3-4 paragraphs is a flag.
 - No boldface emphasis in lists. Use it only on first mention of genuinely important terms.
 - Remove emoji and inline-header lists (`- **X:** ...`).
+- Cut crutch transitions: "Moreover", "Furthermore", "Additionally", "That said", "Moving forward", "When it comes to". Usually just start the next sentence, or use "but" / "so" / "because".
 
 ## 6. Hedging, Filler, and Vague Attributions
 
