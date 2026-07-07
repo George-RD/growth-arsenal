@@ -20,7 +20,7 @@ Target: Flesch-Kincaid Grade Level ≤ 6.
 
 Compute with any scratch cell:
 
-```
+```text
 Grade = 0.39 * (words / sentences) + 11.8 * (syllables / words) - 15.59
 ```
 
@@ -38,7 +38,7 @@ Grade = 0.39 * (words / sentences) + 11.8 * (syllables / words) - 15.59
 - Words: 10
 - Sentences: 1
 - Syllables: We(1) help(1) bus-y(2) own-ers(2) get(1) more(1) leads(1) with-out(2) work-ing(2) nights(1) = 14
-- Grade = 0.39 * 10 + 11.8 * 1.4 - 15.59 = 3.9 + 16.52 - 15.59 = 4.83
+- `Grade = 0.39 * 10 + 11.8 * 1.4 - 15.59 = 3.9 + 16.52 - 15.59 = 4.83`
 
 ## Exceptions
 

@@ -5,27 +5,85 @@ description: "Use when the task is to write or polish short, consumer-facing mar
 
 # Business Copy Style
 
-Use this skill whenever you write or revise customer-facing business copy — offers, outreach scripts, lead magnets, landing pages, README files, ads, or emails. The goal is plain, human prose a 5th grader can read and no one mistakes for AI.
+Write or fix customer-facing copy so it reads plain, sounds human, and no one
+mistakes it for AI. This is a **workflow**, not a rulebook: you draft, strip the
+AI tells, measure the result with a deterministic gate, judge whether it is
+actually good, and loop until it ships.
 
-## Core Rules
+## When to use
 
-1. **Read the rules first.** Before writing or editing, scan the plain-language and de-AI references.
-2. **Target ≤5th-grade reading level.** Short sentences. One idea per sentence. Active voice. Concrete nouns. No jargon without a one-line translation.
-3. **Cut AI tells.** Remove inflated significance, formulaic triads, dead vocabulary ("delve", "landscape", "unlock", "robust", "seamless"), crutch transitions ("Moreover", "That said"), synonym cycling, boldface overuse, hedging, and uniform sentence rhythm. Count em dashes and cut them; short copy should have zero.
-4. **Take a position.** If every reasonable person would agree with the line, it is not copy — it is noise. Say something specific, opinionated, or risky.
-5. **Vary sentence length.** Mix short punchy lines with longer ones. Avoid metronomic medium-length sentences.
-6. **No hedging without a reason.** Delete "it's worth noting", "arguably", "could potentially", "studies show", "many believe". Name the source or say the thing directly.
-7. **One translation per jargon term.** If you must use a term your avatar would not say out loud, follow it immediately with plain English in parentheses. Then remove the jargon in the next pass.
-8. **Compute Flesch-Kincaid before finishing.** If the grade is >6, shorten the worst sentences and swap abstractions for concrete nouns.
-9. **Read it out loud.** Flag anything that sounds like a press release, a chatbot, or no human would say.
+Offers, headlines, subheads, ads, cold outreach, lead magnets, landing pages,
+README intros, bios, taglines. Both workshop skills in this plugin
+(**grandslam-offer**, **hundred-million-leads**) call this skill by name before
+finalizing any customer-facing line.
 
-## Edge Case
+Not for strategy, campaign plans, or technical docs — see the description.
 
-If invoked standalone with no copy to review, write new copy under these rules rather than erroring or asking for copy to review. Ask the user what the copy is for, who it is to, and what action they want.
+## The loop
 
-## Routing Table
+```text
+BRIEF ──► DRAFT ──► DE-AI PASSES ──► MEASURE ──► JUDGE ──► DECIDE
+                         ▲                                    │
+                         └──────────── revise ◄──────────────┘
+                                                         ship when clean
+```
+
+1. **Brief** — capture what/who/action before writing. Template: `templates/copy-brief.md`.
+2. **Draft** — write fast in the avatar's words, one idea per sentence.
+3. **De-AI passes** — run the checklist in `references/de-ai-prose.md` in order.
+4. **Measure** — run `scripts/copy-lint.sh` (deterministic gate).
+5. **Judge** — apply the qualitative tests in `references/eval-cycle.md`.
+6. **Decide** — ship when both gates pass; otherwise fix the named failure and re-measure.
+
+Full detail: `references/workflow.md`.
+
+## Core principles
+
+- **Target ≤5th-grade reading level.** Short sentences, one idea each, active voice, concrete nouns.
+- **Take a position.** If every reasonable person agrees with the line, it is noise. Say something specific or risky.
+- **Vary sentence length.** Mix short punchy lines with longer ones. Avoid a metronomic medium-length cadence.
+- **Cut em dashes.** Count them; short copy should have zero. Use commas or full stops.
+- **No hedging, no filler, no jargon** without a one-line plain-English translation.
+- **Prove it, don't eyeball it.** Compute the reading grade and counts before you call it done.
+
+## Running the eval cycle
+
+Deterministic gate (preferred):
+
+```sh
+scripts/copy-lint.sh path/to/copy.txt        # or:  printf '%s' "$copy" | scripts/copy-lint.sh -
+scripts/copy-lint.sh --max-grade 8 magnet.md # tune per job
+```
+
+Exit 0 = gates pass; exit 1 = revise. It gates on Flesch-Kincaid grade, em
+dashes, Tier-1 AI vocabulary, and average sentence length, and reports advisories
+(Tier-2 vocab, double-hyphens, boldface lists). Gate table and tuning:
+`references/eval-cycle.md`.
+
+No shell? Compute Flesch-Kincaid by hand with the formula in
+`references/plain-language.md`, and count em dashes and Tier-1 words yourself.
+
+Then apply the three qualitative tests — position, read-aloud, specificity — and
+for high-stakes copy the optional adversarial reader panel in `references/eval-cycle.md`.
+
+## Output
+
+Deliver with `templates/rewrite-output.md`: the clean copy first, a short
+**Changes** table (only passes you actually used), then the measurement line.
+
+## Edge case
+
+If invoked with no copy to review, do not error or stall — ask what the copy is
+for, who it is to, and what action it should drive (the brief), then write new
+copy through the same loop.
+
+## Routing table
 
 | Need | Read |
 |---|---|
-| Lower reading level and enforce plain-language rules | references/plain-language.md |
-| Strip AI-sounding prose and structural tells | references/de-ai-prose.md |
+| The end-to-end workflow | `references/workflow.md` |
+| Gate thresholds, qualitative tests, reader panel | `references/eval-cycle.md` |
+| The full de-AI tell checklist | `references/de-ai-prose.md` |
+| Plain-language rules + Flesch-Kincaid formula | `references/plain-language.md` |
+| Deterministic checker | `scripts/copy-lint.sh` (`--help`) |
+| Intake / output shapes | `templates/copy-brief.md`, `templates/rewrite-output.md` |

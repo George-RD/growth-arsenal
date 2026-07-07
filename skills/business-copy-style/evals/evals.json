@@ -22,6 +22,18 @@
         "Output avoids AI-tell vocabulary (delve, landscape, tapestry, paradigm, leverage, harness, navigate, realm, embark, journey, myriad, plethora, multifaceted, revolutionize, synergy, ecosystem, resonate, streamline, robust, seamless, cutting-edge, innovative, comprehensive, pivotal, nuanced, compelling, transformative, bolster, underscore, foster, imperative, intricate, overarching, unprecedented).",
         "Flesch-Kincaid grade computed on the output is ≤6."
       ]
+    },
+    {
+      "id": 2,
+      "prompt": "Here's a SaaS lead-magnet intro paragraph. Rewrite it so it sounds human and de-AI'd, then show your work in this skill's output format. Text: 'In today's rapidly evolving landscape, our groundbreaking platform empowers teams to seamlessly streamline workflows — unlocking unprecedented productivity while fostering collaboration across the entire organization.'",
+      "expected_output": "A rewritten intro that is plain and human, followed by a short Changes table and a measurement line (Flesch-Kincaid grade, em dash count, Tier-1 count) as described in templates/rewrite-output.md.",
+      "expectations": [
+        "The rewritten copy avoids Tier-1 AI vocabulary (streamline, leverage, navigate, landscape, etc.) and drops 'groundbreaking', 'seamlessly', 'unprecedented', 'fostering'.",
+        "The rewritten copy contains zero em dashes.",
+        "Flesch-Kincaid grade computed on the rewritten copy is ≤6.",
+        "The response includes a Changes table listing which passes were applied.",
+        "The response reports measurement numbers (at least Flesch-Kincaid grade and em dash count) for the rewritten copy."
+      ]
     }
   ]
 }
