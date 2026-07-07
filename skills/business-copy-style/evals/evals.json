@@ -1,0 +1,27 @@
+{
+  "skill_name": "business-copy-style",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Rewrite this landing-page headline and subhead so it sounds like a real person wrote it, not AI. Keep it simple: 'Unlock unprecedented growth by leveraging our cutting-edge, AI-powered platform to streamline your workflow and revolutionize your business outcomes.'",
+      "expected_output": "A short headline/subhead that strips AI vocabulary, inflated claims, and jargon; uses concrete, human language; and reads at or below a 5th-grade level.",
+      "expectations": [
+        "Output avoids Tier-1 AI vocabulary from references/de-ai-prose.md (delve, landscape, tapestry, paradigm, leverage, harness, navigate, realm, embark, journey, myriad, plethora, multifaceted, revolutionize, synergy, ecosystem, resonate, streamline) and avoids 'unprecedented', 'cutting-edge', and 'AI-powered'.",
+        "Output sentences average under 15 words.",
+        "Output contains no more than one em dash.",
+        "Flesch-Kincaid grade computed on the output is ≤6."
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Write a 3-sentence cold outreach opener for a local bookkeeping service. Make it sound like a person wrote it, not a chatbot. Keep it dead simple and easy to read.",
+      "expected_output": "Three short, plain sentences for a cold email or DM opener that name a real pain, use simple words, and avoid AI-sounding phrasing.",
+      "expectations": [
+        "Output has exactly three sentences (or close to three, and no more than four).",
+        "Output sentences average under 15 words.",
+        "Output avoids AI-tell vocabulary (delve, landscape, tapestry, paradigm, leverage, harness, navigate, realm, embark, journey, myriad, plethora, multifaceted, revolutionize, synergy, ecosystem, resonate, streamline, robust, seamless, cutting-edge, innovative, comprehensive, pivotal, nuanced, compelling, transformative, bolster, underscore, foster, imperative, intricate, overarching, unprecedented).",
+        "Flesch-Kincaid grade computed on the output is ≤6."
+      ]
+    }
+  ]
+}

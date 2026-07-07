@@ -1,0 +1,27 @@
+{
+  "skill_name": "hundred-million-leads",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I sell an online course for new parents who want to help their baby sleep through the night. Help me build a lead generation system that doesn't rely on paid ads.",
+      "expected_output": "A multi-phase workshop output that includes a lead magnet tailored to sleep-deprived new parents, a recommendation of Core Four channels (warm outreach, cold outreach, content, paid ads) with a primary and secondary channel, outreach script skeletons, and a Rule of 100 execution plan.",
+      "expectations": [
+        "The output names a specific lead magnet (e.g., a guide, checklist, video, or mini-course) that solves a narrow problem for new parents.",
+        "The output recommends specific Core Four channels and names a primary channel and a secondary channel (e.g., warm outreach as primary, content as secondary).",
+        "The output includes at least one outreach script skeleton or message template for the recommended channel(s).",
+        "The output includes a Rule of 100 or 100-unit daily action plan (e.g., 100 days of warm outreach, content pieces, or direct messages)."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I run a residential HVAC company in Phoenix. We do repairs and replacements. I need a system to keep our pipeline full of qualified homeowners, especially before summer hits.",
+      "expected_output": "A multi-phase workshop output that includes a locally relevant lead magnet for Phoenix homeowners, a Core Four channel recommendation suited to home services, outreach script skeletons, and a Rule of 100 execution plan tied to seasonal demand.",
+      "expectations": [
+        "The output names a specific lead magnet (e.g., an AC readiness checklist, pre-summer tune-up guide, or cost estimator) for Phoenix homeowners.",
+        "The output recommends specific Core Four channels and names a primary channel and a secondary channel appropriate for a local HVAC business.",
+        "The output includes at least one outreach script skeleton or message template for the recommended channel(s).",
+        "The output includes a Rule of 100 or 100-unit daily action plan and ties it to a time horizon (e.g., before summer, 100 days, or 100 outreach attempts)."
+      ]
+    }
+  ]
+}

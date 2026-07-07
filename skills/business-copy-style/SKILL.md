@@ -1,6 +1,6 @@
 ---
 name: business-copy-style
-description: "Use when writing customer-facing business copy — offers, outreach scripts, lead magnets, landing/README copy — or when asked to simplify language or remove AI-sounding prose. Enforces ≤5th-grade reading level and de-AI style rules."
+description: "Use when the task is to write or polish short, consumer-facing marketing text itself — ad copy, offer wording, outreach emails, landing page or headline copy, lead magnets, README intros, billboard/product taglines — making it read at a 5th-grade level and sound human, not AI-generated. Trigger on requests to simplify, humanize, or de-AI existing copy, or to draft new short promotional text. Do NOT trigger for building marketing/lead-gen strategies, campaign plans, or technical/engineering documentation (API references, white papers, release notes) even if asked to sound \"less like AI\" — this skill is about the wording of consumer-facing copy, not strategic planning or technical writing."
 ---
 
 # Business Copy Style

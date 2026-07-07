@@ -1,0 +1,29 @@
+{
+  "skill_name": "grandslam-offer",
+  "evals": [
+    {
+      "id": 1,
+      "name": "Bookkeeping 5x offer",
+      "prompt": "I run a small bookkeeping firm, help me build an offer I can charge 5x for",
+      "expected_output": "A Grand Slam Offer workshop output that identifies a starving-crowd market, applies the value equation, names a guarantee, and produces a pricing/stack structure for a bookkeeping firm.",
+      "expectations": [
+        "The output identifies a specific starving-crowd target avatar (not just 'business owners') for the bookkeeping offer.",
+        "The output references the value equation explicitly (Dream Outcome x Perceived Likelihood of Achievement / (Time Delay x Effort & Sacrifice)).",
+        "The output produces a named guarantee with a vivid name and a concrete promise.",
+        "The output includes a pricing stack or tiered offer structure with at least one price point that is 5x or more above typical bookkeeping fees."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Fitness coach high-ticket offer",
+      "prompt": "I'm a fitness coach for busy executives. Help me design a high-ticket offer they can't say no to.",
+      "expected_output": "A Grand Slam Offer workshop output that names the executive avatar, applies scarcity/urgency/exclusivity, produces a guarantee, and structures a premium offer with bonuses and a delivery cube.",
+      "expectations": [
+        "The output names a specific high-ticket avatar (busy executives / C-suite / high-performers) and their acute pain.",
+        "The output applies at least one of urgency, scarcity, or exclusivity to the offer.",
+        "The output produces a named guarantee with a concrete risk reversal or results promise.",
+        "The output structures the offer with a core service plus at least one bonus or premium component stacked into a high-ticket price."
+      ]
+    }
+  ]
+}
