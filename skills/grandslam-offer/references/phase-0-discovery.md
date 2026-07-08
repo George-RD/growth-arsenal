@@ -16,7 +16,7 @@ Organized by what each phase actually needs. When you hit a phase, check the bri
 
 ### Template Structure
 
-Write this template to `{project-name}-research.md` at the start of Phase 0, then fill sections as research comes in. Also create `{project-name}-settings.md` with a `## Preferences` block (Spelling: British default / American) at the same time, so load-bearing config is captured once and read lightly by the language skill.
+Write this template to `{project-name}-research.md` at the start of Phase 0, then fill sections as research comes in. Also create `{project-name}-settings.md` with a `## Preferences` block (Spelling: British default / American) at the same time, so load-bearing config is captured once and read lightly by the business-copy-style skill.
 
 ```text
 # Research Brief — [Business Name]
@@ -105,9 +105,10 @@ This cumulative context gets passed to persona agents in each subsequent phase. 
 ### Step 1: Get the Business Idea
 
 Open with:
+
 > *"I'm your Grand Slam Offer Architect. I'll walk you through building an offer so good people feel stupid saying no — and I have a team of adversarial agents who'll tear apart every weak point before we're done.*
 >
-> *To start: What's your business idea, and who is your target audience? Be specific — what do you sell, to whom, and what problem does it solve? Also confirm one preference: British or American spelling? (I default to British unless you say otherwise — I'll save it to the project settings file so every line stays consistent.)*
+> *To start: What's your business idea, and who is your target audience? Be specific — what do you sell, to whom, and what problem does it solve? Also confirm one preference: British or American spelling? (I default to British unless you say otherwise. I'll save it to the project settings file so every line stays consistent.)*
 
 ### Step 2: Research Intake
 
@@ -159,7 +160,7 @@ Once personas are validated, confirm:
 ### Phase 0 Output
 
 1. Write initial `{project-name}-offer.md` with Phase 0 section
-2. Create `{project-name}-settings.md` recording the confirmed spelling preference (read by the language skill at copy time)
+2. Create `{project-name}-settings.md` recording the confirmed spelling preference (read by the business-copy-style skill at copy time)
 3. Generate `{project-name}-research-dashboard.html` using the `templates/research-dashboard.md` spec, populated with Research Brief data. Open in browser: `open {project-name}-research-dashboard.html`
 4. Generate `{project-name}-workshop-progress.html` using the `templates/workshop-progress.md` spec. Open in browser.
 
