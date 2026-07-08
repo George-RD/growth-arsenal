@@ -43,6 +43,7 @@ Full detail: `references/workflow.md`.
 - **Take a position.** If every reasonable person agrees with the line, it is noise. Say something specific or risky.
 - **Vary sentence length.** Mix short punchy lines with longer ones. Avoid a metronomic medium-length cadence.
 - **Cut em dashes.** Count them; short copy should have zero. Use commas or full stops.
+- **Pick one spelling variant and hold it.** Default to British English. If the project's settings file (or the calling workshop) specifies American, switch. Never mix the two in one piece of copy.
 - **No hedging, no filler, no jargon** without a one-line plain-English translation.
 - **Prove it, don't eyeball it.** Compute the reading grade and counts before you call it done.
 
