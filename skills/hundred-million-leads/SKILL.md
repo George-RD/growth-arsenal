@@ -68,6 +68,7 @@ Phase outputs also use templates:
 - `templates/tracking-dashboard.md` — daily checklist, leading/lagging indicators, and weekly milestones for Phase 5
 
 Instruct the user to copy the relevant template, fill the brackets, and apply the business-copy-style skill before finalizing any customer-facing text.
+Optionally, maintain `{project-name}-decisions.md` with timestamped, type-tagged entries (DECISION, CORRECTION, PREFERENCE) for key choices and corrections. Keep entries free of private business details. The plugin-feedback skill can attach this, redacted, to feedback.
 
 ## Copy-Style Gate
 
@@ -143,3 +144,7 @@ Value = (Dream Outcome x Perceived Likelihood) / (Time Delay x Effort)
 | Phase 5: Rule of 100 Execution Plan | `references/phase-5-rule-of-100.md` |
 | Adversarial review mechanics | `references/adversarial-review.md` |
 | Agent persona definitions | `references/agent-team.md` |
+
+## End-of-Workshop: Feedback & Wrap-up
+
+When the workshop concludes (after Phase 5 and the blueprint summary), run the **plugin-feedback** skill. It asks two brief feedback questions, offers to post a public `[FEEDBACK]` issue (explicit confirmation only, never autonomous), and relays the author's Ko-fi message. Invoke it only at the end. It stays out of context until then.
