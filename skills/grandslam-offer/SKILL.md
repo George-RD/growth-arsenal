@@ -39,7 +39,7 @@ Phase 5: Enhancement → Scarcity, Urgency, Bonuses, Guarantees, Naming → Fina
 
 ## Working Files
 
-This workshop produces two persistent markdown files in the user's working directory. These survive context compaction and serve as the handoff to downstream workshops (e.g., the **hundred-million-leads** skill in this plugin).
+This workshop produces persistent markdown files in the user's working directory. The Research Brief and Offer File are core, the Decision Log is optional. All survive context compaction and serve as the handoff to downstream workshops (e.g., the **hundred-million-leads** skill in this plugin).
 
 ### Research Brief: `{project-name}-research.md`
 
@@ -107,6 +107,10 @@ Status: Phase [X] of 5 complete
 - [ ] Write sales script
 - [ ] Create landing page
 ```
+
+### Decision Log: `{project-name}-decisions.md`
+
+Optional and lightweight. Append one timestamped, type-tagged line per key choice, correction, or preference as the workshop runs (for example, `- 2026-07-08 DECISION: chose American spelling`). Keep it free of private business details. The plugin-feedback skill can attach this, redacted, to end-of-workshop feedback.
 
 ## Delegation & synthesis
 
@@ -208,3 +212,7 @@ This skill is the companion workshop to **hundred-million-leads** in the same pl
 | Phase 5: Enhancement | `references/phase-5-enhancement.md` |
 | Adversarial review | `references/adversarial-review.md` |
 | Naming | `references/naming-magic.md` |
+
+## End-of-Workshop: Feedback & Wrap-up
+
+When the workshop concludes (after Phase 5 and the C.L.O.S.E.R. offer), run the **plugin-feedback** skill. It asks two brief feedback questions, offers to post a public `[FEEDBACK]` issue (explicit confirmation only, never autonomous), and relays the author's Ko-fi message. Invoke it only at the end. It stays out of context until then.
