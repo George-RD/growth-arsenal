@@ -35,6 +35,8 @@ scripts/compose-feedback.sh --favorite "..." --hated "..." [--log {project-name}
 
 The helper only assembles text. It never contacts GitHub.
 
+**Privacy verification (mandatory):** before showing the draft, re-read both answers. Replace any business idea, customer names, financials, market data, or project names with generic placeholders (e.g. `[your product]`, `[your customers]`). Then re-check the assembled draft contains only plugin feedback. Do not skip this, even if the answers looked clean.
+
 If a `{project-name}-decisions.md` exists, offer to attach it under an optional "Decision log" section. **Warn the user to review and redact it first**, because it may reveal usage patterns. Attachment stays optional and off by default in what you show. Include it only if they confirm.
 
 Show the full draft to the user. State plainly: *if posted, this becomes a public issue on the growth-arsenal repo.*
@@ -46,7 +48,7 @@ Detect GitHub access:
 - Run `command -v gh` and `gh auth status`. If `gh` exists and is authed to `George-RD/growth-arsenal`, you may offer to open the issue.
 - If `gh` is missing or not authed, do not attempt. Instead, give them the draft text and the manual link: `https://github.com/George-RD/growth-arsenal/issues/new`. Tell them they can paste it in.
 
-**The hard rule:** never run `gh issue create` without explicit confirmation. Present the draft, then ask: "Want me to post this as a public `[FEEDBACK]` issue?" Only on a clear yes, run:
+**The hard rule:** never run `gh issue create` without explicit confirmation. Present the draft and the exact command below, then ask the user to confirm by typing `post it`. Only after that exact phrase, run:
 
 ```sh
 gh issue create --title "[FEEDBACK] <short summary>" --body-file <draft-file>
