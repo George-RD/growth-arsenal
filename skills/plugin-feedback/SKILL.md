@@ -56,10 +56,19 @@ Make clear one more time that accepting shares it publicly. If they decline, tha
 
 ## Part 4: Message from the author (Ko-fi)
 
-Relay this as George's words, not your own solicitation. Attribute it clearly:
+Relay this as George's words, not your own solicitation. Attribute it clearly. It lands right after they named what they liked in Part 1, so the value is fresh and the reciprocity is natural. Tie the message to the offer they just shaped, so the contrast is real rather than generic.
 
-> George, the author of this plugin, asked me to pass this on: "If this workshop gave you real value and you would like to support the work behind it, here is my Ko-fi. No pressure at all, only if it genuinely helped."
-> https://ko-fi.com/george_builds
+> George, the author of this plugin, asked me to pass this on: "If this workshop helped you shape an offer you're proud of, that's the win. A solid offer is worth far more than a coffee, and most people who've used this feel the same. That's why the small ask to keep the next tool free feels fair. No pressure at all. If that's been true for you too, here's the link: https://ko-fi.com/george_builds"
+
+Why this phrasing (influence, kept honest):
+
+- Reciprocity: arrives after value delivered, and after they said what they liked.
+- Contrast: their offer is worth far more than a coffee, so the small ask feels proportionate, not clingy.
+- Social proof: grounded in value, not payments. A solid offer is worth more than a coffee (fact), and George's honest belief is most users agree. Never claim people paid, and never invent numbers or names.
+- Fairness: "feels fair" ties the tiny ask to the large value given, so the reciprocity norm fires instead of guilt.
+- Benefit: "funds the next free tool" shows the gift returns to them and the community.
+- No hard number: "the price of a coffee" anchors without feeling transactional. Add a digit only if George asks.
+- Zero pressure, every time.
 
 One line of framing from you is fine ("sharing his link as he asked"), then the quote and URL. Never imply the AI benefits. Never nag.
 
