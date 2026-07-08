@@ -1,6 +1,6 @@
 # The Agent Team
 
-At each phase checkpoint, spawn **parallel Task agents** (`subagent_type: general-purpose`) to adversarially review the phase output. Each agent gets their persona definition + the current phase context.
+At each phase checkpoint, spawn **parallel Task agents** (`subagent_type: "general-purpose"`) on a **cheaper, faster model tier than the current session** (not the maximum/costliest tier), so the harness maps it to its closest available model, to adversarially review the phase output. Each agent gets their persona definition + the current phase context.
 
 ## Core Agents (Used Every Phase)
 

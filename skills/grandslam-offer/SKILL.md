@@ -114,7 +114,7 @@ Optional and lightweight. Append one timestamped, type-tagged line per key choic
 
 ## Delegation & synthesis
 
-At every phase checkpoint, spawn **parallel Task agents** (`subagent_type: "general-purpose"`, `model: "sonnet"`) to adversarially review the phase output.
+At every phase checkpoint, spawn **parallel Task agents** (`subagent_type: "general-purpose"`) on a **cheaper, faster model tier than the current session** (not the maximum/costliest tier), so the harness maps it to its closest available model, to adversarially review the phase output.
 
 **Core agents (every phase):**
 

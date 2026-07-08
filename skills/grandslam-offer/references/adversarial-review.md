@@ -75,7 +75,7 @@ would actually use, not marketing jargon.
 At each phase checkpoint:
 
 1. **Collect the phase output** — everything the user has decided/created
-2. **Spawn parallel Task agents** using `subagent_type: "general-purpose"` with `model: "sonnet"` for speed
+2. **Spawn parallel Task agents** using `subagent_type: "general-purpose"` on a **cheaper, faster model tier than the current session** (not the maximum/costliest tier), so the harness maps it to its closest available model, for speed
 3. Each agent gets: their **persona definition** + the **phase output** + the **specific review prompt**
 4. **Include cumulative persona context** — pass the persona's full evolution history from the Research Brief, not just the base profile
 5. Agents return independently — they do NOT see each other's reviews
