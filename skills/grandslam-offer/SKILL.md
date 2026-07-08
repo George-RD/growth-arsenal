@@ -179,11 +179,11 @@ Value = (Dream Outcome × Perceived Likelihood) ÷ (Time Delay × Effort)
 9. **Persist everything** — write to offer file and Research Brief after every phase.
 10. **Generate HTML** — create/update visual dashboards after every phase.
 11. **Phase gating** — explicitly confirm with the user before advancing.
-12. **End with the summary** — close with the final offer file + HTML pages.
+12. **End with the summary** — close with the final offer file + HTML pages, then offer the C.L.O.S.E.R. sales script (see below).
 
-## C.L.O.S.E.R. Sales Framework (Bonus Output)
+## C.L.O.S.E.R. Sales Framework (offered at close)
 
-If the user wants it, generate a sales script outline using Hormozi's C.L.O.S.E.R. framework:
+At the end of Phase 5, offer to generate the C.L.O.S.E.R. sales script. Do not wait for the user to ask. Suggest running it in a fresh session so the script gets clean, focused context. If they accept, generate it using Hormozi's C.L.O.S.E.R. framework:
 
 | Step | Action | Purpose |
 |------|--------|---------|
