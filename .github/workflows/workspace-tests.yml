@@ -8,6 +8,8 @@ on:
       - "skills/business-copy-style/**"
       - "evaluations/**"
       - "DESIGN.md"
+      - "README.md"
+      - "docs/**"
   push:
     branches: [main]
     paths:
@@ -16,6 +18,8 @@ on:
       - "skills/business-copy-style/**"
       - "evaluations/**"
       - "DESIGN.md"
+      - "README.md"
+      - "docs/**"
 
 permissions:
   contents: read
@@ -44,17 +48,32 @@ jobs:
             --surface all \
             --output-dir /tmp/growth-arsenal-reports
           ! grep -R -E '\{\{[A-Z_]+\}\}' /tmp/growth-arsenal-reports/*.html
-      - name: Reproduce landing copy comparison
+      - name: Reproduce landing copy comparisons
         run: |
           python skills/business-copy-style/scripts/copy-compare.py \
             --baseline evaluations/fixtures/landing-page-old.txt \
             --candidate evaluations/fixtures/landing-page-new.txt \
-            --format json > /tmp/landing-copy-comparison.json
+            --baseline-label "Variant A" \
+            --candidate-label "Variant B" \
+            --format json > /tmp/old-vs-new.json
+          python skills/business-copy-style/scripts/copy-compare.py \
+            --baseline evaluations/fixtures/landing-page-new.txt \
+            --candidate evaluations/fixtures/landing-page-hybrid.txt \
+            --baseline-label "Variant B" \
+            --candidate-label "Variant C" \
+            --format json > /tmp/new-vs-hybrid.json
+          sh skills/business-copy-style/scripts/copy-lint.sh \
+            evaluations/fixtures/landing-page-hybrid-hero.txt
           python - <<'PY'
           import json
-          with open('/tmp/landing-copy-comparison.json', encoding='utf-8') as handle:
-              result = json.load(handle)
-          assert result['winner'] is None
-          assert result['baseline']['em_dashes'] == 0
-          assert result['candidate']['em_dashes'] == 0
+          with open('/tmp/old-vs-new.json', encoding='utf-8') as handle:
+              first = json.load(handle)
+          with open('/tmp/new-vs-hybrid.json', encoding='utf-8') as handle:
+              second = json.load(handle)
+          assert first['winner'] is None
+          assert second['winner'] is None
+          assert first['baseline']['em_dashes'] == 0
+          assert first['candidate']['em_dashes'] == 0
+          assert second['candidate']['em_dashes'] == 0
+          assert second['candidate']['flesch_kincaid_grade'] <= second['baseline']['flesch_kincaid_grade']
           PY
