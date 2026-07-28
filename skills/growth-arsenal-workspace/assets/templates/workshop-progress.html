@@ -1,0 +1,10 @@
+<section class="hero-field hero-field--progress">
+  <div class="frame hero-field__grid">
+    <div><span class="console-label">WORKSHOP STATE</span><h1>{{CURRENT_PHASE}}</h1><p class="hero-field__lede">The next phase is determined by approved state, not by how persuasive the latest answer sounds.</p></div>
+    <aside class="qualification-panel"><div><span>Approved phases</span><strong>{{APPROVED_COUNT}} / {{TOTAL_PHASES}}</strong></div><div><span>Stale phases</span><strong>{{STALE_COUNT}}</strong></div></aside>
+  </div>
+</section>
+<section class="report-section frame">
+  <div class="section-heading section-heading--wide"><h2>Phase rail</h2><p>Changing an upstream decision marks dependent work stale. It remains visible, but it is no longer treated as approved.</p></div>
+  <div class="phase-list">{{PHASE_ROWS}}</div>
+</section>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>{{TITLE}}</title>
+  <style>{{CSS}}</style>
+</head>
+<body>
+  <a class="skip-link" href="#report-main">Skip to content</a>
+  <header class="report-header">
+    <div class="frame report-header__inner">
+      <a class="report-brand" href="./" aria-label="growth-arsenal reports"><span>growth</span><strong>arsenal</strong></a>
+      <nav class="report-nav" aria-label="Report navigation">{{NAV}}</nav>
+      <button class="print-button" type="button" data-print>Print</button>
+    </div>
+  </header>
+  <main id="report-main">{{CONTENT}}</main>
+  <footer class="report-footer">
+    <div class="frame report-footer__inner">
+      <span>{{PROJECT_NAME}}</span>
+      <span>Generated {{GENERATED_AT}}</span>
+      <span>growth-arsenal declarative workspace</span>
+    </div>
+  </footer>
+  <script>{{SCRIPT}}</script>
+</body>
+</html>

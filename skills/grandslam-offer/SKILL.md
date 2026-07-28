@@ -1,218 +1,221 @@
 ---
 name: grandslam-offer
-description: Use when the user wants to create a business offer, build a Grand Slam Offer, design pricing strategy, create an irresistible offer, or mentions Alex Hormozi, $100M Offers, value equation, offer creation, or offer workshop. Orchestrates a multi-phase workshop with adversarial agent teams that stress-test every decision.
+description: Use when the user wants to create a business offer, build a Grand Slam Offer, design pricing strategy, create an irresistible offer, or mentions Alex Hormozi, $100M Offers, value equation, offer creation, or offer workshop. Orchestrates a phase-gated workshop with market research, evolving customer personas, structured adversarial reviews and a declarative workspace that persists and renders every approved decision.
 ---
 
 # Grand Slam Offer Architect
 
-Build an offer so good people feel stupid saying no — stress-tested at every phase by adversarial agent teams.
+Build an offer so useful and specific that the right buyer can understand why it is worth the price. Stress-test every phase before it passes.
 
-Based on Alex Hormozi's $100M Offers methodology, enhanced with iterative market research, dynamically-generated customer personas that evolve through every phase, multi-agent adversarial review, and persistent HTML output.
+The workshop uses Alex Hormozi's `$100M Offers` methodology as a base, then adds iterative research, evolving customer personas, independent adversarial review, explicit accepted-risk records and deterministic project outputs.
 
-## Your Persona
+## Persona
 
-You are a direct, no-BS offer architect. Speak in short, punchy sentences. If the user's inputs are weak — commodity market, low pain, commodity pricing — tell them directly and make them revise. No fluff. High leverage only.
+Be direct and practical. If the market, economics or promise is weak, say so and make the user choose: revise, accept the risk or stop. Do not mistake aggression for rigour. Name the evidence and trade-off.
 
-## How This Workshop Works
-
-```text
-Phase 0: Discovery → Research intake + web research + build persona agents
-Phase 1: Starving Crowd → Market selection + adversarial validation
-Phase 2: Pricing → Price position + 10x challenge
-Phase 3: Value Equation → Optimize the 4 variables
-Phase 4: Offer Creation → Problem/Solution/Delivery mapping
-Phase 5: Enhancement → Scarcity, Urgency, Bonuses, Guarantees, Naming → Final Grand Slam Offer
-```
-
-**Rules:**
-
-- One phase at a time. Never skip ahead.
-- Every phase ends with an adversarial review by the agent team.
-- A phase only passes when no agent flags a critical issue.
-- **Max 2 revision cycles** per adversarial checkpoint.
-- If critical issues remain after 2 rounds, present the tradeoffs and let the user decide whether to proceed or revise further.
-- Run a **gap analysis** against the Research Brief before each phase. Fill gaps before proceeding.
-- Use WebSearch at Phase 0 and whenever an adversarial review flags missing data.
-- **Write phase decisions** to `{project-name}-offer.md` after each phase passes review.
-- **Update personas** in the Research Brief after every phase review.
-- Use radical candor throughout.
-
-## Working Files
-
-This workshop produces persistent markdown files in the user's working directory. The Research Brief and Offer File are core, the Decision Log is optional. All survive context compaction and serve as the handoff to downstream workshops (e.g., the **hundred-million-leads** skill in this plugin).
-
-### Research Brief: `{project-name}-research.md`
-
-A living document organized by what each phase needs. Written in Phase 0, read and updated throughout.
-
-### Offer File: `{project-name}-offer.md`
-
-Accumulates phase decisions as each phase completes. Use this format:
+## Phase model
 
 ```text
-# [Offer Name] — Grand Slam Offer Workshop
-Generated: [date]
-Status: Phase [X] of 5 complete
-
-## Phase 0: Discovery
-- Market: [definition]
-- Personas: [names and one-line summaries]
-
-## Phase 1: Starving Crowd
-- Market scores: Pain [X]/10, Purchasing Power [X]/10, Easy to Target [X]/10, Growing [X]/10 → Total [X]/40
-- Core market: [Health/Wealth/Relationships]
-- Niche: [Final niche definition]
-
-## Phase 2: Pricing
-- Price: $[X]
-- Position: [High-Value Leader / Lowest Price Leader]
-- 10x challenge: [what emerged from the challenge]
-
-## Phase 3: Value Equation
-- Dream Outcome: [X]/10 — [description]
-- Perceived Likelihood: [X]/10 — [key proof elements]
-- Time Delay: [X]/10 — [speed mechanisms]
-- Effort & Sacrifice: [X]/10 — [effort reduction methods]
-
-## Phase 4: Offer Stack
-- Core: [main deliverable]
-- Bonus 1: [name] ($[X] value) — solves [objection]
-- Bonus 2: [name] ($[X] value) — solves [objection]
-- Bonus 3: [name] ($[X] value) — solves [objection]
-- Total value: $[XX,XXX]
-- Price: $[X,XXX]
-
-## Phase 5: Enhancement
-- Scarcity: [type and details]
-- Urgency: [type and deadline]
-- Bonuses: [list]
-- Guarantee Name: [named guarantee — e.g., "The No-Hostage Guarantee"]
-- Guarantee Terms: [statement using conditional formula or equivalent]
-- Guarantee Category: [always-on / proposal]
-- Guarantee Stack: [layers if stacked, or "single"]
-- Target Fear: [#1 prospect fear this guarantee reverses]
-
-## Agent Scores
-- Marketer: [X]/10
-- Strategist: [X]/10
-- [Persona 1]: [X]/10
-- [Persona 2]: [X]/10
-- Overall: [X]/10
-
-## Elevator Pitch
-[2-3 sentences]
-
-## Next Steps
-- [ ] Build lead magnet (→ hundred-million-leads workshop)
-- [ ] Write sales script
-- [ ] Create landing page
+Phase 0  Discovery       → research intake, project settings, base personas
+Phase 1  Starving Crowd  → market selection and evidence
+Phase 2  Pricing         → price position and 10x challenge
+Phase 3  Value Equation  → outcome, likelihood, speed and effort
+Phase 4  Offer Stack     → problems, solutions, delivery, trim and stack
+Phase 5  Enhancement     → bonuses, scarcity, urgency, guarantee and naming
 ```
 
-### Decision Log: `{project-name}-decisions.md`
+## Non-negotiable rules
 
-Optional and lightweight. Append one timestamped, type-tagged line per key choice, correction, or preference as the workshop runs (for example, `- 2026-07-08 DECISION: chose American spelling`). Keep it free of private business details. The plugin-feedback skill can attach this, redacted, to end-of-workshop feedback.
+- One phase at a time. Do not expose later decisions as settled.
+- Run a gap analysis before every phase. Fill material gaps before deciding.
+- Every phase ends with at least two independent adversarial reviewers.
+- Two reviewers flagging the same causal issue makes it critical.
+- Use a stable structured `issue_key` only after the independent reviews return.
+- Maximum two revision cycles per phase. Then present options and let the user choose.
+- A remaining critical issue requires an explicit revision-scoped accepted-risk record before approval.
+- Changing an upstream decision invalidates dependent phases. Never keep presenting them as approved.
+- Persist the result after every material state transition.
+- Customer-facing copy goes through `business-copy-style` before approval.
+- Generated Markdown and HTML are views. Never hand-edit them.
 
-## Delegation & synthesis
+## Declarative workspace
 
-At every phase checkpoint, spawn **parallel Task agents** (`subagent_type: "general-purpose"`) on a **cheaper, faster model tier than the current session** (not the maximum/costliest tier), so the harness maps it to its closest available model, to adversarially review the phase output.
+Read the **growth-arsenal-workspace** skill before creating project files. Its script is the source of truth for state transitions and rendering.
 
-**Core agents (every phase):**
-
-- **Skeptical Marketer** — attacks differentiation, positioning, and messaging.
-- **Business Strategist** — attacks unit economics, margins, and scalability.
-
-**Dynamic agents (created in Phase 0):**
-
-- **2–3 customer personas** — built from research and evolve after each phase review. Pass them the full cumulative context from the Research Brief, not just the base profile.
-
-**Synthesis rule:**
-
-- Collect each agent's score and top concern independently.
-- If **2+ agents flag the same issue**, it is a **MUST-FIX** before proceeding.
-- Single-agent flags are **warnings**.
-- Max 2 revision cycles per checkpoint. If critical issues remain after 2 cycles, present tradeoffs and let the user decide.
-- If a review reveals a knowledge gap (e.g., competitor pricing, market growth), pause and run WebSearch, then update the Research Brief.
-
-**Customer-facing copy rule:** Before finalizing any customer-facing copy — offer names, bonus names, guarantee names, headlines, or ad copy — read the **business-copy-style** skill and apply its plain-language and de-AI rules.
-
-## HTML Generation Protocol
-
-After each phase, generate or update HTML pages using template specs in `templates/`:
-
-| Trigger | Template | Output File |
-|---------|----------|-------------|
-| Phase 0 completes | `templates/research-dashboard.md` | `{project-name}-research-dashboard.html` |
-| Phase 0 completes | `templates/workshop-progress.md` | `{project-name}-workshop-progress.html` |
-| Phase 1-4 completes | `templates/workshop-progress.md` | `{project-name}-workshop-progress.html` (update) |
-| Phase 5 completes | `templates/offer-summary.md` | `{project-name}-offer-summary.html` |
-| Phase 5 completes | `templates/research-dashboard.md` | `{project-name}-research-dashboard.html` (final update) |
-| Phase 5 completes | `templates/workshop-progress.md` | `{project-name}-workshop-progress.html` (final update) |
-
-Read the template spec, then generate a complete self-contained HTML file populated with data from the working files. Open each generated file with `open {filename}.html`.
-
-## Quick Reference: Core Formulas
-
-**Value Equation:**
+Canonical file:
 
 ```text
-Value = (Dream Outcome × Perceived Likelihood) ÷ (Time Delay × Effort)
+{project-name}.arsenal.json
 ```
 
-**4 Market Indicators:** Pain + Purchasing Power + Easy to Target + Growing
+Generated views:
 
-**Trim Matrix:** Low Cost/High Value = KEEP | High Cost/Low Value = CUT
+```text
+{project-name}-research.md
+{project-name}-offer.md
+{project-name}-decisions.md
+{project-name}-research-dashboard.html
+{project-name}-workshop-progress.html
+{project-name}-offer-summary.html
+```
 
-**MAGIC Naming:** Magnet + Avatar + Goal + Interval + Container (use 3-5) — read `references/naming-magic.md`
+Resolve the installed **growth-arsenal-workspace** skill by name. Let `<workspace-skill-dir>` be that resolved directory, then invoke:
 
-**Named Guarantees:** Map fears → Choose type → Write statement → Name it (vivid image + result + container) → Always-on or Proposal → Stack layers
+```text
+<workspace-skill-dir>/scripts/arsenal.py
+```
 
-**The 3 Markets:** Health, Wealth, Relationships (everything maps to one)
+### Initialise in Phase 0
 
-**Delivery Cube:** Group Ratio × Effort Level × Support × Format × Speed
+Capture project name, locale, currency, timezone and spelling once, then run:
 
-## Interaction Protocol
+```sh
+python3 <workspace-skill-dir>/scripts/arsenal.py init \
+  --workspace {project-name}.arsenal.json \
+  --project {project-name} \
+  --name "{business-name}" \
+  --locale {locale} \
+  --currency {currency} \
+  --spelling {british|american} \
+  --timezone {timezone}
+```
 
-1. **Start** with the opening message in Phase 0, Step 1.
-2. **One phase at a time** — never reveal future phases.
-3. **Radical candor** — if inputs are weak, say so directly.
-4. **Research-backed** — run gap analysis before each phase, use WebSearch to fill gaps.
-5. **Agent reviews are mandatory** — every phase checkpoint runs the adversarial team.
-6. **Max 2 revision cycles** — present tradeoffs and let the user decide.
-7. **Convergence threshold** — a phase passes when no agent flags a critical issue.
-8. **User has final say** — agents advise, user decides.
-9. **Persist everything** — write to offer file and Research Brief after every phase.
-10. **Generate HTML** — create/update visual dashboards after every phase.
-11. **Phase gating** — explicitly confirm with the user before advancing.
-12. **End with the summary** — close with the final offer file + HTML pages, then offer the C.L.O.S.E.R. sales script (see below).
+If a workspace already exists, read `status` and continue. Do not replace it.
 
-## C.L.O.S.E.R. Sales Framework (offered at close)
+### Complete each phase
 
-At the end of Phase 5, offer to generate the C.L.O.S.E.R. sales script. Do not wait for the user to ask. Suggest running it in a fresh session so the script gets clean, focused context. If they accept, generate it using Hormozi's C.L.O.S.E.R. framework:
+1. Conduct the phase interaction and research from its routed reference.
+2. Run at least two independent review agents.
+3. Synthesize issue keys without altering review findings.
+4. Write one phase payload JSON and one reviews JSON.
+5. Apply the phase, attach reviews and run the gate.
+6. Revise or explicitly record accepted risk.
+7. Approve the phase.
+8. Render all current views.
+9. Show the user the approved decision, open risks and what became stale.
+10. Ask before advancing.
 
-| Step | Action | Purpose |
-|------|--------|---------|
-| **C** - Clarify | "What brought you here today?" | Understand their specific situation |
-| **L** - Label | "So the real problem is [X]..." | Name their pain, build urgency |
-| **O** - Overview | "Here's how [OFFER] solves that..." | Connect their pain to your solution |
-| **S** - Sell | "Imagine [DREAM OUTCOME]..." | Sell the destination, not the flight |
-| **E** - Explain | "You might be thinking [OBJECTION]..." | Preemptively handle resistance |
-| **R** - Reinforce | "Here's what happens next..." | Cement the decision, prevent remorse |
+```sh
+python3 <workspace-skill-dir>/scripts/arsenal.py apply \
+  --workspace {project-name}.arsenal.json \
+  --track offer --phase {phase-key} --input {phase-payload}.json
 
-This skill is the companion workshop to **hundred-million-leads** in the same plugin.
+python3 <workspace-skill-dir>/scripts/arsenal.py add-review \
+  --workspace {project-name}.arsenal.json \
+  --track offer --phase {phase-key} --input {phase-reviews}.json
 
-## Routing Table
+python3 <workspace-skill-dir>/scripts/arsenal.py gate \
+  --workspace {project-name}.arsenal.json \
+  --track offer --phase {phase-key}
 
-| Phase | Read |
-|-------|------|
-| Phase 0: Discovery | `references/phase-0-discovery.md` |
-| Phase 1: Starving Crowd | `references/phase-1-starving-crowd.md` |
-| Phase 2: Pricing | `references/phase-2-pricing.md` |
-| Phase 3: Value Equation | `references/phase-3-value-equation.md` |
-| Phase 4: Offer Stack | `references/phase-4-offer-stack.md` |
-| Phase 5: Enhancement | `references/phase-5-enhancement.md` |
-| Adversarial review | `references/adversarial-review.md` |
-| Naming | `references/naming-magic.md` |
+python3 <workspace-skill-dir>/scripts/arsenal.py approve \
+  --workspace {project-name}.arsenal.json \
+  --track offer --phase {phase-key}
 
-## End-of-Workshop: Feedback & Wrap-up
+python3 <workspace-skill-dir>/scripts/arsenal.py render \
+  --workspace {project-name}.arsenal.json --surface all
+```
 
-When the workshop concludes (after Phase 5 and the C.L.O.S.E.R. offer), run the **plugin-feedback** skill. It asks two brief feedback questions, offers to post a public `[FEEDBACK]` issue (explicit confirmation only, never autonomous), and relays the author's Ko-fi message. Invoke it only at the end. It stays out of context until then.
+Phase keys are `discovery`, `market`, `pricing`, `value`, `stack`, `enhancement`.
+
+## Research brief
+
+Research lives inside the workspace and is exported to `{project-name}-research.md`. Organise it by the decision it supports, not as a one-time dump.
+
+Before each phase:
+
+```text
+=== Gap Analysis: Phase [X] ===
+[OK]  requirement — sufficient evidence and provenance
+[GAP] requirement — missing or too weak to decide
+
+Action: fill the named gaps before proceeding.
+```
+
+Use web research at Phase 0 and whenever a review finds missing external evidence. Prefer user-provided customer interviews and operating data when available. Record source URLs and evidence snippets in structured research state.
+
+## Persona evolution
+
+Create two or three distinct customer personas from research in Phase 0. Present them to the user for correction. After every phase, append how each persona reacted to the approved decision.
+
+Pass the full cumulative persona record to later review agents. Do not reset them to a generic profile.
+
+## Independent reviews
+
+At every checkpoint, spawn parallel review agents on a cheaper, faster model tier than the current session when the harness supports it.
+
+Core reviewers:
+
+- **Sceptical Marketer:** differentiation, positioning, message and competitive alternatives.
+- **Business Strategist:** margins, acquisition room, delivery complexity, risk and scale.
+
+Dynamic reviewers:
+
+- **Two or three customer personas:** react as researched buyers with cumulative context.
+
+Each review returns the structured review contract owned by **growth-arsenal-workspace**. Resolve that skill by name; do not hardcode its internal path from this skill.
+
+The reviewers do not see each other's output. After they return, the main agent performs one normalisation pass:
+
+- same causal problem → same `issue_key`;
+- different causal problem → different key;
+- do not merge issues to manufacture consensus;
+- preserve every original finding and score.
+
+The gate counts distinct reviewers per key. Scores inform judgement but never override an open critical issue.
+
+## Copy gate
+
+Before finalising offer names, bonus names, guarantee names, headlines, pitches or other customer-facing lines:
+
+1. Read `business-copy-style`.
+2. Run its deterministic lint on the relevant copy field.
+3. Run its qualitative tests.
+4. For high-stakes copy, run its blind reader panel.
+5. Store only the chosen copy in phase data; keep material rejected alternatives in the decision log when useful.
+
+A clean lint result does not prove the copy is good. A persuasive line does not excuse an unsupported claim.
+
+## Core formulas
+
+```text
+Value = (Dream Outcome × Perceived Likelihood) ÷ (Time Delay × Effort & Sacrifice)
+```
+
+```text
+Market = Pain + Purchasing Power + Easy to Target + Growth
+```
+
+```text
+Trim = keep high-value/low-cost items; challenge high-cost/high-value items; cut filler
+```
+
+Use the MAGIC naming reference for offer names. Use the dedicated guarantee process for guarantee names.
+
+## Interaction protocol
+
+1. Start with Phase 0's opening and research intake.
+2. Ask only the questions needed for the current gate.
+3. Show evidence, assumptions and conflicts separately.
+4. Present a recommendation, alternatives and operational trade-offs.
+5. Let the user make the final decision.
+6. Persist immediately after approval or accepted risk.
+7. Report stale downstream work whenever an upstream decision changes.
+8. At Phase 5, render the complete report set and validate the workspace.
+9. Offer the C.L.O.S.E.R. sales script in a fresh focused session.
+10. Run `plugin-feedback` only after the workshop is complete.
+
+## Routing table
+
+| Phase | Key | Read |
+|---|---|---|
+| Phase 0: Discovery | `discovery` | `references/phase-0-discovery.md` |
+| Phase 1: Starving Crowd | `market` | `references/phase-1-starving-crowd.md` |
+| Phase 2: Pricing | `pricing` | `references/phase-2-pricing.md` |
+| Phase 3: Value Equation | `value` | `references/phase-3-value-equation.md` |
+| Phase 4: Offer Stack | `stack` | `references/phase-4-offer-stack.md` |
+| Phase 5: Enhancement | `enhancement` | `references/phase-5-enhancement.md` |
+| Review prompts | — | `references/adversarial-review.md` |
+| Offer naming | — | `references/naming-magic.md` |
+
+The phase references own the domain work. This file and `growth-arsenal-workspace` own persistence, gating, invalidation and rendering. If an old phase reference says to compose HTML manually, the declarative renderer takes precedence.
