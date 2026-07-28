@@ -1,70 +1,102 @@
 # Eval Cycle
 
-How to know the copy is done. Two layers: deterministic gates (a script decides)
-and qualitative gates (you decide). Copy ships only when both pass.
+Copy ships only when its mechanics are clean and its meaning serves the brief. Existing-copy rewrites add a third requirement: the candidate must outperform the frozen baseline on the dimensions that matter.
 
 ## Deterministic gates
 
-Run `scripts/copy-lint.sh FILE`. It exits 1 if any hard gate fails, so you can
-loop on it. Defaults suit short consumer copy; override per job.
-
-| Metric | Default gate | Flag | Why |
-|---|---|---|---|
-| Flesch-Kincaid grade | ≤ 6 | `--max-grade` | Plain enough for a busy reader. |
-| Em dashes (U+2014) | 0 | `--max-emdash` | The strongest single AI tell in short copy. Use commas or full stops. |
-| Tier-1 AI vocabulary | 0 (always) | — | Dead giveaways: delve, leverage, streamline, etc. |
-| Avg words / sentence | ≤ 15 | `--max-sentence` | One idea per sentence. |
-
-Advisories are reported but never fail the build — judge them in context:
-
-- **Tier-2 vocab** (robust, seamless, innovative…): fine once, a tell in clusters of 3+.
-- **Double-hyphen (` -- `)**: an em dash in disguise. Usually cut.
-- **Boldface list items** (`- **X:** …`): mechanical emphasis. Keep at most one.
-
-Tuning examples:
+Run:
 
 ```sh
-# a longer lead magnet, allow grade 8 and slightly longer sentences
-scripts/copy-lint.sh --max-grade 8 --max-sentence 18 magnet.md
-# a technical README intro where a single em dash is acceptable
-scripts/copy-lint.sh --max-emdash 1 --max-grade 9 intro.md
+scripts/copy-lint.sh FILE
 ```
 
-Keep the script's Tier lists in sync with `references/de-ai-prose.md` if you edit either.
+| Metric | Default gate | Override | Why |
+|---|---:|---|---|
+| Flesch-Kincaid grade | ≤6 | `--max-grade` | Plain enough for a busy general reader. |
+| Em dashes | 0 | `--max-emdash` | A common artificial aside in short copy. |
+| Tier-1 AI vocabulary | 0 | none | Strong generic-AI signal. |
+| Average words per sentence | ≤15 | `--max-sentence` | Encourages one main idea per sentence. |
 
-## Qualitative gates
+Aim around grade 5 when natural for broad consumer copy. Grade is an estimate, not a command to remove true product terms.
 
-A clean score is necessary, not sufficient. Sterile copy passes the script and
-still fails the reader. Apply these three:
+Advisories do not fail the build:
 
-1. **Position.** At least one line takes a stance a reasonable person could
-   argue with. "We think most agencies overcharge" passes. "We deliver quality"
-   fails — nobody disagrees, so it says nothing.
-2. **Read-aloud.** Say it out loud. Flag anything that sounds like a press
-   release, a chatbot, or a sentence no human would speak.
-3. **Specificity.** Swap the brand name for a competitor's. If the copy still
-   fits, it is generic. Add the concrete number, the named pain, the real detail.
+- Tier-2 vocabulary;
+- en dashes and double hyphens;
+- repeated boldface list labels.
 
-Score each pass/fail. Any fail → revise and re-run the deterministic gate too.
+For baseline/candidate work, run:
 
-## Adversarial reader panel — run it when the copy is high-stakes
+```sh
+python3 scripts/copy-compare.py \
+  --baseline baseline.txt \
+  --candidate candidate.txt \
+  --format json
+```
 
-Run this for anything a stranger judges first or that costs money to get wrong: a
-paid ad, a homepage hero, a pricing page, a launch or cold-outreach email, a lead
-magnet. Skip it only for low-stakes internal or throwaway lines. When unsure, run
-it.
+The comparison script applies identical thresholds to both versions and reports deltas. It does not choose a winner.
 
-Stress-test the copy the way the workshops stress-test offers. Spawn 2-3 parallel
-reader subagents, each a distinct slice of the avatar, and ask each one blind:
+## Ordinary qualitative gates
 
-- **The skimmer** — reads for 3 seconds. What did you take away? Would you click?
-- **The skeptic** — what claim here do you not believe, and why?
-- **The wrong-fit** — does this repel you correctly, or does it try to please everyone?
+1. **Position:** is there a line a reasonable person could disagree with?
+2. **Read-aloud:** would a person say it, or does it sound like a press release or chatbot?
+3. **Specificity:** could a competitor use it unchanged by swapping the brand noun?
 
-Collect each reader's single strongest objection. Fix the objections that
-recur, then re-run the full cycle. Do not average vibes; act on concrete objections.
+Any fail means revise and re-measure.
 
-## The loop, in one line
+## High-stakes reader panel
 
-Draft → `copy-lint.sh` until exit 0 → three qualitative tests → ship. Any failure
-sends you back to the specific fix, not back to a blank page.
+Run this when a stranger judges the copy first or the cost of confusion is high: homepage hero, pricing, launch, paid ad, cold outreach or lead magnet.
+
+Readers work blind and independently:
+
+- **Skimmer:** after three seconds, what is this, who is it for and what should I do?
+- **Right-fit sceptic:** what is generic, unsupported, unclear or hard to believe?
+- **Wrong-fit reader:** does it repel me because I am not the buyer, or because I cannot understand it?
+- **Mechanism reader, when relevant:** can I explain how it differs from the normal alternative?
+
+Collect each reader's strongest objection. Repeated causal objections matter more than average sentiment.
+
+## Paired rubric
+
+When a baseline exists, score each variant `0 = fails`, `1 = partial`, `2 = clear`:
+
+- target-audience recognition;
+- category clarity;
+- mechanism clarity;
+- specificity;
+- action clarity;
+- trust and claim discipline;
+- wrong-fit rejection;
+- voice and memorability.
+
+The total organises evidence. It does not override factual failure, repeated objections or a load-bearing dimension.
+
+## Decision rules
+
+- **Ship candidate:** it wins the important dimensions and introduces no factual, trust or action regression.
+- **Keep baseline:** the rewrite repairs nothing material or damages stronger copy.
+- **Hybrid:** each version owns a different load-bearing strength. Preserve named winning lines, then evaluate the hybrid from the start.
+- **Revise direction:** both fail the same key job.
+
+Never describe retaining the baseline as a failed rewrite. The evaluation prevented a regression.
+
+## Dogfood loop
+
+```text
+freeze baseline
+      ↓
+produce candidate through current workflow
+      ↓
+measure both + blind qualitative comparison
+      ↓
+choose baseline / candidate / hybrid
+      ↓
+identify process causes
+      ↓
+change workflow only on material evidence
+      ↓
+rerun the same comparison
+```
+
+Keep at least one evaluation dimension outside the deterministic detector. Otherwise the workflow learns to pass its own test rather than communicate better.
