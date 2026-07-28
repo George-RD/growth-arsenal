@@ -28,11 +28,11 @@ Phase 5  Enhancement     → bonuses, scarcity, urgency, guarantee and naming
 
 - One phase at a time. Do not expose later decisions as settled.
 - Run a gap analysis before every phase. Fill material gaps before deciding.
-- Every phase ends with independent adversarial reviews.
+- Every phase ends with at least two independent adversarial reviewers.
 - Two reviewers flagging the same causal issue makes it critical.
 - Use a stable structured `issue_key` only after the independent reviews return.
 - Maximum two revision cycles per phase. Then present options and let the user choose.
-- A remaining critical issue requires an explicit accepted-risk record before approval.
+- A remaining critical issue requires an explicit revision-scoped accepted-risk record before approval.
 - Changing an upstream decision invalidates dependent phases. Never keep presenting them as approved.
 - Persist the result after every material state transition.
 - Customer-facing copy goes through `business-copy-style` before approval.
@@ -59,10 +59,10 @@ Generated views:
 {project-name}-offer-summary.html
 ```
 
-Resolve the workspace script relative to this skill directory:
+Resolve the installed **growth-arsenal-workspace** skill by name. Let `<workspace-skill-dir>` be that resolved directory, then invoke:
 
 ```text
-../growth-arsenal-workspace/scripts/arsenal.py
+<workspace-skill-dir>/scripts/arsenal.py
 ```
 
 ### Initialise in Phase 0
@@ -70,7 +70,7 @@ Resolve the workspace script relative to this skill directory:
 Capture project name, locale, currency, timezone and spelling once, then run:
 
 ```sh
-python3 ../growth-arsenal-workspace/scripts/arsenal.py init \
+python3 <workspace-skill-dir>/scripts/arsenal.py init \
   --workspace {project-name}.arsenal.json \
   --project {project-name} \
   --name "{business-name}" \
@@ -85,7 +85,7 @@ If a workspace already exists, read `status` and continue. Do not replace it.
 ### Complete each phase
 
 1. Conduct the phase interaction and research from its routed reference.
-2. Run the independent review agents.
+2. Run at least two independent review agents.
 3. Synthesize issue keys without altering review findings.
 4. Write one phase payload JSON and one reviews JSON.
 5. Apply the phase, attach reviews and run the gate.
@@ -96,23 +96,23 @@ If a workspace already exists, read `status` and continue. Do not replace it.
 10. Ask before advancing.
 
 ```sh
-python3 ../growth-arsenal-workspace/scripts/arsenal.py apply \
+python3 <workspace-skill-dir>/scripts/arsenal.py apply \
   --workspace {project-name}.arsenal.json \
   --track offer --phase {phase-key} --input {phase-payload}.json
 
-python3 ../growth-arsenal-workspace/scripts/arsenal.py add-review \
+python3 <workspace-skill-dir>/scripts/arsenal.py add-review \
   --workspace {project-name}.arsenal.json \
   --track offer --phase {phase-key} --input {phase-reviews}.json
 
-python3 ../growth-arsenal-workspace/scripts/arsenal.py gate \
+python3 <workspace-skill-dir>/scripts/arsenal.py gate \
   --workspace {project-name}.arsenal.json \
   --track offer --phase {phase-key}
 
-python3 ../growth-arsenal-workspace/scripts/arsenal.py approve \
+python3 <workspace-skill-dir>/scripts/arsenal.py approve \
   --workspace {project-name}.arsenal.json \
   --track offer --phase {phase-key}
 
-python3 ../growth-arsenal-workspace/scripts/arsenal.py render \
+python3 <workspace-skill-dir>/scripts/arsenal.py render \
   --workspace {project-name}.arsenal.json --surface all
 ```
 
@@ -153,7 +153,7 @@ Dynamic reviewers:
 
 - **Two or three customer personas:** react as researched buyers with cumulative context.
 
-Each review returns the schema from `../growth-arsenal-workspace/assets/schemas/review.schema.json`.
+Each review returns the structured review contract owned by **growth-arsenal-workspace**. Resolve that skill by name; do not hardcode its internal path from this skill.
 
 The reviewers do not see each other's output. After they return, the main agent performs one normalisation pass:
 
