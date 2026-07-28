@@ -20,7 +20,15 @@ TRACKS = {
         ("value", "Value Equation"),
         ("stack", "Offer Stack"),
         ("enhancement", "Enhancement"),
-    ]
+    ],
+    "leads": [
+        ("discovery", "Discovery and Offer Audit"),
+        ("lead-magnet", "Lead Magnet Lab"),
+        ("channels", "Core Four Channels"),
+        ("execution", "Tactical Execution"),
+        ("lead-getters", "Lead Getters"),
+        ("rule-of-100", "Rule of 100"),
+    ],
 }
 VALID_STATUSES = {"not_started", "draft", "in_review", "approved", "stale"}
 
@@ -78,13 +86,6 @@ def save_workspace(path: str | Path, state: dict[str, Any]) -> None:
     atomic_write(path, json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
 
 
-def load_workspace(path: str | Path) -> dict[str, Any]:
-    state = read_json(path)
-    if not isinstance(state, dict):
-        raise ArsenalError("Workspace root must be an object")
-    return state
-
-
 def new_phase(label: str) -> dict[str, Any]:
     return {
         "label": label,
@@ -101,14 +102,25 @@ def new_phase(label: str) -> dict[str, Any]:
     }
 
 
-def new_workspace(
-    project: str,
-    name: str | None,
-    locale: str,
-    currency: str,
-    spelling: str,
-    timezone_name: str,
-) -> dict[str, Any]:
+def ensure_track_structure(state: dict[str, Any]) -> dict[str, Any]:
+    state.setdefault("tracks", {})
+    for track, phases in TRACKS.items():
+        track_state = state["tracks"].setdefault(track, {"current_phase": phases[0][0], "phases": {}})
+        track_state.setdefault("current_phase", phases[0][0])
+        track_state.setdefault("phases", {})
+        for key, label in phases:
+            track_state["phases"].setdefault(key, new_phase(label))
+    return state
+
+
+def load_workspace(path: str | Path) -> dict[str, Any]:
+    state = read_json(path)
+    if not isinstance(state, dict):
+        raise ArsenalError("Workspace root must be an object")
+    return ensure_track_structure(state)
+
+
+def new_workspace(project: str, name: str | None, locale: str, currency: str, spelling: str, timezone_name: str) -> dict[str, Any]:
     stamp = utc_now()
     slug = project_slug(project)
     return {
@@ -125,10 +137,8 @@ def new_workspace(
             "timezone": timezone_name,
         },
         "tracks": {
-            "offer": {
-                "current_phase": "discovery",
-                "phases": {key: new_phase(label) for key, label in TRACKS["offer"]},
-            }
+            track: {"current_phase": phases[0][0], "phases": {key: new_phase(label) for key, label in phases}}
+            for track, phases in TRACKS.items()
         },
         "research": {"market_identity": {}, "personas": [], "sources": [], "gaps": []},
         "accepted_risks": [],
@@ -148,15 +158,27 @@ def phase_order(track: str) -> list[str]:
 
 
 def get_phase(state: dict[str, Any], track: str, phase: str) -> dict[str, Any]:
+    ensure_track_structure(state)
     try:
         return state["tracks"][track]["phases"][phase]
     except KeyError as exc:
         raise ArsenalError(f"Unknown phase {track}:{phase}") from exc
 
 
-def upstream_revisions(state: dict[str, Any], track: str, phase: str) -> dict[str, int]:
+def dependency_revisions(state: dict[str, Any], track: str, phase: str) -> dict[str, int]:
     order = phase_order(track)
-    return {key: get_phase(state, track, key)["revision"] for key in order[: order.index(phase)]}
+    revisions = {key: get_phase(state, track, key)["revision"] for key in order[: order.index(phase)]}
+    if track == "leads":
+        for key in phase_order("offer"):
+            offer_phase = get_phase(state, "offer", key)
+            if offer_phase["revision"]:
+                revisions[f"offer:{key}"] = offer_phase["revision"]
+    return revisions
+
+
+def upstream_revisions(state: dict[str, Any], track: str, phase: str) -> dict[str, int]:
+    """Backward-compatible alias from the first workspace release."""
+    return dependency_revisions(state, track, phase)
 
 
 def deep_merge(base: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
@@ -169,14 +191,25 @@ def deep_merge(base: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def mark_stale(phase: dict[str, Any], reason: str) -> bool:
+    if phase["revision"] or phase["status"] != "not_started":
+        phase.update(status="stale", stale_reason=reason, approved_at=None)
+        return True
+    return False
+
+
 def invalidate_downstream(state: dict[str, Any], track: str, changed_phase: str) -> list[str]:
     order = phase_order(track)
     invalidated: list[str] = []
     for key in order[order.index(changed_phase) + 1 :]:
         phase = get_phase(state, track, key)
-        if phase["revision"] or phase["status"] != "not_started":
-            phase.update(status="stale", stale_reason=f"Upstream phase {changed_phase} changed", approved_at=None)
-            invalidated.append(key)
+        if mark_stale(phase, f"Upstream {track} phase {changed_phase} changed"):
+            invalidated.append(f"{track}:{key}")
+    if track == "offer":
+        for key in phase_order("leads"):
+            phase = get_phase(state, "leads", key)
+            if mark_stale(phase, f"Offer phase {changed_phase} changed"):
+                invalidated.append(f"leads:{key}")
     return invalidated
 
 
@@ -254,6 +287,7 @@ def compute_gate(state: dict[str, Any], track: str, phase: str) -> dict[str, Any
 
 
 def validate_workspace(state: dict[str, Any]) -> list[dict[str, str]]:
+    ensure_track_structure(state)
     findings: list[dict[str, str]] = []
     if state.get("schema_version") != SCHEMA_VERSION:
         findings.append({"level": "error", "code": "schema-version", "message": f"Expected {SCHEMA_VERSION}"})
@@ -265,21 +299,15 @@ def validate_workspace(state: dict[str, Any]) -> list[dict[str, str]]:
             try:
                 phase = get_phase(state, track, name)
             except ArsenalError as exc:
-                findings.append({"level": "error", "code": f"phase-{name}", "message": str(exc)})
+                findings.append({"level": "error", "code": f"phase-{track}-{name}", "message": str(exc)})
                 continue
             if phase.get("status") not in VALID_STATUSES:
-                findings.append({"level": "error", "code": f"status-{name}", "message": "Invalid phase status"})
-            if phase.get("status") == "approved" and phase.get("input_revisions", {}) != upstream_revisions(state, track, name):
-                findings.append(
-                    {
-                        "level": "error",
-                        "code": f"stale-{track}-{name}",
-                        "message": f"Approved {track}:{name} has stale upstream revisions",
-                    }
-                )
+                findings.append({"level": "error", "code": f"status-{track}-{name}", "message": "Invalid phase status"})
+            if phase.get("status") == "approved" and phase.get("input_revisions", {}) != dependency_revisions(state, track, name):
+                findings.append({"level": "error", "code": f"stale-{track}-{name}", "message": f"Approved {track}:{name} has stale dependency revisions"})
             for review in phase.get("reviews", []):
                 try:
                     validate_review(review)
                 except ArsenalError as exc:
-                    findings.append({"level": "error", "code": f"review-{name}", "message": str(exc)})
+                    findings.append({"level": "error", "code": f"review-{track}-{name}", "message": str(exc)})
     return findings

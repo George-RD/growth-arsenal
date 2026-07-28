@@ -15,6 +15,7 @@ if str(SCRIPT_DIR) not in sys.path:
 from render import render_all
 from workspace import (
     ArsenalError,
+    TRACKS,
     compute_gate,
     deep_merge,
     get_phase,
@@ -152,7 +153,7 @@ def build_parser() -> argparse.ArgumentParser:
     for name in ("apply", "add-review", "gate", "approve", "accept-risk"):
         command = commands.add_parser(name)
         command.add_argument("--workspace", required=True)
-        command.add_argument("--track", default="offer", choices=["offer"])
+        command.add_argument("--track", default="offer", choices=sorted(TRACKS))
         command.add_argument("--phase", required=True)
         if name in {"apply", "add-review"}:
             command.add_argument("--input", required=True)
@@ -165,7 +166,7 @@ def build_parser() -> argparse.ArgumentParser:
         command.add_argument("--workspace", required=True)
     render = commands.add_parser("render")
     render.add_argument("--workspace", required=True)
-    render.add_argument("--surface", default="all", choices=["all", "offer-summary", "workshop-progress", "research-dashboard"])
+    render.add_argument("--surface", default="all", choices=["all", "offer-summary", "workshop-progress", "research-dashboard", "leads-blueprint", "tracking-dashboard"])
     render.add_argument("--output-dir")
     render.add_argument("--allow-invalid", action="store_true")
     return parser
@@ -211,7 +212,6 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
 
-# Stable Python API used by tests and harness adapters.
 load_state = load_workspace
 atomic_write_text = __import__("workspace").atomic_write
 validate_state = validate_workspace
