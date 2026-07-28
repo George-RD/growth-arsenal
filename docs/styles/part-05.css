@@ -1,0 +1,59 @@
+.install-console { border: 2px solid var(--navy); background: var(--paper); color: var(--navy); box-shadow: 10px 10px 0 var(--navy); }
+.install-tabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 2px solid var(--navy); }
+.install-tabs button { border: 0; padding: 0.9rem; background: var(--blue-soft); color: var(--navy); font-weight: 700; cursor: pointer; }
+.install-tabs button[aria-selected="true"] { background: var(--yellow); }
+.install-panel { padding: 1.1rem; }
+.code-label { display: flex; justify-content: space-between; gap: 1rem; align-items: center; font-family: var(--mono); font-size: 0.75rem; }
+.code-label button { border: 1px solid var(--navy); background: var(--white); color: var(--navy); padding: 0.35rem 0.6rem; cursor: pointer; }
+.code-label button:hover { background: var(--navy); color: var(--white); }
+.install-panel pre { margin: 0.8rem 0 0; padding: 1rem; background: var(--navy); color: var(--white); overflow-x: auto; font-family: var(--mono); font-size: 0.76rem; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; }
+.prompt-example { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; padding: 1rem; border-top: 2px solid var(--navy); background: var(--yellow); }
+.prompt-example span { font-family: var(--mono); font-size: 0.75rem; font-weight: 600; }
+.prompt-example p { margin: 0; font-weight: 700; }
+.faq-section { padding-block: clamp(6rem, 11vw, 10rem); }
+.faq-section > h2 { max-width: 10ch; }
+.faq-list { max-width: 800px; margin: clamp(3rem, 6vw, 5rem) 0 0 auto; border-top: 2px solid var(--navy); }
+.faq-list details { border-bottom: 1px solid var(--line-dark); padding: 1.1rem 0; }
+.faq-list summary { display: flex; justify-content: space-between; gap: 1rem; cursor: pointer; list-style: none; font-family: var(--display); font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 800; line-height: 1.1; text-transform: uppercase; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: "+"; color: var(--blue); font-family: var(--mono); }
+.faq-list details[open] summary::after { content: "−"; }
+.faq-list p { max-width: 65ch; margin: 1rem 0 0; color: #3b4664; }
+.site-footer { background: var(--navy); color: var(--white); }
+.footer-main { min-height: 340px; display: flex; justify-content: space-between; gap: 2rem; align-items: center; }
+.footer-main p { margin: 0; max-width: 12ch; font-size: clamp(3rem, 6vw, 5.4rem); line-height: 0.9; }
+.footer-main .button-primary { flex: 0 0 auto; }
+.footer-meta { display: flex; flex-wrap: wrap; gap: 0.8rem 2rem; padding-block: 1.3rem 2rem; border-top: 1px solid rgba(255,255,255,0.2); color: #cdd5ec; font-size: 0.82rem; }
+.footer-meta a { text-underline-offset: 0.25rem; }
+.footer-meta a:last-child { margin-left: auto; }
+/* Progressive enhancement: without JavaScript, show the full test and both install paths. */
+html:not(.js) .rig-stage-tabs,
+html:not(.js) .rig-progress,
+html:not(.js) .rig-controls,
+html:not(.js) .install-tabs { display: none; }
+html:not(.js) .rig-panel[hidden] { display: flex; }
+html:not(.js) .rig-panel { min-height: auto; border-bottom: 1px solid var(--line-dark); }
+html:not(.js) .install-panel[hidden] { display: block; }
+html:not(.js) .install-panel + .install-panel { border-top: 2px solid var(--navy); }
+@media (max-width: 980px) {
+  :root { --frame: min(100% - 2.25rem, 760px); }
+  .site-header { grid-template-columns: 1fr auto; }
+  .site-header nav { display: none; }
+  .hero { min-height: auto; grid-template-columns: 1fr; gap: 4rem; }
+  .hero-copy { max-width: 700px; }
+  .hero h1 { max-width: 9ch; }
+  .test-rig { width: min(100%, 680px); }
+  .principle-section,
+  .sequence-head,
+  .workshops-intro,
+  .outputs-section,
+  .install-layout { grid-template-columns: 1fr; }
+  .comparison { max-width: 680px; margin-left: auto; }
+  .sequence { grid-template-columns: 1fr 1fr; row-gap: 2.5rem; }
+  .workshop-inner { grid-template-columns: 0.45fr 1.55fr; }
+  .bench-output,
+  .copy-sample { grid-column: 2; }
+  .outputs-section { gap: 4rem; }
+  .file-console { width: min(100%, 680px); }
+  .install-console { max-width: 760px; }
+}

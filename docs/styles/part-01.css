@@ -1,0 +1,169 @@
+:root {
+  --blue: #1450ff;
+  --blue-deep: #1744d1;
+  --navy: #0e1630;
+  --navy-2: #172242;
+  --paper: #f6f8ff;
+  --white: #ffffff;
+  --yellow: #d9ff4f;
+  --orange: #ff5c35;
+  --blue-soft: #dfe7ff;
+  --line-light: rgba(255, 255, 255, 0.26);
+  --line-dark: rgba(14, 22, 48, 0.2);
+  --display: "Barlow Condensed", "Noto Sans Display", "Arial Narrow", sans-serif;
+  --body: "Atkinson Hyperlegible", "Noto Sans", sans-serif;
+  --mono: "Spline Sans Mono", "DejaVu Sans Mono", monospace;
+  --frame: min(1180px, calc(100vw - 3rem));
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--navy);
+  font-family: var(--body);
+  font-size: clamp(1rem, 0.96rem + 0.18vw, 1.12rem);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; }
+button { font: inherit; }
+img, svg { display: block; max-width: 100%; }
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  transform: translateY(-180%);
+  background: var(--yellow);
+  color: var(--navy);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+}
+.skip-link:focus { transform: translateY(0); }
+:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--navy);
+}
+.frame { width: var(--frame); margin-inline: auto; }
+.hero-shell {
+  background: var(--blue);
+  color: var(--white);
+  overflow: hidden;
+}
+.site-header {
+  min-height: 5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid var(--line-light);
+}
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.18rem;
+  font-family: var(--display);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.015em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.wordmark strong { color: var(--yellow); font-weight: 900; }
+.site-header nav {
+  justify-self: end;
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 2.3rem);
+}
+.site-header nav a,
+.header-github {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.site-header nav a { color: rgba(255, 255, 255, 0.9); }
+.site-header nav a:hover { color: var(--yellow); }
+.header-github {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line-light);
+}
+.header-github:hover { background: var(--white); color: var(--blue); }
+.hero {
+  min-height: 700px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(480px, 1.12fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+  padding-block: clamp(4rem, 8vw, 7.5rem);
+}
+.hero-copy { max-width: 650px; }
+.hero h1,
+.principle-section h2,
+.sequence-head h2,
+.workshops-intro h2,
+.outputs-copy h2,
+.install-copy h2,
+.faq-section h2,
+.footer-main p {
+  font-family: var(--display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.hero h1 {
+  margin: 0;
+  max-width: 10ch;
+  font-size: clamp(4rem, 7.4vw, 5.8rem);
+  line-height: 0.87;
+}
+.hero h1 em {
+  color: var(--yellow);
+  font-style: normal;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.08em;
+}
+.hero-lede {
+  max-width: 54ch;
+  margin: 2rem 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.1rem, 1rem + 0.35vw, 1.3rem);
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.4rem;
+  margin-top: 2rem;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.35rem;
+  padding: 0.85rem 1.2rem;
+  border: 2px solid currentColor;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out), background-color 180ms ease, color 180ms ease;
+}
+.button-primary {
+  background: var(--yellow);
+  color: var(--navy);
+  border-color: var(--navy);
+  box-shadow: 5px 5px 0 var(--navy);
+}
+.button-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--navy);
+}
+.text-link {
+  font-weight: 700;
+  text-underline-offset: 0.25rem;
+}

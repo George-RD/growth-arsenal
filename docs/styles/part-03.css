@@ -1,0 +1,134 @@
+.clearance-mark {
+  width: min(100%, 320px);
+  margin: 2.5rem auto 0;
+  padding: 1.1rem;
+  border: 5px solid var(--blue);
+  color: var(--blue);
+  text-align: center;
+  transform: rotate(-2deg);
+}
+.clearance-mark span {
+  display: block;
+  font-family: var(--display);
+  font-size: 4.8rem;
+  font-weight: 900;
+  line-height: 0.85;
+}
+.clearance-mark small { font-family: var(--mono); font-weight: 600; }
+.output-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+.output-list li::before { content: "✓ "; color: var(--blue); }
+.rig-progress { height: 4px; background: var(--blue-soft); }
+.rig-progress i {
+  display: block;
+  width: 25%;
+  height: 100%;
+  background: var(--blue);
+  transition: width 520ms var(--ease-out);
+}
+.rig-controls {
+  display: grid;
+  grid-template-columns: 3rem 1fr 3rem;
+  min-height: 3rem;
+  align-items: center;
+  background: var(--navy);
+  color: var(--white);
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+.rig-controls button {
+  align-self: stretch;
+  border: 0;
+  background: transparent;
+  color: var(--yellow);
+  cursor: pointer;
+}
+.rig-controls button:hover { background: var(--navy-2); }
+.test-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.55rem, 2vw, 1.5rem);
+  min-height: 3.4rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--yellow);
+  color: var(--navy);
+  overflow: hidden;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.test-strip i { width: 1.4rem; height: 1px; background: var(--navy); opacity: 0.45; }
+.principle-section {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(3rem, 8vw, 7rem);
+  padding-block: clamp(5rem, 10vw, 9rem);
+  align-items: center;
+}
+.principle-section h2,
+.sequence-head h2,
+.workshops-intro h2,
+.outputs-copy h2,
+.install-copy h2,
+.faq-section h2 {
+  margin: 0;
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  line-height: 0.92;
+}
+.principle-copy > p { max-width: 58ch; margin: 1.5rem 0 0; color: #3b4664; }
+.comparison { border: 2px solid var(--navy); }
+.comparison > div { padding: clamp(1.5rem, 3vw, 2.5rem); }
+.comparison > div + div { border-top: 2px solid var(--navy); }
+.comparison span { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; }
+.comparison p { margin: 1rem 0 0; font-size: clamp(1.2rem, 1rem + 0.8vw, 1.65rem); line-height: 1.35; }
+.comparison-soft { background: var(--white); color: #4b5571; }
+.comparison-soft p { text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: 0.15em; }
+.comparison-hard { background: var(--navy); color: var(--white); }
+.comparison-hard span { color: var(--yellow); }
+.sequence-section { background: var(--navy); color: var(--white); padding-block: clamp(5rem, 10vw, 9rem); }
+.sequence-head { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(2rem, 7vw, 7rem); align-items: end; }
+.sequence-head p { margin: 0; color: #cdd5ec; max-width: 45ch; }
+.sequence {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  list-style: none;
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding: 0;
+  border-top: 2px solid var(--yellow);
+}
+.sequence li { position: relative; padding: 1.5rem clamp(1rem, 2.5vw, 2rem) 0 0; }
+.sequence li::before {
+  content: "";
+  position: absolute;
+  width: 0.8rem;
+  height: 0.8rem;
+  top: -0.48rem;
+  left: 0;
+  background: var(--yellow);
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(217, 255, 79, 0.15);
+}
+.sequence span { font-family: var(--mono); color: var(--yellow); font-size: 0.75rem; }
+.sequence h3 { margin: 0.55rem 0 0; font-family: var(--display); font-size: 2rem; line-height: 1; text-transform: uppercase; }
+.sequence p { margin: 0.8rem 0 0; color: #cdd5ec; font-size: 0.92rem; }
+.workshops-section { background: var(--white); }
+.workshops-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: end;
+  padding-block: clamp(5rem, 9vw, 8rem) clamp(3rem, 6vw, 5rem);
+}
