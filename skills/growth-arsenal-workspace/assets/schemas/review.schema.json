@@ -4,26 +4,71 @@
   "title": "Growth Arsenal independent review",
   "type": "object",
   "additionalProperties": false,
-  "required": ["reviewer", "issues"],
+  "required": [
+    "reviewer",
+    "issues"
+  ],
   "properties": {
-    "reviewer": {"type": "string", "minLength": 1},
-    "score": {"type": ["number", "null"], "minimum": 0, "maximum": 10},
-    "top_concern": {"type": "string"},
-    "submitted_at": {"type": "string"},
+    "reviewer": {
+      "type": "string",
+      "pattern": ".*\\S.*"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 10
+    },
+    "top_concern": {
+      "type": "string"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
     "issues": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["issue_key", "finding"],
+        "required": [
+          "issue_key",
+          "finding"
+        ],
         "properties": {
-          "issue_key": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
-          "title": {"type": "string"},
-          "severity": {"enum": ["suggestion", "warning", "critical"]},
-          "finding": {"type": "string"},
-          "evidence": {"type": "string"},
-          "recommended_fix": {"type": "string"},
-          "blocking": {"type": "boolean"}
+          "issue_key": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "suggestion",
+              "warning",
+              "critical"
+            ]
+          },
+          "finding": {
+            "type": "string",
+            "pattern": ".*\\S.*"
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "recommended_fix": {
+            "type": "string"
+          },
+          "blocking": {
+            "type": "boolean"
+          }
         }
       }
     }
