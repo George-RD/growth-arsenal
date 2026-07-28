@@ -12,9 +12,9 @@
 
 # growth-arsenal
 
-Business growth workshops that run inside your AI coding agent.
+Three linked workshops build your offer, lead plan and customer copy inside your AI coding agent.
 
-A normal chat helps you improve an idea. growth-arsenal tries to break it. Independent agents test the market, pricing, margins, message and execution plan at every phase. Approved decisions are written to files as the workshop runs.
+Independent reviewers attack the market, maths, message and execution plan at each phase. Approved decisions are written to files as the workshop runs.
 
 ## What is inside
 
