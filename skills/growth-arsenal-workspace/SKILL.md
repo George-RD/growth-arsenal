@@ -34,7 +34,7 @@ Paths in this skill are relative to this `SKILL.md`. Resolve the installed skill
 python3 scripts/arsenal.py --help
 ```
 
-When another skill calls this one, it should resolve `../growth-arsenal-workspace/scripts/arsenal.py` relative to its own skill directory. Do not assume the user's current directory contains the script.
+When another skill calls `growth-arsenal-workspace`, it should resolve that installed skill's directory, then invoke `scripts/arsenal.py` from the resolved directory. Do not assume the user's current directory contains the script.
 
 ## Standard flow
 
@@ -108,7 +108,7 @@ python3 scripts/arsenal.py gate \
   --phase market
 ```
 
-Exit `0` means the phase can be approved. Exit `1` means one or more unaccepted critical issues remain. Two distinct reviewers using the same `issue_key` make that issue critical; an explicitly blocking issue is also critical.
+Exit `0` means the phase can be approved. Exit `1` means the independent-review requirement is incomplete or one or more unaccepted critical issues remain. At least two distinct reviewers are required. Two distinct reviewers using the same `issue_key` make that issue critical; an explicitly blocking issue is also critical.
 
 ### 5. Resolve or explicitly accept risk
 
@@ -124,7 +124,7 @@ python3 scripts/arsenal.py accept-risk \
   --confirmed-by user
 ```
 
-Never invent acceptance on the user's behalf.
+Risk acceptance applies only to the current phase revision. A revised phase must be reviewed and, where necessary, accepted again. Never invent acceptance on the user's behalf.
 
 ### 6. Approve and render
 
@@ -139,7 +139,7 @@ python3 scripts/arsenal.py render \
   --surface all
 ```
 
-Rendering writes the three HTML reports plus generated offer, research and decision Markdown views next to the workspace file.
+Approval is rejected when prerequisites are not approved, the phase is stale, its input revision snapshot has drifted, or fewer than two independent reviewers have submitted. Rendering writes the three HTML reports plus generated offer, research and decision Markdown views next to the workspace file.
 
 ### 7. Validate before handoff
 
@@ -156,10 +156,10 @@ The script may calculate or enforce:
 
 - phase order and revision numbers;
 - distinct-reviewer consensus by normalised issue key;
-- approval and accepted-risk state;
+- approval and revision-scoped accepted-risk state;
 - stale downstream state;
 - currency and percentage formatting;
-- safe HTML escaping;
+- safe HTML and Markdown boundaries;
 - atomic writes and deterministic report rendering.
 
 The script must not decide:
