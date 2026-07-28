@@ -1,0 +1,45 @@
+{
+  "baseline": {
+    "average_words_per_sentence": 8.6,
+    "double_hyphens": 0,
+    "em_dashes": 0,
+    "en_dashes": 0,
+    "flesch_kincaid_grade": 5.1,
+    "hard_gate_failures": [],
+    "hard_gate_pass": true,
+    "label": "Old landing copy",
+    "sentences": 22,
+    "tier_1_count": 0,
+    "tier_1_terms": [],
+    "tier_2_count": 0,
+    "tier_2_terms": [],
+    "words": 189
+  },
+  "candidate": {
+    "average_words_per_sentence": 9.5,
+    "double_hyphens": 0,
+    "em_dashes": 0,
+    "en_dashes": 0,
+    "flesch_kincaid_grade": 6.6,
+    "hard_gate_failures": ["grade 6.6 > 6"],
+    "hard_gate_pass": false,
+    "label": "Qualification-lab copy",
+    "sentences": 24,
+    "tier_1_count": 0,
+    "tier_1_terms": [],
+    "tier_2_count": 0,
+    "tier_2_terms": [],
+    "words": 228
+  },
+  "candidate_minus_baseline": {
+    "average_words_per_sentence": 0.9,
+    "em_dashes": 0,
+    "flesch_kincaid_grade": 1.5,
+    "sentences": 2,
+    "tier_1_count": 0,
+    "tier_2_count": 0,
+    "words": 39
+  },
+  "decision_required": "Deterministic signals do not choose the winner. Run the blind paired qualitative rubric; keep the baseline, candidate, or a re-evaluated hybrid based on audience fit and product truth.",
+  "winner": null
+}

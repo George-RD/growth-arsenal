@@ -1,88 +1,143 @@
 # Copy Workflow
 
-The full loop for producing or fixing customer-facing copy. Run it in order. Do
-not skip the measure step — that is what separates this skill from "rewrite it
-and hope."
+The workflow has two paths. Greenfield copy needs one evaluated draft. Existing or high-stakes copy needs a paired evaluation so the rewrite does not win by default.
 
-```text
-BRIEF ──► DRAFT ──► DE-AI PASSES ──► MEASURE ──► JUDGE ──► DECIDE
-                         ▲                                    │
-                         └──────────── revise ◄──────────────┘
-                                                         ship when clean
-```
+## 1. Freeze the brief
 
-## 1. Brief
+Get these before writing:
 
-Never write blind. Get three things first (copy `templates/copy-brief.md`):
+- **What:** headline, subhead, offer line, ad, email, lead magnet, README intro or tagline.
+- **Who:** one named audience, what they already believe and what language they use.
+- **Action:** what they should do, and where.
+- **Truth:** product facts, proof, restrictions and claims that may not change.
+- **Constraints:** length, spelling, channel, required wording and reading-level policy.
 
-- **What** the copy is (headline, subhead, ad, email opener, lead magnet, README intro, tagline).
-- **Who** it is for — one named avatar, not "customers". What do they already believe? What words do they use?
-- **Action** you want them to take, and where.
+Use `templates/copy-brief.md`.
 
-Also capture: reading-level target (default ≤5th grade), length limit, and any brand voice notes. If invoked with copy to fix, the "brief" is the existing copy plus what the user dislikes about it.
+If existing copy is supplied, save it unchanged as the baseline before drafting. Do not let the rewrite silently alter the audience, offer or desired action.
 
 ## 2. Draft
 
-Write the first version fast, to the brief. Aim for the avatar's own words.
-Do not polish yet — you are about to strip it.
+Write the first candidate quickly to the brief.
 
 Drafting bias:
 
-- One idea per sentence. Short beats clever.
-- Say the specific thing the avatar cares about, not a category ("get 12 hours back a week", not "boost productivity").
-- Take a position. If every reasonable person nods along, it is filler.
+- one idea per sentence;
+- audience language over category jargon;
+- concrete result, mechanism or pain over adjectives;
+- a real position rather than consensus filler;
+- no invented numbers, proof or urgency.
 
-## 3. De-AI passes
+Do not optimise to the lint script while drafting.
 
-Run the checklist in `references/de-ai-prose.md` in order. Each pass is one lens;
-do them as separate sweeps, not all at once — you catch more that way.
+## 3. Run de-AI passes
 
-1. Inflated significance → cut, replace with a fact.
-2. Formulaic structure → break the pattern, vary lengths.
-3. AI vocabulary (Tier-1 cut on sight, Tier-2 in clusters).
-4. Grammar tells (copula avoidance, -ing tails, negative parallelism, synonym cycling, false ranges).
-5. Rhythm and style (em dashes → zero in short copy, boldface, transitions, emoji).
-6. Hedging, filler, vague attributions.
-7. Chatbot artifacts.
-8. Personal-copy structural tells (for bios / about-me).
-9. Missing human texture → add an opinion, a number, a lived detail.
+Read `references/de-ai-prose.md` and run each lens separately:
 
-Plain-language rules run alongside every pass: see `references/plain-language.md`.
+1. inflated significance;
+2. formulaic structure;
+3. Tier-1 and clustered Tier-2 vocabulary;
+4. grammar tells;
+5. rhythm, punctuation and mechanical emphasis;
+6. hedging, filler and vague attribution;
+7. chatbot artefacts;
+8. personal-copy structural tells when relevant;
+9. missing human texture.
 
-## 4. Measure
+Plain-language rules run alongside every pass.
 
-Prove it, do not eyeball it. Run the deterministic gate:
+## 4. Measure mechanics
+
+Single version:
 
 ```sh
 scripts/copy-lint.sh path/to/copy.txt
-# or pipe: printf '%s' "$copy" | scripts/copy-lint.sh -
 ```
 
-It reports and hard-gates on: Flesch-Kincaid grade, em dashes, Tier-1 vocab,
-average sentence length. Exit code 0 = gates pass, 1 = revise. See
-`references/eval-cycle.md` for the gate table and how to read the advisories. If
-you cannot run the script, compute Flesch-Kincaid by hand with the formula in
-`references/plain-language.md` and count em dashes and Tier-1 words yourself.
+Existing-copy or dogfood comparison:
 
-## 5. Judge
+```sh
+python3 scripts/copy-compare.py \
+  --baseline baseline.txt \
+  --candidate candidate.txt \
+  --format json
+```
 
-The script cannot tell if the copy is *good* — only that it is clean. Apply the
-qualitative gates in `references/eval-cycle.md`:
+Default hard gates are:
 
-- **Position test:** does a line exist someone could disagree with?
-- **Read-aloud test:** would a real person say this out loud, or is it press-release voice?
-- **Specificity test:** could this copy be pasted onto a competitor by swapping one noun? If yes, it says nothing.
+- Flesch-Kincaid grade ≤6;
+- zero em dashes;
+- zero Tier-1 AI vocabulary;
+- average sentence length ≤15 words.
 
-Run the adversarial reader panel in `eval-cycle.md` when the copy is high-stakes (paid ad, homepage hero, pricing, launch or outreach email, lead magnet). Skip it only for throwaway internal lines.
+Grade 5 is a useful aim for broad consumer copy, not a second hidden hard gate. Proper nouns and necessary product terms may raise the estimate. Fix the sentence before replacing a true term with a vague one.
 
-## 6. Decide
+## 5. Judge meaning
 
-- **Ship** when the deterministic gate passes AND the three judge tests pass.
-- **Revise** otherwise: fix the specific failures, then go back to step 4. Do not
-  re-draft from scratch unless the direction itself is wrong.
+Run the ordinary tests:
 
-## 7. Deliver
+- position;
+- read-aloud;
+- specificity.
 
-Present the result with the format in `templates/rewrite-output.md`: the clean
-copy first, then a short Changes table, then the measurement line (grade, em
-dashes, Tier-1). Only list passes where you actually changed something.
+For high-stakes copy, run blind readers:
+
+- skimmer;
+- right-fit sceptic;
+- wrong-fit reader;
+- mechanism reader when the product's process is the main differentiator.
+
+A mechanical pass is necessary, not sufficient. A persuasive line also fails when it overclaims, obscures the category or attracts the wrong audience.
+
+## 6. Compare when a baseline exists
+
+Read `references/paired-evaluation.md`.
+
+Evaluate baseline and candidate against the same brief without revealing provenance. Decide:
+
+- keep baseline;
+- adopt candidate;
+- build and re-evaluate a hybrid;
+- revise the direction because both fail.
+
+Do not average away repeated objections. Fix the causal problem.
+
+## 7. Decide and loop
+
+### Greenfield
+
+Ship when the deterministic and qualitative gates pass. Otherwise fix the named failure and return to measurement. Do not restart from blank unless the direction is wrong.
+
+### Existing copy
+
+A candidate replaces the baseline only when it wins load-bearing dimensions without introducing a trust, factual or action regression. The baseline may remain unchanged. That is a valid successful evaluation.
+
+A hybrid must run through the full workflow as a new candidate.
+
+## 8. Dogfood the process
+
+After evaluating output, evaluate the workflow itself:
+
+- Which instruction caused a material win?
+- Which instruction caused a regression?
+- Which failure was invisible to the current detector or rubric?
+- Did two directives conflict, and which one better served product truth?
+
+Change the workflow only for repeated failures or one severe failure. Then rerun the same comparison. The explanation for a change is not evidence that it worked.
+
+## 9. Deliver
+
+Ordinary rewrite:
+
+- final copy;
+- short Changes table;
+- measurement line.
+
+Paired evaluation:
+
+- recommendation and exact copy;
+- baseline/candidate/hybrid decision;
+- load-bearing evidence;
+- deterministic comparison;
+- retained lines from the losing variant;
+- limitations and next evidence needed.
