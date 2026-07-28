@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">growth-arsenal</title>
+  <desc id="desc">Your offer should fail here first. Business growth workshops inside your AI coding agent.</desc>
+  <rect width="1200" height="360" fill="#1450ff"/>
+  <path d="M0 310h1200v50H0z" fill="#d9ff4f"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity=".18">
+    <path d="M720 0v310M780 0v310M840 0v310M900 0v310M960 0v310M1020 0v310M1080 0v310M1140 0v310"/>
+    <path d="M720 50h480M720 110h480M720 170h480M720 230h480M720 290h480"/>
+  </g>
+  <g font-family="Arial, sans-serif" fill="#fff">
+    <text x="72" y="80" font-size="30" font-weight="700" letter-spacing="1">GROWTH-ARSENAL</text>
+    <text x="72" y="170" font-size="72" font-weight="900">YOUR OFFER SHOULD</text>
+    <text x="72" y="248" font-size="72" font-weight="900" fill="#d9ff4f">FAIL HERE FIRST.</text>
+    <text x="72" y="333" font-size="18" font-family="monospace" fill="#0e1630">ADVERSARIAL BUSINESS WORKSHOPS FOR AI CODING AGENTS</text>
+  </g>
+  <g transform="translate(765 58)">
+    <path d="M0 0h356l28 28v214H28L0 214z" fill="#f6f8ff" stroke="#0e1630" stroke-width="4"/>
+    <path d="M0 0h356l28 28H28L0 0z" fill="#0e1630"/>
+    <rect x="31" y="64" width="322" height="38" fill="#dfe7ff" stroke="#0e1630" stroke-width="2"/>
+    <rect x="31" y="118" width="322" height="38" fill="#ff5c35" stroke="#0e1630" stroke-width="2"/>
+    <rect x="31" y="172" width="322" height="38" fill="#d9ff4f" stroke="#0e1630" stroke-width="2"/>
+    <g font-family="monospace" font-size="14" font-weight="700" fill="#0e1630">
+      <text x="47" y="89">INPUT</text><text x="286" y="89">UNTESTED</text>
+      <text x="47" y="143">ATTACK</text><text x="302" y="143">FAIL</text>
+      <text x="47" y="197">REBUILD</text><text x="295" y="197">PASS</text>
+    </g>
+  </g>
+</svg>

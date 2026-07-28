@@ -1,0 +1,49 @@
+@media (max-width: 620px) {
+  :root { --frame: calc(100% - 1.5rem); }
+  .site-header { min-height: 4.3rem; gap: 1rem; }
+  .header-github { font-size: 0.78rem; padding: 0.45rem 0.6rem; }
+  .wordmark { font-size: 1.25rem; }
+  .hero { padding-block: 3.7rem 4.5rem; gap: 3rem; }
+  .hero h1 { font-size: clamp(3.6rem, 18vw, 5rem); }
+  .hero-facts div { grid-template-columns: 1fr; gap: 0.15rem; padding-block: 0.65rem; }
+  .hero-actions { align-items: stretch; }
+  .button { width: 100%; }
+  .text-link { padding: 0.75rem 0; }
+  .test-rig { box-shadow: 7px 7px 0 rgba(14, 22, 48, 0.86); }
+  .rig-topline { align-items: flex-start; }
+  .rig-live { text-align: right; }
+  .rig-stage-tabs button { padding-inline: 0.2rem; font-size: 0.75rem; }
+  .rig-screen,
+  .rig-panel { min-height: 420px; }
+  .rig-panel blockquote { font-size: 2.25rem; }
+  .attack-list li { grid-template-columns: 1fr auto; }
+  .attack-list li span { grid-column: 1 / -1; }
+  .clearance-mark span { font-size: 4rem; }
+  .test-strip { justify-content: flex-start; }
+  .principle-section h2,
+  .sequence-head h2,
+  .workshops-intro h2,
+  .outputs-copy h2,
+  .install-copy h2,
+  .faq-section h2 { font-size: clamp(2.8rem, 14vw, 4rem); }
+  .sequence { grid-template-columns: 1fr; row-gap: 2.2rem; }
+  .sequence li { padding-right: 0; }
+  .workshop-inner { grid-template-columns: 1fr; gap: 1.8rem; }
+  .bench-output,
+  .copy-sample { grid-column: 1; }
+  .bench-id strong { font-size: 4.3rem; }
+  .bench-copy h3 { font-size: 2.6rem; }
+  .file-console { box-shadow: 6px 6px 0 var(--blue); }
+  .file-console li { grid-template-columns: auto minmax(0, 1fr); }
+  .install-console { box-shadow: 6px 6px 0 var(--navy); }
+  .install-tabs button { font-size: 0.82rem; }
+  .prompt-example { grid-template-columns: 1fr; gap: 0.25rem; }
+  .footer-main { min-height: 430px; flex-direction: column; justify-content: center; align-items: stretch; }
+  .footer-main p { max-width: 10ch; }
+  .footer-meta { flex-direction: column; }
+  .footer-meta a:last-child { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

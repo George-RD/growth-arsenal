@@ -1,97 +1,87 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,100:16213e&height=180&section=header&text=growth-arsenal&fontSize=42&fontColor=e0e0e0&animation=fadeIn&fontAlignY=35&desc=Business%20growth%20workshops%20run%20inside%20your%20AI%20coding%20agent&descSize=15&descAlignY=55">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:667eea,100:764ba2&height=180&section=header&text=growth-arsenal&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Business%20growth%20workshops%20run%20inside%20your%20AI%20coding%20agent&descSize=15&descAlignY=55" width="100%" alt="growth-arsenal header">
+  <img src="docs/readme-header.svg" width="100%" alt="growth-arsenal. Your offer should fail here first." />
 </picture>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/skills-3-blue?style=flat-square" alt="Skills">
-  <img src="https://img.shields.io/badge/Claude_Code-compatible-green?style=flat-square" alt="Claude Code">
-  <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" alt="MIT License">
-  <a href="https://ko-fi.com/george_builds"><img src="https://img.shields.io/badge/Ko--fi-Support-ff5e5b?style=flat-square&logo=ko-fi&logoColor=white" alt="Support on Ko-fi"></a>
+  <a href="https://george-rd.github.io/growth-arsenal/"><strong>See how it works</strong></a>
+  ·
+  <a href="#install"><strong>Install</strong></a>
+  ·
+  <a href="https://ko-fi.com/george_builds"><strong>Support the project</strong></a>
 </p>
 
-<p align="center">
-  <b><a href="https://george-rd.github.io/growth-arsenal/">See how it works →</a></b>
-</p>
+# growth-arsenal
 
-## Build offers and lead gen systems that survive contact with real customers
+Business growth workshops that run inside your AI coding agent.
 
-Three Hormozi-style workshops, run by adversarial AI agent teams. They stress-test every offer, lead magnet, and script before you ship it, not after.
+A normal chat helps you improve an idea. growth-arsenal tries to break it. Independent agents test the market, pricing, margins, message and execution plan at every phase. Approved decisions are written to files as the workshop runs.
 
----
+## What is inside
 
-## What's inside
+| Workshop | What it does | Main output |
+|---|---|---|
+| **grandslam-offer** | Builds the market, price, value equation, offer stack, guarantee and name. A sceptical marketer, business strategist and dynamic customer personas review each phase. | Research brief, offer file and HTML dashboards |
+| **hundred-million-leads** | Builds lead magnets, chooses channels, writes outreach and lays out a Rule of 100 plan. Customer personas receive the scripts as prospects. | Lead-generation blueprint, scripts and tracking plan |
+| **business-copy-style** | Runs customer-facing copy through plain-language, de-AI and adversarial reader checks. The other workshops call it automatically. | Clearer copy that is ready for a human edit |
 
-| Skill | What it does |
-|---|---|
-| **grandslam-offer** | Turns a vague idea into a priced, named offer with a real guarantee. A skeptical marketer, a margin-obsessed strategist, and simulated customers tear it apart first. Based on Alex Hormozi's *$100M Offers*. |
-| **hundred-million-leads** | Builds your lead magnets, picks your Core Four channels, writes your outreach scripts, and lays out a Rule of 100 plan. Companion to the offer workshop. Based on Alex Hormozi's *$100M Leads*. |
-| **business-copy-style** | Checks every customer-facing line against plain-language and de-AI rules before it ships. Both workshops call it automatically. Nothing sounds like a robot wrote it. |
+The workshops can run independently. Together they form a chain from rough idea to offer, acquisition plan and final copy.
 
-Each workshop saves its work to markdown files as it runs. That way your progress survives a restart and hands off cleanly to the next skill.
+## How the pressure test works
 
----
+1. **Build:** research missing facts and draft one phase.
+2. **Attack:** independent agents review the same output in parallel.
+3. **Converge:** shared concerns become must-fix issues.
+4. **Persist:** approved decisions are written to Markdown and HTML files.
+
+A phase passes only when no critical issue remains, or when you explicitly accept the trade-off.
 
 ## Install
 
-Pick the path for your harness. All commands assume you're in a terminal.
+### Claude Code plugin
 
-| Harness | Command |
-|---|---|
-| Claude Code (plugin) | `/plugin marketplace add George-RD/growth-arsenal` then `/plugin install growth-arsenal@growth-arsenal` |
-| Claude Code (skills only) | `git clone https://github.com/George-RD/growth-arsenal && cd growth-arsenal && ./install.sh claude` |
-| Oh My Pi (OMP) | Same clone, then `./install.sh omp` (or `./install.sh claude`; OMP inherits `~/.claude/skills/` automatically) |
-| Codex | Same clone, then `./install.sh codex` |
-| opencode | Same clone, then `./install.sh opencode` |
-| agents.md-style harnesses | Same clone, then `./install.sh agents` |
+```text
+/plugin marketplace add George-RD/growth-arsenal
+/plugin install growth-arsenal@growth-arsenal
+```
 
-Updates: `git pull` in the cloned repo; the install is a symlink, so changes show up immediately. Windows: symlinks aren't reliable, copy the `skills/<name>` directories into your harness's skills folder instead.
+### Skills install
 
----
+```bash
+git clone https://github.com/George-RD/growth-arsenal
+cd growth-arsenal
+./install.sh codex   # claude | omp | opencode | agents
+```
 
-## Quick start
+Supported harnesses: Claude Code, Oh My Pi, Codex, opencode and agents.md-style tools.
 
-Once installed, just tell your agent what you need:
+The install uses symlinks, so `git pull` updates the workshops in place. On Windows, copy the `skills/<name>` folders into the harness skills directory instead.
 
-- *"I run a small bookkeeping firm, help me build an offer I can charge 5x for"* → grandslam-offer takes over.
-- *"I sell an online course for new parents, help me build a lead generation system"* → hundred-million-leads takes over.
-- *"Rewrite this landing page copy so it doesn't sound like AI wrote it"* → business-copy-style takes over.
+## Start with a plain request
 
-The agent teams push back on weak ideas. They ask hard questions about pricing, guarantees, channels, and messaging. That's the point. The stress test happens before you go to market, not after.
+```text
+I run a small bookkeeping firm. Help me build an offer I can charge five times more for.
+```
 
----
+```text
+I sell an online course for new parents. Build a lead generation system I can execute every day.
+```
 
-## FAQ
+```text
+Rewrite this landing page so it does not sound like AI wrote it.
+```
 
-**Isn't this just a chatbot with extra steps?**
-No. A plain chat call skips the adversarial review. Each phase gets torn apart by a skeptical marketer, a strategist, and simulated customers before you move on.
+The workshop will ask for what it needs. It will push back when the market, maths or message is weak.
 
-**Does this replace talking to real customers?**
-No. It kills the obvious weak spots first, cheaply, before real buyers see them. You still have to talk to real people. They just meet a stronger offer.
+## What it does not do
 
-**Do I need to know the Hormozi books first?**
-No. The workshop asks the questions and builds the offer with you, phase by phase.
+This does not replace talking to real customers. Dynamic personas catch obvious gaps, but they are not proof of demand. Real buyers still decide whether the offer works.
 
-**What if I only want the lead-gen piece?**
-Each skill runs on its own. The leads workshop suggests the offer workshop first if you skipped it. It won't block you either way.
-
-**Will the copy sound like AI wrote it?**
-Every customer-facing line runs through business-copy-style first. Plain language. No AI tells.
-
----
+You do not need to read Alex Hormozi's books first. The workshops apply the relevant questions and formulas one phase at a time. This repository is an independent open-source implementation inspired by *$100M Offers* and *$100M Leads*.
 
 ## Contributing
 
-Found a bug? Got an idea? [Open an issue](https://github.com/George-RD/growth-arsenal/issues). PRs welcome. See `CLAUDE.md` for repo conventions.
+Found a bug or a weak part of the workshop? [Open an issue](https://github.com/George-RD/growth-arsenal/issues). Pull requests are welcome. See `CLAUDE.md` for repository conventions.
 
-## Credits
-
-These workshops implement methodologies from Alex Hormozi's *$100M Offers* and *$100M Leads*.
-
-## License
+## Licence
 
 MIT. See `LICENSE`.
-
-<picture>
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,100:16213e&height=100&section=footer" width="100%" alt="footer">
-</picture>

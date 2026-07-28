@@ -1,0 +1,157 @@
+.text-link:hover { color: var(--yellow); }
+.hero-facts {
+  margin: 2.7rem 0 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line-light);
+}
+.hero-facts div {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1rem;
+  padding-block: 0.42rem;
+}
+.hero-facts dt {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+.hero-facts dd { margin: 0; color: rgba(255, 255, 255, 0.9); font-size: 0.92rem; }
+.test-rig {
+  position: relative;
+  min-width: 0;
+  color: var(--navy);
+  background: var(--paper);
+  border: 2px solid var(--navy);
+  box-shadow: 12px 12px 0 rgba(14, 22, 48, 0.86);
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+}
+.test-rig::before,
+.test-rig::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  background: var(--yellow);
+}
+.test-rig::before { width: 44px; height: 4px; top: 11px; right: -2px; transform: rotate(45deg); }
+.test-rig::after { width: 44px; height: 4px; bottom: 11px; left: -2px; transform: rotate(45deg); }
+.rig-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+.rig-live { color: var(--yellow); }
+.rig-live i,
+.console-status i {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 20%, transparent);
+}
+.rig-stage-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 2px solid var(--navy);
+}
+.rig-stage-tabs button {
+  border: 0;
+  border-right: 1px solid var(--line-dark);
+  background: var(--blue-soft);
+  color: var(--navy);
+  padding: 0.75rem 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.rig-stage-tabs button:last-child { border-right: 0; }
+.rig-stage-tabs button[aria-selected="true"] { background: var(--yellow); }
+.rig-screen {
+  position: relative;
+  min-height: 375px;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(20, 80, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 80, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  overflow: hidden;
+}
+.rig-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 375px;
+  padding: clamp(1.35rem, 3vw, 2rem);
+}
+.rig-panel[hidden] { display: none; }
+.js .rig-panel.rig-enter { animation: rig-in 520ms var(--ease-out) both; }
+@keyframes rig-in {
+  from { opacity: 0; transform: translateX(22px); filter: blur(5px); clip-path: inset(0 0 0 14%); }
+  to { opacity: 1; transform: translateX(0); filter: blur(0); clip-path: inset(0); }
+}
+.specimen-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.07em;
+}
+.rig-panel blockquote {
+  margin: clamp(2.5rem, 7vw, 4.2rem) 0 0;
+  max-width: 18ch;
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+.input-notes,
+.change-log {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.6rem;
+}
+.input-notes span,
+.change-log span {
+  padding: 0.38rem 0.55rem;
+  background: var(--white);
+  border: 1px solid var(--line-dark);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+.change-log span { background: var(--yellow); }
+.screen-note {
+  margin: auto 0 0;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line-dark);
+  font-size: 0.82rem;
+  color: #3b4664;
+}
+.attack-list {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+.attack-list li {
+  display: grid;
+  grid-template-columns: 7rem 1fr auto;
+  gap: 0.8rem;
+  align-items: start;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line-dark);
+}
+.attack-list b { font-family: var(--mono); font-size: 0.75rem; }
+.attack-list span { font-size: 0.9rem; }
+.attack-list strong { color: #b82f17; font-family: var(--mono); font-size: 0.75rem; }
