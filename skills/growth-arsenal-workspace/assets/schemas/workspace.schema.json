@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/George-RD/growth-arsenal/schemas/workspace.schema.json",
+  "title": "Growth Arsenal workspace",
+  "type": "object",
+  "required": ["schema_version", "project", "tracks", "research", "accepted_risks", "events"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "workspace_revision": {"type": "integer", "minimum": 0},
+    "project": {
+      "type": "object",
+      "required": ["slug", "name", "locale", "currency", "spelling", "timezone"],
+      "properties": {
+        "slug": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "name": {"type": "string", "minLength": 1},
+        "locale": {"type": "string", "minLength": 2},
+        "currency": {"type": "string", "minLength": 3, "maxLength": 3},
+        "spelling": {"enum": ["british", "american"]},
+        "timezone": {"type": "string", "minLength": 1}
+      }
+    },
+    "tracks": {"type": "object"},
+    "research": {"type": "object"},
+    "accepted_risks": {"type": "array"},
+    "events": {"type": "array"},
+    "render": {"type": "object"}
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "accepted_risks": [],
+  "events": [],
+  "project": {
+    "created_at": "2026-07-28T00:00:00Z",
+    "currency": "GBP",
+    "locale": "en-GB",
+    "name": "Garage Follow-up",
+    "slug": "garage-follow-up",
+    "spelling": "british",
+    "timezone": "Europe/London",
+    "updated_at": "2026-07-28T00:00:00Z"
+  },
+  "render": {
+    "last_rendered_at": null,
+    "outputs": [],
+    "theme": "qualification-lab"
+  },
+  "research": {
+    "gaps": [],
+    "market_identity": {
+      "core_market": "Wealth",
+      "niche": "Independent garages"
+    },
+    "personas": [],
+    "sources": []
+  },
+  "schema_version": 1,
+  "tracks": {
+    "offer": {
+      "current_phase": "enhancement",
+      "phases": {
+        "discovery": {
+          "approved_at": "2026-07-28T00:00:00Z",
+          "data": {},
+          "data_hash": "demo",
+          "evidence_refs": [],
+          "input_revisions": {},
+          "label": "Discovery",
+          "reviews": [],
+          "revision": 1,
+          "stale_reason": null,
+          "status": "approved",
+          "summary": "Independent garages losing inbound enquiries."
+        },
+        "enhancement": {
+          "approved_at": "2026-07-28T00:00:00Z",
+          "data": {
+            "elevator_pitch": "A follow-up system for independent garages, installed in the inbox they already use.",
+            "guarantee": {
+              "category": "Always-on",
+              "name": "No New CRM Promise",
+              "terms": "If the workflow needs a new CRM, the installation fee is refunded."
+            },
+            "offer_name": "The Five-Day Follow-up Fit",
+            "scarcity": "Five pilot installs per month",
+            "urgency": "Pilot pricing closes when the five slots are filled"
+          },
+          "data_hash": "demo",
+          "evidence_refs": [],
+          "input_revisions": {
+            "discovery": 1,
+            "market": 1,
+            "pricing": 1,
+            "stack": 1,
+            "value": 1
+          },
+          "label": "Enhancement",
+          "reviews": [],
+          "revision": 1,
+          "stale_reason": null,
+          "status": "approved",
+          "summary": "Clear to test with five pilot garages."
+        },
+        "market": {
+          "approved_at": "2026-07-28T00:00:00Z",
+          "data": {
+            "core_market": "Wealth",
+            "niche": "Independent garages losing inbound enquiries"
+          },
+          "data_hash": "demo",
+          "evidence_refs": [],
+          "input_revisions": {"discovery": 1},
+          "label": "Starving Crowd",
+          "reviews": [],
+          "revision": 1,
+          "stale_reason": null,
+          "status": "approved",
+          "summary": "Garages with 3-20 staff and no dedicated enquiry desk."
+        },
+        "pricing": {
+          "approved_at": "2026-07-28T00:00:00Z",
+          "data": {"position": "High-Value Leader", "price": 1500},
+          "data_hash": "demo",
+          "evidence_refs": [],
+          "input_revisions": {"discovery": 1, "market": 1},
+          "label": "Pricing",
+          "reviews": [],
+          "revision": 1,
+          "stale_reason": null,
+          "status": "approved",
+          "summary": "A fixed installation fee with monthly support."
+        },
+        "stack": {
+          "approved_at": "2026-07-28T00:00:00Z",
+          "data": {
+            "bonuses": [{"description": "Find where replies currently fail", "name": "Missed enquiry audit", "value": 500}],
+            "core": {"description": "Installed with the garage's existing inbox", "name": "Five-day enquiry follow-up system", "value": 2500},
+            "price": 1500,
+            "total_value": 3000
+          },
+          "data_hash": "demo",
+          "evidence_refs": [],
+          "input_revisions": {"discovery": 1, "market": 1, "pricing": 1, "value": 1},
+          "label": "Offer Stack",
+          "reviews": [],
+          "revision": 1,
+          "stale_reason": null,
+          "status": "approved",
+          "summary": "Installation, inbox rules and response templates."
+        },
+        "value": {
+          "approved_at": "2026-07-28T00:00:00Z",
+          "data": {
+            "dream_outcome": "Every enquiry gets a useful reply",
+            "dream_score": 8,
+            "effort_sacrifice": "No new CRM",
+            "effort_score": 8,
+            "likelihood_score": 7,
+            "perceived_likelihood": "Installed in the existing inbox",
+            "time_delay": "Five days",
+            "time_score": 8
+          },
+          "data_hash": "demo",
+          "evidence_refs": [],
+          "input_revisions": {"discovery": 1, "market": 1, "pricing": 1},
+          "label": "Value Equation",
+          "reviews": [],
+          "revision": 1,
+          "stale_reason": null,
+          "status": "approved",
+          "summary": "Visible first result within five days."
+        }
+      }
+    }
+  },
+  "workspace_revision": 0
+}
