@@ -27,6 +27,13 @@ Tier-1 vocab         : [n]    (target 0)
 avg words/sentence   : [x.x]  (target ≤ 15)
 ```
 
+When structural review was relevant, add only the advisory lines that affected the edit:
+
+```text
+advisory: duplicate sentences [n] | repeated starters [n] | repeated 4-word phrases [n]/[rate per 1k]
+advisory: sentence-length stdev [x.x] | similar-length runs [n] | overloaded paragraphs [n]
+```
+
 Judge tests: position [pass/fail] · read-aloud [pass/fail] · specificity [pass/fail]
 
 > Produced with `scripts/copy-lint.sh`; see `references/eval-cycle.md`.

@@ -74,6 +74,12 @@ scripts/copy-lint.sh path/to/copy.txt
 printf '%s' "$copy" | scripts/copy-lint.sh -
 ```
 
+Add the optional structural summary when cadence or templated phrasing is in question:
+
+```sh
+scripts/copy-lint.sh --structure path/to/copy.txt
+```
+
 Paired comparison:
 
 ```sh
@@ -84,6 +90,8 @@ python3 scripts/copy-compare.py \
 ```
 
 `copy-lint.sh` exits `0` when hard gates pass and `1` when the copy needs a named mechanical fix. `copy-compare.py` always leaves `winner` unset because lower grade, fewer words or shorter sentences do not prove better copy.
+
+Structural counts cover repeated sentences and openers, sentence-length rhythm, repeated four-word phrases, paragraph load, first-person starts, contrast scaffolds and page-explaining phrases. They are review evidence only. They do not prove AI authorship or replace the qualitative rubric.
 
 ## Qualitative gates
 

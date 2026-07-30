@@ -22,8 +22,17 @@ Aim around grade 5 when natural for broad consumer copy. Grade is an estimate, n
 Advisories do not fail the build:
 
 - Tier-2 vocabulary;
-- en dashes and double hyphens;
-- repeated boldface list labels.
+- en dashes, double hyphens and repeated boldface list labels;
+- exact duplicate sentences and repeated two-word sentence openers;
+- sentence-length variation and runs of similarly sized sentences;
+- repeated content-bearing four-word phrases per 1,000 words;
+- paragraphs over the configured word or sentence load;
+- first-person sentence-start rate;
+- repeated contrast scaffolds and page-explaining phrases.
+
+Use `scripts/copy-lint.sh --structure FILE` for an opt-in single-copy summary. The paired comparator always includes the structural fields in its text and JSON reports.
+
+The structural defaults are review prompts, not universal limits. Product names, deliberate refrains, legal copy, short samples and personal writing can all produce false positives. Never use these counts to claim authorship or teach the copy to beat the detector.
 
 For baseline/candidate work, run:
 
