@@ -7,6 +7,8 @@ import unittest
 from pathlib import Path
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "copy-compare.py"
+ROOT = Path(__file__).resolve().parents[3]
+FIXTURES = ROOT / "evaluations" / "fixtures"
 spec = importlib.util.spec_from_file_location("copy_compare", SCRIPT)
 copy_compare = importlib.util.module_from_spec(spec)
 assert spec.loader
@@ -15,7 +17,7 @@ spec.loader.exec_module(copy_compare)
 
 
 class CopyCompareTests(unittest.TestCase):
-    """Cover extraction, sentence counting, gates and winner neutrality."""
+    """Cover extraction, gates, structural advisories and winner neutrality."""
 
     def test_result_refuses_to_choose_a_winner(self):
         payload = copy_compare.result(
@@ -93,6 +95,85 @@ class CopyCompareTests(unittest.TestCase):
                 encoding="utf-8",
             )
             self.assertEqual(copy_compare.read_copy(path), "Offer test.\nFix it early.")
+
+    def test_positive_fixture_exposes_each_structural_advisory(self):
+        metrics = copy_compare.analyse(
+            (FIXTURES / "structural-advisory-positive.txt").read_text(encoding="utf-8")
+        )
+        self.assertGreater(metrics.duplicate_sentence_instances, 0)
+        self.assertGreater(metrics.repeated_two_word_starter_instances, 0)
+        self.assertGreater(metrics.similar_sentence_length_run_count, 0)
+        self.assertGreater(metrics.repeated_four_word_phrase_instances, 0)
+        self.assertGreater(metrics.overloaded_paragraph_count, 0)
+        self.assertGreater(metrics.first_person_sentence_start_rate, 0)
+        self.assertGreater(metrics.contrast_scaffold_count, 0)
+        self.assertGreater(metrics.meta_phrase_count, 0)
+
+    def test_negative_fixture_avoids_structural_alerts_and_varies_rhythm(self):
+        metrics = copy_compare.analyse(
+            (FIXTURES / "structural-advisory-negative.txt").read_text(encoding="utf-8")
+        )
+        self.assertEqual(metrics.duplicate_sentence_instances, 0)
+        self.assertEqual(metrics.repeated_two_word_starter_instances, 0)
+        self.assertEqual(metrics.similar_sentence_length_run_count, 0)
+        self.assertEqual(metrics.repeated_four_word_phrase_instances, 0)
+        self.assertEqual(metrics.overloaded_paragraph_count, 0)
+        self.assertEqual(metrics.first_person_sentence_start_rate, 0)
+        self.assertEqual(metrics.contrast_scaffold_count, 0)
+        self.assertEqual(metrics.meta_phrase_count, 0)
+        self.assertGreater(metrics.sentence_length_stdev, 0)
+
+    def test_repeated_phrase_detector_ignores_mostly_stopword_windows(self):
+        metrics = copy_compare.analyse(
+            "This is in the way. This is in the way.",
+            max_grade=20,
+            max_sentence=30,
+        )
+        self.assertEqual(metrics.repeated_four_word_phrase_instances, 0)
+
+    def test_structural_advisories_never_change_hard_gate_or_winner(self):
+        repetitive = "We test the offer now. We test the offer now. We test the offer now."
+        metrics = copy_compare.analyse(
+            repetitive,
+            max_grade=20,
+            max_sentence=30,
+        )
+        self.assertTrue(metrics.hard_gate_pass)
+        self.assertGreater(metrics.duplicate_sentence_instances, 0)
+        payload = copy_compare.result(
+            "Clear copy.",
+            repetitive,
+            baseline_label="A",
+            candidate_label="B",
+            max_grade=20,
+            max_emdash=0,
+            max_sentence=30,
+        )
+        self.assertIsNone(payload["winner"])
+        self.assertGreater(
+            payload["candidate_minus_baseline"]["duplicate_sentence_instances"],
+            0,
+        )
+
+    def test_paragraph_thresholds_are_configurable(self):
+        text = "One short sentence. A second short sentence."
+        default = copy_compare.analyse(text)
+        strict = copy_compare.analyse(text, max_paragraph_sentences=1)
+        self.assertEqual(default.overloaded_paragraph_count, 0)
+        self.assertEqual(strict.overloaded_paragraph_count, 1)
+
+    def test_text_report_labels_structural_signals_as_advisory(self):
+        payload = copy_compare.result(
+            "Baseline copy.",
+            "Candidate copy.",
+            baseline_label="A",
+            candidate_label="B",
+            max_grade=20,
+            max_emdash=0,
+            max_sentence=30,
+        )
+        report = copy_compare.text_report(payload)
+        self.assertIn("Advisory (structural; never gates)", report)
 
 
 if __name__ == "__main__":

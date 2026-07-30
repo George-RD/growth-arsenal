@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Compare deterministic copy signals without choosing a qualitative winner.
-
-The output is deliberately descriptive. A lower reading grade or shorter sentence
-is not automatically better copy. The paired-evaluation workflow decides whether
-one version better serves the audience, action and product truth.
-"""
+"""Compare copy signals without choosing a qualitative winner."""
 from __future__ import annotations
 
 import argparse
@@ -16,6 +11,15 @@ from dataclasses import asdict, dataclass
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Iterable
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+from copy_structure import (  # noqa: E402
+    COMPARISON_FIELDS as STRUCTURAL_COMPARISON_FIELDS,
+    StructuralMetrics,
+    analyse as analyse_structure,
+)
 
 TIER_1 = {
     "delve", "landscape", "tapestry", "paradigm", "leverage", "harness",
@@ -41,13 +45,11 @@ BLOCK_TAGS = {
 IGNORED_TAGS = {"script", "style", "svg", "noscript"}
 NONTERMINAL_DOT = "\u2024"
 ABBREVIATION_RE = re.compile(
-    r"\b(?:e\.g|i\.e|mr|mrs|ms|dr|prof|sr|jr|vs|etc|no|fig|st)\.",
-    re.IGNORECASE,
+    r"\b(?:e\.g|i\.e|mr|mrs|ms|dr|prof|sr|jr|vs|etc|no|fig|st)\.", re.I
 )
 INITIALISM_RE = re.compile(r"\b(?:[A-Za-z]\.){2,}")
 URL_OR_EMAIL_RE = re.compile(
-    r"https?://\S+|www\.\S+|\b[\w.+-]+@[\w.-]+\.\w+\b",
-    re.IGNORECASE,
+    r"https?://\S+|www\.\S+|\b[\w.+-]+@[\w.-]+\.\w+\b", re.I
 )
 TERMINAL_RE = re.compile(r"[.!?]+(?:[\"'”’\)\]]*)?(?=\s|$)")
 
@@ -87,16 +89,14 @@ class VisibleTextParser(HTMLParser):
             self.parts.append(data)
 
     def text(self) -> str:
-        lines = []
-        for raw_line in "".join(self.parts).splitlines():
-            line = re.sub(r"[ \t]+", " ", raw_line).strip()
-            if line:
-                lines.append(line)
-        return "\n".join(lines)
+        return "\n".join(
+            line for raw in "".join(self.parts).splitlines()
+            if (line := re.sub(r"[ \t]+", " ", raw).strip())
+        )
 
 
 @dataclass(frozen=True)
-class Metrics:
+class Metrics(StructuralMetrics):
     words: int
     sentences: int
     average_words_per_sentence: float
@@ -113,8 +113,6 @@ class Metrics:
 
 
 def visible_text(raw: str, suffix: str = "") -> str:
-    """Return visible text from HTML or decoded plaintext."""
-
     if suffix.lower() in {".html", ".htm"} or re.search(
         r"<\s*(?:html|body|main|section|article|div|p|h[1-6])\b", raw, re.I
     ):
@@ -126,32 +124,24 @@ def visible_text(raw: str, suffix: str = "") -> str:
 
 
 def read_copy(path: str | Path) -> str:
-    """Read a copy corpus and extract visible text when it is HTML."""
-
     source = Path(path)
     try:
-        raw = source.read_text(encoding="utf-8")
+        return visible_text(source.read_text(encoding="utf-8"), source.suffix)
     except FileNotFoundError as exc:
         raise ValueError(f"No such file: {source}") from exc
-    return visible_text(raw, source.suffix)
 
 
 def syllables(word: str) -> int:
-    """Estimate English syllables using the same lightweight gate heuristic."""
-
     cleaned = re.sub(r"[^a-z]", "", word.lower())
     if not cleaned:
         return 1
-    groups = re.findall(r"[aeiouy]+", cleaned)
-    count = len(groups)
+    count = len(re.findall(r"[aeiouy]+", cleaned))
     if cleaned.endswith("e") and not cleaned.endswith("le") and count > 1:
         count -= 1
     return max(1, count)
 
 
 def base_forms(word: str) -> Iterable[str]:
-    """Yield simple inflectional stems used by the vocabulary detector."""
-
     word = word.lower()
     yield word
     if word.endswith("ies") and len(word) > 3:
@@ -165,8 +155,6 @@ def base_forms(word: str) -> Iterable[str]:
 
 
 def matched_terms(words: list[str], vocabulary: set[str]) -> list[str]:
-    """Return vocabulary terms matched directly or through simple inflections."""
-
     matched: list[str] = []
     for word in words:
         for form in base_forms(word):
@@ -177,32 +165,36 @@ def matched_terms(words: list[str], vocabulary: set[str]) -> list[str]:
 
 
 def protect_nonterminal_dots(text: str) -> str:
-    """Protect decimal, abbreviation, initialism, URL and email dots."""
-
-    def protect_match(match: re.Match[str]) -> str:
-        token = match.group(0)
-        trailing = ""
+    def protect(match: re.Match[str]) -> str:
+        token, trailing = match.group(0), ""
         while token and token[-1] in ".!?":
             trailing = token[-1] + trailing
             token = token[:-1]
         return token.replace(".", NONTERMINAL_DOT) + trailing
 
-    protected = URL_OR_EMAIL_RE.sub(protect_match, text)
-    protected = re.sub(r"(?<=\d)\.(?=\d)", NONTERMINAL_DOT, protected)
-    protected = ABBREVIATION_RE.sub(
-        lambda match: match.group(0).replace(".", NONTERMINAL_DOT), protected
+    text = URL_OR_EMAIL_RE.sub(protect, text)
+    text = re.sub(r"(?<=\d)\.(?=\d)", NONTERMINAL_DOT, text)
+    text = ABBREVIATION_RE.sub(lambda match: match.group(0).replace(".", NONTERMINAL_DOT), text)
+    return INITIALISM_RE.sub(
+        lambda match: match.group(0).replace(".", NONTERMINAL_DOT), text
     )
-    protected = INITIALISM_RE.sub(
-        lambda match: match.group(0).replace(".", NONTERMINAL_DOT), protected
-    )
-    return protected
+
+
+def split_sentences(text: str) -> list[str]:
+    protected = protect_nonterminal_dots(text)
+    matches = list(TERMINAL_RE.finditer(protected))
+    if not matches:
+        return [protected.strip().replace(NONTERMINAL_DOT, ".")] if protected.strip() else []
+    sentences, start = [], 0
+    for match in matches:
+        if sentence := protected[start : match.end()].strip():
+            sentences.append(sentence.replace(NONTERMINAL_DOT, "."))
+        start = match.end()
+    return sentences
 
 
 def sentence_count(text: str) -> int:
-    """Count terminal punctuation without treating token-internal dots as stops."""
-
-    protected = protect_nonterminal_dots(text)
-    return max(1, len(TERMINAL_RE.findall(protected)))
+    return max(1, len(split_sentences(text)))
 
 
 def analyse(
@@ -211,22 +203,35 @@ def analyse(
     max_grade: float = 6,
     max_emdash: int = 0,
     max_sentence: float = 15,
+    similar_length_tolerance: int = 2,
+    similar_run_min: int = 3,
+    max_paragraph_words: int = 120,
+    max_paragraph_sentences: int = 6,
 ) -> Metrics:
-    """Calculate deterministic readability and de-AI signals for one corpus."""
-
     normalized = re.sub(r"\s+", " ", text).strip()
     words_raw = WORD_RE.findall(normalized)
     words = [word.lower() for word in words_raw]
-    sentences = sentence_count(normalized)
+    sentence_texts = split_sentences(normalized)
+    sentences = max(1, len(sentence_texts))
     word_count = max(1, len(words))
     average = word_count / sentences
-    syllable_count = sum(syllables(word) for word in words_raw) or 1
     grade = max(
         0.0,
-        0.39 * average + 11.8 * (syllable_count / word_count) - 15.59,
+        0.39 * average
+        + 11.8 * ((sum(syllables(word) for word in words_raw) or 1) / word_count)
+        - 15.59,
     )
-    tier_1 = matched_terms(words, TIER_1)
-    tier_2 = matched_terms(words, TIER_2)
+    tier_1, tier_2 = matched_terms(words, TIER_1), matched_terms(words, TIER_2)
+    structure = analyse_structure(
+        text,
+        sentence_texts,
+        word_count=word_count,
+        sentence_counter=sentence_count,
+        similar_length_tolerance=similar_length_tolerance,
+        similar_run_min=similar_run_min,
+        max_paragraph_words=max_paragraph_words,
+        max_paragraph_sentences=max_paragraph_sentences,
+    )
     em_dashes = normalized.count("—")
     failures: list[str] = []
     if grade > max_grade + 0.05:
@@ -236,10 +241,10 @@ def analyse(
     if tier_1:
         failures.append(f"Tier-1 vocabulary {len(tier_1)} > 0")
     if average > max_sentence + 0.05:
-        failures.append(
-            f"average sentence {average:.1f} > {max_sentence:g} words"
-        )
+        failures.append(f"average sentence {average:.1f} > {max_sentence:g} words")
+
     return Metrics(
+        **asdict(structure),
         words=len(words),
         sentences=sentences,
         average_words_per_sentence=round(average, 1),
@@ -256,24 +261,18 @@ def analyse(
     )
 
 
-def comparison(baseline: Metrics, candidate: Metrics) -> dict[str, float | int]:
-    """Return candidate-minus-baseline deterministic deltas."""
+COMPARISON_FIELDS = (
+    "words", "sentences", "average_words_per_sentence", "flesch_kincaid_grade",
+    "em_dashes", "tier_1_count", "tier_2_count", *STRUCTURAL_COMPARISON_FIELDS,
+)
 
-    return {
-        "words": candidate.words - baseline.words,
-        "sentences": candidate.sentences - baseline.sentences,
-        "average_words_per_sentence": round(
-            candidate.average_words_per_sentence - baseline.average_words_per_sentence,
-            1,
-        ),
-        "flesch_kincaid_grade": round(
-            candidate.flesch_kincaid_grade - baseline.flesch_kincaid_grade,
-            1,
-        ),
-        "em_dashes": candidate.em_dashes - baseline.em_dashes,
-        "tier_1_count": candidate.tier_1_count - baseline.tier_1_count,
-        "tier_2_count": candidate.tier_2_count - baseline.tier_2_count,
-    }
+
+def comparison(baseline: Metrics, candidate: Metrics) -> dict[str, float | int]:
+    deltas: dict[str, float | int] = {}
+    for field in COMPARISON_FIELDS:
+        delta = getattr(candidate, field) - getattr(baseline, field)
+        deltas[field] = round(delta, 1) if isinstance(delta, float) else delta
+    return deltas
 
 
 def result(
@@ -285,25 +284,39 @@ def result(
     max_grade: float,
     max_emdash: int,
     max_sentence: float,
+    similar_length_tolerance: int = 2,
+    similar_run_min: int = 3,
+    max_paragraph_words: int = 120,
+    max_paragraph_sentences: int = 6,
 ) -> dict[str, object]:
-    """Build a two-sided metrics payload that deliberately leaves winner unset."""
-
-    baseline = analyse(
-        baseline_text,
-        max_grade=max_grade,
-        max_emdash=max_emdash,
-        max_sentence=max_sentence,
-    )
-    candidate = analyse(
-        candidate_text,
-        max_grade=max_grade,
-        max_emdash=max_emdash,
-        max_sentence=max_sentence,
-    )
+    settings = {
+        "max_grade": max_grade,
+        "max_emdash": max_emdash,
+        "max_sentence": max_sentence,
+        "similar_length_tolerance": similar_length_tolerance,
+        "similar_run_min": similar_run_min,
+        "max_paragraph_words": max_paragraph_words,
+        "max_paragraph_sentences": max_paragraph_sentences,
+    }
+    baseline, candidate = analyse(baseline_text, **settings), analyse(candidate_text, **settings)
     return {
         "baseline": {"label": baseline_label, **asdict(baseline)},
         "candidate": {"label": candidate_label, **asdict(candidate)},
         "candidate_minus_baseline": comparison(baseline, candidate),
+        "thresholds": {
+            "hard_gates": {
+                "max_grade": max_grade,
+                "max_emdash": max_emdash,
+                "max_sentence": max_sentence,
+                "tier_1_count": 0,
+            },
+            "structural_advisories": {
+                "similar_length_tolerance": similar_length_tolerance,
+                "similar_run_min": similar_run_min,
+                "max_paragraph_words": max_paragraph_words,
+                "max_paragraph_sentences": max_paragraph_sentences,
+            },
+        },
         "winner": None,
         "decision_required": (
             "Deterministic signals do not choose the winner. Run the blind paired "
@@ -314,9 +327,7 @@ def result(
 
 
 def text_report(payload: dict[str, object]) -> str:
-    """Format a compact human-readable comparison report."""
-
-    rows = []
+    rows: list[str] = []
     for key in ("baseline", "candidate"):
         item = payload[key]
         assert isinstance(item, dict)
@@ -326,27 +337,31 @@ def text_report(payload: dict[str, object]) -> str:
             f"em dashes {item['em_dashes']} | Tier-1 {item['tier_1_count']} | "
             f"hard gate {'PASS' if item['hard_gate_pass'] else 'FAIL'}"
         )
-        for failure in item["hard_gate_failures"]:
-            rows.append(f"  - {failure}")
-    rows.extend(
-        [
-            "",
-            "Candidate minus baseline:",
-            json.dumps(
-                payload["candidate_minus_baseline"],
-                ensure_ascii=False,
-                sort_keys=True,
-            ),
-            "",
-            str(payload["decision_required"]),
-        ]
-    )
+        rows.extend(f"  - {failure}" for failure in item["hard_gate_failures"])
+        rows.extend([
+            "  Advisory (structural; never gates):",
+            "    repetition: "
+            f"duplicate sentences {item['duplicate_sentence_instances']} | "
+            f"repeated starters {item['repeated_two_word_starter_instances']} | "
+            f"repeated 4-word phrases {item['repeated_four_word_phrase_instances']} "
+            f"({item['repeated_four_word_phrases_per_1000_words']}/1k words)",
+            "    rhythm/load: "
+            f"sentence stdev {item['sentence_length_stdev']} | "
+            f"similar-length runs {item['similar_sentence_length_run_count']} | "
+            f"overloaded paragraphs {item['overloaded_paragraph_count']}",
+            "    voice/scaffolds: "
+            f"first-person starts {item['first_person_sentence_start_rate']}% | "
+            f"contrast {item['contrast_scaffold_count']} | meta phrases {item['meta_phrase_count']}",
+        ])
+    rows.extend([
+        "", "Candidate minus baseline:",
+        json.dumps(payload["candidate_minus_baseline"], ensure_ascii=False, sort_keys=True),
+        "", str(payload["decision_required"]),
+    ])
     return "\n".join(rows)
 
 
 def parser() -> argparse.ArgumentParser:
-    """Build the command-line interface."""
-
     command = argparse.ArgumentParser(
         description="Compare deterministic copy signals without choosing a winner"
     )
@@ -357,13 +372,15 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--max-grade", type=float, default=6)
     command.add_argument("--max-emdash", type=int, default=0)
     command.add_argument("--max-sentence", type=float, default=15)
+    command.add_argument("--similar-length-tolerance", type=int, default=2)
+    command.add_argument("--similar-run-min", type=int, default=3)
+    command.add_argument("--max-paragraph-words", type=int, default=120)
+    command.add_argument("--max-paragraph-sentences", type=int, default=6)
     command.add_argument("--format", choices=["text", "json"], default="text")
     return command
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Run the comparison and write text or JSON output."""
-
     args = parser().parse_args(argv)
     try:
         payload = result(
@@ -374,14 +391,17 @@ def main(argv: list[str] | None = None) -> int:
             max_grade=args.max_grade,
             max_emdash=args.max_emdash,
             max_sentence=args.max_sentence,
+            similar_length_tolerance=args.similar_length_tolerance,
+            similar_run_min=args.similar_run_min,
+            max_paragraph_words=args.max_paragraph_words,
+            max_paragraph_sentences=args.max_paragraph_sentences,
         )
     except ValueError as exc:
         print(json.dumps({"ok": False, "error": str(exc)}), file=sys.stderr)
         return 2
     print(
         json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True)
-        if args.format == "json"
-        else text_report(payload)
+        if args.format == "json" else text_report(payload)
     )
     return 0
 

@@ -54,6 +54,8 @@ python3 scripts/copy-compare.py \
 
 The script measures both versions using the same thresholds and reports the candidate-minus-baseline delta. It deliberately returns `winner: null`.
 
+The report includes structural advisories for repeated sentences, openers and phrases, sentence-length rhythm, paragraph load, first-person starts, contrast scaffolds and page-explaining phrases. These can identify where to read closely. They do not select the stronger positioning or establish who wrote the copy.
+
 Deterministic gates may disqualify a version for a named mechanical failure. They do not select the stronger positioning. A lower reading grade is not automatically a better headline.
 
 ## 4. Run a blind qualitative panel

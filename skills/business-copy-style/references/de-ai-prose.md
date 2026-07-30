@@ -2,7 +2,9 @@
 
 Run this checklist before finalizing any customer-facing copy.
 
-**Before you flag anything, count and stack.** Do not claim "too many em dashes" or "overused triads" from a general impression — actually count them in the copy first. And when several tells land on the same phrase (boldface + scare quotes + a dramatic aside on one coined term), that is *one* strong tell, not three. Fix it once; do not pad the list.
+**Before you flag anything, count and stack.** Do not claim "too many em dashes" or "overused triads" from a general impression. Actually count them in the copy first. When several tells land on the same phrase, that is one strong tell, not three. Fix it once; do not pad the list.
+
+**Do not write for the detector.** Every structural signal can be a false positive. A deliberate refrain, legal wording, a short sample or a first-person story may trigger a count for good reason. Use the counts to find passages worth reading again. Never treat them as proof of AI authorship or weaken true copy merely to make the numbers fall.
 
 ## 1. Inflated Significance
 
@@ -22,6 +24,20 @@ Fix:
 - Repeated "What this means for you" or "The takeaway" callouts.
 - "Despite X... Despite these challenges..." loops.
 - Lists with exactly three items where the third is padding.
+- Exact sentence repeats or the same two-word opener used several times.
+
+### Page-explaining and meta phrases
+
+These phrases narrate the page instead of helping the reader:
+
+- "What this means..."
+- "The takeaway..."
+- "In this section..." / "On this page..."
+- "As you can see..."
+- "Let's break this down..."
+- "Here's what..." / "Below you'll..."
+
+One can be useful. Repeated use is a prompt to remove the signposting and state the point directly.
 
 ## 3. Overused AI Vocabulary
 
@@ -39,13 +55,14 @@ Fix:
 
 - Copula avoidance: "serves as" / "stands as" / "functions as" clustering. Use "is" / "are".
 - Superficial -ing phrases: "highlighting...", "underscoring...", "showcasing..."
-- Negative parallelisms: "It's not just X, it's Y" more than once per short piece.
+- Negative parallelisms and contrast scaffolds: "It's not just X, it's Y", "I'm not X. I'm Y." or "Not only X, but Y" more than once per short piece.
 - False ranges: "from X to Y" where X and Y aren't on a real scale.
 - Synonym cycling (elegant variation): "the offer... the deal... the package... the bundle" in one passage. Pick one word and repeat it. Repetition beats fake variety.
 
 ## 5. Rhythm and Style
 
 - Vary sentence length: add short punchy sentences under 8 words.
+- Check runs of similarly sized sentences. Clean vocabulary can still sound generated when every line has the same beat.
 - Avoid every sentence starting with "The" or a noun.
 - Start some sentences with "But", "And", "So", or "Look,".
 - **Em dashes: count them, then cut them.** In short consumer copy aim for zero; use commas or full stops. Even a single em dash is an AI tell when it injects a dramatic aside mid-line (e.g. "our tool — built for speed — wins under load"). In longer copy, more than one per 3-4 paragraphs is a flag.
@@ -80,8 +97,9 @@ These pass word-level checks but still sound AI:
 - Contrast labels: "I'm not X. I'm Y." / "Not just X, but Y"
 - Label phrases: "Builder by instinct", "Fixer by compulsion"
 - Generic stance vs. specific opinion: "I think everything can be optimized" (AI) vs. "I think most things can be better" (authentic)
-- Ending with a dare or tricolon after repeated use
-- Formulaic bio rhythm
+- Most sentences beginning with I, my, we or our.
+- Ending with a dare or tricolon after repeated use.
+- Formulaic bio rhythm.
 
 ## 9. Missing Human Texture
 

@@ -54,6 +54,12 @@ Single version:
 scripts/copy-lint.sh path/to/copy.txt
 ```
 
+Add structural evidence when repetition or cadence is part of the review:
+
+```sh
+scripts/copy-lint.sh --structure path/to/copy.txt
+```
+
 Existing-copy or dogfood comparison:
 
 ```sh
@@ -71,6 +77,8 @@ Default hard gates are:
 - average sentence length ≤15 words.
 
 Grade 5 is a useful aim for broad consumer copy, not a second hidden hard gate. Proper nouns and necessary product terms may raise the estimate. Fix the sentence before replacing a true term with a vague one.
+
+Structural counts report duplicate sentences, repeated openers and phrases, sentence rhythm, paragraph load, first-person starts, contrast scaffolds and page-explaining phrases. Treat them as context-sensitive prompts. They never set `fail`, choose a winner or prove AI authorship.
 
 ## 5. Judge meaning
 

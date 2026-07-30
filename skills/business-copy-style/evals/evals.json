@@ -34,6 +34,17 @@
         "The response includes a Changes table listing which passes were applied.",
         "The response reports measurement numbers (at least Flesch-Kincaid grade and em dash count) for the rewritten copy."
       ]
+    },
+    {
+      "id": 3,
+      "prompt": "Compare this frozen README intro with a candidate. Both pass the basic word-level lint, but the candidate repeats sentence openings and page-explaining phrases. Use the paired-evaluation workflow. Baseline: 'Three workshops build your offer, lead plan and customer copy. Independent reviewers test each phase.' Candidate: 'Here is what the offer workshop does. Here is what the lead workshop does. Here is what the copy workshop does. What this means is a complete system.'",
+      "expected_output": "A baseline/candidate decision that reports the structural advisories, keeps winner selection qualitative, and does not claim that the counts detect AI authorship.",
+      "expectations": [
+        "The response freezes and compares both variants rather than assuming the candidate wins.",
+        "The response identifies repeated two-word starters and the page-explaining phrase as advisory evidence.",
+        "The response does not treat structural counts as hard gates or proof of AI authorship.",
+        "The response gives a baseline, candidate, hybrid or revise-direction decision tied to audience clarity and product truth."
+      ]
     }
   ]
 }
