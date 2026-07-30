@@ -12,28 +12,24 @@
 
 # growth-arsenal
 
-Three linked workshops build your offer, lead plan and customer copy inside your AI coding agent.
+Three linked workshops turn a rough idea into an offer, a lead plan and customer copy. They run inside your AI coding agent.
 
-Independent reviewers attack the market, maths, message and execution plan at each phase. Approved decisions are written to files as the workshop runs.
+Separate reviewers test each phase. Approved decisions and reports stay in your project.
 
-## What is inside
+<picture>
+  <source media="(max-width: 640px)" srcset="docs/readme-system-mobile.svg" />
+  <img src="docs/readme-system.svg" width="100%" alt="A rough idea can move through the offer, leads and copy workshops. Each phase is built, attacked by independent reviewers, revised and saved as project files." />
+</picture>
 
-| Workshop | What it does | Main output |
+Use one workshop or run all three. A phase clears only when no critical issue remains, or you accept the trade-off.
+
+## Choose where to start
+
+| You need to | Start with | You keep |
 |---|---|---|
-| **grandslam-offer** | Builds the market, price, value equation, offer stack, guarantee and name. A sceptical marketer, business strategist and dynamic customer personas review each phase. | Research brief, offer file and HTML dashboards |
-| **hundred-million-leads** | Builds lead magnets, chooses channels, writes outreach and lays out a Rule of 100 plan. Customer personas receive the scripts as prospects. | Lead-generation blueprint, scripts and tracking plan |
-| **business-copy-style** | Runs customer-facing copy through plain-language, de-AI and adversarial reader checks. The other workshops call it automatically. | Clearer copy that is ready for a human edit |
-
-The workshops can run independently. Together they form a chain from rough idea to offer, acquisition plan and final copy.
-
-## How the pressure test works
-
-1. **Build:** research missing facts and draft one phase.
-2. **Attack:** independent agents review the same output in parallel.
-3. **Converge:** shared concerns become must-fix issues.
-4. **Persist:** approved decisions are written to Markdown and HTML files.
-
-A phase passes only when no critical issue remains, or when you explicitly accept the trade-off.
+| Price and package an idea | [`grandslam-offer`](skills/grandslam-offer/) | Research, offer file and HTML reports |
+| Build a lead plan you can use | [`hundred-million-leads`](skills/hundred-million-leads/) | Lead plan, scripts and a tracker |
+| Make customer copy plain and human | [`business-copy-style`](skills/business-copy-style/) | Reviewed copy and comparison notes |
 
 ## Install
 
@@ -70,9 +66,9 @@ I sell an online course for new parents. Build a lead generation system I can ex
 Rewrite this landing page so it does not sound like AI wrote it.
 ```
 
-The workshop will ask for what it needs. It will push back when the market, maths or message is weak.
+The workshop will ask for what it needs and push back when the market, maths or message is weak.
 
-## What it does not do
+## Limits
 
 This does not replace talking to real customers. Dynamic personas catch obvious gaps, but they are not proof of demand. Real buyers still decide whether the offer works.
 
