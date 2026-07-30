@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      TARGET_URL: https://copy-quality-progressive-disclosure-resume.geo139.workers.dev/
+      TARGET_URL: https://6002d511-resume.geo139.workers.dev/
     steps:
       - name: Check out harness
         uses: actions/checkout@v4
@@ -81,7 +81,7 @@ jobs:
           root = Path('visual-review')
           files = sorted(path.name for path in root.iterdir() if path.is_file())
           summary = {
-              'target': 'https://copy-quality-progressive-disclosure-resume.geo139.workers.dev/',
+              'target': 'https://6002d511-resume.geo139.workers.dev/',
               'screenshots': [name for name in files if name.endswith('.png')],
               'css_has_project_disclosure': 'project-disclosure' in (root / 'styles.css').read_text(),
               'html_bytes': (root / 'index.html').stat().st_size,
