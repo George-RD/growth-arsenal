@@ -16,25 +16,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      TARGET_URL: https://6002d511-resume.geo139.workers.dev/
+      TARGET_URL: https://georgerd.com/
     steps:
       - name: Check out harness
         uses: actions/checkout@v4
 
-      - name: Verify deployed source and choose browser
+      - name: Mirror public portfolio shell
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p visual-review
+          mkdir -p visual-review/assets
           curl --fail --location --retry 3 --retry-all-errors "$TARGET_URL" -o visual-review/index.html
           curl --fail --location --retry 3 --retry-all-errors "${TARGET_URL}styles.css" -o visual-review/styles.css
-          grep -q 'project-disclosure' visual-review/styles.css
+          curl --fail --location --retry 3 --retry-all-errors "${TARGET_URL}app.js" -o visual-review/app.js
+          curl --fail --location --retry 3 --retry-all-errors "${TARGET_URL}assets/favicon.svg" -o visual-review/assets/favicon.svg
+          curl --fail --location --retry 3 --retry-all-errors "${TARGET_URL}assets/social-preview.svg" -o visual-review/assets/social-preview.svg
+          curl --fail --location --retry 3 --retry-all-errors "${TARGET_URL}assets/yarnling-story-library.svg" -o visual-review/assets/yarnling-story-library.svg
+          grep -q 'I turn unclear, consequential problems into systems people can use.' visual-review/index.html
           BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
           test -n "$BROWSER"
           echo "BROWSER=$BROWSER" >> "$GITHUB_ENV"
           "$BROWSER" --version | tee visual-review/browser-version.txt
 
-      - name: Capture responsive sections
+      - name: Capture production reference
         shell: bash
         run: |
           set -euo pipefail
@@ -45,47 +49,25 @@ jobs:
             --disable-dev-shm-usage
             --hide-scrollbars
             --run-all-compositor-stages-before-draw
-            --virtual-time-budget=6000
+            --virtual-time-budget=5000
             --force-device-scale-factor=1
           )
-
-          capture() {
-            local name="$1"
-            local size="$2"
-            local fragment="$3"
-            "$BROWSER" "${FLAGS[@]}" \
-              --window-size="$size" \
-              --screenshot="${PWD}/visual-review/${name}.png" \
-              "${TARGET_URL}${fragment}"
-          }
-
-          capture desktop-hero 1440,1000 ''
-          capture desktop-proof 1440,1000 '#proof'
-          capture desktop-projects 1440,1000 '#projects'
-          capture desktop-contact 1440,1000 '#contact'
-          capture mobile-hero 390,844 ''
-          capture mobile-proof 390,844 '#proof'
-          capture mobile-projects 390,844 '#projects'
-          capture mobile-contact 390,844 '#contact'
-          capture narrow-projects 320,720 '#projects'
-
-          "$BROWSER" "${FLAGS[@]}" \
-            --window-size=1440,1000 \
-            --print-to-pdf="${PWD}/visual-review/portfolio.pdf" \
-            "$TARGET_URL"
+          "$BROWSER" "${FLAGS[@]}" --window-size=1440,1000 \
+            --screenshot="${PWD}/visual-review/production-desktop.png" "$TARGET_URL"
+          "$BROWSER" "${FLAGS[@]}" --window-size=390,844 \
+            --screenshot="${PWD}/visual-review/production-mobile.png" "$TARGET_URL"
 
           python3 - <<'PY'
           from pathlib import Path
           import json
 
           root = Path('visual-review')
-          files = sorted(path.name for path in root.iterdir() if path.is_file())
           summary = {
-              'target': 'https://6002d511-resume.geo139.workers.dev/',
-              'screenshots': [name for name in files if name.endswith('.png')],
-              'css_has_project_disclosure': 'project-disclosure' in (root / 'styles.css').read_text(),
+              'target': 'https://georgerd.com/',
               'html_bytes': (root / 'index.html').stat().st_size,
               'css_bytes': (root / 'styles.css').stat().st_size,
+              'app_bytes': (root / 'app.js').stat().st_size,
+              'assets': sorted(path.name for path in (root / 'assets').iterdir()),
           }
           (root / 'summary.json').write_text(json.dumps(summary, indent=2))
           print(json.dumps(summary, indent=2))
@@ -95,7 +77,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: resume-visual-review
+          name: resume-production-shell
           path: visual-review
           if-no-files-found: error
           retention-days: 3
