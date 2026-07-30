@@ -1,0 +1,252 @@
+name: Temporary resume PR 13 audit
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out audit harness
+        uses: actions/checkout@v4
+
+      - name: Reconstruct portfolio branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reconstructed audit-site/assets audit
+          base64 --decode evaluations/resume-pr13-source.tar.gz.b64 > /tmp/resume-pr13-source.tar.gz
+          tar -xzf /tmp/resume-pr13-source.tar.gz -C reconstructed
+
+          cat reconstructed/site/index-*.html > audit-site/index.html
+          curl --fail --location --retry 3 --retry-all-errors https://georgerd.com/styles.css -o audit-site/styles.css
+          cat reconstructed/site/styles-008.css >> audit-site/styles.css
+          curl --fail --location --retry 3 --retry-all-errors https://georgerd.com/app.js -o audit-site/app.js
+          curl --fail --location --retry 3 --retry-all-errors https://georgerd.com/assets/favicon.svg -o audit-site/assets/favicon.svg
+          curl --fail --location --retry 3 --retry-all-errors https://georgerd.com/assets/social-preview.svg -o audit-site/assets/social-preview.svg
+          curl --fail --location --retry 3 --retry-all-errors https://georgerd.com/assets/yarnling-story-library.svg -o audit-site/assets/yarnling-story-library.svg
+
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import re
+
+          html = Path('audit-site/index.html').read_text(encoding='utf-8')
+          css = Path('audit-site/styles.css').read_text(encoding='utf-8')
+
+          class Parser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.h1 = 0
+                  self.ids = []
+                  self.preview_links = []
+                  self.print_controls = 0
+
+              def handle_starttag(self, tag, attrs):
+                  values = dict(attrs)
+                  if tag == 'h1':
+                      self.h1 += 1
+                  if values.get('id'):
+                      self.ids.append(values['id'])
+                  if tag == 'a' and 'preview-hit' in values.get('class', '').split():
+                      self.preview_links.append(values)
+                  if values.get('data-print') is not None:
+                      self.print_controls += 1
+
+          parser = Parser()
+          parser.feed(html)
+          assert parser.h1 == 1, parser.h1
+          assert len(parser.ids) == len(set(parser.ids)), 'duplicate IDs'
+          assert len(parser.preview_links) == 9, len(parser.preview_links)
+          assert all(re.match(r'^Visit\s+.+', item.get('aria-label', '')) for item in parser.preview_links)
+          assert parser.print_controls == 0
+          assert html.count('class="project-row') == 9
+          assert html.count('class="project-proof project-disclosure"') == 9
+          assert html.count('<span class="visually-hidden">Open live site</span>') == 10
+          assert '>Open live site' not in html.replace('<span class="visually-hidden">Open live site</span>', '')
+          assert 'Print this portfolio' not in html
+          assert 'Site pending' not in html
+          assert css.count('{') == css.count('}')
+          assert '.preview-hit::before' in css
+          assert '.venture-section' in css
+          PY
+
+      - name: Install browser driver
+        run: npm install --no-save puppeteer-core@24.16.0
+
+      - name: Render and inspect
+        shell: bash
+        run: |
+          set -euo pipefail
+          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser)"
+          "$BROWSER" --version | tee audit/browser-version.txt
+          python3 -m http.server 8080 --directory audit-site > audit/server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 1
+          BROWSER="$BROWSER" node <<'NODE'
+          const fs = require('fs');
+          const puppeteer = require('puppeteer-core');
+
+          (async () => {
+            const browser = await puppeteer.launch({
+              executablePath: process.env.BROWSER,
+              headless: true,
+              args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+            });
+
+            const report = { viewports: {}, consoleErrors: [], pageErrors: [] };
+            const page = await browser.newPage();
+            page.on('console', message => {
+              if (message.type() === 'error') report.consoleErrors.push(message.text());
+            });
+            page.on('pageerror', error => report.pageErrors.push(String(error)));
+
+            async function inspect(name, width, height, target = 'http://127.0.0.1:8080/') {
+              await page.setViewport({ width, height, deviceScaleFactor: 1 });
+              await page.goto(target, { waitUntil: 'networkidle2', timeout: 45000 });
+              await page.evaluate(() => window.scrollTo(0, 0));
+              const metrics = await page.evaluate(() => {
+                const intersect = (a, b) => !(
+                  a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom
+                );
+                const rows = [...document.querySelectorAll('.project-row')].map(row => {
+                  const name = row.querySelector('h3')?.textContent.trim() || 'Unnamed';
+                  const links = [...row.querySelectorAll('a[href^="http"]')];
+                  const live = links.filter(a => !a.hostname.toLowerCase().includes('github.com'));
+                  const actionLive = [...row.querySelectorAll('.project-action a[href^="http"]')]
+                    .filter(a => !a.hostname.toLowerCase().includes('github.com'));
+                  return {
+                    name,
+                    liveCount: live.length,
+                    liveHrefs: live.map(a => a.href),
+                    actionLiveCount: actionLive.length,
+                    sourceCount: links.filter(a => a.hostname.toLowerCase().includes('github.com')).length,
+                    actionHeight: row.querySelector('.project-action')?.getBoundingClientRect().height || 0,
+                  };
+                });
+                const overlaps = [...document.querySelectorAll('.project-row')].map(row => {
+                  const status = row.querySelector('.project-status');
+                  const heading = row.querySelector('.project-main h3');
+                  return status && heading ? intersect(status.getBoundingClientRect(), heading.getBoundingClientRect()) : false;
+                });
+                const visibleOpenLive = [...document.querySelectorAll('body *')].filter(element => {
+                  const direct = [...element.childNodes]
+                    .filter(node => node.nodeType === Node.TEXT_NODE)
+                    .map(node => node.textContent.trim())
+                    .join(' ');
+                  if (!direct.includes('Open live site')) return false;
+                  return !element.classList.contains('visually-hidden');
+                }).length;
+                const previewLinks = [...document.querySelectorAll('.preview-hit')];
+                return {
+                  finalUrl: location.href,
+                  title: document.title,
+                  documentOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+                  h1Count: document.querySelectorAll('h1').length,
+                  projectRows: rows,
+                  previewCount: previewLinks.length,
+                  previewLabels: previewLinks.map(link => link.getAttribute('aria-label')),
+                  visibleOpenLive,
+                  printControl: Boolean(document.querySelector('[data-print]')),
+                  disclosureLabels: [...document.querySelectorAll('.project-disclosure summary')].map(x => x.textContent.trim()),
+                  statusHeadingOverlaps: overlaps,
+                  heroWidth: document.querySelector('.hero')?.getBoundingClientRect().width || 0,
+                  heroCopyWidth: document.querySelector('.hero-copy')?.getBoundingClientRect().width || 0,
+                  heroMapWidth: document.querySelector('.hero-map')?.getBoundingClientRect().width || 0,
+                };
+              });
+              report.viewports[name] = metrics;
+              return metrics;
+            }
+
+            await inspect('desktop', 1440, 1000);
+            await page.screenshot({ path: 'audit/desktop-full.png', fullPage: true });
+            await page.evaluate(() => document.querySelector('#projects').scrollIntoView());
+            await page.screenshot({ path: 'audit/desktop-projects.png' });
+
+            const firstPreview = await page.$('.project-preview');
+            await firstPreview.hover();
+            await new Promise(resolve => setTimeout(resolve, 450));
+            report.hover = await page.evaluate(() => ({
+              labelOpacity: getComputedStyle(document.querySelector('.preview-hit'), '::before').opacity,
+              arrowTransform: getComputedStyle(document.querySelector('.preview-arrow')).transform,
+            }));
+            await page.screenshot({ path: 'audit/desktop-project-hover.png' });
+
+            await page.focus('.preview-hit');
+            await new Promise(resolve => setTimeout(resolve, 350));
+            report.focus = await page.evaluate(() => ({
+              labelOpacity: getComputedStyle(document.querySelector('.preview-hit'), '::before').opacity,
+              activeLabel: document.activeElement?.getAttribute('aria-label'),
+            }));
+
+            await page.$eval('.project-disclosure', element => { element.open = true; });
+            await page.screenshot({ path: 'audit/desktop-project-open.png' });
+
+            await inspect('tablet', 834, 1112);
+            await page.evaluate(() => document.querySelector('#projects').scrollIntoView());
+            await page.screenshot({ path: 'audit/tablet-projects.png' });
+
+            await inspect('mobile', 390, 844);
+            await page.evaluate(() => document.querySelector('#projects').scrollIntoView());
+            await page.screenshot({ path: 'audit/mobile-projects.png' });
+            await page.evaluate(() => document.querySelector('#ventures').scrollIntoView());
+            await page.screenshot({ path: 'audit/mobile-ventures.png' });
+
+            await inspect('narrow', 320, 720);
+            await page.screenshot({ path: 'audit/narrow-hero.png' });
+
+            fs.writeFileSync('audit/report.json', JSON.stringify(report, null, 2));
+
+            const failures = [];
+            for (const [name, metrics] of Object.entries(report.viewports)) {
+              if (metrics.documentOverflow > 1) failures.push(`${name}: document overflow ${metrics.documentOverflow}`);
+              if (metrics.h1Count !== 1) failures.push(`${name}: expected one h1`);
+              if (metrics.previewCount !== 9) failures.push(`${name}: expected nine preview links`);
+              if (metrics.visibleOpenLive !== 0) failures.push(`${name}: visible Open live site copy remains`);
+              if (metrics.printControl) failures.push(`${name}: print control remains`);
+              if (metrics.statusHeadingOverlaps.some(Boolean)) failures.push(`${name}: status overlaps heading`);
+              if (metrics.projectRows.some(row => row.liveCount !== 1 || row.actionLiveCount !== 0)) {
+                failures.push(`${name}: project destination duplication`);
+              }
+              if (metrics.projectRows.some(row => row.actionHeight < 43.5)) {
+                failures.push(`${name}: action row below 44px`);
+              }
+              if (metrics.previewLabels.some(label => !/^Visit\s+.+/.test(label || ''))) {
+                failures.push(`${name}: non-specific preview label`);
+              }
+            }
+            if (report.viewports.narrow.heroCopyWidth > report.viewports.narrow.heroWidth + 1) failures.push('narrow: hero copy overflow');
+            if (report.viewports.narrow.heroMapWidth > report.viewports.narrow.heroWidth + 1) failures.push('narrow: hero map overflow');
+            if (Number(report.hover.labelOpacity) < 0.9) failures.push('hover label did not become visible');
+            if (Number(report.focus.labelOpacity) < 0.9) failures.push('focus label did not become visible');
+            if (!/^Visit\s+.+/.test(report.focus.activeLabel || '')) failures.push('focus did not reach preview destination');
+            if (report.consoleErrors.length) failures.push(`console errors: ${report.consoleErrors.join(' | ')}`);
+            if (report.pageErrors.length) failures.push(`page errors: ${report.pageErrors.join(' | ')}`);
+
+            await browser.close();
+            if (failures.length) {
+              console.error(failures.join('\n'));
+              process.exit(1);
+            }
+          })().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pr13-audit
+          path: audit
+          if-no-files-found: error
+          retention-days: 3
