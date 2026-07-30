@@ -10,6 +10,7 @@ on:
       - "DESIGN.md"
       - "README.md"
       - "docs/**"
+      - ".github/workflows/workspace-tests.yml"
   push:
     branches: [main]
     paths:
@@ -77,3 +78,20 @@ jobs:
           assert second['candidate']['em_dashes'] == 0
           assert second['candidate']['flesch_kincaid_grade'] <= second['baseline']['flesch_kincaid_grade']
           PY
+
+  materialize-resume:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out resume
+        uses: actions/checkout@v4
+        with:
+          repository: George-RD/resume
+          ref: main
+          path: resume
+      - name: Upload repository snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-main-snapshot
+          path: resume
+          include-hidden-files: true
+          retention-days: 1
