@@ -18,7 +18,7 @@
     <text x="20" y="187" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#0e1630">Assumptions</text>
     <text x="20" y="215" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#0e1630">Questions</text>
     <path d="M0 225h170" stroke="#ff5c35" stroke-width="6"/>
-    <text x="85" y="253" text-anchor="middle" font-family="monospace" font-size="17" font-weight="700" fill="#b52f16">CHEAP TO FIX</text>
+    <text x="85" y="253" text-anchor="middle" font-family="monospace" font-size="17" font-weight="700" fill="#0e1630">CHEAP TO FIX</text>
   </g>
 
   <path d="M206 191h36" stroke="#0e1630" stroke-width="5"/>
