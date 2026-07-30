@@ -16,8 +16,8 @@
     <text x="350" y="104" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#0e1630">Questions</text>
     <path d="M514 38v88" stroke="#0e1630" stroke-width="3"/>
     <path d="M514 38h106v7H514z" fill="#ff5c35"/>
-    <text x="567" y="76" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#b52f16">CHEAP</text>
-    <text x="567" y="103" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#b52f16">TO FIX</text>
+    <text x="567" y="76" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#0e1630">CHEAP</text>
+    <text x="567" y="103" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#0e1630">TO FIX</text>
   </g>
 
   <path d="M350 222v30" stroke="#0e1630" stroke-width="5"/>
