@@ -10,75 +10,81 @@
   </g>
 
   <g transform="translate(36 76)">
-    <path d="M0 0h152l18 18v224H18L0 224z" fill="#1450ff" stroke="#0e1630" stroke-width="3"/>
-    <text x="14" y="34" font-family="monospace" font-size="14" font-weight="700" fill="#dfe7ff" letter-spacing=".5">INPUT / UNTESTED</text>
-    <text x="20" y="96" font-family="Arial Narrow, Arial, sans-serif" font-size="43" font-weight="900" fill="#fff">ROUGH</text>
-    <text x="20" y="140" font-family="Arial Narrow, Arial, sans-serif" font-size="43" font-weight="900" fill="#d9ff4f">IDEA</text>
-    <text x="20" y="183" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#fff">Assumptions</text>
-    <text x="20" y="211" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#fff">Questions</text>
-    <path d="M0 224h170v42H0z" fill="#ff5c35" stroke="#0e1630" stroke-width="3"/>
-    <text x="85" y="251" text-anchor="middle" font-family="monospace" font-size="17" font-weight="700" fill="#0e1630">CHEAP TO FIX</text>
+    <path d="M0 0h152l18 18v248H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h152l18 18v30H0z" fill="#1450ff"/>
+    <text x="14" y="31" font-family="monospace" font-size="14" font-weight="700" fill="#ffffff" letter-spacing=".5">INPUT / UNTESTED</text>
+    <text x="20" y="101" font-family="Arial Narrow, Arial, sans-serif" font-size="43" font-weight="900" fill="#0e1630">ROUGH</text>
+    <text x="20" y="145" font-family="Arial Narrow, Arial, sans-serif" font-size="43" font-weight="900" fill="#1450ff">IDEA</text>
+    <text x="20" y="187" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#0e1630">Assumptions</text>
+    <text x="20" y="215" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#0e1630">Questions</text>
+    <path d="M0 225h170" stroke="#ff5c35" stroke-width="6"/>
+    <text x="85" y="253" text-anchor="middle" font-family="monospace" font-size="17" font-weight="700" fill="#0e1630">CHEAP TO FIX</text>
   </g>
 
   <path d="M206 191h36" stroke="#0e1630" stroke-width="5"/>
   <path d="M235 180l14 11-14 11z" fill="#0e1630"/>
 
   <g transform="translate(250 76)">
-    <path d="M0 0h220v266H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h220v308H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
     <path d="M0 0h220v50H0z" fill="#0e1630"/>
-    <text x="18" y="32" font-family="monospace" font-size="18" font-weight="700" fill="#fff">01 / OFFER</text>
-    <text x="18" y="91" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">PACKAGE</text>
-    <text x="18" y="126" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">THE VALUE</text>
-    <g font-family="Arial, sans-serif" font-size="21" font-weight="700">
+    <path d="M0 0h8v50H0z" fill="#1450ff"/>
+    <text x="18" y="32" font-family="monospace" font-size="18" font-weight="700" fill="#ffffff">01 / OFFER</text>
+    <text x="18" y="91" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900" fill="#0e1630">PACKAGE</text>
+    <text x="18" y="126" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900" fill="#0e1630">THE VALUE</text>
+    <g font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#0e1630">
       <text x="18" y="169">Market</text>
       <text x="18" y="199">Price</text>
       <text x="18" y="229">Guarantee</text>
     </g>
     <path d="M0 266h220v42H0z" fill="#dfe7ff" stroke="#0e1630" stroke-width="3"/>
-    <text x="18" y="293" font-family="monospace" font-size="17" font-weight="700">offer.md</text>
+    <text x="18" y="293" font-family="monospace" font-size="17" font-weight="700" fill="#0e1630">offer.md</text>
   </g>
 
   <path d="M470 191h35" stroke="#0e1630" stroke-width="5"/>
   <path d="M498 180l14 11-14 11z" fill="#0e1630"/>
 
   <g transform="translate(513 76)">
-    <path d="M0 0h220v266H0z" fill="#dfe7ff" stroke="#0e1630" stroke-width="3"/>
-    <path d="M0 0h220v50H0z" fill="#1450ff"/>
-    <text x="18" y="32" font-family="monospace" font-size="18" font-weight="700" fill="#fff">02 / LEADS</text>
-    <text x="18" y="91" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">BUILD THE</text>
-    <text x="18" y="126" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">PIPELINE</text>
-    <g font-family="Arial, sans-serif" font-size="21" font-weight="700">
+    <path d="M0 0h220v308H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h220v50H0z" fill="#0e1630"/>
+    <path d="M0 0h8v50H0z" fill="#1450ff"/>
+    <text x="18" y="32" font-family="monospace" font-size="18" font-weight="700" fill="#ffffff">02 / LEADS</text>
+    <text x="18" y="91" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900" fill="#0e1630">BUILD THE</text>
+    <text x="18" y="126" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900" fill="#0e1630">PIPELINE</text>
+    <g font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#0e1630">
       <text x="18" y="169">Lead magnets</text>
       <text x="18" y="199">Channels</text>
       <text x="18" y="229">Scripts</text>
     </g>
-    <path d="M0 266h220v42H0z" fill="#1450ff" stroke="#0e1630" stroke-width="3"/>
-    <text x="18" y="293" font-family="monospace" font-size="17" font-weight="700" fill="#fff">lead-plan.md</text>
+    <path d="M0 266h220v42H0z" fill="#dfe7ff" stroke="#0e1630" stroke-width="3"/>
+    <text x="18" y="293" font-family="monospace" font-size="17" font-weight="700" fill="#0e1630">lead-plan.md</text>
   </g>
 
   <path d="M733 191h35" stroke="#0e1630" stroke-width="5"/>
   <path d="M761 180l14 11-14 11z" fill="#0e1630"/>
 
   <g transform="translate(776 76)">
-    <path d="M0 0h220v266H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
-    <path d="M0 0h220v50H0z" fill="#d9ff4f"/>
-    <text x="18" y="32" font-family="monospace" font-size="18" font-weight="700" fill="#0e1630">03 / COPY</text>
-    <text x="18" y="91" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">MAKE IT</text>
-    <text x="18" y="126" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">HUMAN</text>
-    <g font-family="Arial, sans-serif" font-size="21" font-weight="700">
+    <path d="M0 0h220v308H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h220v50H0z" fill="#0e1630"/>
+    <path d="M0 0h8v50H0z" fill="#1450ff"/>
+    <text x="18" y="32" font-family="monospace" font-size="18" font-weight="700" fill="#ffffff">03 / COPY</text>
+    <text x="18" y="91" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900" fill="#0e1630">MAKE IT</text>
+    <text x="18" y="126" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900" fill="#0e1630">HUMAN</text>
+    <g font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#0e1630">
       <text x="18" y="169">Plain</text>
       <text x="18" y="199">Specific</text>
       <text x="18" y="229">Reviewed</text>
     </g>
-    <path d="M0 266h220v42H0z" fill="#d9ff4f" stroke="#0e1630" stroke-width="3"/>
-    <text x="18" y="293" font-family="monospace" font-size="17" font-weight="700">approved copy</text>
+    <path d="M0 266h220v42H0z" fill="#dfe7ff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 266h8v42H0z" fill="#d9ff4f"/>
+    <text x="18" y="293" font-family="monospace" font-size="17" font-weight="700" fill="#0e1630">approved copy</text>
   </g>
 
   <path d="M996 191h34" stroke="#0e1630" stroke-width="5"/>
   <path d="M1023 180l14 11-14 11z" fill="#0e1630"/>
 
   <g transform="translate(1038 76)">
-    <path d="M0 0h126v308H0z" fill="#d9ff4f" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h126v308H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h126v9H0z" fill="#d9ff4f"/>
     <text x="63" y="45" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#0e1630">FILES</text>
     <text x="63" y="70" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#0e1630">YOU KEEP</text>
     <path d="M14 89h98" stroke="#0e1630" stroke-width="3"/>
@@ -92,21 +98,23 @@
   </g>
 
   <g transform="translate(36 405)">
-    <path d="M0 0h1128v38H0z" fill="#0e1630"/>
-    <text x="18" y="25" font-family="monospace" font-size="18" font-weight="700" fill="#fff">EVERY PHASE</text>
+    <path d="M0 0h1128v38H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h180v38H0z" fill="#0e1630"/>
+    <text x="18" y="25" font-family="monospace" font-size="18" font-weight="700" fill="#ffffff">EVERY PHASE</text>
 
-    <g font-family="monospace" font-size="17" font-weight="700">
-      <path d="M180 0h220v38H180z" fill="#dfe7ff"/>
-      <text x="290" y="25" text-anchor="middle" fill="#0e1630">BUILD</text>
+    <g font-family="monospace" font-size="17" font-weight="700" fill="#0e1630">
+      <path d="M180 0h220v6H180z" fill="#1450ff"/>
+      <text x="290" y="25" text-anchor="middle">BUILD</text>
 
-      <path d="M410 0h220v38H410z" fill="#ff5c35"/>
-      <text x="520" y="25" text-anchor="middle" fill="#0e1630">ATTACK</text>
+      <path d="M410 0h220v6H410z" fill="#ff5c35"/>
+      <text x="520" y="25" text-anchor="middle">ATTACK</text>
 
-      <path d="M640 0h254v38H640z" fill="#ffffff"/>
-      <text x="767" y="25" text-anchor="middle" fill="#0e1630">REVISE / ACCEPT</text>
+      <path d="M640 0h254v6H640z" fill="#dfe7ff"/>
+      <text x="767" y="25" text-anchor="middle">REVISE / ACCEPT</text>
 
-      <path d="M904 0h224v38H904z" fill="#d9ff4f"/>
-      <text x="1016" y="25" text-anchor="middle" fill="#0e1630">APPROVE + SAVE</text>
+      <path d="M904 0h224v6H904z" fill="#d9ff4f"/>
+      <text x="1016" y="25" text-anchor="middle">APPROVE + SAVE</text>
     </g>
+    <path d="M400 0v38M630 0v38M894 0v38" stroke="#0e1630" stroke-width="2"/>
   </g>
 </svg>
