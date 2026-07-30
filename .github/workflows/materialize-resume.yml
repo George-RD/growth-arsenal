@@ -1,6 +1,9 @@
 name: Temporary resume materialization
 
 on:
+  push:
+    branches:
+      - agent/materialize-resume
   pull_request:
     branches:
       - main
