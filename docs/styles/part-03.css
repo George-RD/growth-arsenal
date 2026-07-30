@@ -33,7 +33,7 @@
   width: 25%;
   height: 100%;
   background: var(--blue);
-  transition: width 520ms var(--ease-out);
+  transition: width 300ms var(--ease-out);
 }
 .rig-controls {
   display: grid;
@@ -109,10 +109,19 @@
   padding: 0;
   border-top: 2px solid var(--yellow);
 }
-.sequence li { position: relative; padding: 1.5rem clamp(1rem, 2.5vw, 2rem) 0 0; }
+.sequence li {
+  --sequence-color: var(--blue);
+  --sequence-delay: 0ms;
+  position: relative;
+  padding: 1.5rem clamp(1rem, 2.5vw, 2rem) 0 0;
+}
+.sequence li:nth-child(2) { --sequence-color: var(--orange); --sequence-delay: 900ms; }
+.sequence li:nth-child(3) { --sequence-color: var(--blue-soft); --sequence-delay: 1800ms; }
+.sequence li:nth-child(4) { --sequence-color: var(--yellow); --sequence-delay: 2700ms; }
 .sequence li::before {
   content: "";
   position: absolute;
+  z-index: 2;
   width: 0.8rem;
   height: 0.8rem;
   top: -0.48rem;
@@ -120,6 +129,51 @@
   background: var(--yellow);
   border-radius: 50%;
   box-shadow: 0 0 0 5px rgba(217, 255, 79, 0.15);
+}
+.sequence li::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--sequence-color);
+  opacity: 0;
+  pointer-events: none;
+}
+.sequence.is-tracing li::before,
+.sequence.is-tracing li::after,
+.sequence.is-tracing li > span {
+  animation-duration: 840ms;
+  animation-delay: var(--sequence-delay);
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: both;
+}
+.sequence.is-tracing li::before { animation-name: sequence-node; }
+.sequence.is-tracing li::after { animation-name: sequence-scan; }
+.sequence.is-tracing li > span { animation-name: sequence-label; }
+@keyframes sequence-node {
+  0%, 100% {
+    background: var(--yellow);
+    box-shadow: 0 0 0 5px rgba(217, 255, 79, 0.15);
+    transform: scale(1);
+  }
+  24%, 72% {
+    background: var(--sequence-color);
+    box-shadow: 0 0 0 7px color-mix(in srgb, var(--sequence-color) 24%, transparent);
+    transform: scale(1.34);
+  }
+}
+@keyframes sequence-scan {
+  0% { width: 0; opacity: 0; }
+  18% { opacity: 1; }
+  76% { width: 100%; opacity: 1; }
+  100% { width: 100%; opacity: 0; }
+}
+@keyframes sequence-label {
+  0%, 100% { color: var(--yellow); }
+  24%, 72% { color: var(--sequence-color); }
 }
 .sequence span { font-family: var(--mono); color: var(--yellow); font-size: 0.75rem; }
 .sequence h3 { margin: 0.55rem 0 0; font-family: var(--display); font-size: 2rem; line-height: 1; text-transform: uppercase; }

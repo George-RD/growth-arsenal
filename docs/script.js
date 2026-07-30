@@ -1,7 +1,12 @@
 (() => {
-  const rig = document.querySelector('[data-rig]');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let reducedMotion = reducedMotionQuery.matches;
+  reducedMotionQuery.addEventListener?.('change', (event) => {
+    reducedMotion = event.matches;
+  });
+  const pageIsVisible = () => document.visibilityState === 'visible';
 
+  const rig = document.querySelector('[data-rig]');
   if (rig) {
     const tabs = [...rig.querySelectorAll('[data-rig-tab]')];
     const panels = [...rig.querySelectorAll('[data-rig-panel]')];
@@ -11,6 +16,9 @@
     const next = rig.querySelector('[data-rig-next]');
     let current = 0;
     let timer = null;
+    let rigVisible = !('IntersectionObserver' in window);
+    let pointerPaused = false;
+    let focusPaused = false;
 
     const show = (index, focusTab = false, animate = true) => {
       current = (index + tabs.length) % tabs.length;
@@ -27,7 +35,7 @@
         const active = panelIndex === current;
         panel.hidden = !active;
         panel.classList.toggle('is-active', active);
-        if (active && animate) {
+        if (active && animate && !reducedMotion) {
           void panel.offsetWidth;
           panel.classList.add('rig-enter');
         }
@@ -42,9 +50,17 @@
       timer = null;
     };
 
+    const canAutoplay = () => (
+      !reducedMotion
+      && rigVisible
+      && pageIsVisible()
+      && !pointerPaused
+      && !focusPaused
+    );
+
     const start = () => {
-      if (reducedMotion || timer) return;
-      timer = window.setInterval(() => show(current + 1), 5200);
+      if (!canAutoplay() || timer) return;
+      timer = window.setInterval(() => show(current + 1), 6500);
     };
 
     tabs.forEach((tab, index) => {
@@ -75,15 +91,97 @@
       show(current + 1);
     });
 
-    rig.addEventListener('mouseenter', stop);
-    rig.addEventListener('mouseleave', start);
-    rig.addEventListener('focusin', stop);
+    rig.addEventListener('mouseenter', () => {
+      pointerPaused = true;
+      stop();
+    });
+    rig.addEventListener('mouseleave', () => {
+      pointerPaused = false;
+      start();
+    });
+    rig.addEventListener('focusin', () => {
+      focusPaused = true;
+      stop();
+    });
     rig.addEventListener('focusout', (event) => {
-      if (!rig.contains(event.relatedTarget)) start();
+      if (!rig.contains(event.relatedTarget)) {
+        focusPaused = false;
+        start();
+      }
+    });
+
+    if ('IntersectionObserver' in window) {
+      const rigObserver = new IntersectionObserver(([entry]) => {
+        rigVisible = entry.isIntersecting && entry.intersectionRatio >= 0.25;
+        if (rigVisible) start();
+        else stop();
+      }, { threshold: [0, 0.25, 0.6] });
+      rigObserver.observe(rig);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (pageIsVisible()) start();
+      else stop();
+    });
+
+    reducedMotionQuery.addEventListener?.('change', () => {
+      if (reducedMotion) stop();
+      else start();
     });
 
     show(0, false, false);
     start();
+  }
+
+  const sequence = document.querySelector('.sequence');
+  if (sequence) {
+    let sequenceVisible = !('IntersectionObserver' in window);
+    let sequencePlayed = false;
+    let sequenceTimer = null;
+
+    const resetSequence = (allowReplay = false) => {
+      if (sequenceTimer) window.clearTimeout(sequenceTimer);
+      sequenceTimer = null;
+      sequence.classList.remove('is-tracing');
+      if (allowReplay) sequencePlayed = false;
+    };
+
+    const playSequence = () => {
+      if (reducedMotion || sequencePlayed || !sequenceVisible || !pageIsVisible()) return;
+      sequencePlayed = true;
+      sequence.classList.remove('is-tracing');
+      void sequence.offsetWidth;
+      sequence.classList.add('is-tracing');
+      sequenceTimer = window.setTimeout(() => {
+        sequence.classList.remove('is-tracing');
+        sequence.classList.add('has-traced');
+        sequenceTimer = null;
+      }, 3800);
+    };
+
+    if ('IntersectionObserver' in window) {
+      const sequenceObserver = new IntersectionObserver(([entry]) => {
+        sequenceVisible = entry.isIntersecting && entry.intersectionRatio >= 0.35;
+        if (sequenceVisible) playSequence();
+        else if (sequence.classList.contains('is-tracing')) resetSequence(true);
+      }, { threshold: [0, 0.35, 0.7] });
+      sequenceObserver.observe(sequence);
+    } else {
+      playSequence();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (!pageIsVisible() && sequence.classList.contains('is-tracing')) {
+        resetSequence(true);
+      } else if (pageIsVisible()) {
+        playSequence();
+      }
+    });
+
+    reducedMotionQuery.addEventListener?.('change', () => {
+      if (reducedMotion) resetSequence(true);
+      else playSequence();
+    });
   }
 
   const install = document.querySelector('[data-install]');

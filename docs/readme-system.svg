@@ -2,6 +2,75 @@
   <title id="title">How growth-arsenal fits together</title>
   <desc id="desc">A rough business idea can move through offer, leads and copy workshops. Every phase is built, attacked by independent reviewers, revised and saved as project files.</desc>
 
+  <style>
+    .motion-layer { pointer-events: none; }
+    .motion-signal { opacity: 0; }
+    .motion-line {
+      fill: none;
+      stroke-width: 5;
+      stroke-linecap: square;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+    .signal-1 { animation: signal-1 18s linear 1 both; }
+    .signal-1 .motion-line { animation: draw-1 18s linear 1 both; }
+    .signal-2 { animation: signal-2 18s linear 1 both; }
+    .signal-2 .motion-line { animation: draw-2 18s linear 1 both; }
+    .signal-3 { animation: signal-3 18s linear 1 both; }
+    .signal-3 .motion-line { animation: draw-3 18s linear 1 both; }
+    .signal-4 { animation: signal-4 18s linear 1 both; }
+    .signal-4 .motion-line { animation: draw-4 18s linear 1 both; }
+    .phase-cursor {
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: phase-cursor-desktop 18s cubic-bezier(0.16, 1, 0.3, 1) 1 both;
+    }
+    @keyframes signal-1 {
+      0%, 5%, 13%, 100% { opacity: 0; }
+      7%, 11% { opacity: 1; }
+    }
+    @keyframes draw-1 {
+      0%, 5% { stroke-dashoffset: 1; }
+      11%, 100% { stroke-dashoffset: 0; }
+    }
+    @keyframes signal-2 {
+      0%, 12%, 20%, 100% { opacity: 0; }
+      14%, 18% { opacity: 1; }
+    }
+    @keyframes draw-2 {
+      0%, 12% { stroke-dashoffset: 1; }
+      18%, 100% { stroke-dashoffset: 0; }
+    }
+    @keyframes signal-3 {
+      0%, 19%, 27%, 100% { opacity: 0; }
+      21%, 25% { opacity: 1; }
+    }
+    @keyframes draw-3 {
+      0%, 19% { stroke-dashoffset: 1; }
+      25%, 100% { stroke-dashoffset: 0; }
+    }
+    @keyframes signal-4 {
+      0%, 26%, 34%, 100% { opacity: 0; }
+      28%, 32% { opacity: 1; }
+    }
+    @keyframes draw-4 {
+      0%, 26% { stroke-dashoffset: 1; }
+      32%, 100% { stroke-dashoffset: 0; }
+    }
+    @keyframes phase-cursor-desktop {
+      0%, 40% { opacity: 0; transform: translateX(0); }
+      42%, 47% { opacity: 1; transform: translateX(0); }
+      49%, 54% { opacity: 1; transform: translateX(230px); }
+      56%, 61% { opacity: 1; transform: translateX(460px); }
+      63%, 68% { opacity: 1; transform: translateX(724px); }
+      70%, 100% { opacity: 0; transform: translateX(724px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .motion-layer { display: none; }
+    }
+  </style>
+
   <rect x="2" y="2" width="1196" height="466" fill="#f6f8ff" stroke="#0e1630" stroke-width="4"/>
 
   <g font-family="Arial, sans-serif" fill="#0e1630">
@@ -116,5 +185,25 @@
       <text x="1016" y="25" text-anchor="middle">APPROVE + SAVE</text>
     </g>
     <path d="M400 0v38M630 0v38M894 0v38" stroke="#0e1630" stroke-width="2"/>
+  </g>
+
+  <g class="motion-layer" aria-hidden="true">
+    <g class="motion-signal signal-1" stroke="#1450ff" fill="#1450ff">
+      <path class="motion-line" pathLength="1" d="M206 191h36"/>
+      <path d="M235 180l14 11-14 11z" stroke="none"/>
+    </g>
+    <g class="motion-signal signal-2" stroke="#1450ff" fill="#1450ff">
+      <path class="motion-line" pathLength="1" d="M470 191h35"/>
+      <path d="M498 180l14 11-14 11z" stroke="none"/>
+    </g>
+    <g class="motion-signal signal-3" stroke="#1450ff" fill="#1450ff">
+      <path class="motion-line" pathLength="1" d="M733 191h35"/>
+      <path d="M761 180l14 11-14 11z" stroke="none"/>
+    </g>
+    <g class="motion-signal signal-4" stroke="#1450ff" fill="#1450ff">
+      <path class="motion-line" pathLength="1" d="M996 191h34"/>
+      <path d="M1023 180l14 11-14 11z" stroke="none"/>
+    </g>
+    <rect class="phase-cursor" x="224" y="405" width="18" height="6" fill="#0e1630"/>
   </g>
 </svg>
