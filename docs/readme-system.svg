@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" role="img" aria-labelledby="title desc">
+  <title id="title">How growth-arsenal fits together</title>
+  <desc id="desc">A rough business idea can move through offer, leads and copy workshops. Every phase is built, attacked by independent reviewers, revised and saved as project files.</desc>
+
+  <rect x="2" y="2" width="1196" height="466" fill="#f6f8ff" stroke="#0e1630" stroke-width="4"/>
+
+  <g font-family="Arial, sans-serif" fill="#0e1630">
+    <text x="38" y="44" font-family="monospace" font-size="20" font-weight="700" letter-spacing="1">USE ONE WORKSHOP OR RUN THE CHAIN</text>
+    <text x="1162" y="44" text-anchor="end" font-family="monospace" font-size="17" font-weight="700">RUNS INSIDE YOUR AI CODING AGENT</text>
+  </g>
+
+  <g transform="translate(36 76)">
+    <path d="M0 0h152l18 18v224H18L0 224z" fill="#1450ff" stroke="#0e1630" stroke-width="3"/>
+    <text x="14" y="34" font-family="monospace" font-size="14" font-weight="700" fill="#dfe7ff" letter-spacing=".5">INPUT / UNTESTED</text>
+    <text x="20" y="96" font-family="Arial Narrow, Arial, sans-serif" font-size="43" font-weight="900" fill="#fff">ROUGH</text>
+    <text x="20" y="140" font-family="Arial Narrow, Arial, sans-serif" font-size="43" font-weight="900" fill="#d9ff4f">IDEA</text>
+    <text x="20" y="183" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#fff">Assumptions</text>
+    <text x="20" y="211" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#fff">Questions</text>
+    <path d="M0 224h170v42H0z" fill="#ff5c35" stroke="#0e1630" stroke-width="3"/>
+    <text x="85" y="251" text-anchor="middle" font-family="monospace" font-size="17" font-weight="700" fill="#0e1630">CHEAP TO FIX</text>
+  </g>
+
+  <path d="M206 191h36" stroke="#0e1630" stroke-width="5"/>
+  <path d="M235 180l14 11-14 11z" fill="#0e1630"/>
+
+  <g transform="translate(250 76)">
+    <path d="M0 0h220v266H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h220v50H0z" fill="#0e1630"/>
+    <text x="18" y="32" font-family="monospace" font-size="18" font-weight="700" fill="#fff">01 / OFFER</text>
+    <text x="18" y="91" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">PACKAGE</text>
+    <text x="18" y="126" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">THE VALUE</text>
+    <g font-family="Arial, sans-serif" font-size="21" font-weight="700">
+      <text x="18" y="169">Market</text>
+      <text x="18" y="199">Price</text>
+      <text x="18" y="229">Guarantee</text>
+    </g>
+    <path d="M0 266h220v42H0z" fill="#dfe7ff" stroke="#0e1630" stroke-width="3"/>
+    <text x="18" y="293" font-family="monospace" font-size="17" font-weight="700">offer.md</text>
+  </g>
+
+  <path d="M470 191h35" stroke="#0e1630" stroke-width="5"/>
+  <path d="M498 180l14 11-14 11z" fill="#0e1630"/>
+
+  <g transform="translate(513 76)">
+    <path d="M0 0h220v266H0z" fill="#dfe7ff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h220v50H0z" fill="#1450ff"/>
+    <text x="18" y="32" font-family="monospace" font-size="18" font-weight="700" fill="#fff">02 / LEADS</text>
+    <text x="18" y="91" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">BUILD THE</text>
+    <text x="18" y="126" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">PIPELINE</text>
+    <g font-family="Arial, sans-serif" font-size="21" font-weight="700">
+      <text x="18" y="169">Lead magnets</text>
+      <text x="18" y="199">Channels</text>
+      <text x="18" y="229">Scripts</text>
+    </g>
+    <path d="M0 266h220v42H0z" fill="#1450ff" stroke="#0e1630" stroke-width="3"/>
+    <text x="18" y="293" font-family="monospace" font-size="17" font-weight="700" fill="#fff">lead-plan.md</text>
+  </g>
+
+  <path d="M733 191h35" stroke="#0e1630" stroke-width="5"/>
+  <path d="M761 180l14 11-14 11z" fill="#0e1630"/>
+
+  <g transform="translate(776 76)">
+    <path d="M0 0h220v266H0z" fill="#ffffff" stroke="#0e1630" stroke-width="3"/>
+    <path d="M0 0h220v50H0z" fill="#d9ff4f"/>
+    <text x="18" y="32" font-family="monospace" font-size="18" font-weight="700" fill="#0e1630">03 / COPY</text>
+    <text x="18" y="91" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">MAKE IT</text>
+    <text x="18" y="126" font-family="Arial Narrow, Arial, sans-serif" font-size="32" font-weight="900">HUMAN</text>
+    <g font-family="Arial, sans-serif" font-size="21" font-weight="700">
+      <text x="18" y="169">Plain</text>
+      <text x="18" y="199">Specific</text>
+      <text x="18" y="229">Reviewed</text>
+    </g>
+    <path d="M0 266h220v42H0z" fill="#d9ff4f" stroke="#0e1630" stroke-width="3"/>
+    <text x="18" y="293" font-family="monospace" font-size="17" font-weight="700">approved copy</text>
+  </g>
+
+  <path d="M996 191h34" stroke="#0e1630" stroke-width="5"/>
+  <path d="M1023 180l14 11-14 11z" fill="#0e1630"/>
+
+  <g transform="translate(1038 76)">
+    <path d="M0 0h126v308H0z" fill="#d9ff4f" stroke="#0e1630" stroke-width="3"/>
+    <text x="63" y="45" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#0e1630">FILES</text>
+    <text x="63" y="70" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#0e1630">YOU KEEP</text>
+    <path d="M14 89h98" stroke="#0e1630" stroke-width="3"/>
+    <g font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0e1630" text-anchor="middle">
+      <text x="63" y="131">Research</text>
+      <text x="63" y="166">Decisions</text>
+      <text x="63" y="201">Plans</text>
+      <text x="63" y="236">Scripts</text>
+      <text x="63" y="271">Reports</text>
+    </g>
+  </g>
+
+  <g transform="translate(36 405)">
+    <path d="M0 0h1128v38H0z" fill="#0e1630"/>
+    <text x="18" y="25" font-family="monospace" font-size="18" font-weight="700" fill="#fff">EVERY PHASE</text>
+
+    <g font-family="monospace" font-size="17" font-weight="700">
+      <path d="M180 0h220v38H180z" fill="#dfe7ff"/>
+      <text x="290" y="25" text-anchor="middle" fill="#0e1630">BUILD</text>
+
+      <path d="M410 0h220v38H410z" fill="#ff5c35"/>
+      <text x="520" y="25" text-anchor="middle" fill="#0e1630">ATTACK</text>
+
+      <path d="M640 0h254v38H640z" fill="#ffffff"/>
+      <text x="767" y="25" text-anchor="middle" fill="#0e1630">REVISE / ACCEPT</text>
+
+      <path d="M904 0h224v38H904z" fill="#d9ff4f"/>
+      <text x="1016" y="25" text-anchor="middle" fill="#0e1630">APPROVE + SAVE</text>
+    </g>
+  </g>
+</svg>
