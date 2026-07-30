@@ -1,0 +1,204 @@
+name: One-off live resume production audit
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Capture and inspect georgerd.com
+        env:
+          TARGET_URL: https://georgerd.com/
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORKSPACE="${PWD}"
+          mkdir -p "${WORKSPACE}/audit-output" /tmp/live-resume-audit
+          cd /tmp/live-resume-audit
+          npm init -y >/dev/null
+          npm install --no-save --ignore-scripts playwright-core@1.55.0
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser)"
+          test -n "${CHROME_PATH}"
+          export CHROME_PATH WORKSPACE
+
+          cat > /tmp/live-resume-audit/audit.mjs <<'EOF'
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          import { chromium } from 'playwright-core';
+
+          const targetUrl = process.env.TARGET_URL;
+          const chromePath = process.env.CHROME_PATH;
+          const outputDir = path.join(process.env.WORKSPACE, 'audit-output');
+          const expectedCopy = 'I turn unclear, consequential problems into systems people can use.';
+          const viewports = [
+            { name: 'desktop', width: 1440, height: 1000 },
+            { name: 'tablet', width: 834, height: 1112 },
+            { name: 'mobile', width: 390, height: 844 },
+            { name: 'narrow', width: 320, height: 720 },
+          ];
+
+          const browser = await chromium.launch({
+            headless: true,
+            executablePath: chromePath,
+            args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+          });
+
+          const report = {
+            targetUrl,
+            generatedAt: new Date().toISOString(),
+            runs: {},
+          };
+
+          for (const viewport of viewports) {
+            const context = await browser.newContext({
+              viewport: { width: viewport.width, height: viewport.height },
+              deviceScaleFactor: 1,
+            });
+            const page = await context.newPage();
+            const consoleErrors = [];
+            const pageErrors = [];
+            page.on('console', (message) => {
+              if (message.type() === 'error') consoleErrors.push(message.text());
+            });
+            page.on('pageerror', (error) => pageErrors.push(String(error)));
+
+            const response = await page.goto(targetUrl, {
+              waitUntil: 'domcontentloaded',
+              timeout: 90000,
+            });
+            await page.waitForTimeout(1800);
+
+            const bodyText = await page.locator('body').innerText();
+            if (!bodyText.includes(expectedCopy)) {
+              throw new Error(`${viewport.name}: expected merged copy was not found`);
+            }
+
+            await page.evaluate(async () => {
+              const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+              const step = Math.max(600, Math.floor(window.innerHeight * 0.8));
+              for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+                window.scrollTo(0, y);
+                await delay(45);
+              }
+              window.scrollTo(0, 0);
+              await delay(500);
+            });
+
+            await page.screenshot({
+              path: path.join(outputDir, `${viewport.name}-full.png`),
+              fullPage: true,
+              animations: 'disabled',
+              caret: 'hide',
+            });
+            await page.locator('#top').screenshot({
+              path: path.join(outputDir, `${viewport.name}-hero.png`),
+              animations: 'disabled',
+              caret: 'hide',
+            });
+            if (viewport.name === 'tablet') {
+              await page.locator('#projects').screenshot({
+                path: path.join(outputDir, 'tablet-projects.png'),
+                animations: 'disabled',
+                caret: 'hide',
+              });
+            }
+
+            const metrics = await page.evaluate(() => {
+              const getRect = (selector) => {
+                const element = document.querySelector(selector);
+                if (!element) return null;
+                const value = element.getBoundingClientRect();
+                return {
+                  left: Math.round(value.left * 10) / 10,
+                  right: Math.round(value.right * 10) / 10,
+                  width: Math.round(value.width * 10) / 10,
+                  height: Math.round(value.height * 10) / 10,
+                  clientWidth: element.clientWidth,
+                  scrollWidth: element.scrollWidth,
+                };
+              };
+              return {
+                document: {
+                  clientWidth: document.documentElement.clientWidth,
+                  scrollWidth: document.documentElement.scrollWidth,
+                  horizontalOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+                },
+                hero: getRect('.hero'),
+                heroCopy: getRect('.hero-copy'),
+                heroTitle: getRect('#hero-title'),
+                heroMap: getRect('.hero-map'),
+                brand: getRect('.brand'),
+                compactProject: getRect('.project-compact'),
+                compactStatus: getRect('.project-compact .project-status'),
+                disclosureLabels: [...document.querySelectorAll('.project-disclosure summary')]
+                  .map((element) => element.textContent.trim().replace(/\s+/g, ' ')),
+                h1Count: document.querySelectorAll('h1').length,
+              };
+            });
+
+            if (metrics.document.horizontalOverflow !== 0) {
+              throw new Error(`${viewport.name}: document horizontal overflow ${metrics.document.horizontalOverflow}px`);
+            }
+            if (viewport.name === 'narrow') {
+              for (const [label, value] of Object.entries({
+                heroCopy: metrics.heroCopy,
+                heroTitle: metrics.heroTitle,
+                heroMap: metrics.heroMap,
+              })) {
+                if (!value || value.scrollWidth > value.clientWidth) {
+                  throw new Error(`narrow: ${label} overflows ${value?.scrollWidth} > ${value?.clientWidth}`);
+                }
+              }
+              if (!metrics.brand || metrics.brand.width < 44 || metrics.brand.height < 44) {
+                throw new Error(`narrow: brand target is below 44px: ${JSON.stringify(metrics.brand)}`);
+              }
+            }
+            if (viewport.name === 'tablet') {
+              if (!metrics.compactProject || !metrics.compactStatus) {
+                throw new Error('tablet: compact project metrics unavailable');
+              }
+              if (metrics.compactStatus.width > 300 || metrics.compactStatus.width >= metrics.compactProject.width * 0.75) {
+                throw new Error(`tablet: compact status appears stretched: ${JSON.stringify(metrics.compactStatus)}`);
+              }
+            }
+
+            report.runs[viewport.name] = {
+              viewport,
+              httpStatus: response?.status() ?? null,
+              finalUrl: page.url(),
+              metrics,
+              consoleErrors: [...new Set(consoleErrors)],
+              pageErrors: [...new Set(pageErrors)],
+            };
+            await context.close();
+          }
+
+          await browser.close();
+          await fs.writeFile(
+            path.join(outputDir, 'live-audit.json'),
+            JSON.stringify(report, null, 2),
+          );
+          console.log(JSON.stringify(report, null, 2));
+          EOF
+
+          node /tmp/live-resume-audit/audit.mjs
+
+      - name: Upload live screenshots and metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-resume-production-audit
+          path: audit-output
+          if-no-files-found: error
+          retention-days: 2
