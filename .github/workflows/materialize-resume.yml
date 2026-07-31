@@ -1,0 +1,32 @@
+name: Temporary resume materialization
+
+on:
+  push:
+    branches:
+      - agent/materialize-resume
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out resume
+        uses: actions/checkout@v4
+        with:
+          repository: George-RD/resume
+          ref: main
+          path: resume
+
+      - name: Upload repository snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-main-snapshot
+          path: resume
+          include-hidden-files: true
+          retention-days: 1
