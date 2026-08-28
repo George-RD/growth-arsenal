@@ -10,6 +10,10 @@
   <a href="https://ko-fi.com/george_builds"><strong>Support the project</strong></a>
 </p>
 
+<p align="center">
+  <a href="https://skills.sh/George-RD/growth-arsenal"><img src="https://skills.sh/b/George-RD/growth-arsenal" alt="skills.sh installs" /></a>
+</p>
+
 # growth-arsenal
 
 Three linked workshops turn a rough idea into an offer, a lead plan and customer copy. They run inside your AI coding agent.
@@ -33,6 +37,22 @@ Use one workshop or run all three. A phase clears only when no critical issue re
 
 ## Install
 
+### Skills CLI
+
+```bash
+npx skills add George-RD/growth-arsenal
+```
+
+This is the standard [skills.sh](https://skills.sh/) install path. It discovers the skills in this repository and lets you choose the target agent and install scope.
+
+For the complete Growth Arsenal set, select all five skills. The offer and leads workshops use the shared workspace, copy and feedback skills by name. For a non-interactive Codex install:
+
+```bash
+npx skills add George-RD/growth-arsenal --skill '*' -a codex -y
+```
+
+Add `-g` for a global install instead of the default project install. `business-copy-style` can also be installed on its own.
+
 ### Claude Code plugin
 
 ```text
@@ -40,7 +60,7 @@ Use one workshop or run all three. A phase clears only when no critical issue re
 /plugin install growth-arsenal@growth-arsenal
 ```
 
-### Skills install
+### From source
 
 ```bash
 git clone https://github.com/George-RD/growth-arsenal
@@ -48,9 +68,7 @@ cd growth-arsenal
 ./install.sh codex   # claude | omp | opencode | agents
 ```
 
-Supported harnesses: Claude Code, Oh My Pi, Codex, opencode and agents.md-style tools.
-
-The install uses symlinks, so `git pull` updates the workshops in place. On Windows, copy the `skills/<name>` folders into the harness skills directory instead.
+The source installer uses symlinks, so `git pull` updates the workshops in place. The Skills CLI is the preferred cross-platform install path.
 
 ## Start with a plain request
 
