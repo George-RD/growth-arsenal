@@ -3,23 +3,25 @@ name: Growth Arsenal tests
 on:
   pull_request:
     paths:
-      - "skills/growth-arsenal-workspace/**"
-      - "skills/grandslam-offer/**"
-      - "skills/business-copy-style/**"
+      - "skills/**"
       - "evaluations/**"
+      - ".claude-plugin/**"
+      - "CLAUDE.md"
       - "DESIGN.md"
       - "README.md"
       - "docs/**"
+      - "install.sh"
   push:
     branches: [main]
     paths:
-      - "skills/growth-arsenal-workspace/**"
-      - "skills/grandslam-offer/**"
-      - "skills/business-copy-style/**"
+      - "skills/**"
       - "evaluations/**"
+      - ".claude-plugin/**"
+      - "CLAUDE.md"
       - "DESIGN.md"
       - "README.md"
       - "docs/**"
+      - "install.sh"
 
 permissions:
   contents: read
@@ -29,9 +31,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Verify Skills CLI compatibility
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/skills-smoke"
+          cd "$RUNNER_TEMP/skills-smoke"
+          npx --yes skills@1.5.23 add "$GITHUB_WORKSPACE" --skill '*' -a codex -y --copy
+          for skill in \
+            business-copy-style \
+            grandslam-offer \
+            growth-arsenal-workspace \
+            hundred-million-leads \
+            plugin-feedback
+          do
+            test -f ".agents/skills/$skill/SKILL.md"
+          done
       - name: Compile Python scripts
         run: |
           python -m py_compile skills/growth-arsenal-workspace/scripts/*.py

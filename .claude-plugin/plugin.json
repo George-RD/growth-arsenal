@@ -5,5 +5,13 @@
   "author": {
     "name": "George-RD"
   },
+  "repository": "https://github.com/George-RD/growth-arsenal",
+  "skills": [
+    "./skills/grandslam-offer",
+    "./skills/hundred-million-leads",
+    "./skills/business-copy-style",
+    "./skills/growth-arsenal-workspace",
+    "./skills/plugin-feedback"
+  ],
   "keywords": ["business", "offers", "leads", "hormozi", "marketing", "copywriting", "agent-teams"]
 }
