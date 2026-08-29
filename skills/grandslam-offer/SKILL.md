@@ -35,12 +35,13 @@ Phase 5  Enhancement     → bonuses, scarcity, urgency, guarantee and naming
 - A remaining critical issue requires an explicit revision-scoped accepted-risk record before approval.
 - Changing an upstream decision invalidates dependent phases. Never keep presenting them as approved.
 - Persist the result after every material state transition.
-- Customer-facing copy goes through `business-copy-style` before approval.
+- `growth-arsenal-workspace` is a hard dependency. Resolve it by name at the first workspace operation; if unavailable, pause only the workspace-dependent path and follow the Phase 0 install/resume flow below.
+- `business-copy-style` is a quality dependency. Resolve it by name at the first customer-facing copy gate; if unavailable, follow the Copy gate install-or-degraded flow and keep the affected copy unverified until it is rechecked.
 - Generated Markdown and HTML are views. Never hand-edit them.
 
 ## Declarative workspace
 
-Read the **growth-arsenal-workspace** skill before creating project files. Its script is the source of truth for state transitions and rendering.
+At the first workspace operation, resolve the installed **growth-arsenal-workspace** skill by name. Once available, read it before creating project files. Its script is the source of truth for state transitions and rendering.
 
 Canonical file:
 
@@ -59,13 +60,29 @@ Generated views:
 {project-name}-offer-summary.html
 ```
 
-Resolve the installed **growth-arsenal-workspace** skill by name. Let `<workspace-skill-dir>` be that resolved directory, then invoke:
+Let `<workspace-skill-dir>` be the resolved **growth-arsenal-workspace** directory, then invoke:
 
 ```text
 <workspace-skill-dir>/scripts/arsenal.py
 ```
 
 ### Initialise in Phase 0
+
+Do not preflight `growth-arsenal-workspace` at workshop startup. Resolve it by skill name when the first workspace operation is needed.
+
+If it cannot be resolved:
+
+1. Do not run `init`, `apply`, `add-review`, `gate`, `approve` or `render`.
+2. Tell the user that persistent state, phase gating and deterministic rendering are unavailable until the companion skill is installed.
+3. Show the standard install command:
+
+   ```sh
+   npx skills add George-RD/growth-arsenal --skill growth-arsenal-workspace
+   ```
+
+4. Pause only the workspace-dependent path. Preserve the conversation and any already-valid workshop decisions.
+
+After the skill becomes available, resolve and read it, then resume from the current phase. Do not restart discovery or discard already-valid decisions solely because the companion skill was missing.
 
 Capture project name, locale, currency, timezone and spelling once, then run:
 
@@ -166,7 +183,26 @@ The gate counts distinct reviewers per key. Scores inform judgement but never ov
 
 ## Copy gate
 
-Before finalising offer names, bonus names, guarantee names, headlines, pitches or other customer-facing lines:
+At the first point where the workshop must produce or approve customer-facing copy, resolve `business-copy-style` by skill name. Do not prompt for it during discovery or strategy work that does not yet need customer-facing copy.
+
+If `business-copy-style` cannot be resolved:
+
+1. Explain that the shared copy-quality gate is unavailable: deterministic lint, qualitative tests and, for high-stakes copy, the blind reader panel cannot be verified.
+2. Show the standard install command:
+
+   ```sh
+   npx skills add George-RD/growth-arsenal --skill business-copy-style
+   ```
+
+3. Give the user two explicit choices: install the skill and retry the copy gate, or continue with the affected copy in a degraded state.
+4. If the user continues degraded, record the affected copy status in the current phase data as `degraded/unverified`. Never report the copy gate as passed or verified.
+5. In the degraded path, apply only these minimum safety checks:
+   - no unsupported claims or fabricated results;
+   - use plain language grounded in approved facts;
+   - surface assumptions and unknowns instead of inventing specifics.
+6. Do not imitate `business-copy-style` lint thresholds, qualitative rubrics or reader-panel method. Keep the status `degraded/unverified` until that skill becomes available and re-verifies the copy.
+
+When `business-copy-style` is available, before finalising offer names, bonus names, guarantee names, headlines, pitches or other customer-facing lines:
 
 1. Read `business-copy-style`.
 2. Run its deterministic lint on the relevant copy field.
