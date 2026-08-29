@@ -2,7 +2,7 @@
 
 This is the most output-heavy phase. Generate **ready-to-use assets** for the primary channel, plus basics for the secondary.
 
-**Before finalizing any customer-facing copy — warm scripts, cold scripts, ads, or content calendar posts — read the business-copy-style skill and apply its plain-language and de-AI rules.**
+**Before finalizing any customer-facing copy — warm scripts, cold scripts, ads, or content calendar posts — apply the top-level Copy-Style Gate in `../SKILL.md`. Do not resolve or prompt for `business-copy-style` independently in this phase.**
 
 ### Warm Outreach Scripts (if selected)
 
@@ -94,7 +94,7 @@ Interested?
 
 ### Paid Ad Scripts (if selected)
 
-**Before finalizing any ad copy, read the business-copy-style skill and apply its plain-language and de-AI rules.**
+**Before finalizing any ad copy, apply the top-level Copy-Style Gate in `../SKILL.md`; if the workshop is already in an explicitly degraded copy state, carry `degraded/unverified` rather than prompting again.**
 
 **The Call Out → Pain → Solution → CTA structure:**
 
@@ -137,7 +137,7 @@ Ongoing: Always have 1 "champion" + 2 "challengers"
 
 ### Content Calendar (if selected)
 
-**Before finalizing any content calendar post, read the business-copy-style skill and apply its plain-language and de-AI rules.**
+**Before finalizing any content calendar post, apply the top-level Copy-Style Gate in `../SKILL.md`; if the workshop is already in an explicitly degraded copy state, carry `degraded/unverified` rather than prompting again.**
 
 **The Hook/Retain/Reward Framework:**
 
