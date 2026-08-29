@@ -24,6 +24,45 @@
         "The output produces a named guarantee with a concrete risk reversal or results promise.",
         "The output structures the offer with a core service plus at least one bonus or premium component stacked into a high-ticket price."
       ]
+    },
+    {
+      "id": 3,
+      "name": "Companion skills available",
+      "prompt": "Both growth-arsenal-workspace and business-copy-style are installed and resolvable by skill name. I run a small bookkeeping firm. Start the Grand Slam Offer workshop and take me through the first workspace operation and the first customer-facing copy checkpoint.",
+      "expected_output": "Normal Grand Slam Offer workshop behavior that uses both available companion skills without dependency warnings, install prompts or degraded copy status.",
+      "expectations": [
+        "The output proceeds through the workspace path using growth-arsenal-workspace without asking the user to install it.",
+        "The output uses business-copy-style at the copy checkpoint without asking the user to install it.",
+        "The output does not show a companion-skill npx install command when both skills are available.",
+        "The output does not mark copy degraded or unverified when the copy-quality gate is available and completed."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Missing workspace hard dependency",
+      "prompt": "We already completed valid Grand Slam Offer discovery decisions and are now at the first workspace operation, but growth-arsenal-workspace cannot be resolved by skill name. Continue from here without resetting what we already decided.",
+      "expected_output": "The workshop pauses only the workspace-dependent path, explains what is unavailable, gives the standard selective-install command, and preserves valid prior decisions so the current phase can resume after installation.",
+      "expectations": [
+        "The output does not attempt a workspace operation while growth-arsenal-workspace is unavailable.",
+        "The output explains that persistent state, phase gating and deterministic rendering are unavailable until the skill is installed.",
+        "The output shows exactly `npx skills add George-RD/growth-arsenal --skill growth-arsenal-workspace`.",
+        "The output preserves the conversation and already-valid workshop decisions and says the current phase can resume after the skill is available.",
+        "The output does not offer a degraded or fallback workspace mode."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Missing copy quality dependency",
+      "prompt": "We are at the first customer-facing copy gate in a Grand Slam Offer workshop. business-copy-style cannot be resolved by skill name, and I want to continue without installing it for now.",
+      "expected_output": "The workshop explains the unavailable copy-quality checks, gives the standard selective-install command, honors the explicit degraded-continuation choice, applies only minimum safety checks and keeps the copy status degraded/unverified rather than claiming the gate passed.",
+      "expectations": [
+        "The output names the unavailable deterministic lint and qualitative tests, and notes that the blind reader panel is unavailable for high-stakes copy.",
+        "The output shows exactly `npx skills add George-RD/growth-arsenal --skill business-copy-style`.",
+        "The output allows degraded continuation and marks the affected copy status `degraded/unverified`.",
+        "The output never claims the business-copy-style gate passed or was verified while the skill is missing.",
+        "The degraded path uses only minimum safety checks such as avoiding unsupported claims, using plain language grounded in approved facts, and surfacing unknowns instead of fabricating specifics.",
+        "The output does not reproduce business-copy-style lint thresholds, qualitative rubrics or reader-panel methodology."
+      ]
     }
   ]
 }
