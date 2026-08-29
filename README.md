@@ -45,13 +45,23 @@ npx skills add George-RD/growth-arsenal
 
 This is the standard [skills.sh](https://skills.sh/) install path. It discovers the skills in this repository and lets you choose the target agent and install scope.
 
-For the complete Growth Arsenal set, select all five skills. The offer and leads workshops use the shared workspace, copy and feedback skills by name. For a non-interactive Codex install:
+The simplest all-in option is to install the complete Growth Arsenal set. For a non-interactive Codex install:
 
 ```bash
 npx skills add George-RD/growth-arsenal --skill '*' -a codex -y
 ```
 
-Add `-g` for a global install instead of the default project install. `business-copy-style` can also be installed on its own.
+Selective installs are also supported. Install only the workshop or capability you need:
+
+```bash
+npx skills add George-RD/growth-arsenal --skill grandslam-offer
+npx skills add George-RD/growth-arsenal --skill hundred-million-leads
+npx skills add George-RD/growth-arsenal --skill business-copy-style
+```
+
+The offer and leads workshops resolve companion capabilities by skill name when they first need them. If a required workspace capability is missing, the dependent path pauses and shows the standard install command. If the shared copy-quality capability is missing, the workshop offers installation or an explicitly degraded, unverified copy path rather than silently claiming the quality gate passed. `business-copy-style` is independently usable on its own.
+
+Add `-g` for a global install instead of the default project install.
 
 ### Claude Code plugin
 
@@ -68,7 +78,7 @@ cd growth-arsenal
 ./install.sh codex   # claude | omp | opencode | agents
 ```
 
-The source installer uses symlinks, so `git pull` updates the workshops in place. The Skills CLI is the preferred cross-platform install path.
+The source installer is a legacy whole-repository compatibility path and uses symlinks, so `git pull` updates the workshops in place. The Skills CLI is the preferred cross-platform install path, including selective installs.
 
 ## Start with a plain request
 

@@ -52,6 +52,79 @@ jobs:
           do
             test -f ".agents/skills/$skill/SKILL.md"
           done
+      - name: Verify selective Skills CLI installs
+        run: |
+          set -euo pipefail
+          offer_root="$RUNNER_TEMP/skills-selective-offer"
+          copy_root="$RUNNER_TEMP/skills-selective-copy"
+          mkdir -p "$offer_root" "$copy_root"
+
+          cd "$offer_root"
+          npx --yes skills@1.5.23 add "$GITHUB_WORKSPACE" --skill grandslam-offer -a codex -y --copy
+          test -f ".agents/skills/grandslam-offer/SKILL.md"
+          test -d ".agents/skills/grandslam-offer/references"
+          test -d ".agents/skills/grandslam-offer/templates"
+          test ! -e ".agents/skills/growth-arsenal-workspace"
+          test ! -e ".agents/skills/business-copy-style"
+
+          cd "$copy_root"
+          npx --yes skills@1.5.23 add "$GITHUB_WORKSPACE" --skill business-copy-style -a codex -y --copy
+          test -f ".agents/skills/business-copy-style/SKILL.md"
+          test -f ".agents/skills/business-copy-style/scripts/copy-lint.sh"
+          test -f ".agents/skills/business-copy-style/scripts/copy-compare.py"
+          test -d ".agents/skills/business-copy-style/references"
+          test -d ".agents/skills/business-copy-style/templates"
+          test ! -e ".agents/skills/grandslam-offer"
+      - name: Verify selective offer dependency negotiation contract
+        run: |
+          # Keep this proof aligned with docs/agents/skill-dependencies.md. Replace the
+          # instruction-level shim when native Skills CLI dependencies cover the contract.
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          workspace = Path(os.environ["GITHUB_WORKSPACE"])
+          installed = (
+              Path(os.environ["RUNNER_TEMP"])
+              / "skills-selective-offer"
+              / ".agents"
+              / "skills"
+              / "grandslam-offer"
+              / "SKILL.md"
+          ).read_text(encoding="utf-8")
+
+          workspace_command = (
+              "npx skills add George-RD/growth-arsenal --skill growth-arsenal-workspace"
+          )
+          copy_command = (
+              "npx skills add George-RD/growth-arsenal --skill business-copy-style"
+          )
+
+          assert "growth-arsenal-workspace` is a hard dependency" in installed
+          assert "business-copy-style` is a quality dependency" in installed
+          assert workspace_command in installed
+          assert copy_command in installed
+          assert "degraded/unverified" in installed
+
+          evals = json.loads(
+              (workspace / "skills/grandslam-offer/evals/evals.json").read_text(
+                  encoding="utf-8"
+              )
+          )["evals"]
+          by_name = {case["name"]: case for case in evals}
+          missing_workspace = by_name["Missing workspace hard dependency"]
+          missing_copy = by_name["Missing copy quality dependency"]
+
+          workspace_expectations = "\n".join(missing_workspace["expectations"])
+          copy_expectations = "\n".join(missing_copy["expectations"])
+
+          assert workspace_command in workspace_expectations
+          assert "does not offer a degraded or fallback workspace mode" in workspace_expectations
+          assert copy_command in copy_expectations
+          assert "degraded/unverified" in copy_expectations
+          assert "never claims" in copy_expectations
+          PY
       - name: Compile Python scripts
         run: |
           python -m py_compile skills/growth-arsenal-workspace/scripts/*.py

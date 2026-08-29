@@ -50,20 +50,22 @@ Before changing cross-skill dependency behavior, read `docs/agents/skill-depende
 
 - **Skills CLI is the canonical cross-agent install path**: `npx skills add George-RD/growth-arsenal`. Do not add a repository-specific npm installer while the standard Skills CLI covers the requirement.
 - **Skills one level deep**: every installable skill lives at `skills/<name>/SKILL.md`. Keep `name` and `description` frontmatter valid so the Skills CLI and agent harnesses can discover it.
-- **The full pack is load-bearing today**: `grandslam-offer` and `hundred-million-leads` resolve shared skills by name. Until companion-skill negotiation is implemented, a complete install must include `growth-arsenal-workspace`, `business-copy-style` and `plugin-feedback` as well as the two workshops.
+- **Selective installs are supported**: the complete pack is the simplest all-in option, not a correctness requirement. `grandslam-offer` and `hundred-million-leads` resolve companion skills by name at the first point of need. A missing hard dependency pauses only the dependent path; a missing quality dependency offers installation or explicit degraded continuation and cannot be reported as verified while absent.
+- **Dependency watchpoint is authoritative**: `docs/agents/skill-dependencies.md` defines when to replace the instruction-level dependency shim. Check current official `vercel-labs/skills` support before extending the shim, and remove matching local behavior when native support covers it.
 - **SKILL.md < 500 lines** (progressive disclosure). Per-phase deep content lives in `references/`, loaded on demand — never inline the whole workshop in the top-level file.
 - **Deterministic output templates** live in `templates/`; SKILL.md instructs "copy the template, fill the brackets" rather than freeform generation, for repeatable output shape.
 - **Copy-style wiring**: any copy-emitting instruction in a workshop skill (offer names, outreach scripts, ad copy, bonus/guarantee copy) must reference `business-copy-style` by skill name, not by path.
 - **No build step** — this repo remains skills, templates, references and lightweight scripts. Distribution should not require publishing a second package.
-- **Before release**: run `scripts/bump-version.sh --check`, and markdownlint if configured (`.markdownlint.json` disables MD013, MD024, MD029, MD033, MD036, MD060). CI also installs the full pack with a pinned Skills CLI release.
+- **Before release**: run `scripts/bump-version.sh --check`, and markdownlint if configured (`.markdownlint.json` disables MD013, MD024, MD029, MD033, MD036, MD060). CI verifies both the complete pack and supported selective Skills CLI installs with a pinned release.
 - **Eval workflow**: skills are measured, not just written. See `skills/<name>/evals/evals.json` for quality-eval prompts/assertions, and `skill://skill-creator` (or the vendored `~/.omp/agent/skills/skill-creator/` engine) for the with-skill-vs-baseline quality loop and the `run_loop.py` description-optimization loop.
 - **Matt workflow changes are intentional**: the installed subset and reviewed upstream revision live in `docs/agents/matt-pocock-skills.md`. Do not silently expand or auto-update the vendored workflow.
 - **Commits**: conventional commits — `feat(scope):`, `fix(scope):`, `chore(scope):`.
 
 ## Gotchas
 
-- The Skills CLI defaults to a project install. Use `-g` for global installation and `--skill '*'` when the complete Growth Arsenal pack is required.
-- Installing only `grandslam-offer` or `hundred-million-leads` is incomplete today because they call sibling support skills by name. The companion-skill roadmap is intended to replace this failure mode without a custom package manager.
-- `business-copy-style` is safe to install standalone.
+- The Skills CLI defaults to a project install. Use `-g` for global installation and `--skill '*'` for the simplest complete-pack install.
+- Installing only `grandslam-offer` or `hundred-million-leads` is supported. The workshops negotiate missing core companion capabilities lazily at the point of need instead of requiring a full-pack preflight.
+- `business-copy-style` is safe to install and use standalone.
+- Do not turn companion negotiation into dependency metadata, recursive `skills-lock.json` behavior or a custom resolver. The dependency watchpoint in `docs/agents/skill-dependencies.md` is the authority for replacing the shim with native Skills CLI support.
 - `install.sh` remains a source-checkout compatibility path; its symlinks mean `git pull` propagates updates automatically.
 - The `business-copy-style` skill has no path-relative links into the workshop skills' dirs — cross-skill references are by name only, since skill install order/location varies per harness.
