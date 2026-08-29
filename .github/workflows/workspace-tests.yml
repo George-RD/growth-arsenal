@@ -62,12 +62,18 @@ jobs:
           cd "$offer_root"
           npx --yes skills@1.5.23 add "$GITHUB_WORKSPACE" --skill grandslam-offer -a codex -y --copy
           test -f ".agents/skills/grandslam-offer/SKILL.md"
+          test -d ".agents/skills/grandslam-offer/references"
+          test -d ".agents/skills/grandslam-offer/templates"
           test ! -e ".agents/skills/growth-arsenal-workspace"
           test ! -e ".agents/skills/business-copy-style"
 
           cd "$copy_root"
           npx --yes skills@1.5.23 add "$GITHUB_WORKSPACE" --skill business-copy-style -a codex -y --copy
           test -f ".agents/skills/business-copy-style/SKILL.md"
+          test -f ".agents/skills/business-copy-style/scripts/copy-lint.sh"
+          test -f ".agents/skills/business-copy-style/scripts/copy-compare.py"
+          test -d ".agents/skills/business-copy-style/references"
+          test -d ".agents/skills/business-copy-style/templates"
           test ! -e ".agents/skills/grandslam-offer"
       - name: Verify selective offer dependency negotiation contract
         run: |
