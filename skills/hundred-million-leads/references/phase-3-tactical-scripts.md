@@ -94,7 +94,7 @@ Interested?
 
 ### Paid Ad Scripts (if selected)
 
-**Before finalizing any ad copy, apply the top-level Copy-Style Gate for `business-copy-style`; if the workshop is already in an explicitly degraded copy state, carry `degraded/unverified` rather than prompting again.**
+**Before finalizing any ad copy, apply the top-level Copy-Style Gate for `business-copy-style`.**
 
 **The Call Out → Pain → Solution → CTA structure:**
 
@@ -137,7 +137,7 @@ Ongoing: Always have 1 "champion" + 2 "challengers"
 
 ### Content Calendar (if selected)
 
-**Before finalizing any content calendar post, apply the top-level Copy-Style Gate for `business-copy-style`; if the workshop is already in an explicitly degraded copy state, carry `degraded/unverified` rather than prompting again.**
+**Before finalizing any content calendar post, apply the top-level Copy-Style Gate for `business-copy-style`.**
 
 **The Hook/Retain/Reward Framework:**
 
