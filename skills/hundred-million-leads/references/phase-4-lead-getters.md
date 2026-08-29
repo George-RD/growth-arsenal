@@ -30,7 +30,7 @@ The "Make It Easy" System:
 
 **The Referral Ask Script:**
 
-> **Before finalizing the referral ask script, apply the top-level Copy-Style Gate for `business-copy-style`; if the workshop is already in an explicitly degraded copy state, carry `degraded/unverified` rather than prompting again.**
+> **Before finalizing the referral ask script, apply the top-level Copy-Style Gate for `business-copy-style`.**
 
 ```text
 "Hey [Customer Name], I'm so glad [SPECIFIC RESULT THEY GOT].
@@ -52,7 +52,7 @@ Identify non-competing businesses serving the same audience:
 
 **Affiliate Outreach Email:**
 
-> **Before finalizing the affiliate outreach email, apply the top-level Copy-Style Gate for `business-copy-style`; if the workshop is already in an explicitly degraded copy state, carry `degraded/unverified` rather than prompting again.**
+> **Before finalizing the affiliate outreach email, apply the top-level Copy-Style Gate for `business-copy-style`.**
 
 ```text
 Subject: Quick partnership idea for [THEIR BUSINESS NAME]
