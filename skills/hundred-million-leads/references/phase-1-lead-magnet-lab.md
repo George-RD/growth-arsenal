@@ -71,7 +71,7 @@ Score each on:
 
 **Synthesis rule:** Keep only lead magnets scoring 7+ average across all agents. If none pass, redesign.
 
-**Phase 1 Output:** Top 3 lead magnets with full specs, ranked by agent scores. Apply the top-level Copy-Style Gate for `business-copy-style` to the final customer-facing lead magnet descriptions and calls-to-action before moving to the checkpoint; if the workshop is already in an explicitly degraded copy state, carry `degraded/unverified` rather than prompting again.
+**Phase 1 Output:** Top 3 lead magnets with full specs, ranked by agent scores. Apply the top-level Copy-Style Gate for `business-copy-style` to the final customer-facing lead magnet descriptions and calls-to-action before moving to the checkpoint.
 
 ---
 
