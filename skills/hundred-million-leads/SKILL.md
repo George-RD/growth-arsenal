@@ -34,6 +34,7 @@ Phase 5: Rule of 100 → Daily execution plan + tracking framework
 - A phase only passes when no agent flags a critical issue.
 - Use WebSearch at Phase 0 and whenever market/platform data would strengthen a decision.
 - Personas **react to outreach as real recipients** in Phase 3 — not just reviewers.
+- `business-copy-style` is a quality dependency. Resolve it by skill name only at the first point where customer-facing copy must be produced or approved; if unavailable, follow the Copy-Style Gate install-or-degraded flow and never claim the missing gate passed.
 - Use radical candor throughout. Generic = dead on arrival.
 
 ## The Agent Team
@@ -67,14 +68,34 @@ Phase outputs also use templates:
 - `templates/outreach-scripts.md` — warm, cold, paid, and content skeletons for Phase 3
 - `templates/tracking-dashboard.md` — daily checklist, leading/lagging indicators, and weekly milestones for Phase 5
 
-Instruct the user to copy the relevant template, fill the brackets, and apply the business-copy-style skill before finalizing any customer-facing text.
+Instruct the user to copy the relevant template, fill the brackets, and apply the Copy-Style Gate below before finalizing any customer-facing text.
 Optionally, maintain `{project-name}-decisions.md` with timestamped, type-tagged entries (DECISION, CORRECTION, PREFERENCE) for key choices and corrections. Keep entries free of private business details. The plugin-feedback skill can attach this, redacted, to feedback.
 
 ## Copy-Style Gate
 
-**Before finalizing any customer-facing copy — outreach scripts, ad copy, lead-magnet copy, referral ask, affiliate email, or any landing/README text — read the business-copy-style skill and apply its plain-language and de-AI rules.**
+At the first point where the workshop must produce or approve customer-facing copy — lead magnet names/descriptions, calls-to-action, outreach scripts, ad copy, content posts, referral asks, affiliate email, landing/README text, or final blueprint positioning — resolve `business-copy-style` by skill name. Do not preflight it during discovery, market research, offer audit, channel strategy, or other work that does not yet need customer-facing copy.
 
-This applies to every copy-emitting moment in the workshop: lead magnet descriptions, script hooks, ad body, content calendar posts, referral ask, affiliate outreach email, and the final blueprint elevator pitch and one-liner. If the copy scores above a 5th-grade reading level or contains AI-sounding phrasing, revise before the adversarial review.
+If `business-copy-style` cannot be resolved:
+
+1. Explain that the shared plain-language and de-AI copy-quality gate cannot be verified while the companion skill is unavailable.
+2. Show the standard install command:
+
+   ```sh
+   npx skills add George-RD/growth-arsenal --skill business-copy-style
+   ```
+
+3. Give the user two explicit choices: install the skill and retry the copy gate, or continue with the affected copy in a degraded state.
+4. If the user explicitly continues degraded, label the affected customer-facing copy `degraded/unverified` in the current phase output and carry that status into the final blueprint until the copy is rechecked. Never report the `business-copy-style` gate as passed or verified while the skill is missing.
+5. In the degraded path, apply only these minimum safety and validity checks:
+   - no unsupported claims, fabricated results, testimonials, statistics, or specifics;
+   - use plain language grounded in approved facts;
+   - surface assumptions and unknowns instead of inventing details.
+6. Do not reproduce `business-copy-style` lint thresholds, qualitative rubrics, reader-panel methods, rewrite recipes, or other full methodology as a local fallback.
+7. After the user has explicitly chosen degraded continuation for the current workshop, do not repeat the install prompt for every later copy asset. Keep later affected copy `degraded/unverified` unless the skill becomes available or the user asks to retry the gate.
+
+When `business-copy-style` is available, read it and apply its plain-language and de-AI rules before finalizing any customer-facing copy. This applies to every copy-emitting moment in the workshop: lead magnet descriptions, script hooks, ad body, content calendar posts, referral ask, affiliate outreach email, and the final blueprint elevator pitch and one-liner. If the copy scores above a 5th-grade reading level or contains AI-sounding phrasing, revise before the adversarial review.
+
+If previously degraded copy is later rechecked with `business-copy-style`, remove `degraded/unverified` only after the shared gate actually passes.
 
 ## Delegation & Synthesis
 

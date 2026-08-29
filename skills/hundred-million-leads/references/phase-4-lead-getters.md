@@ -2,7 +2,7 @@
 
 Once YOUR lead generation is working, get OTHERS to bring leads to you. Four types of lead getters:
 
-**Before finalizing any customer-facing copy in this phase — referral ask, affiliate outreach email, or forwarded customer message — read the business-copy-style skill and apply its plain-language and de-AI rules.**
+**Before finalizing any customer-facing copy in this phase — referral ask, affiliate outreach email, or forwarded customer message — apply the top-level Copy-Style Gate for the `business-copy-style` quality dependency. Do not resolve or prompt for the companion skill independently in this phase.**
 
 ### The Concept
 
@@ -30,7 +30,7 @@ The "Make It Easy" System:
 
 **The Referral Ask Script:**
 
-> **Before finalizing the referral ask script, read the business-copy-style skill and apply its plain-language and de-AI rules.**
+> **Before finalizing the referral ask script, apply the top-level Copy-Style Gate for `business-copy-style`.**
 
 ```text
 "Hey [Customer Name], I'm so glad [SPECIFIC RESULT THEY GOT].
@@ -52,7 +52,7 @@ Identify non-competing businesses serving the same audience:
 
 **Affiliate Outreach Email:**
 
-> **Before finalizing the affiliate outreach email, read the business-copy-style skill and apply its plain-language and de-AI rules.**
+> **Before finalizing the affiliate outreach email, apply the top-level Copy-Style Gate for `business-copy-style`.**
 
 ```text
 Subject: Quick partnership idea for [THEIR BUSINESS NAME]

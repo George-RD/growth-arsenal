@@ -22,6 +22,34 @@
         "The output includes at least one outreach script skeleton or message template for the recommended channel(s).",
         "The output includes a Rule of 100 or 100-unit daily action plan and ties it to a time horizon (e.g., before summer, 100 days, or 100 outreach attempts)."
       ]
+    },
+    {
+      "id": 3,
+      "name": "Copy quality dependency available",
+      "prompt": "business-copy-style is installed and resolvable by skill name. Start a $100M Leads workshop for my bookkeeping firm, complete Phase 0 discovery and the offer audit, then take me into Phase 1 through the first point where you need to produce or approve customer-facing copy.",
+      "expected_output": "Normal Leads workshop behavior that does not preflight the copy dependency during Phase 0, then uses the available business-copy-style quality gate at the first customer-facing copy checkpoint without an install prompt or degraded status.",
+      "expectations": [
+        "The output does not prompt about business-copy-style during Phase 0 discovery or offer-audit work that does not require customer-facing copy.",
+        "At the first customer-facing copy checkpoint in Phase 1, the output uses business-copy-style without asking the user to install it.",
+        "The output does not show `npx skills add George-RD/growth-arsenal --skill business-copy-style` when the skill is available.",
+        "The output does not mark the affected copy degraded or unverified when the copy-quality gate is available and completed."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Missing copy quality dependency",
+      "prompt": "business-copy-style cannot be resolved by skill name. Start a $100M Leads workshop for my bookkeeping firm, complete Phase 0 discovery and the offer audit without dependency prompts, then enter Phase 1 and reach the first customer-facing copy checkpoint. Explain my options and assume I explicitly choose to continue without installing it for now.",
+      "expected_output": "The workshop checks lazily at the first copy-producing or approval point, explains the unavailable shared copy-quality capability, shows the standard selective-install command, offers install-or-degraded continuation, and after the explicit degraded choice keeps the affected copy degraded/unverified with only minimum safety checks.",
+      "expectations": [
+        "The output does not prompt about business-copy-style during Phase 0 discovery or offer-audit work before customer-facing copy is needed.",
+        "At the first customer-facing copy checkpoint in Phase 1, the output explains that the shared plain-language and de-AI copy-quality gate cannot be verified while business-copy-style is unavailable.",
+        "The output shows exactly `npx skills add George-RD/growth-arsenal --skill business-copy-style`.",
+        "The output explicitly offers installation or degraded continuation before following the requested degraded path.",
+        "The output marks the affected copy status `degraded/unverified`.",
+        "The output never claims the business-copy-style gate passed or was verified while the skill is missing.",
+        "The degraded path uses only minimum safety checks such as avoiding unsupported claims, using plain language grounded in approved facts, and surfacing assumptions or unknowns instead of fabricating specifics.",
+        "The output does not reproduce business-copy-style lint thresholds, qualitative rubrics, reader-panel methodology or other full copy-method guidance."
+      ]
     }
   ]
 }

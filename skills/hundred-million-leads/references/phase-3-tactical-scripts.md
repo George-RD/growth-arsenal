@@ -2,7 +2,7 @@
 
 This is the most output-heavy phase. Generate **ready-to-use assets** for the primary channel, plus basics for the secondary.
 
-**Before finalizing any customer-facing copy — warm scripts, cold scripts, ads, or content calendar posts — read the business-copy-style skill and apply its plain-language and de-AI rules.**
+**Before finalizing any customer-facing copy — warm scripts, cold scripts, ads, or content calendar posts — apply the top-level Copy-Style Gate for the `business-copy-style` quality dependency. Do not resolve or prompt for the companion skill independently in this phase.**
 
 ### Warm Outreach Scripts (if selected)
 
@@ -94,7 +94,7 @@ Interested?
 
 ### Paid Ad Scripts (if selected)
 
-**Before finalizing any ad copy, read the business-copy-style skill and apply its plain-language and de-AI rules.**
+**Before finalizing any ad copy, apply the top-level Copy-Style Gate for `business-copy-style`.**
 
 **The Call Out → Pain → Solution → CTA structure:**
 
@@ -137,7 +137,7 @@ Ongoing: Always have 1 "champion" + 2 "challengers"
 
 ### Content Calendar (if selected)
 
-**Before finalizing any content calendar post, read the business-copy-style skill and apply its plain-language and de-AI rules.**
+**Before finalizing any content calendar post, apply the top-level Copy-Style Gate for `business-copy-style`.**
 
 **The Hook/Retain/Reward Framework:**
 
