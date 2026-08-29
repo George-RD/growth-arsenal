@@ -31,7 +31,7 @@ For the top 3 narrow problems, create lead magnets across all three types:
 
 For each lead magnet, specify:
 
-> **Before finalizing customer-facing lead magnet names, descriptions or calls-to-action, apply the top-level Copy-Style Gate in `../SKILL.md`. Do not resolve or prompt for `business-copy-style` independently in this phase.**
+> **Before finalizing customer-facing lead magnet names, descriptions or calls-to-action, apply the top-level Copy-Style Gate for the `business-copy-style` quality dependency. Do not resolve or prompt for the companion skill independently in this phase.**
 
 ```text
 LEAD MAGNET: [Name]
@@ -71,7 +71,7 @@ Score each on:
 
 **Synthesis rule:** Keep only lead magnets scoring 7+ average across all agents. If none pass, redesign.
 
-**Phase 1 Output:** Top 3 lead magnets with full specs, ranked by agent scores. Apply the top-level Copy-Style Gate to the final customer-facing lead magnet descriptions and calls-to-action before moving to the checkpoint; if the workshop is already in an explicitly degraded copy state, carry `degraded/unverified` rather than prompting again.
+**Phase 1 Output:** Top 3 lead magnets with full specs, ranked by agent scores. Apply the top-level Copy-Style Gate for `business-copy-style` to the final customer-facing lead magnet descriptions and calls-to-action before moving to the checkpoint; if the workshop is already in an explicitly degraded copy state, carry `degraded/unverified` rather than prompting again.
 
 ---
 
