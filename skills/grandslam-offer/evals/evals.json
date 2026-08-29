@@ -53,12 +53,13 @@
     {
       "id": 5,
       "name": "Missing copy quality dependency",
-      "prompt": "We are at the first customer-facing copy gate in a Grand Slam Offer workshop. business-copy-style cannot be resolved by skill name, and I want to continue without installing it for now.",
-      "expected_output": "The workshop explains the unavailable copy-quality checks, gives the standard selective-install command, honors the explicit degraded-continuation choice, applies only minimum safety checks and keeps the copy status degraded/unverified rather than claiming the gate passed.",
+      "prompt": "We are at the first customer-facing copy gate in a Grand Slam Offer workshop, but business-copy-style cannot be resolved by skill name. Explain my options, then assume I explicitly choose to continue without installing it for now.",
+      "expected_output": "The workshop explains the unavailable copy-quality checks, gives the standard selective-install command, offers install-or-degraded continuation, then honors the explicit degraded-continuation choice with only minimum safety checks and keeps the copy status degraded/unverified rather than claiming the gate passed.",
       "expectations": [
         "The output names the unavailable deterministic lint and qualitative tests, and notes that the blind reader panel is unavailable for high-stakes copy.",
         "The output shows exactly `npx skills add George-RD/growth-arsenal --skill business-copy-style`.",
-        "The output allows degraded continuation and marks the affected copy status `degraded/unverified`.",
+        "The output explicitly offers installation or degraded continuation before following the requested degraded path.",
+        "The output marks the affected copy status `degraded/unverified`.",
         "The output never claims the business-copy-style gate passed or was verified while the skill is missing.",
         "The degraded path uses only minimum safety checks such as avoiding unsupported claims, using plain language grounded in approved facts, and surfacing unknowns instead of fabricating specifics.",
         "The output does not reproduce business-copy-style lint thresholds, qualitative rubrics or reader-panel methodology."
