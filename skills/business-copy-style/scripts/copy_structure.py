@@ -35,6 +35,10 @@ CONTRAST_SCAFFOLDS: Mapping[str, re.Pattern[str]] = {
     "i'm not": re.compile(r"\bi(?:'m|\s+am)\s+not\b", re.I),
     "this isn't": re.compile(r"\bthis\s+is(?:n't|\s+not)\b", re.I),
     "we don't just": re.compile(r"\bwe\s+do(?:n't|\s+not)\s+just\b", re.I),
+    "comma-not antithesis": re.compile(
+        r",\s+not\s+(?:a|an|the|this|that|these|those|my|our|your|their|its|his|her|any|some|no|every|each|one|two|three|four|five|six|seven|eight|nine|ten)\s+[a-z]+",
+        re.I,
+    ),
 }
 META_PHRASES: Mapping[str, re.Pattern[str]] = {
     "what this means": re.compile(r"\bwhat\s+this\s+means\b", re.I),

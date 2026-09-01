@@ -30,23 +30,28 @@ Drafting bias:
 
 Do not optimise to the lint script while drafting.
 
-## 3. Run de-AI passes
+## 3. Audit sentence and paragraph merit
 
-Read `references/de-ai-prose.md` and run each lens separately:
+Strip away headings, layout and neighbouring copy. Read each sentence alone.
 
-1. inflated significance;
-2. formulaic structure;
-3. Tier-1 and clustered Tier-2 vocabulary;
-4. grammar tells;
-5. rhythm, punctuation and mechanical emphasis;
-6. hedging, filler and vague attribution;
-7. chatbot artefacts;
-8. personal-copy structural tells when relevant;
-9. missing human texture.
+For every sentence:
+
+- name its job: fact, decision, action, explanation or necessary boundary;
+- write its plain meaning;
+- delete it when the reader loses nothing;
+- rebuild it from the meaning when polish, symmetry or negation is doing the work.
+
+For `X, not Y`, remove `not Y` and check whether the reader loses a necessary fact. Keep a factual correction when the contrast carries that fact. Otherwise rebuild the sentence from its positive meaning.
+
+Then read each paragraph as one argument. It should answer one reader question in a useful order. Delete a closing line that only restates the paragraph as a neat takeaway.
+
+## 4. Run de-AI passes
+
+Read `references/de-ai-prose.md` and run each lens separately. Start with its merit audit, then check inflation, formulaic structure, vocabulary, grammar, rhythm, filler, chatbot artefacts, personal-copy tells and missing human texture.
 
 Plain-language rules run alongside every pass.
 
-## 4. Measure mechanics
+## 5. Measure mechanics
 
 Single version:
 
@@ -80,10 +85,12 @@ Grade 5 is a useful aim for broad consumer copy, not a second hidden hard gate. 
 
 Structural counts report duplicate sentences, repeated openers and phrases, sentence rhythm, paragraph load, first-person starts, contrast scaffolds and page-explaining phrases. Treat them as context-sensitive prompts. They never set `fail`, choose a winner or prove AI authorship.
 
-## 5. Judge meaning
+## 6. Judge meaning
 
 Run the ordinary tests:
 
+- sentence merit;
+- paragraph cohesion;
 - position;
 - read-aloud;
 - specificity.
@@ -97,7 +104,7 @@ For high-stakes copy, run blind readers:
 
 A mechanical pass is necessary, not sufficient. A persuasive line also fails when it overclaims, obscures the category or attracts the wrong audience.
 
-## 6. Compare when a baseline exists
+## 7. Compare when a baseline exists
 
 Read `references/paired-evaluation.md`.
 
@@ -110,7 +117,7 @@ Evaluate baseline and candidate against the same brief without revealing provena
 
 Do not average away repeated objections. Fix the causal problem.
 
-## 7. Decide and loop
+## 8. Decide and loop
 
 ### Greenfield
 
@@ -122,7 +129,7 @@ A candidate replaces the baseline only when it wins load-bearing dimensions with
 
 A hybrid must run through the full workflow as a new candidate.
 
-## 8. Dogfood the process
+## 9. Dogfood the process
 
 After evaluating output, evaluate the workflow itself:
 
@@ -133,7 +140,7 @@ After evaluating output, evaluate the workflow itself:
 
 Change the workflow only for repeated failures or one severe failure. Then rerun the same comparison. The explanation for a change is not evidence that it worked.
 
-## 9. Deliver
+## 10. Deliver
 
 Ordinary rewrite:
 

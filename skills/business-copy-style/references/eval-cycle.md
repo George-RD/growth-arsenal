@@ -28,7 +28,7 @@ Advisories do not fail the build:
 - repeated content-bearing four-word phrases per 1,000 words;
 - paragraphs over the configured word or sentence load;
 - first-person sentence-start rate;
-- repeated contrast scaffolds and page-explaining phrases.
+- contrast scaffolds, including comma-not contrasts, and page-explaining phrases.
 
 Use `scripts/copy-lint.sh --structure FILE` for an opt-in single-copy summary. The paired comparator always includes the structural fields in its text and JSON reports.
 
@@ -47,11 +47,13 @@ The comparison script applies identical thresholds to both versions and reports 
 
 ## Ordinary qualitative gates
 
-1. **Position:** is there a line a reasonable person could disagree with?
-2. **Read-aloud:** would a person say it, or does it sound like a press release or chatbot?
-3. **Specificity:** could a competitor use it unchanged by swapping the brand noun?
+1. **Sentence merit:** does each sentence do one needed job: fact, decision, action, explanation or boundary?
+2. **Paragraph cohesion:** does each paragraph answer one reader question without a polished restatement at the end?
+3. **Position:** is there a line a reasonable person could disagree with?
+4. **Read-aloud:** would a person say it, or does it sound like a press release or chatbot?
+5. **Specificity:** could a competitor use it unchanged by swapping the brand noun?
 
-Any fail means revise and re-measure.
+Any fail means revise from the intended meaning, then re-measure. Do not repair a generated frame by swapping synonyms.
 
 ## High-stakes reader panel
 

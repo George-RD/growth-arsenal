@@ -136,6 +136,14 @@ function count_phrase(haystack,needle,   count,offset,found,rest){
   }
   return count
 }
+function count_comma_not(haystack,   count,rest){
+  count=0; rest=haystack
+  while(match(rest, /,[[:space:]]+not[[:space:]]+(a|an|the|this|that|these|those|my|our|your|their|its|his|her|any|some|no|every|each|one|two|three|four|five|six|seven|eight|nine|ten)[[:space:]]+[a-z]+/)){
+    count++
+    rest=substr(rest,RSTART+RLENGTH)
+  }
+  return count
+}
 function close_run(size){
   if(size>=run_min){ similar_runs++; if(size>longest_run) longest_run=size }
 }
@@ -249,7 +257,7 @@ END{
     }
 
     lower=tolower(raw)
-    contrast_count=0; nc=split(contrast_phrases,contrast,/\|/)
+    contrast_count=count_comma_not(lower); nc=split(contrast_phrases,contrast,/\|/)
     for(i=1;i<=nc;i++) contrast_count+=count_phrase(lower,contrast[i])
     meta_count=0; nm=split(meta_phrases,meta,/\|/)
     for(i=1;i<=nm;i++) meta_count+=count_phrase(lower,meta[i])

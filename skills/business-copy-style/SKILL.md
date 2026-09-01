@@ -1,6 +1,6 @@
 ---
 name: business-copy-style
-description: Use when the task is to write or polish short, customer-facing marketing text itself, including offer wording, ads, outreach, landing pages, headlines, lead magnets, README intros, bios and taglines. Makes copy plain, specific and human, then verifies it with deterministic and qualitative gates. When revising existing or high-stakes copy, preserves the incumbent as a baseline and runs a paired evaluation rather than assuming the rewrite is better. Not for campaign strategy or technical documentation.
+description: Use when the task is to write or polish short customer-facing or executive copy, including offer wording, ads, outreach, landing pages, presentation text, headlines, lead magnets, README intros, bios and taglines. Makes copy plain, specific and human, then verifies it with deterministic and qualitative gates. When revising existing or high-stakes copy, preserves the incumbent as a baseline and runs a paired evaluation rather than assuming the rewrite is better. Not for campaign strategy or long-form technical documentation.
 ---
 
 # Business Copy Style
@@ -11,32 +11,32 @@ This is a workflow, not a bag of banned words. Draft, strip the tells, measure t
 
 ## When to use
 
-Offers, headlines, subheads, ads, outreach, lead magnets, landing pages, README intros, bios and taglines. The `grandslam-offer` and `hundred-million-leads` workshops call this skill before finalising customer-facing lines.
+Offers, headlines, subheads, ads, outreach, lead magnets, landing pages, executive presentation text, README intros, bios and taglines. The `grandslam-offer` and `hundred-million-leads` workshops call this skill before finalising customer-facing lines.
 
-Not for business strategy, campaign planning or technical documentation.
+Not for business strategy, campaign planning or long-form technical documentation.
 
 ## Choose the evaluation path
 
 ### Greenfield copy
 
 ```text
-BRIEF → DRAFT → DE-AI PASSES → MEASURE → JUDGE → DECIDE
-                         ▲                           │
-                         └──────── revise ◄─────────┘
+BRIEF → DRAFT → MERIT AUDIT → DE-AI PASSES → MEASURE → JUDGE → DECIDE
+                                ▲                           │
+                                └──────── revise ◄─────────┘
 ```
 
 ### Existing copy or dogfooding
 
 ```text
 FREEZE BASELINE ─┐
-                 ├→ SAME BRIEF → DRAFT CANDIDATE → MEASURE BOTH
-CANDIDATE ───────┘                                  │
-                                                   ▼
-                                      BLIND PAIRED JUDGEMENT
-                                      │        │          │
-                                   baseline candidate   hybrid
-                                                        │
-                                                        └→ re-evaluate
+                 ├→ SAME BRIEF → DRAFT CANDIDATE → MERIT AUDIT → MEASURE BOTH
+CANDIDATE ───────┘                                                  │
+                                                                   ▼
+                                                      BLIND PAIRED JUDGEMENT
+                                                      │        │          │
+                                                   baseline candidate   hybrid
+                                                                        │
+                                                                        └→ re-evaluate
 ```
 
 Read `references/paired-evaluation.md` whenever existing high-stakes copy is being replaced or the skill is evaluating its own output.
@@ -45,11 +45,12 @@ Read `references/paired-evaluation.md` whenever existing high-stakes copy is bei
 
 1. **Brief:** capture what the copy is, one audience, what they already believe and the action it should drive. Use `templates/copy-brief.md`.
 2. **Draft:** write in the audience's language. One idea per sentence.
-3. **De-AI passes:** run `references/de-ai-prose.md` in order.
-4. **Measure:** run `scripts/copy-lint.sh`.
-5. **Judge:** run the position, read-aloud and specificity tests in `references/eval-cycle.md`.
-6. **Reader panel:** for high-stakes copy, run the skimmer, sceptic and wrong-fit readers blind.
-7. **Decide:** ship only when the mechanical and qualitative gates pass.
+3. **Merit audit:** strip formatting and read every sentence alone. Name its job: fact, decision, action, explanation or necessary boundary. Delete sentences with no job. Then check that each paragraph answers one reader question without restating itself.
+4. **De-AI passes:** run `references/de-ai-prose.md` in order.
+5. **Measure:** run `scripts/copy-lint.sh`.
+6. **Judge:** run the sentence-merit, paragraph-cohesion, position, read-aloud and specificity tests in `references/eval-cycle.md`.
+7. **Reader panel:** for high-stakes copy, run the skimmer, sceptic and wrong-fit readers blind.
+8. **Decide:** ship only when the mechanical and qualitative gates pass.
 
 Full detail: `references/workflow.md`.
 
@@ -58,6 +59,7 @@ Full detail: `references/workflow.md`.
 - **Default hard gate: Flesch-Kincaid grade ≤6.** Aim around grade 5 for broad consumer copy when the product language still sounds natural. Do not damage a true product term merely to lower a score.
 - **Take a position.** If every reasonable person agrees with the line, it is probably noise.
 - **Be specific.** Prefer the named buyer, problem, action, number or mechanism over a category adjective.
+- **Make every sentence work.** Keep it only when the reader needs its fact, decision, action, explanation or boundary.
 - **Vary sentence length.** Mix short lines with longer explanatory ones.
 - **Use zero em dashes in short copy.** Count them rather than relying on impression.
 - **Choose one spelling variant and hold it.** Default to British English unless project settings say otherwise.

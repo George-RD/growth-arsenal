@@ -7,8 +7,15 @@ import unittest
 from pathlib import Path
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "copy-compare.py"
-ROOT = Path(__file__).resolve().parents[3]
-FIXTURES = ROOT / "evaluations" / "fixtures"
+POSITIVE_COPY = (
+    "I help owners fix late books. I help owners fix late books. "
+    "I help owners fix late books. Here is what this means. "
+    "It is not just cleanup, it is control. Owners see the cash. Cash stops hiding."
+)
+NEGATIVE_COPY = (
+    "Late books hide cash. Owners waste hours chasing receipts every Friday. "
+    "The service fixes the backlog, then gives the team a simple weekly routine."
+)
 spec = importlib.util.spec_from_file_location("copy_compare", SCRIPT)
 copy_compare = importlib.util.module_from_spec(spec)
 assert spec.loader
@@ -97,9 +104,7 @@ class CopyCompareTests(unittest.TestCase):
             self.assertEqual(copy_compare.read_copy(path), "Offer test.\nFix it early.")
 
     def test_positive_fixture_exposes_each_structural_advisory(self):
-        metrics = copy_compare.analyse(
-            (FIXTURES / "structural-advisory-positive.txt").read_text(encoding="utf-8")
-        )
+        metrics = copy_compare.analyse(POSITIVE_COPY)
         self.assertGreater(metrics.duplicate_sentence_instances, 0)
         self.assertGreater(metrics.repeated_two_word_starter_instances, 0)
         self.assertGreater(metrics.similar_sentence_length_run_count, 0)
@@ -109,10 +114,30 @@ class CopyCompareTests(unittest.TestCase):
         self.assertGreater(metrics.contrast_scaffold_count, 0)
         self.assertGreater(metrics.meta_phrase_count, 0)
 
-    def test_negative_fixture_avoids_structural_alerts_and_varies_rhythm(self):
+    def test_comma_not_is_a_contrast_scaffold(self):
         metrics = copy_compare.analyse(
-            (FIXTURES / "structural-advisory-negative.txt").read_text(encoding="utf-8")
+            "The case supports a pilot charter, not an ROI claim.",
+            max_grade=20,
+            max_sentence=30,
         )
+        self.assertEqual(metrics.contrast_scaffold_count, 1)
+        self.assertTrue(
+            any(
+                example.startswith("comma-not antithesis")
+                for example in metrics.contrast_scaffold_examples
+            )
+        )
+
+    def test_comma_not_gerund_is_not_a_contrast_scaffold(self):
+        metrics = copy_compare.analyse(
+            "We asked, not knowing the answer.",
+            max_grade=20,
+            max_sentence=30,
+        )
+        self.assertEqual(metrics.contrast_scaffold_count, 0)
+
+    def test_negative_fixture_avoids_structural_alerts_and_varies_rhythm(self):
+        metrics = copy_compare.analyse(NEGATIVE_COPY)
         self.assertEqual(metrics.duplicate_sentence_instances, 0)
         self.assertEqual(metrics.repeated_two_word_starter_instances, 0)
         self.assertEqual(metrics.similar_sentence_length_run_count, 0)

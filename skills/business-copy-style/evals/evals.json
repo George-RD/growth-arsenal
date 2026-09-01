@@ -45,6 +45,17 @@
         "The response does not treat structural counts as hard gates or proof of AI authorship.",
         "The response gives a baseline, candidate, hybrid or revise-direction decision tied to audience clarity and product truth."
       ]
+    },
+    {
+      "id": 4,
+      "prompt": "Audit and repair this executive-slide line on its own merit: 'The case supports a pilot charter, not an ROI claim.' Preserve the decision boundary. Explain the sentence's job before rewriting it.",
+      "expected_output": "A sentence-level merit audit that identifies the comma-not tidy antithesis, states the boundary job, and rebuilds the meaning as direct plain statements.",
+      "expectations": [
+        "The response names the sentence job as a decision or claim boundary.",
+        "The response flags the 'X, not Y' frame instead of passing it because the words and reading level are simple.",
+        "The replacement preserves both meanings: draft the charter and keep ROI unproven.",
+        "The replacement does not use another tidy contrast frame."
+      ]
     }
   ]
 }

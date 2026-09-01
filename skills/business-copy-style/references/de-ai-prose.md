@@ -6,7 +6,27 @@ Run this checklist before finalizing any customer-facing copy.
 
 **Do not write for the detector.** Every structural signal can be a false positive. A deliberate refrain, legal wording, a short sample or a first-person story may trigger a count for good reason. Use the counts to find passages worth reading again. Never treat them as proof of AI authorship or weaken true copy merely to make the numbers fall.
 
-## 1. Inflated Significance
+## 1. Sentence and Paragraph Merit
+
+Run this before hunting for vocabulary tells. Remove the heading, layout and neighbouring sentences. Read each sentence alone.
+
+For each sentence:
+
+1. Name its one job: fact, decision, action, explanation or necessary boundary.
+2. Write the plain meaning in your own words.
+3. Delete it if the reader loses nothing.
+4. Rebuild it from the meaning when the sentence relies on polish, symmetry or negation to sound useful. Do not swap synonyms inside the same generated frame.
+
+Flag tidy contrasts even when they appear once: `X, not Y`, `not just X`, `X rather than Y`, balanced opposites and neat two-part corrections. A factual correction can stay when the contrast itself carries the fact. Otherwise split it into direct statements.
+
+Example:
+
+- Generated frame: `The case supports a pilot charter, not an ROI claim.`
+- Plain repair: `Draft the pilot charter. ROI still needs proof.`
+
+Then read each paragraph as a unit. It must answer one reader question in a useful order. Delete the closing sentence when it only restates the paragraph with a polished takeaway.
+
+## 2. Inflated Significance
 
 Cut or replace:
 
@@ -15,7 +35,7 @@ Cut or replace:
 - "evolving landscape", "indelible mark", "deeply rooted"
 - "boasts", "showcases", "exemplifies", "enhancing its"
 
-## 2. Formulaic Structure
+## 3. Formulaic Structure
 
 Fix:
 
@@ -39,7 +59,7 @@ These phrases narrate the page instead of helping the reader:
 
 One can be useful. Repeated use is a prompt to remove the signposting and state the point directly.
 
-## 3. Overused AI Vocabulary
+## 4. Overused AI Vocabulary
 
 Tier 1 (cut immediately):
 
@@ -49,17 +69,17 @@ Tier 2 (suspicious in clusters of 3+):
 
 - robust, seamless, cutting-edge, innovative, comprehensive, pivotal, nuanced, compelling, transformative, bolster, underscore, foster, imperative, intricate, overarching, unprecedented
 
-## 4. Grammar Patterns
+## 5. Grammar Patterns
 
 Fix:
 
 - Copula avoidance: "serves as" / "stands as" / "functions as" clustering. Use "is" / "are".
 - Superficial -ing phrases: "highlighting...", "underscoring...", "showcasing..."
-- Negative parallelisms and contrast scaffolds: "It's not just X, it's Y", "I'm not X. I'm Y." or "Not only X, but Y" more than once per short piece.
+- Tidy contrasts and negative framing: flag `X, not Y`, "It's not just X, it's Y", "I'm not X. I'm Y." and "Not only X, but Y" even once in short copy. Keep a factual correction only when the contrast itself carries necessary meaning.
 - False ranges: "from X to Y" where X and Y aren't on a real scale.
 - Synonym cycling (elegant variation): "the offer... the deal... the package... the bundle" in one passage. Pick one word and repeat it. Repetition beats fake variety.
 
-## 5. Rhythm and Style
+## 6. Rhythm and Style
 
 - Vary sentence length: add short punchy sentences under 8 words.
 - Check runs of similarly sized sentences. Clean vocabulary can still sound generated when every line has the same beat.
@@ -70,7 +90,7 @@ Fix:
 - Remove emoji and inline-header lists (`- **X:** ...`).
 - Cut crutch transitions: "Moreover", "Furthermore", "Additionally", "That said", "Moving forward", "When it comes to". Usually just start the next sentence, or use "but" / "so" / "because".
 
-## 6. Hedging, Filler, and Vague Attributions
+## 7. Hedging, Filler, and Vague Attributions
 
 Cut:
 
@@ -82,14 +102,14 @@ Cut:
 
 Either name the source with a date or delete the claim.
 
-## 7. Chatbot Artifacts
+## 8. Chatbot Artifacts
 
 Delete:
 
 - "Great question!", "I hope this helps!", "Let me know if you want me to expand!"
 - "Certainly!", "Absolutely!"
 
-## 8. Personal-Copy Structural Tells
+## 9. Personal-Copy Structural Tells
 
 These pass word-level checks but still sound AI:
 
@@ -101,7 +121,7 @@ These pass word-level checks but still sound AI:
 - Ending with a dare or tricolon after repeated use.
 - Formulaic bio rhythm.
 
-## 9. Missing Human Texture
+## 10. Missing Human Texture
 
 Add if absent:
 
@@ -110,7 +130,7 @@ Add if absent:
 - A lived detail or example.
 - A first-person line when the context fits.
 
-## 10. Output Rule
+## 11. Output Rule
 
 After rewriting, include a short **Changes** table:
 
