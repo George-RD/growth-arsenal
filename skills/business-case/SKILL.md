@@ -30,8 +30,8 @@ Do the economics and decision logic before writing the deck.
    For every material input record:
    - value or range;
    - unit and period;
-   - status: observed, sourced estimate, assumption or scenario;
-   - owner/source;
+   - claim status: observed, estimate, assumption or scenario;
+   - source or owner, recorded separately from status;
    - why the assumption is reasonable;
    - what evidence would change it.
 
@@ -79,8 +79,17 @@ Do the economics and decision logic before writing the deck.
 
    *Done when:* every pilot measure maps to a decision-driving assumption or operational risk.
 
-8. **Hand off to writing**
-   Pass the decision, model, assumptions and selected evidence to `writing-core`, then `executive-writing`. Use `business-copy-style` only after the first useful prose exists.
+8. **Hand off to writing when prose is requested**
+   The decision model can run standalone. When the user wants a memo, report or presentation, resolve `writing-core` and `executive-writing` by skill name at this point.
+
+   If either is unavailable:
+   - keep the completed decision model intact;
+   - show the relevant install command:
+     - `npx skills add George-RD/growth-arsenal --skill writing-core`
+     - `npx skills add George-RD/growth-arsenal --skill executive-writing`
+   - pause only the prose handoff rather than recreating the missing skill locally.
+
+   When both are available, pass the decision, model, assumptions and selected evidence to `writing-core`, then `executive-writing`. Use `business-copy-style` only after the first useful prose exists.
 
    *Done when:* the presentation is an expression of the model rather than the place where the model is invented.
 

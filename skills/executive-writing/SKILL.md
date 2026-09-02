@@ -7,7 +7,17 @@ description: Business and executive prose for managers, stakeholders, presentati
 
 Turn a correct factual kernel into writing a manager can skim, hear and repeat.
 
-Read `writing-core` first. This skill changes **delivery**, not the underlying facts.
+## Companion resolution
+
+`writing-core` is a hard dependency because this skill adapts meaning; it should not invent the underlying meaning itself. At first use, resolve `writing-core` by skill name and read it.
+
+If it is unavailable:
+
+1. explain that the meaning-first generation layer is missing;
+2. show `npx skills add George-RD/growth-arsenal --skill writing-core`;
+3. pause the prose-generation path until it is available.
+
+Do not recreate `writing-core` locally. A user can still use this file as reference when editing already-approved prose, but do not claim the full workflow ran.
 
 ## 1. Define the decision surface
 
@@ -85,6 +95,8 @@ Common failure patterns:
 
 ## 6. Final review
 
-If the text is high-stakes or externally judged, run `business-copy-style` as the **final critic**. For internal technical/executive copy, use its structural review and an audience-appropriate readability threshold rather than forcing consumer-grade vocabulary.
+For high-stakes or externally judged text, resolve `business-copy-style` by skill name as a quality dependency. If it is unavailable, the executive draft can still be delivered, but label the final de-slop/copy review as **not verified** rather than imitating that skill's method.
+
+When available, use its structural review and an audience-appropriate readability threshold rather than forcing consumer-grade vocabulary.
 
 A good executive draft is allowed to be plain, slightly uneven and specific. It does not need a polished takeaway on every section.

@@ -1,14 +1,16 @@
 {
-  "prompts": [
+  "skill_name": "writing-core",
+  "evals": [
     {
-      "name": "meaning-before-polish",
+      "id": 0,
       "prompt": "Turn these mixed technical notes into a short wiki explanation. First reason from a factual kernel. Notes: (1) Server logs show receiver A sent 1,240 GNSS messages on 18 Aug 2026; this is observed from server.log. (2) Neil estimates the wider mitigation programme reduced GNSS-related lost time by about 30%; the calculation method is not yet available. (3) We do not know how much of that recovery is attributable to the Holocron dashboard. (4) The system uses NMEA 0183 messages and Redis Streams; keep those technical terms because they are precise. Preserve the distinction between claim status and provenance.",
-      "assertions": [
-        "Builds or clearly reasons from a factual kernel before polished prose",
-        "Keeps the observed message count, the sourced 30% estimate and the attribution unknown distinct",
-        "Records claim status separately from provenance",
-        "Uses stable terminology and does not invent connective claims",
-        "Keeps NMEA 0183 and Redis Streams while simplifying the surrounding language"
+      "expected_output": "A factual kernel plus a short wiki explanation that preserves the observed count, sourced programme estimate, attribution unknown, provenance, and necessary technical terms without inventing causal links.",
+      "expectations": [
+        "The response builds or explicitly reasons from a factual kernel before polished prose.",
+        "The observed message count, the 30% estimate and the attribution unknown remain separate claims.",
+        "Claim status is recorded separately from provenance; the 30% remains an estimate even though it has a named source.",
+        "The response keeps NMEA 0183 and Redis Streams while simplifying surrounding language.",
+        "The response does not invent evidence that Holocron caused the wider programme recovery."
       ]
     }
   ]

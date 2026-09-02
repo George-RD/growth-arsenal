@@ -115,6 +115,6 @@ The profile may store:
 
 Do not store sensitive sample text merely to justify the rule. If a later audit needs the original evidence, return to the approved source rather than duplicating it into the profile.
 
-For George's wiki, propose changes to `notes/george-voice.md`; do not silently rewrite the canonical profile.
+If the workspace already defines a canonical voice-profile path, propose changes there. If it does not, return the proposed profile in the current response and ask where the user wants it stored before creating a durable file. Do not assume an author-specific path.
 
 *Done when:* the profile is shorter than the evidence behind it, contains no unnecessary raw samples, and can guide `writing-core` without forcing one genre onto another.
