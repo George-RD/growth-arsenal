@@ -1,0 +1,14 @@
+{
+  "prompts": [
+    {
+      "name": "cross-genre-profile",
+      "prompt": "Infer a voice profile from user chat, an edited email, a presentation rewrite and an approved social post.",
+      "assertions": [
+        "Separates stable preferences from genre-specific behaviour",
+        "Weights user-approved and user-edited samples above generic examples",
+        "Uses rejected-draft versus user-rewrite pairs to infer generative causes",
+        "Does not copy distinctive phrases as style rules"
+      ]
+    }
+  ]
+}

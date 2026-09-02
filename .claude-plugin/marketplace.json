@@ -1,15 +1,15 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "growth-arsenal",
-  "description": "George's business growth workshops: offers, leads, and copy — Hormozi-methodology agent teams for Claude Code",
+  "description": "George's business growth and writing skill pack for Claude Code",
   "owner": {
     "name": "George-RD"
   },
   "plugins": [
     {
       "name": "growth-arsenal",
-      "description": "Business growth workshops with adversarial agent teams: build irresistible offers, complete lead-generation systems, and plain-language customer-facing copy using Alex Hormozi's $100M Offers and $100M Leads methodologies.",
-      "version": "1.0.0",
+      "description": "Business growth workshops and composable writing skills for meaning-first prose, executive writing, business cases, voice calibration and copy review.",
+      "version": "1.1.0",
       "author": { "name": "George-RD" },
       "source": "./",
       "category": "business"

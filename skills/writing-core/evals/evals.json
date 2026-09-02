@@ -1,0 +1,14 @@
+{
+  "prompts": [
+    {
+      "name": "meaning-before-polish",
+      "prompt": "Turn mixed technical notes into a wiki explanation. The notes include observed facts, estimates and one unknown.",
+      "assertions": [
+        "Builds or clearly reasons from a factual kernel before polished prose",
+        "Keeps observed facts, estimates and unknowns distinct",
+        "Uses stable terminology and does not invent connective claims",
+        "Allows necessary technical terms while simplifying surrounding language"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "prompts": [
+    {
+      "name": "sparse-decision-deck",
+      "prompt": "Write a management slide from a detailed technical finding and several caveats.",
+      "assertions": [
+        "Puts the decision-relevant conclusion first",
+        "Leaves method and secondary caveats out of visible slide copy when notes can carry them",
+        "Uses concrete evidence rather than strategic-sounding abstraction",
+        "Reads naturally aloud"
+      ]
+    }
+  ]
+}

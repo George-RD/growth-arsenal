@@ -1,0 +1,15 @@
+{
+  "prompts": [
+    {
+      "name": "messy-data-investment-case",
+      "prompt": "Build a business case where value data are incomplete but subject-matter estimates and cost proxies exist.",
+      "assertions": [
+        "Uses labelled assumptions instead of waiting for perfect data",
+        "Builds low, base and high cases without selecting assumptions to force a positive result",
+        "Calculates break-even or switching values",
+        "Separates programme value from component attribution",
+        "Frames the pilot as validation of decision-driving assumptions"
+      ]
+    }
+  ]
+}
