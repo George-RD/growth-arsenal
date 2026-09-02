@@ -119,7 +119,8 @@ Before prose, produce a compact decision model containing:
 - assumption ledger;
 - appraisal horizon and cost basis;
 - low/base/high economics;
-- break-even or switching value;
+- break-even value;
+- switching value;
 - major risks and ownership;
 - recommendation;
 - next evidence to replace.

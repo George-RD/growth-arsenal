@@ -34,7 +34,8 @@ Phase 5: Rule of 100 → Daily execution plan + tracking framework
 - A phase only passes when no agent flags a critical issue.
 - Use WebSearch at Phase 0 and whenever market/platform data would strengthen a decision.
 - Personas **react to outreach as real recipients** in Phase 3 — not just reviewers.
-- `business-copy-style` is a quality dependency. Resolve it by skill name only at the first point where customer-facing copy must be produced or approved; if unavailable, follow the Copy-Style Gate install-or-degraded flow and never claim the missing gate passed.
+- `writing-core` is a hard dependency only when customer-facing language must first be generated. Resolve it at that point; if unavailable, follow the Writing Generation Gate and pause only the copy-generation path.
+- `business-copy-style` is a quality dependency. Resolve it by skill name after a useful candidate exists; if unavailable, follow the Copy-Style Gate install-or-degraded flow and never claim the missing gate passed.
 - Use radical candor throughout. Generic = dead on arrival.
 
 ## The Agent Team
@@ -68,12 +69,37 @@ Phase outputs also use templates:
 - `templates/outreach-scripts.md` — warm, cold, paid, and content skeletons for Phase 3
 - `templates/tracking-dashboard.md` — daily checklist, leading/lagging indicators, and weekly milestones for Phase 5
 
-Instruct the user to copy the relevant template, fill the brackets, and apply the Copy-Style Gate below before finalizing any customer-facing text.
+Instruct the user to copy the relevant template, fill the brackets, and apply the Writing Generation Gate followed by the Copy-Style Gate below before finalizing any customer-facing text.
 Optionally, maintain `{project-name}-decisions.md` with timestamped, type-tagged entries (DECISION, CORRECTION, PREFERENCE) for key choices and corrections. Keep entries free of private business details. The plugin-feedback skill can attach this, redacted, to feedback.
+
+## Writing Generation Gate
+
+At the first point where the workshop must generate customer-facing language — lead magnet names/descriptions, calls-to-action, outreach scripts, ad copy, content posts, referral asks, affiliate email, landing/README text, or final blueprint positioning — resolve `writing-core` by skill name. Do not preflight it during discovery, market research, offer audit or channel strategy.
+
+If `writing-core` cannot be resolved:
+
+1. explain that the meaning-first generation layer is unavailable;
+2. show the standard install command:
+
+   ```sh
+   npx skills add George-RD/growth-arsenal --skill writing-core
+   ```
+
+3. pause only the customer-facing generation path and preserve the approved strategy/phase state;
+4. resume from the same phase after the skill becomes available. Do not recreate `writing-core` locally.
+
+When `writing-core` is available:
+
+1. read it;
+2. build the factual kernel from the approved offer/phase decisions, market evidence, target persona, claim boundaries and action the asset must drive;
+3. generate the first useful candidate from that kernel;
+4. pass the resulting candidate to the Copy-Style Gate below.
+
+Do not generate scripts, ads, lead magnets or posts first and rely on a later anti-slop pass to repair their structure.
 
 ## Copy-Style Gate
 
-At the first point where the workshop must produce or approve customer-facing copy — lead magnet names/descriptions, calls-to-action, outreach scripts, ad copy, content posts, referral asks, affiliate email, landing/README text, or final blueprint positioning — resolve `business-copy-style` by skill name. Do not preflight it during discovery, market research, offer audit, channel strategy, or other work that does not yet need customer-facing copy.
+After `writing-core` has produced a useful customer-facing candidate, resolve `business-copy-style` by skill name. Do not preflight it during discovery, market research, offer audit, channel strategy, or other work that does not yet need customer-facing copy.
 
 If `business-copy-style` cannot be resolved:
 

@@ -9,6 +9,16 @@ Write from meaning, not from a polished first draft.
 
 This skill owns the **generation layer**. It should run before genre-specific writing skills and before `business-copy-style`. A downstream workflow can change the audience, format or tone, but it should inherit the same facts, terms and causal structure.
 
+## Companion resolution
+
+Check a companion only when its capability is first needed.
+
+- **`executive-writing` is a hard dependency for executive, manager or presentation delivery.** If it is missing, keep the factual kernel, show `npx skills add George-RD/growth-arsenal --skill executive-writing`, and pause only that delivery path until it is available.
+- **`business-case` is a hard dependency when the task needs an investment/decision model and no completed model has been supplied.** If it is missing, keep the source evidence and kernel work, show `npx skills add George-RD/growth-arsenal --skill business-case`, and pause only the business-case modelling path.
+- **`business-copy-style` is a quality dependency for customer-facing short copy.** If it is missing, explain that the final de-slop/copy-quality gate cannot be verified, show `npx skills add George-RD/growth-arsenal --skill business-copy-style`, and ask whether to install it or continue degraded. If the user continues degraded, label the affected copy `degraded/unverified` and do not imitate the missing skill's full method.
+
+Do not duplicate a missing companion's method as a local fallback.
+
 ## Sequence
 
 1. **Build the factual kernel**

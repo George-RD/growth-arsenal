@@ -36,7 +36,8 @@ Phase 5  Enhancement     → bonuses, scarcity, urgency, guarantee and naming
 - Changing an upstream decision invalidates dependent phases. Never keep presenting them as approved.
 - Persist the result after every material state transition.
 - `growth-arsenal-workspace` is a hard dependency. Resolve it by name at the first workspace operation; if unavailable, pause only the workspace-dependent path and follow the Phase 0 install/resume flow below.
-- `business-copy-style` is a quality dependency. Resolve it by name at the first customer-facing copy gate; if unavailable, follow the Copy gate install-or-degraded flow and keep the affected copy unverified until it is rechecked.
+- `writing-core` is a hard dependency at the first customer-facing generation step. Resolve it by name before drafting offer names, pitches, guarantees or other copy; if unavailable, pause only the copy-generation path and follow the Writing generation gate below.
+- `business-copy-style` is a quality dependency. Resolve it by name after a useful customer-facing candidate exists; if unavailable, follow the Copy gate install-or-degraded flow and keep the affected copy unverified until it is rechecked.
 - Generated Markdown and HTML are views. Never hand-edit them.
 
 ## Declarative workspace
@@ -181,9 +182,34 @@ The reviewers do not see each other's output. After they return, the main agent 
 
 The gate counts distinct reviewers per key. Scores inform judgement but never override an open critical issue.
 
+## Writing generation gate
+
+At the first point where the workshop must generate customer-facing language, resolve `writing-core` by skill name. Do not preflight it during discovery or strategy work that has not reached copy.
+
+If `writing-core` cannot be resolved:
+
+1. explain that the meaning-first generation layer is unavailable;
+2. show the standard install command:
+
+   ```sh
+   npx skills add George-RD/growth-arsenal --skill writing-core
+   ```
+
+3. pause only the customer-facing copy-generation path; preserve the approved strategy and workspace state;
+4. resume from the same phase after the skill is available. Do not imitate `writing-core` as a local fallback.
+
+When `writing-core` is available:
+
+1. read it;
+2. build the factual kernel from approved phase decisions, research evidence, assumptions, the target buyer and the action the line must drive;
+3. generate the first useful candidate through that kernel;
+4. pass the resulting candidate to the Copy gate below.
+
+Do not generate polished offer names, guarantee names, headlines or pitches first and ask the copy critic to repair their underlying frame later.
+
 ## Copy gate
 
-At the first point where the workshop must produce or approve customer-facing copy, resolve `business-copy-style` by skill name. Do not prompt for it during discovery or strategy work that does not yet need customer-facing copy.
+At the first point where the workshop must approve customer-facing copy, resolve `business-copy-style` by skill name. Do not prompt for it during discovery or strategy work that does not yet need customer-facing copy.
 
 If `business-copy-style` cannot be resolved:
 

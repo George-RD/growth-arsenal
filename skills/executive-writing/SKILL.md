@@ -95,7 +95,14 @@ Common failure patterns:
 
 ## 6. Final review
 
-For high-stakes or externally judged text, resolve `business-copy-style` by skill name as a quality dependency. If it is unavailable, the executive draft can still be delivered, but label the final de-slop/copy review as **not verified** rather than imitating that skill's method.
+For high-stakes or externally judged text, resolve `business-copy-style` by skill name as a quality dependency.
+
+If it is unavailable:
+
+1. explain that the final de-slop/copy-quality gate cannot be verified;
+2. show `npx skills add George-RD/growth-arsenal --skill business-copy-style`;
+3. ask whether to install it or continue degraded;
+4. if the user continues degraded, deliver the executive draft labelled **degraded/unverified** and do not imitate the missing skill's method.
 
 When available, use its structural review and an audience-appropriate readability threshold rather than forcing consumer-grade vocabulary.
 
