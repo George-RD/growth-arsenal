@@ -17,13 +17,16 @@ This skill owns the **generation layer**. It should run before genre-specific wr
    - action, state or claim;
    - object or consequence;
    - number, date or example when material;
-   - evidence status: observed, sourced, estimated, assumed or unknown.
+   - **claim status**: observed, estimated, assumed or unknown;
+   - **provenance**: the named source, source type or `UNAVAILABLE`.
+
+   Status and provenance are separate. A sourced estimate remains `ESTIMATED`; its source is recorded independently. An observed claim can also have a source.
 
    Use one topic per statement. Keep the same term for the same thing. Do not add transitions, slogans or rhetorical framing yet.
 
    Read [`references/factual-kernel.md`](references/factual-kernel.md) when the source is technical, uncertain, long or contradictory.
 
-   *Done when:* another competent reader could reconstruct the argument without any stylistic prose.
+   *Done when:* another competent reader could reconstruct the argument without any stylistic prose, and every material claim has both status and provenance.
 
 2. **Choose the reader and genre**
    Decide what the reader already knows, what they need to understand, and what they should do next. Pick only the guidance needed for this surface:
@@ -72,7 +75,7 @@ This skill owns the **generation layer**. It should run before genre-specific wr
 - **Specific before general.** Name the vessel, customer, system, number, event or decision when it matters.
 - **Stable terms.** Repetition is better than elegant variation when two words might imply two concepts.
 - **Causality must be earned.** Use `because`, `so`, `if`, `when` or an explicit mechanism only when the source supports that relationship.
-- **Uncertainty is data.** Separate the claim from its confidence or evidence status.
+- **Uncertainty is data.** Separate the claim, its status and its provenance.
 - **Compression has a floor.** Shorten until the next cut would remove meaning or make the reader infer a missing relationship.
 - **Technical language is allowed.** Simplify the sentence around a necessary term instead of replacing the term with a vague one.
 - **No universal cadence.** Lists, short sentences, long sentences, fragments and rhetorical questions are all tools; none is a default template.

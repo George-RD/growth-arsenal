@@ -17,11 +17,11 @@ Write fragments or terse sentences. Do not optimise style.
 | Object | What does the action affect? |
 | Consequence | Why does it matter, if the source supports that link? |
 | Measure | What number, unit, date, range or example matters? |
-| Status | Observed, sourced, estimated, assumed, scenario, unknown? |
-| Source | Where did it come from? |
+| Status | Observed, estimated, assumed or unknown? |
+| Provenance | What named source or source type supports it? Use `UNAVAILABLE` when none is available. |
 | Decision use | What decision or reader question does this support? |
 
-Not every claim needs every field.
+Every **material** claim requires both Status and Provenance. A sourced estimate is still `ESTIMATED`; provenance records who or what supplied it. Use `UNAVAILABLE` rather than silently leaving provenance blank. Non-material connective notes do not need the full record.
 
 ## Controlled-English-inspired checks
 
@@ -45,9 +45,9 @@ Weak polished draft:
 
 Kernel:
 
-- Holocron shows live GNSS interference to the ROC.
-- ROC operators use it during vessel work. `OBSERVED`
-- Live evidence may reduce time spent diagnosing events. `TO MEASURE`
-- Live evidence may support earlier restart after the signal stabilises. `TO MEASURE`
+- Holocron shows live GNSS interference to the ROC. `OBSERVED` · source: live system / project record
+- ROC operators use it during vessel work. `OBSERVED` · source: ROC operating evidence
+- Live evidence may reduce time spent diagnosing events. `ESTIMATED` · source: operator hypothesis; measurement unavailable
+- Live evidence may support earlier restart after the signal stabilises. `ESTIMATED` · source: operator hypothesis; measurement unavailable
 
 Only after the kernel is correct should a genre skill decide what belongs in the final prose.

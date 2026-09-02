@@ -50,7 +50,8 @@ The slide is evidence for the speaker, not a transcript.
 
 - Title: direct takeaway or question. Full sentence when natural; a short label is fine when the visual carries the claim.
 - Body: the minimum evidence needed to understand or remember the point.
-- Speaker notes: method, caveats, source detail and secondary arguments.
+- **Decision-changing caveats stay visible.** If a caveat changes the recommendation, applicability, confidence level or decision threshold, put it on the slide beside the claim or number it qualifies.
+- Speaker notes: method, source detail and secondary caveats that do not change the decision.
 - Keep one main visual or calculation when it can replace prose.
 - If the audience must read a paragraph, stop speaking until they have read it.
 
@@ -62,7 +63,7 @@ Make the argument stand alone. Use short sections organised by reader questions,
 
 Use outcome, current state, blocker or decision, then next action. Do not narrate all activity.
 
-*Done when:* the information density fits how the surface is consumed.
+*Done when:* the information density fits how the surface is consumed and no decision-changing qualification is hidden from the reader.
 
 ## 5. Preserve natural corporate language
 
@@ -76,7 +77,8 @@ Common failure patterns:
 - symmetrical `X, not Y` conclusions;
 - three-item lists created for rhythm;
 - repeated status labels that turn every slide into a template;
-- caveats pulled onto the slide because the writer is afraid to state a working estimate;
+- secondary caveats pulled onto the slide merely to sound careful;
+- decision-changing caveats hidden in notes to keep the slide tidy;
 - headlines that describe the page instead of making the point.
 
 *Done when:* the copy can be spoken without translating it back into ordinary English.

@@ -2,13 +2,14 @@
   "prompts": [
     {
       "name": "messy-data-investment-case",
-      "prompt": "Build a business case where value data are incomplete but subject-matter estimates and cost proxies exist.",
+      "prompt": "Build the decision model for this internal investment case before writing any deck copy. Facts and estimates: annual software hosting/support is expected to be AED 120,000, sourced from the current run-cost estimate. A Commercial proxy values productive vessel time at AED 12,000 per hour; Finance has not yet approved that measure. DOME data are incomplete, but two recent projects recorded 18 and 31 GNSS-affected productive hours. A technical lead estimates the wider mitigation programme recovers about 30% of GNSS-affected time; this includes antennas, procedures and software, so Holocron's share is unknown. Options are hold current state, controlled expansion, or a bounded regional pilot. Build credible low/base/high cases, show break-even and a switching value, and identify what the pilot should measure. Do not choose assumptions merely to make the pilot positive.",
       "assertions": [
-        "Uses labelled assumptions instead of waiting for perfect data",
-        "Builds low, base and high cases without selecting assumptions to force a positive result",
-        "Calculates break-even or switching values",
-        "Separates programme value from component attribution",
-        "Frames the pilot as validation of decision-driving assumptions"
+        "Uses labelled assumptions and proxies instead of waiting for perfect data",
+        "Builds low, base and high cases from credible adverse, best-current and favourable assumptions",
+        "Calculates the protected hours required to cover the AED 120,000 incremental cost",
+        "Shows at least one switching value tied to a decision-driving assumption",
+        "Keeps the 30% programme recovery separate from Holocron attribution",
+        "Frames the pilot as validation of decision-driving assumptions rather than discovery of value from zero"
       ]
     }
   ]

@@ -2,12 +2,13 @@
   "prompts": [
     {
       "name": "meaning-before-polish",
-      "prompt": "Turn mixed technical notes into a wiki explanation. The notes include observed facts, estimates and one unknown.",
+      "prompt": "Turn these mixed technical notes into a short wiki explanation. First reason from a factual kernel. Notes: (1) Server logs show receiver A sent 1,240 GNSS messages on 18 Aug 2026; this is observed from server.log. (2) Neil estimates the wider mitigation programme reduced GNSS-related lost time by about 30%; the calculation method is not yet available. (3) We do not know how much of that recovery is attributable to the Holocron dashboard. (4) The system uses NMEA 0183 messages and Redis Streams; keep those technical terms because they are precise. Preserve the distinction between claim status and provenance.",
       "assertions": [
         "Builds or clearly reasons from a factual kernel before polished prose",
-        "Keeps observed facts, estimates and unknowns distinct",
+        "Keeps the observed message count, the sourced 30% estimate and the attribution unknown distinct",
+        "Records claim status separately from provenance",
         "Uses stable terminology and does not invent connective claims",
-        "Allows necessary technical terms while simplifying surrounding language"
+        "Keeps NMEA 0183 and Redis Streams while simplifying the surrounding language"
       ]
     }
   ]

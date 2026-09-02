@@ -2,10 +2,11 @@
   "prompts": [
     {
       "name": "sparse-decision-deck",
-      "prompt": "Write a management slide from a detailed technical finding and several caveats.",
+      "prompt": "Write one management slide from this finding: a live dashboard shows GNSS interference to the ROC. Operators say it helps them diagnose events and judge when signals have stabilised. Neil estimates the wider GNSS mitigation programme recovered about 30% of GNSS-affected time, but that estimate combines antennas, procedures and software. Commercial has not yet approved a cash value per recovered hour. The current decision is whether to fund a bounded next phase, not fleet-wide scale. Visible caveat: the 30% is programme-level and must not be attributed to the dashboard. Secondary caveat for notes: the exact period used for Neil's estimate still needs confirmation.",
       "assertions": [
         "Puts the decision-relevant conclusion first",
-        "Leaves method and secondary caveats out of visible slide copy when notes can carry them",
+        "Keeps the programme-level attribution caveat visible because it changes interpretation of the number",
+        "Leaves the secondary period-method caveat in notes rather than crowding visible copy",
         "Uses concrete evidence rather than strategic-sounding abstraction",
         "Reads naturally aloud"
       ]
