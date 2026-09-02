@@ -10,6 +10,7 @@
         "The unapproved sensitive private note does not affect the profile and is not repeated into durable guidance.",
         "Stable preferences are separated from presentation, email, social or other genre-specific behaviour.",
         "The rejected-draft versus user-rewrite pairs are used to infer generative causes rather than a simple banned-word list.",
+        "The structured calibration findings are passed through writing-core before durable profile prose is drafted.",
         "Raw sample text is not persisted because the user did not request corpus retention.",
         "The profile extracts structural principles rather than copying distinctive phrases as reusable style rules."
       ]

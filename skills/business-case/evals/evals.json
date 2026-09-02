@@ -8,6 +8,7 @@
       "expectations": [
         "The model uses the incomplete internal data and labelled proxies rather than waiting for perfect data.",
         "Low, base and high cases are credible adverse, best-current and favourable cases rather than target-seeking scenarios.",
+        "The model states one common appraisal horizon and cost basis before comparing options or scenarios.",
         "The response calculates the protected hours required to cover AED 120,000 of annual incremental cost at the stated value proxy.",
         "At least one switching value is tied to an assumption that could change the preferred option.",
         "The 30% wider-programme recovery is not attributed wholesale to Holocron.",
