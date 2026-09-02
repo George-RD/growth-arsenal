@@ -7,7 +7,7 @@ description: Derive or update a writing voice profile from user-approved example
 
 Infer preferences from **approved evidence**, not stereotypes about how a person should sound.
 
-This skill produces or updates a voice profile. It does not draft the final deliverable and it does not silently mine available history.
+This skill calibrates a voice profile. It does not silently mine available history.
 
 ## 1. Define approval scope
 
@@ -43,7 +43,7 @@ Tag each sample by genre, date, provenance and approval status. Do not treat a s
 
 ## 3. Extract stable DNA
 
-Look for repeated behaviour across genres:
+Record structured calibration findings before writing profile prose. Look for repeated behaviour across genres:
 
 - how quickly the point appears;
 - direct vs indirect syntax;
@@ -102,9 +102,17 @@ Extract structural principles, never distinctive wording.
 
 *Done when:* external material supports a principle rather than becoming a style imitation target.
 
-## 7. Update the profile
+## 7. Draft the profile through writing-core
 
-Write the smallest durable change. Preserve existing accepted guidance unless the new evidence clearly supersedes it.
+The structured calibration findings are derived evidence; the durable voice profile is prose generated from them. Before drafting that profile, resolve `writing-core` by skill name and pass the findings to it as the factual kernel input.
+
+If `writing-core` is unavailable:
+
+- return the structured calibration findings without turning them into durable profile prose;
+- show `npx skills add George-RD/growth-arsenal --skill writing-core`;
+- pause the profile-writing step rather than recreating the missing skill locally.
+
+When `writing-core` is available, write the smallest durable change. Preserve existing accepted guidance unless the new evidence clearly supersedes it.
 
 The profile may store:
 
@@ -117,4 +125,4 @@ Do not store sensitive sample text merely to justify the rule. If a later audit 
 
 If the workspace already defines a canonical voice-profile path, propose changes there. If it does not, return the proposed profile in the current response and ask where the user wants it stored before creating a durable file. Do not assume an author-specific path.
 
-*Done when:* the profile is shorter than the evidence behind it, contains no unnecessary raw samples, and can guide `writing-core` without forcing one genre onto another.
+*Done when:* the profile is shorter than the evidence behind it, contains no unnecessary raw samples, and can guide future `writing-core` runs without forcing one genre onto another.

@@ -1,8 +1,21 @@
 # Economic model
 
+## Use one appraisal horizon
+
+Put costs and benefits on the same time basis before comparing them.
+
+1. Choose the appraisal horizon that matches the decision: for example a 12-month pilot or a multi-year operating life.
+2. Schedule upfront CAPEX when it occurs.
+3. Schedule recurring OPEX and benefits in the periods when they occur.
+4. Use the same units and time basis across every option.
+5. When timing is material or Finance requires it, discount future cash flows using the approved rate and compare net present value (NPV), not undiscounted totals from different periods.
+6. Calculate payback from cumulative net cash flow over that same schedule.
+
+Do not compare one year of benefit with lifecycle cost, or lifecycle benefit with one year of cost.
+
 ## Primary equation
 
-Prefer the smallest equation that captures the real value driver:
+Within the chosen appraisal horizon:
 
 ```text
 Net value =
@@ -31,9 +44,11 @@ Use three scenarios when uncertainty is material:
 
 Do not make the low case absurdly pessimistic or the high case aspirational.
 
+Use the same appraisal horizon and cash-flow timing in all three scenarios so only the intended assumptions change.
+
 ## Break-even
 
-Solve for the uncertain driver that makes net value zero.
+Solve for the uncertain driver that makes net value zero on the same cost basis and appraisal horizon.
 
 Example:
 
@@ -42,6 +57,8 @@ Break-even protected hours =
   annual incremental cost
   ÷ value per protected hour
 ```
+
+This annual form is valid only when both numerator and benefit unit refer to the same annual period. For multi-year cases, solve against the scheduled or discounted cash flows instead.
 
 A useful business-case slide often shows this number before a large ROI estimate because it lets the audience judge robustness.
 
@@ -55,7 +72,7 @@ Examples:
 - maximum annual support cost before a slower option wins;
 - minimum recovery rate needed for positive net value.
 
-Show the distance between the base assumption and switching value.
+Show the distance between the base assumption and switching value. Keep the underlying appraisal horizon unchanged while testing that assumption.
 
 ## Attribution
 

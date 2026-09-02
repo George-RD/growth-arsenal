@@ -39,7 +39,9 @@ Do the economics and decision logic before writing the deck.
 
    *Done when:* a sceptic can replace any assumption without rebuilding the model.
 
-4. **Model low, base and high cases**
+4. **Choose one appraisal horizon and model low, base and high cases**
+   Put every option on the same cash-flow timeline before comparing value. Schedule upfront CAPEX, recurring OPEX and benefits in the periods where they occur. If timing is material or Finance requires it, use the approved discount rate and compare NPV. Do not compare one year of benefit with lifecycle cost.
+
    Use ranges where uncertainty is material. Keep the base case as the best current estimate, not automatically the most conservative value.
 
    Separate:
@@ -50,19 +52,19 @@ Do the economics and decision logic before writing the deck.
 
    Never count the same benefit twice.
 
-   Read [`references/economic-model.md`](references/economic-model.md) for break-even and attribution rules.
+   Read [`references/economic-model.md`](references/economic-model.md) for appraisal-horizon, break-even and attribution rules.
 
-   *Done when:* the recommendation can be tested across plausible conditions.
+   *Done when:* every option and scenario uses the same horizon and cost basis, and the recommendation can be tested across plausible conditions.
 
 5. **Calculate break-even and switching values**
    Ask:
-   - How much benefit is required to cover incremental cost?
+   - How much benefit is required to cover incremental cost on the chosen horizon?
    - Which single assumption matters most?
    - How far must that assumption move before the preferred option changes?
 
    A fragile case depends on a narrow set of favourable assumptions. A robust case survives a large error in the uncertain inputs.
 
-   *Done when:* the reader can see what must be true for the investment to be worthwhile.
+   *Done when:* the reader can see what must be true for the investment to be worthwhile without mixing periods or cost bases.
 
 6. **Separate programme value from component attribution**
    When several interventions create the outcome, model the programme result first. Then test whether the component being funded needs only a smaller attributable contribution to justify its incremental cost.
@@ -89,7 +91,7 @@ Do the economics and decision logic before writing the deck.
      - `npx skills add George-RD/growth-arsenal --skill executive-writing`
    - pause only the prose handoff rather than recreating the missing skill locally.
 
-   When both are available, pass the decision, model, assumptions and selected evidence to `writing-core`, then `executive-writing`. Use `business-copy-style` only after the first useful prose exists.
+   When both are available, pass the completed decision model, assumptions and selected evidence to `writing-core`, then `executive-writing`. Mark the model as already completed so `writing-core` does not re-enter this workflow. Use `business-copy-style` only after the first useful prose exists.
 
    *Done when:* the presentation is an expression of the model rather than the place where the model is invented.
 
@@ -115,6 +117,7 @@ Before prose, produce a compact decision model containing:
 - decision requested;
 - options;
 - assumption ledger;
+- appraisal horizon and cost basis;
 - low/base/high economics;
 - break-even or switching value;
 - major risks and ownership;
