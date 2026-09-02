@@ -33,7 +33,7 @@ This skill owns the **generation layer**. It should run before genre-specific wr
    - private wiki/research: preserve reasoning, provenance and uncertainty;
    - technical documentation: optimise for precision and unambiguous action;
    - executive/business writing: resolve `executive-writing`;
-   - business case: resolve `business-case` before prose;
+   - business case: if no completed `business-case` decision model has been supplied, resolve `business-case` before prose; if a completed model is already the input, use it and do not re-enter that workflow;
    - personal or public voice: use the user's approved voice profile if one exists;
    - customer-facing short copy: run `business-copy-style` after drafting.
 
