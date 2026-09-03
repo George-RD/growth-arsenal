@@ -33,17 +33,23 @@ Every material input needs a claim status and evidence provenance. `Owner` is se
 
 ## Cash-flow schedule
 
-Use one row per option per period. For a one-period appraisal, include one row for each option. For a multi-period appraisal, include every material period needed to reproduce NPV and payback.
+Use one row per **scenario, option and period**. For a one-period appraisal, include Low/Base/High rows for each option. For a multi-period appraisal, repeat each scenario/option across every material period needed to reproduce NPV and payback.
 
-| Period | Option | Attributable benefit | Future incremental cost | Quantified dis-benefits | Net cash flow | Discount factor | Present value |
-|---|---|---:|---:|---:|---:|---:|---:|
-| [ ] | Hold / do nothing | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| [ ] | Minimum / slower change | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| [ ] | Recommended path | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Scenario | Period | Option | Attributable benefit | Future incremental cost | Quantified dis-benefits | Net cash flow | Discount factor | Present value |
+|---|---|---|---:|---:|---:|---:|---:|---:|
+| Low | [ ] | Hold / do nothing | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Low | [ ] | Minimum / slower change | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Low | [ ] | Recommended path | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Base | [ ] | Hold / do nothing | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Base | [ ] | Minimum / slower change | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Base | [ ] | Recommended path | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| High | [ ] | Hold / do nothing | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| High | [ ] | Minimum / slower change | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| High | [ ] | Recommended path | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 
 ## Option economics
 
-Use the same appraisal horizon and cost basis for every row. Totals are undiscounted for a one-period case or NPV when discounting is material.
+Use the same appraisal horizon and cost basis for every row. Totals are undiscounted for a one-period case or NPV when discounting is material. These totals must reconcile to the cash-flow schedule above.
 
 | Option | Scenario | Attributable benefit | Future incremental cost | Quantified dis-benefits | Net value / NPV | Key assumptions changed |
 |---|---|---:|---:|---:|---:|---|
@@ -63,14 +69,14 @@ Use the same appraisal horizon and cost basis for every row. Totals are undiscou
 
 ## Break-even
 
-Break-even is the point where the recommended path reaches zero net value against the chosen counterfactual.
+Break-even is the point where the recommended path's **incremental net value versus the chosen counterfactual** reaches zero.
 
 - **Counterfactual:** [normally Hold / do nothing, or state another]
-- **Driver:** [e.g. protected vessel-hours]
+- **Driver:** [e.g. affected productive time]
 - **Break-even value:** [ ]
 - **Base-case value:** [ ]
 - **Headroom:** [ ]
-- **Calculation / source:** [ ]
+- **Calculation / source:** [show the recommended-vs-counterfactual equality or the valid zero-counterfactual shortcut]
 
 ## Switching value
 
@@ -82,6 +88,7 @@ Switching value is the point where a named competing option becomes preferable t
 - **Switching value:** [ ]
 - **Distance / headroom:** [ ]
 - **Calculation / source:** [show equality/crossover using both option models]
+- **Relationship to break-even:** [different threshold, or SAME because counterfactual = competing option]
 
 ## Programme and component attribution
 
