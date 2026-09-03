@@ -9,11 +9,13 @@
 
 ## Options
 
-| Option | What changes | Certain dis-benefits | Main risks | Initial view |
+Use neutral option names while building the model. Record the selected option only in Recommendation.
+
+| Option | What changes | Certain dis-benefits | Main risks | Role in appraisal |
 |---|---|---|---|---|
 | Hold / do nothing | [ ] | [ ] | [ ] | [ ] |
 | Minimum / slower change | [ ] | [ ] | [ ] | [ ] |
-| Recommended path | [ ] | [ ] | [ ] | [ ] |
+| [Named change option] | [ ] | [ ] | [ ] | [candidate under appraisal] |
 
 ## Assumption ledger
 
@@ -39,13 +41,13 @@ Use one row per **scenario, option and period**. For a one-period appraisal, inc
 |---|---|---|---:|---:|---:|---:|---:|---:|
 | Low | [ ] | Hold / do nothing | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 | Low | [ ] | Minimum / slower change | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Low | [ ] | Recommended path | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Low | [ ] | [Named change option] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 | Base | [ ] | Hold / do nothing | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 | Base | [ ] | Minimum / slower change | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Base | [ ] | Recommended path | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Base | [ ] | [Named change option] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 | High | [ ] | Hold / do nothing | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 | High | [ ] | Minimum / slower change | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| High | [ ] | Recommended path | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| High | [ ] | [Named change option] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 
 ## Option economics
 
@@ -59,9 +61,15 @@ Use the same appraisal horizon and cost basis for every row. Totals are undiscou
 | Minimum / slower change | Low | [ ] | [ ] | [ ] | [ ] | [ ] |
 | Minimum / slower change | Base | [ ] | [ ] | [ ] | [ ] | [ ] |
 | Minimum / slower change | High | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Recommended path | Low | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Recommended path | Base | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Recommended path | High | [ ] | [ ] | [ ] | [ ] | [ ] |
+| [Named change option] | Low | [ ] | [ ] | [ ] | [ ] | [ ] |
+| [Named change option] | Base | [ ] | [ ] | [ ] | [ ] | [ ] |
+| [Named change option] | High | [ ] | [ ] | [ ] | [ ] | [ ] |
+
+### Non-financial and secondary benefits
+
+| Option | Benefit | Evidence / status | Overlap treatment | Decision relevance |
+|---|---|---|---|---|
+| [ ] | [ ] | [ ] | [how it remains separate from quantified value] | [ ] |
 
 ### Unquantified dis-benefits
 
@@ -69,24 +77,27 @@ Use the same appraisal horizon and cost basis for every row. Totals are undiscou
 
 ## Payback
 
-Payback is when the recommended path has recovered its **incremental economic burden versus the named counterfactual** on the same cash-flow schedule. Use cumulative incremental net cash flow when discounting is not material; use cumulative incremental present value when discounted payback is the approved basis.
+Payback is when the candidate option under appraisal has recovered its **incremental economic burden versus the named counterfactual** on the same cash-flow schedule. Use cumulative incremental net cash flow when discounting is not material; use cumulative incremental present value when discounted payback is the approved basis.
 
+- **Candidate option under appraisal:** [named option; this is not a pre-selected recommendation]
 - **Counterfactual:** [normally Hold / do nothing, or state another]
 - **Scenario reported:** [Base; add Low/High when decision-relevant]
 - **Basis:** [cumulative incremental net cash flow / cumulative incremental present value]
+- **First incremental burden period:** [period/date, or NONE]
 - **Payback period / date:** [period/date, IMMEDIATE / FIRST-PERIOD PAYBACK, NO PAYBACK WITHIN HORIZON, or UNKNOWN]
-- **Calculation / source:** [show the recommended-minus-counterfactual cumulative calculation]
+- **Calculation / source:** [show the candidate-minus-counterfactual cumulative calculation]
 
-| Scenario | Period | Recommended cash flow / PV | Counterfactual cash flow / PV | Incremental amount | Cumulative incremental amount |
+| Scenario | Period | Candidate cash flow / PV | Counterfactual cash flow / PV | Incremental amount | Cumulative incremental amount |
 |---|---|---:|---:|---:|---:|
 | Base | [ ] | [ ] | [ ] | [ ] | [ ] |
 
-Repeat period rows until payback occurs or the appraisal horizon ends. If required inputs are unavailable, record `UNKNOWN` and name the evidence needed instead of omitting this section.
+Ignore any leading periods where both options have zero economics. Repeat rows from the first incremental burden period until payback occurs or the appraisal horizon ends. If there is no incremental burden, start at the first non-zero incremental period. If required inputs are unavailable, record `UNKNOWN` and name the evidence needed instead of omitting this section.
 
 ## Break-even
 
-Break-even is the point where the recommended path's **incremental net value versus the chosen counterfactual** reaches zero.
+Break-even is the point where the candidate option under appraisal's **incremental net value versus the chosen counterfactual** reaches zero.
 
+- **Candidate option under appraisal:** [ ]
 - **Counterfactual:** [normally Hold / do nothing, or state another]
 - **Scenario:** [normally Base; state another when decision-relevant]
 - **Appraisal basis:** [horizon, currency/value basis and NPV treatment]
@@ -95,12 +106,13 @@ Break-even is the point where the recommended path's **incremental net value ver
 - **Break-even value:** [ ]
 - **Base-case value:** [ ]
 - **Headroom:** [ ]
-- **Calculation / source:** [show the recommended-vs-counterfactual equality or the valid zero-counterfactual shortcut]
+- **Calculation / source:** [show the candidate-vs-counterfactual equality or the valid zero-counterfactual shortcut]
 
 ## Switching value
 
-Switching value is the point where a named competing option becomes preferable to the recommended option.
+Switching value is the point where a named competing option becomes preferable to the candidate option under appraisal.
 
+- **Candidate option under appraisal:** [ ]
 - **Competing option:** [ ]
 - **Scenario:** [normally Base; state another when decision-relevant]
 - **Appraisal basis:** [horizon, currency/value basis and NPV treatment]
@@ -148,7 +160,8 @@ Switching value is the point where a named competing option becomes preferable t
 
 ## Recommendation
 
-[Recommended option and why it remains preferable after option-by-option economics, low/base/high, dis-benefits, payback, break-even and switching-value tests.]
+- **Selected option / status:** [named option, CONDITIONAL, or UNKNOWN]
+- **Reason:** [why this result follows from option-by-option economics, low/base/high, dis-benefits, payback, break-even, switching values and delivery feasibility]
 
 ## Next evidence to replace
 

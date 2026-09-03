@@ -32,7 +32,7 @@
       "expected_output": "Normal Grand Slam Offer workshop behavior that uses all available companion skills without dependency warnings, install prompts or degraded copy status.",
       "expectations": [
         "The output proceeds through the workspace path using growth-arsenal-workspace without asking the user to install it.",
-        "The output uses writing-core before generating the first customer-facing copy without asking the user to install it.",
+        "The output uses writing-core for the Phase 0 market snapshot and persona synthesis and before the first customer-facing copy, without asking the user to install it.",
         "The output uses business-copy-style after a useful candidate exists without asking the user to install it.",
         "The output does not show a companion-skill npx install command when all three required companions are available.",
         "The output does not mark copy degraded or unverified when the copy-quality gate is available and completed."
@@ -70,10 +70,10 @@
     {
       "id": 6,
       "name": "Missing writing generation hard dependency",
-      "prompt": "growth-arsenal-workspace is available and the offer strategy/phase decisions are already valid. We have reached the first point where customer-facing offer copy must be generated, but writing-core cannot be resolved by skill name. Continue from this exact state.",
-      "expected_output": "The workshop preserves the approved strategy and workspace state, pauses only prose generation, gives the writing-core selective-install command, and resumes from the same phase after installation instead of drafting copy through a fallback method.",
+      "prompt": "growth-arsenal-workspace is available and the offer strategy/phase decisions are already valid. We have reached the Phase 0 market-snapshot and persona synthesis step, but writing-core cannot be resolved by skill name. Continue from this exact state.",
+      "expected_output": "The workshop preserves the approved strategy and workspace state, pauses human-readable Phase 0 synthesis, gives the writing-core selective-install command, and resumes from the same phase after installation instead of drafting through a fallback method.",
       "expectations": [
-        "The output does not generate customer-facing copy while writing-core is unavailable.",
+        "The output does not generate the Phase 0 market snapshot, persona prose or customer-facing copy while writing-core is unavailable.",
         "The output shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
         "The output preserves the approved offer decisions and current workspace/phase state.",
         "The output says the prose-generation step can resume from the same phase after writing-core becomes available.",

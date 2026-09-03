@@ -19,10 +19,10 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
    *Done when:* approval of this case cannot be confused with approval of a later scale-up.
 
 2. **Define the counterfactual and options**
-   Describe the current state if nothing changes. Compare at least:
+   Describe the current state if nothing changes. Use neutral names and compare at least:
    - do nothing / hold;
    - minimum or slower change;
-   - recommended path.
+   - a named change option under appraisal.
 
    Add another option only when it changes the decision. Compare each option on the same criteria, including certain negative effects such as training load, parallel running, temporary productivity loss or transition disruption. Keep those **dis-benefits** separate from risks: a dis-benefit is expected to occur; a risk may occur.
 
@@ -62,18 +62,18 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
 
    *Done when:* every option and scenario uses the same horizon and cost/value basis, intended timing assumptions are explicit, certain negative effects are included once, and the recommendation can be tested across plausible conditions.
 
-5. **Calculate payback, break-even and switching values**
-   Calculate all three:
-   - **Payback:** when the recommended path's cumulative incremental cash flow or present value versus the named counterfactual reaches zero or becomes positive.
-   - **Break-even:** where the recommended path's incremental net value versus the chosen counterfactual reaches zero for the tested driver.
-   - **Switching value:** where the recommended path and a named competing option have equal net value and the preferred option changes beyond that point.
+5. **Calculate payback, break-even and switching values for a candidate**
+   Name the change option being tested; this is not yet the recommendation. Calculate all three:
+   - **Payback:** when the candidate option's cumulative incremental cash flow or present value versus the named counterfactual recovers its incremental burden.
+   - **Break-even:** where the candidate option's incremental net value versus the chosen counterfactual reaches zero for the tested driver.
+   - **Switching value:** where the candidate option and a named competing option have equal net value and the preferred option changes beyond that point.
 
-   Use the same appraisal basis for payback as the option economics: cumulative net cash flow when discounting is not material, or cumulative present value when discounted payback is the approved basis. If the first modelled period is already non-negative versus the counterfactual, report immediate or first-period payback. If payback does not occur within the horizon, record `NO PAYBACK WITHIN HORIZON`. If inputs are missing, record `UNKNOWN` and the evidence needed.
+   Use the same appraisal basis for payback as the option economics: cumulative net cash flow when discounting is not material, or cumulative present value when discounted payback is the approved basis. Start at the first period containing an incremental economic burden, ignoring any leading periods where both options have zero economics. If that period aggregates burden and benefit and is already non-negative versus the counterfactual, report immediate or first-period payback. If there is no incremental burden, start at the first non-zero incremental period. If payback does not occur within the horizon, record `NO PAYBACK WITHIN HORIZON`. If inputs are missing, record `UNKNOWN` and the evidence needed.
 
    The counterfactual for break-even and payback is usually Hold / do nothing. The competing option for switching may instead be the minimum/slower-change path. For each threshold, name the scenario and appraisal basis, and hold non-tested assumptions at that scenario's values unless explicit exceptions are recorded. Break-even and switching may be recorded as `SAME` only when the option comparison, tested driver/assumption, appraisal basis and equality being solved are all identical. The same option pair with a different driver is still a different threshold.
 
    Ask:
-   - When does the recommended path recover its incremental economic burden versus the counterfactual?
+   - When does the candidate option recover its incremental economic burden versus the counterfactual?
    - How much benefit is required to cover that burden on the chosen horizon?
    - Which single assumption matters most?
    - How far must that assumption move before the preferred option changes?
@@ -90,36 +90,42 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
    *Done when:* programme economics and component economics cannot be double-counted.
 
 7. **Test delivery feasibility and set governance**
-   Fill the template's Commercial and delivery feasibility section. Test the proposed path against vendors or partners, hardware and infrastructure, licences and contracts, procurement, delivery capacity and skills, operational support, lead times and sequencing. Record missing evidence as `UNKNOWN` or `UNAVAILABLE`; an attractive economic result does not prove the option can be delivered.
+   Fill the template's Commercial and delivery feasibility section for every material candidate. Test each proposed path against vendors or partners, hardware and infrastructure, licences and contracts, procurement, delivery capacity and skills, operational support, lead times and sequencing. Record missing evidence as `UNKNOWN` or `UNAVAILABLE`; an attractive economic result does not prove an option can be delivered.
 
    Name the executive, delivery, benefits and operational support owners. Add the material milestones and decision gates with their dates or windows, required evidence and exit conditions.
 
-   *Done when:* the recommendation has a credible, owned delivery path; every material commercial, capacity, support or timing constraint is evidenced or explicitly open; and later commitments cannot be confused with the current decision.
+   *Done when:* every candidate's material commercial, capacity, support and timing constraints are evidenced or explicitly open, the feasible paths have credible owners, and later commitments cannot be confused with the current decision.
 
-8. **Decide what the next phase proves**
-   A pilot should reduce uncertainty in the assumptions most likely to change the decision. Do not frame it as `find out whether there is any value` when the current model already supports investment.
+8. **Derive the recommendation**
+   Compare the completed option economics, Low/Base/High cases, dis-benefits, non-financial benefits, payback, break-even, switching values, risks and delivery feasibility. Fill the template's Recommendation section from that evidence.
 
-   Prefer:
+   Select any option the model supports. Record `CONDITIONAL` with the deciding condition, or `UNKNOWN` with the missing evidence, when the model cannot yet distinguish the options. A proposed change or pilot is a candidate, not a predetermined winner.
+
+   *Done when:* the recommendation, condition or open state can be traced to the completed model without changing an assumption to produce the desired answer.
+
+9. **Decide what the next phase proves**
+   If the selected or conditional path includes a pilot, phased rollout or further evidence stage, use it to reduce uncertainty in the assumptions most likely to change the next decision. When the current model already supports investment, prefer:
    > The current case supports X. The pilot will replace assumptions A and B with measured data before scale.
 
-   Fill the template's Next evidence section so each proposed measurement states which decision it could change.
+   Fill the template's Next evidence section so each proposed measurement states which decision it could change. If no next evidence stage is warranted, record `N/A` and why.
 
-   *Done when:* every pilot measure maps to a decision-driving assumption or operational risk.
+   *Done when:* every proposed measure maps to a decision-driving assumption, feasibility constraint or operational risk, or the section records why no further evidence stage is required.
 
-9. **Hand off to writing when prose is requested**
-   The decision model can run standalone. When the user wants a memo, report or presentation, resolve `writing-core` and `executive-writing` independently by skill name at this point.
+10. **Hand off to writing when prose is requested**
+    The decision model can run standalone. When the user wants a memo, report or presentation, resolve `writing-core` and `executive-writing` independently by skill name at this point.
 
-   For each missing companion:
-   - keep the completed decision model intact;
-   - show only that companion's install command:
-     - missing `writing-core` → `npx skills add George-RD/growth-arsenal --skill writing-core`
-     - missing `executive-writing` → `npx skills add George-RD/growth-arsenal --skill executive-writing`
+    For each missing companion:
 
-   Pause only the prose handoff until both required companions are available. Do not recreate a missing skill locally.
+    - keep the completed decision model intact;
+    - show only that companion's install command:
+      - missing `writing-core` → `npx skills add George-RD/growth-arsenal --skill writing-core`
+      - missing `executive-writing` → `npx skills add George-RD/growth-arsenal --skill executive-writing`
 
-   When both are available, pass the completed decision model, assumptions and selected evidence to `writing-core`, then `executive-writing`. Mark the model as already completed so `writing-core` does not re-enter this workflow. Use `business-copy-style` only after the first useful prose exists.
+    Pause only the prose handoff until both required companions are available. Do not recreate a missing skill locally.
 
-   *Done when:* the presentation is an expression of the model rather than the place where the model is invented.
+    When both are available, pass the completed decision model, assumptions and selected evidence to `writing-core`, then `executive-writing`. Mark the model as already completed so `writing-core` does not re-enter this workflow. Use `business-copy-style` only after the first useful prose exists.
+
+    *Done when:* the presentation is an expression of the model rather than the place where the model is invented.
 
 ## Evidence posture
 

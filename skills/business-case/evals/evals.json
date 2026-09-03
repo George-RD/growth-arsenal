@@ -15,19 +15,47 @@
         "The option economics record low/base/high net value or NPV for each of the three options and reconcile to the detailed cash-flow schedule.",
         "The response records the 40 training hours and parallel-running period as material dis-benefits or transition impacts rather than hiding them in generic risk language.",
         "Costs and quantified dis-benefits are non-overlapping: any effect already included in the AED 120,000 run-cost estimate is not added again as a separate quantified dis-benefit.",
-        "The Payback section names the counterfactual and reports a payback period/date, `NO PAYBACK WITHIN HORIZON`, or `UNKNOWN`; if unknown, it names the missing evidence rather than omitting the result.",
-        "Payback is based on cumulative recommended-minus-counterfactual cash flow or present value on the same appraisal basis, not the recommended option in isolation.",
-        "Break-even names the counterfactual and solves for the point where the recommended path's incremental net value versus that counterfactual is zero; it does not ignore material counterfactual costs, benefits or dis-benefits.",
-        "The switching analysis names a competing option and solves for the point where the recommended and competing options have equal net value; it is not merely the recommended option's standalone zero-net-value calculation repeated under another label.",
+        "The Payback section names the candidate option and counterfactual and reports a payback period/date, `IMMEDIATE`, `FIRST-PERIOD PAYBACK`, `NO PAYBACK WITHIN HORIZON`, or `UNKNOWN`; if unknown, it names the missing evidence rather than omitting the result.",
+        "Payback is based on cumulative candidate-minus-counterfactual cash flow or present value on the same appraisal basis, not the candidate option in isolation.",
+        "Break-even names the candidate and counterfactual and solves for the point where their incremental net value is zero; it does not ignore material counterfactual costs, benefits or dis-benefits.",
+        "The switching analysis names a candidate and competing option and solves for the point where they have equal net value; it is not merely the candidate option's standalone zero-net-value calculation repeated under another label.",
         "The response records `SAME` for break-even and switching only when the option pair, tested driver or assumption, appraisal basis and equality being solved are all identical; the same option pair alone is insufficient.",
         "The response records the base-case value and the distance or headroom to the relevant threshold.",
         "Each break-even and switching threshold names the scenario, appraisal basis and assumptions held constant except for the tested driver.",
         "The 30% wider-programme recovery is not attributed wholesale to Holocron.",
-        "Pilot measures map to assumptions or risks that affect the later scale decision.",
+        "If the selected or conditional path includes a pilot or further evidence stage, its measures map to assumptions, feasibility constraints or risks that affect the later decision; otherwise the section records `N/A` and why.",
+        "Material non-financial and secondary benefits remain visible by option with evidence status and overlap treatment rather than being omitted or assigned speculative cash values.",
         "Commercial and delivery feasibility covers vendors or partners, hardware and infrastructure, licences and contracts, procurement, delivery capacity and skills, operational support, and lead-time constraints; missing inputs remain explicit rather than being treated as proof of feasibility.",
         "Governance names executive, delivery, benefits and operational support ownership and records material milestones or decision gates with required evidence and exit conditions.",
         "The recommendation follows the completed option economics and evidence; it may select any option or remain conditional or `UNKNOWN` when the supplied evidence cannot distinguish them, rather than treating the bounded pilot as a predetermined winner.",
-        "If cumulative incremental value is non-negative in the first modelled period, payback is reported as immediate or first-period payback rather than `NO PAYBACK WITHIN HORIZON`."
+        "If cumulative incremental value is non-negative in the first period containing the candidate's incremental burden, payback is reported as immediate or first-period payback rather than `NO PAYBACK WITHIN HORIZON`; leading periods where both options have zero economics do not trigger payback.",
+        "A zero-only prefix before a later incremental cost does not count as payback; the payback search starts when the economic burden begins."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Prose companions available",
+      "prompt": "The business-case decision model is complete and approved for handoff. writing-core and executive-writing are both installed and resolvable by skill name. Turn the model into a short executive decision memo without rebuilding the economics.",
+      "expected_output": "The completed model passes through writing-core and then executive-writing without dependency warnings, install prompts or re-entering business-case analysis.",
+      "expectations": [
+        "The response preserves the completed decision model and does not rebuild or change its economics.",
+        "The response uses writing-core before executive-writing.",
+        "The response does not show a companion-skill install command when both required companions are available.",
+        "The memo is an expression of the supplied model rather than a new decision analysis."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Missing prose hard dependencies",
+      "prompt": "The business-case decision model is complete and must be preserved. I now want an executive deck, but writing-core and executive-writing cannot be resolved by skill name. Continue from this exact state.",
+      "expected_output": "The workflow preserves the completed model, pauses only prose delivery, shows the two standard selective-install commands, and resumes the same handoff after both companions are available without recreating either method.",
+      "expectations": [
+        "The response keeps the completed decision model intact and does not re-run or discard the analysis.",
+        "The response does not draft the deck while either hard dependency is unavailable.",
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill executive-writing`.",
+        "The response says the prose handoff can resume from the completed model after both companions are available.",
+        "The response does not recreate either missing skill's method locally."
       ]
     }
   ]

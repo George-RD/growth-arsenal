@@ -12,6 +12,32 @@
         "The response keeps NMEA 0183 and Redis Streams while simplifying surrounding language.",
         "The response does not invent evidence that Holocron caused the wider programme recovery."
       ]
+    },
+    {
+      "id": 1,
+      "name": "Missing executive delivery hard dependency",
+      "prompt": "Build and preserve the factual kernel for this manager briefing, then prepare executive delivery. executive-writing cannot be resolved by skill name.",
+      "expected_output": "The factual kernel is preserved, only executive delivery pauses, and the response shows the standard executive-writing selective-install command without recreating its method.",
+      "expectations": [
+        "The response completes or preserves the factual kernel before pausing the executive delivery path.",
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill executive-writing`.",
+        "The response does not produce the manager-facing delivery while executive-writing is unavailable.",
+        "The response says delivery can resume from the preserved kernel after installation.",
+        "The response does not recreate executive-writing guidance locally."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Missing business-case hard dependency",
+      "prompt": "Use these operational figures to build an investment decision model before drafting prose. No completed business-case model is supplied, and business-case cannot be resolved by skill name.",
+      "expected_output": "The source evidence and any factual-kernel work are preserved, business-case modelling pauses, and the response shows the standard business-case selective-install command without inventing the missing model.",
+      "expectations": [
+        "The response preserves the source evidence and any completed factual-kernel work.",
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill business-case`.",
+        "The response does not draft the decision prose or create a substitute investment model while business-case is unavailable.",
+        "The response says modelling can resume from the preserved evidence after installation.",
+        "The response does not recreate business-case guidance locally."
+      ]
     }
   ]
 }
