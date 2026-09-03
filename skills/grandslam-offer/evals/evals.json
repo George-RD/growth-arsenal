@@ -32,6 +32,7 @@
       "expected_output": "Normal Grand Slam Offer workshop behavior that uses all available companion skills without dependency warnings, install prompts or degraded copy status.",
       "expectations": [
         "The output proceeds through the workspace path using growth-arsenal-workspace without asking the user to install it.",
+        "The output applies Phase 0 research to the canonical JSON workspace and renders the research Markdown view instead of writing or filling that generated view directly.",
         "The output uses writing-core for the Phase 0 market snapshot and persona synthesis and before the first customer-facing copy, without asking the user to install it.",
         "The output uses business-copy-style after a useful candidate exists without asking the user to install it.",
         "The output does not show a companion-skill npx install command when all three required companions are available.",

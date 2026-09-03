@@ -14,9 +14,9 @@ File: `{project-name}-research.md`
 
 Organized by what each phase actually needs. When you hit a phase, check the brief. If data's missing, research. If it's there, use it.
 
-### Template Structure
+### Canonical research state
 
-Write this template to `{project-name}-research.md` at the start of Phase 0, then fill sections as research comes in. Also create `{project-name}-settings.md` with a `## Preferences` block (Spelling: British default / American) at the same time, so load-bearing config is captured once and read lightly by the business-copy-style skill.
+Initialise `{project-name}.arsenal.json` through `growth-arsenal-workspace`. Apply each research update to that canonical state with `arsenal.py apply`, then render `{project-name}-research.md`; never hand-edit the generated view. Create `{project-name}-settings.md` separately with a `## Preferences` block (Spelling: British default / American), so load-bearing copy config is captured once and read lightly by the `business-copy-style` skill.
 
 ```text
 # Research Brief — [Business Name]
