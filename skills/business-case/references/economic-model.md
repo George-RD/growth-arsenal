@@ -9,7 +9,7 @@ Put costs and benefits on the same time basis before comparing them.
 3. Schedule recurring OPEX, quantified dis-benefits and benefits in the periods when they occur.
 4. Use the same units and time basis across every option.
 5. When timing is material or Finance requires it, discount future cash flows using the approved rate and compare net present value (NPV), not undiscounted totals from different periods.
-6. Calculate payback from cumulative net cash flow over that same schedule.
+6. Calculate payback from cumulative **incremental** cash flow or present value of the recommended option versus the named counterfactual on that same schedule.
 
 Do not compare one year of benefit with lifecycle cost, or lifecycle benefit with one year of cost.
 
@@ -48,6 +48,27 @@ Use three scenarios when uncertainty is material:
 Do not make the low case absurdly pessimistic or the high case aspirational.
 
 Use the same appraisal horizon and cash-flow timing in all three scenarios so only the intended assumptions change.
+
+## Payback
+
+Payback asks when the recommended option has recovered its **incremental economic burden versus the named counterfactual**.
+
+For each period on the chosen scenario and appraisal basis:
+
+```text
+Incremental amount_t =
+  recommended cash flow or present value_t
+  - counterfactual cash flow or present value_t
+
+Cumulative incremental amount_t =
+  sum of incremental amounts through period t
+```
+
+Payback is the first period where the cumulative incremental amount reaches zero or becomes positive after an earlier negative balance.
+
+Use cumulative undiscounted incremental cash flow when discounting is not material. Use cumulative incremental present value when discounted payback is the approved basis. Always name the counterfactual and state which basis was used.
+
+If payback does not occur before the appraisal horizon ends, record `NO PAYBACK WITHIN HORIZON`. If the required timing or value inputs are unavailable, record `UNKNOWN` and identify the evidence needed rather than omitting payback.
 
 ## Break-even
 
