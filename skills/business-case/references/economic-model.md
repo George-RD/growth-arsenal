@@ -58,7 +58,7 @@ Break-even protected hours =
   ÷ value per protected hour
 ```
 
-This annual form is valid only when both numerator and benefit unit refer to the same annual period. For multi-year cases, solve against the scheduled or discounted cash flows instead.
+This annual form is valid only when the incremental cost is the annualised cost consistent with the per-hour benefit rate. For multi-year cases, solve against the scheduled or discounted cash flows instead.
 
 A useful business-case slide often shows this number before a large ROI estimate because it lets the audience judge robustness.
 
