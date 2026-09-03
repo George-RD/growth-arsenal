@@ -34,8 +34,8 @@ Phase 5: Rule of 100 → Daily execution plan + tracking framework
 - A phase only passes when no agent flags a critical issue.
 - Use WebSearch at Phase 0 and whenever market/platform data would strengthen a decision.
 - Personas **react to outreach as real recipients** in Phase 3 — not just reviewers.
-- `writing-core` is a hard dependency only when customer-facing language must first be generated. Resolve it at that point; if unavailable, follow the Writing Generation Gate and pause only the copy-generation path.
-- `business-copy-style` is a quality dependency. Resolve it by skill name after a useful candidate exists; if unavailable, follow the Copy-Style Gate install-or-degraded flow and never claim the missing gate passed.
+- `writing-core` is a hard dependency at the first point raw evidence or approved decisions become human-readable prose. Raw source capture/search results may exist first, but Phase 0 research synthesis, persona prose and later customer-facing language all pass through the Prose Generation Gate below. If unavailable, pause only the prose-generation path and preserve raw evidence/approved strategy.
+- `business-copy-style` is a quality dependency for customer-facing copy after a useful candidate exists. It is not required for internal research synthesis. If unavailable at a customer-facing copy checkpoint, follow the Copy-Style Gate install-or-degraded flow and never claim the missing gate passed.
 - Use radical candor throughout. Generic = dead on arrival.
 
 ## The Agent Team
@@ -69,12 +69,23 @@ Phase outputs also use templates:
 - `templates/outreach-scripts.md` — warm, cold, paid, and content skeletons for Phase 3
 - `templates/tracking-dashboard.md` — daily checklist, leading/lagging indicators, and weekly milestones for Phase 5
 
-Instruct the user to copy the relevant template, fill the brackets, and apply the Writing Generation Gate followed by the Copy-Style Gate below before finalizing any customer-facing text.
+All human-readable phase/report prose is generated through the Prose Generation Gate. Customer-facing text then also passes the Copy-Style Gate before finalising.
 Optionally, maintain `{project-name}-decisions.md` with timestamped, type-tagged entries (DECISION, CORRECTION, PREFERENCE) for key choices and corrections. Keep entries free of private business details. The plugin-feedback skill can attach this, redacted, to feedback.
 
-## Writing Generation Gate
+## Prose Generation Gate
 
-At the first point where the workshop must generate customer-facing language — lead magnet names/descriptions, calls-to-action, outreach scripts, ad copy, content posts, referral asks, affiliate email, landing/README text, or final blueprint positioning — resolve `writing-core` by skill name. Do not preflight it during discovery, market research, offer audit or channel strategy.
+At the first point raw evidence or approved decisions must become human-readable prose, resolve `writing-core` by skill name. This includes:
+
+- Phase 0 Lead Gen Landscape research report;
+- narrative customer/persona descriptions derived from research;
+- lead magnet names/descriptions;
+- calls-to-action and outreach scripts;
+- ad copy and content posts;
+- referral/affiliate text;
+- landing/README copy;
+- final blueprint positioning and explanatory prose.
+
+Do not preflight `writing-core` before raw discovery facts/search results exist. Resolve it when synthesis starts.
 
 If `writing-core` cannot be resolved:
 
@@ -85,21 +96,23 @@ If `writing-core` cannot be resolved:
    npx skills add George-RD/growth-arsenal --skill writing-core
    ```
 
-3. pause only the customer-facing generation path and preserve the approved strategy/phase state;
-4. resume from the same phase after the skill becomes available. Do not recreate `writing-core` locally.
+3. preserve raw research evidence, structured decisions and approved phase state;
+4. pause only the human-readable prose-generation path;
+5. resume from the same phase after the skill becomes available. Do not recreate `writing-core` locally.
 
 When `writing-core` is available:
 
 1. read it;
-2. build the factual kernel from the approved offer/phase decisions, market evidence, target persona, claim boundaries and action the asset must drive;
-3. generate the first useful candidate from that kernel;
-4. pass the resulting candidate to the Copy-Style Gate below.
+2. build the factual kernel from the raw evidence or approved decisions, preserving source/status boundaries;
+3. generate only the prose required by the current report, persona, asset or blueprint surface;
+4. for internal research/persona prose, continue to the relevant phase/adversarial review;
+5. for customer-facing copy, pass the useful candidate to the Copy-Style Gate below.
 
-Do not generate scripts, ads, lead magnets or posts first and rely on a later anti-slop pass to repair their structure.
+Do not write a polished research report, script, ad, lead magnet or post first and rely on a later anti-slop pass to repair its structure.
 
 ## Copy-Style Gate
 
-After `writing-core` has produced a useful customer-facing candidate, resolve `business-copy-style` by skill name. Do not preflight it during discovery, market research, offer audit, channel strategy, or other work that does not yet need customer-facing copy.
+After `writing-core` has produced a useful **customer-facing** candidate, resolve `business-copy-style` by skill name. Do not use this gate merely because Phase 0 generated an internal research report.
 
 If `business-copy-style` cannot be resolved:
 
@@ -119,7 +132,7 @@ If `business-copy-style` cannot be resolved:
 6. Do not reproduce `business-copy-style` lint thresholds, qualitative rubrics, reader-panel methods, rewrite recipes, or other full methodology as a local fallback.
 7. After the user has explicitly chosen degraded continuation for the current workshop, do not repeat the install prompt for every later copy asset. Keep later affected copy `degraded/unverified` unless the skill becomes available or the user asks to retry the gate.
 
-When `business-copy-style` is available, read it and apply its plain-language and de-AI rules before finalizing any customer-facing copy. This applies to every copy-emitting moment in the workshop: lead magnet descriptions, script hooks, ad body, content calendar posts, referral ask, affiliate outreach email, and the final blueprint elevator pitch and one-liner. If the copy scores above a 5th-grade reading level or contains AI-sounding phrasing, revise before the adversarial review.
+When `business-copy-style` is available, read it and apply its audience-appropriate plain-language and de-AI review before finalizing any customer-facing copy. This applies to every copy-emitting moment in the workshop: lead magnet descriptions, script hooks, ad body, content calendar posts, referral ask, affiliate outreach email, and the final blueprint elevator pitch and one-liner.
 
 If previously degraded copy is later rechecked with `business-copy-style`, remove `degraded/unverified` only after the shared gate actually passes.
 
@@ -127,18 +140,18 @@ If previously degraded copy is later rechecked with `business-copy-style`, remov
 
 **Which subagents run per phase:**
 
-- **Phase 0:** Core agents review the offer audit and market research; no customer personas yet. WebSearch runs in parallel to build the Lead Gen Landscape report.
+- **Phase 0:** Core agents review the offer audit and market evidence; no customer personas yet. WebSearch can gather raw evidence in parallel. Before building the Lead Gen Landscape report or narrative persona material, run that evidence through `writing-core`; reviewers see the resulting source-bounded synthesis, not an unreviewed polished first draft.
 - **Phase 1:** Core agents + 2-3 customer personas (now defined) review the lead magnets. Personas decide whether they'd actually trade an email for each magnet.
 - **Phase 2:** Core agents + customer personas review the channel strategy. Personas confirm whether they'd actually encounter the brand on the chosen channel.
-- **Phase 3:** Core agents + customer personas **as recipients**. Personas literally receive the scripts, ads, and content pieces and react as real prospects. This is the most output-heavy phase; spawn writers and reviewers in parallel.
+- **Phase 3:** Core agents + customer personas **as recipients**. Personas literally receive the scripts, ads, and content pieces and react as real prospects. This is the most output-heavy phase; writing-core generates the candidate from approved meaning, then reviewers and customer-copy gates test it.
 - **Phase 4:** Core agents + customer personas review referral programs, affiliate partnerships, and employee/agency delegation. Personas evaluate whether they'd share the message with a friend.
 - **Phase 5:** Core agents + customer personas review the Rule of 100 plan and repeated-exposure cadence. Personas judge whether they'd be intrigued or annoyed after seeing the brand multiple times.
 
 **Parallel vs sequential:**
 
-- **Within a phase:** Research, writing, and template filling happen first; the adversarial review team runs in parallel. All agents see the same phase output but not each other's reviews.
+- **Within a phase:** raw research and structured analysis may run in parallel. Human-readable synthesis/copy then runs through `writing-core`; adversarial reviewers receive the same generated phase output but not each other's reviews.
 - **Across phases:** Run sequentially. Never start Phase N+1 until Phase N passes its checkpoint.
-- **Revision loops:** After feedback, fix critical issues first, then re-run the checkpoint. Warnings and suggestions can be addressed or explicitly accepted by the user.
+- **Revision loops:** After feedback, fix critical issues first, then re-run the checkpoint. Warnings and suggestions can be addressed or explicitly accepted by the user. If a review changes underlying meaning, return to the factual kernel before regenerating prose.
 
 **Synthesis into pass/revise:**
 
