@@ -114,6 +114,8 @@ If `writing-core` is unavailable:
 
 When `writing-core` is available, write the smallest durable change. Preserve existing accepted guidance unless the new evidence clearly supersedes it.
 
+If the workspace already defines a canonical voice-profile format, preserve that format and update the smallest relevant sections. If no canonical format exists, copy and fill [`templates/voice-profile.md`](templates/voice-profile.md). Do not silently invent a different durable structure from run to run.
+
 The profile may store:
 
 - derived writing rules;
@@ -123,6 +125,6 @@ The profile may store:
 
 Do not store sensitive sample text merely to justify the rule. If a later audit needs the original evidence, return to the approved source rather than duplicating it into the profile.
 
-If the workspace already defines a canonical voice-profile path, propose changes there. If it does not, return the proposed profile in the current response and ask where the user wants it stored before creating a durable file. Do not assume an author-specific path.
+If the workspace already defines a canonical voice-profile path, propose changes there. If it does not, return the filled profile template in the current response and ask where the user wants it stored before creating a durable file. Do not assume an author-specific path.
 
-*Done when:* the profile is shorter than the evidence behind it, contains no unnecessary raw samples, and can guide future `writing-core` runs without forcing one genre onto another.
+*Done when:* the profile has a stable structure, is shorter than the evidence behind it, contains no unnecessary raw samples, and can guide future `writing-core` runs without forcing one genre onto another.
