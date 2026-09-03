@@ -80,6 +80,18 @@
         "The output says the prose-generation step can resume from the same phase after writing-core becomes available.",
         "The output does not recreate the writing-core method locally or substitute business-copy-style as the first-draft author."
       ]
+    },
+    {
+      "id": 7,
+      "name": "Phase output persistence sequence",
+      "prompt": "The Phase 3 value-equation work has produced a complete candidate payload and all companion skills are available. Finish this phase and ask whether to advance.",
+      "expected_output": "The candidate payload follows the canonical apply, independent-review, gate, risk-resolution, approval and render sequence before the approved decision is shown and the user is asked whether to advance.",
+      "expectations": [
+        "The output delegates persistence to the parent workflow and applies the candidate payload to the canonical JSON workspace before attaching at least two independent reviews, gating the revision, resolving or accepting remaining risk, recording approval and rendering.",
+        "The output shows the approved decision and asks whether to advance only after the full persistence sequence completes.",
+        "The output does not write, fill, update or append the generated offer Markdown, Research Brief or HTML reports directly.",
+        "The output preserves the canonical workspace as the only source of truth for generated views."
+      ]
     }
   ]
 }

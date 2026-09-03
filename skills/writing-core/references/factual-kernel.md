@@ -45,11 +45,36 @@ Weak polished draft:
 
 > Holocron provides a robust regional capability that enables faster operational decision-making during GNSS disruption.
 
-Kernel:
+Completed kernel:
 
-- Holocron shows live GNSS interference to the ROC. `OBSERVED` · source: live system / project record
-- ROC operators use it during vessel work. `OBSERVED` · source: ROC operating evidence
-- Live evidence may reduce time spent diagnosing events. `ESTIMATED` · source: operator hypothesis; measurement unavailable
-- Live evidence may support earlier restart after the signal stabilises. `ESTIMATED` · source: operator hypothesis; measurement unavailable
+### Source scope
 
-Only after the kernel is correct should a genre skill decide what belongs in the final prose.
+- **Task / decision:** Explain the current Holocron evidence without overstating impact.
+- **Audience / use:** Internal wiki readers deciding what is known and what still needs proof.
+- **Sources read:** Receiver A server log dated 18 August 2026; technical-lead estimate; project record.
+- **Material source gaps:** Recovery-estimate method and dashboard-attribution evidence.
+
+### Material claims
+
+| ID | Subject | State / action | Object | Consequence | Measure | Status | Provenance | Decision use |
+|---|---|---|---|---|---|---|---|---|
+| C1 | Receiver A | sent | GNSS messages | NONE | 1,240 messages on 18 August 2026 | OBSERVED | Receiver A server log, 18 August 2026 | Establish observed system activity |
+| C2 | Wider mitigation programme | is estimated to recover | GNSS-affected time | May reduce disruption across the programme | About 30%; calculation method unavailable | ESTIMATED | Named technical-lead estimate | Use only as an unverified programme scenario |
+| C3 | Holocron | has | an unmeasured share of the programme recovery | Dashboard benefit cannot yet be attributed | NONE | UNKNOWN | Project record; attribution evidence unavailable | Do not claim the 30% recovery for Holocron |
+| C4 | System | uses | NMEA 0183 | NONE | NONE | OBSERVED | Technical system record | Preserve the exact protocol name |
+| C5 | System | uses | Redis Streams | NONE | NONE | OBSERVED | Technical system record | Preserve the exact component name |
+
+### Relationships and uncertainty
+
+- **Supported causal links:** NONE. C1 does not prove C2 or C3.
+- **Conflicts:** NONE.
+- **Unknowns that limit the text:** C2 has no recorded calculation method; C3 has no attribution evidence.
+- **Terms that must stay exact:** Holocron, GNSS, NMEA 0183 and Redis Streams.
+
+### Handoff
+
+- **Claims to include:** C1, C2, C3, C4 and C5.
+- **Claims to omit:** NONE.
+- **Reader action / question:** Treat the 30% figure as a programme estimate and collect evidence before attributing any share to Holocron.
+
+Only after this kernel is correct should a genre skill decide what belongs in the final prose.

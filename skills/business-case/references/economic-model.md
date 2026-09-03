@@ -93,7 +93,7 @@ Always name the counterfactual. It is usually Hold / do nothing, but use the act
 
 ### Shortcut when the counterfactual has zero relevant economics
 
-If the chosen counterfactual has zero relevant benefit, cost and quantified dis-benefit on the appraisal basis, the tested driver changes only the candidate option, every other attributable-benefit term is zero or cancels between the options, and every non-tested formula term remains constant across the tested range, a shortcut is valid:
+If the chosen counterfactual has zero relevant benefit, cost and quantified dis-benefit on the appraisal basis, `value per protected hour` is non-zero on that basis, the tested driver changes only the candidate option, every other attributable-benefit term is zero or cancels between the options, and every non-tested formula term remains constant across the tested range, a shortcut is valid:
 
 ```text
 Break-even protected hours =
@@ -106,6 +106,8 @@ Total economic burden =
 ```
 
 Do not use this shortcut when the counterfactual has its own material economics or response to the tested driver, or when a fixed attributable-benefit difference remains outside the tested protected-hours term.
+
+Never divide by a zero value term. Solve the complete option models and record whether there is no finite threshold or every tested value is equal, as appropriate.
 
 This shortcut returns **protected/recovered hours**. To express the threshold as affected time, divide protected hours by the candidate's attributable recovery rate when it is non-zero, or use the general formula below.
 

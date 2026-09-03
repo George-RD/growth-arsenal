@@ -91,10 +91,13 @@ Payback is when the candidate option under appraisal has recovered its **increme
 - **Later reversal:** [NONE, or first later period/date cumulative value becomes negative again]
 - **End-of-horizon cumulative amount:** [ ]
 - **Calculation / source:** [show the candidate-minus-counterfactual cumulative calculation]
+- **Cumulative schedule:** [one row per period from the first modelled period through the final appraisal period; the three rows below illustrate a three-period horizon]
 
 | Scenario | Period | Candidate cash flow / PV | Counterfactual cash flow / PV | Incremental amount | Cumulative incremental amount |
 |---|---|---:|---:|---:|---:|
-| Base | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Base | Period 1 | [ ] | [ ] | [ ] | [ ] |
+| Base | Period 2 | [ ] | [ ] | [ ] | [ ] |
+| Base | Period 3 / final period | [ ] | [ ] | [ ] | [ ] |
 
 Ignore any leading periods where both options have zero economics when identifying the first burden, but retain every non-zero period and every later period through the full appraisal horizon in this table. If every incremental amount through the horizon is zero, record `NO INCREMENTAL ECONOMICS` and no payback date. Otherwise, payback is the first period at or after the burden where cumulative value reaches zero or becomes positive. If it later becomes negative, keep the first-crossing payback date and disclose the reversal period separately. If there is no incremental burden but the schedule contains a non-zero amount, start the search at the first non-zero incremental period. If required inputs are unavailable, record `UNKNOWN` and name the evidence needed instead of omitting this section.
 
