@@ -59,6 +59,7 @@ jobs:
           done
           test -f ".agents/skills/business-case/templates/decision-model.md"
           test -f ".agents/skills/business-case/references/economic-model.md"
+          test -f ".agents/skills/voice-calibration/templates/voice-profile.md"
           test -f ".agents/skills/writing-core/references/factual-kernel.md"
       - name: Verify selective Skills CLI installs
         run: |
@@ -101,6 +102,7 @@ jobs:
           test -f "$RUNNER_TEMP/skills-selective-business-case/.agents/skills/business-case/evals/evals.json"
           test -f "$RUNNER_TEMP/skills-selective-executive-writing/.agents/skills/executive-writing/evals/evals.json"
           test -f "$RUNNER_TEMP/skills-selective-voice-calibration/.agents/skills/voice-calibration/evals/evals.json"
+          test -f "$RUNNER_TEMP/skills-selective-voice-calibration/.agents/skills/voice-calibration/templates/voice-profile.md"
           test -f "$RUNNER_TEMP/skills-selective-writing-core/.agents/skills/writing-core/references/factual-kernel.md"
           test -f "$RUNNER_TEMP/skills-selective-writing-core/.agents/skills/writing-core/evals/evals.json"
       - name: Verify selective offer dependency negotiation contract
@@ -147,13 +149,17 @@ jobs:
           )["evals"]
           by_name = {case["name"]: case for case in evals}
           missing_workspace = by_name["Missing workspace hard dependency"]
+          missing_writing = by_name["Missing writing generation hard dependency"]
           missing_copy = by_name["Missing copy quality dependency"]
 
           workspace_expectations = "\n".join(missing_workspace["expectations"])
+          writing_expectations = "\n".join(missing_writing["expectations"])
           copy_expectations = "\n".join(missing_copy["expectations"])
 
           assert workspace_command in workspace_expectations
           assert "does not offer a degraded or fallback workspace mode" in workspace_expectations
+          assert writing_command in writing_expectations
+          assert "does not generate customer-facing copy" in writing_expectations
           assert copy_command in copy_expectations
           assert "degraded/unverified" in copy_expectations
           assert "never claims" in copy_expectations
