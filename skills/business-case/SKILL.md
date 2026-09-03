@@ -68,9 +68,9 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
    - **Break-even:** where the recommended path's incremental net value versus the chosen counterfactual reaches zero for the tested driver.
    - **Switching value:** where the recommended path and a named competing option have equal net value and the preferred option changes beyond that point.
 
-   Use the same appraisal basis for payback as the option economics: cumulative net cash flow when discounting is not material, or cumulative present value when discounted payback is the approved basis. If payback does not occur within the horizon, record `NO PAYBACK WITHIN HORIZON`. If inputs are missing, record `UNKNOWN` and the evidence needed.
+   Use the same appraisal basis for payback as the option economics: cumulative net cash flow when discounting is not material, or cumulative present value when discounted payback is the approved basis. If the first modelled period is already non-negative versus the counterfactual, report immediate or first-period payback. If payback does not occur within the horizon, record `NO PAYBACK WITHIN HORIZON`. If inputs are missing, record `UNKNOWN` and the evidence needed.
 
-   The counterfactual for break-even and payback is usually Hold / do nothing. The competing option for switching may instead be the minimum/slower-change path. Break-even and switching may be recorded as `SAME` only when the option comparison, tested driver/assumption, appraisal basis and equality being solved are all identical. The same option pair with a different driver is still a different threshold.
+   The counterfactual for break-even and payback is usually Hold / do nothing. The competing option for switching may instead be the minimum/slower-change path. For each threshold, name the scenario and appraisal basis, and hold non-tested assumptions at that scenario's values unless explicit exceptions are recorded. Break-even and switching may be recorded as `SAME` only when the option comparison, tested driver/assumption, appraisal basis and equality being solved are all identical. The same option pair with a different driver is still a different threshold.
 
    Ask:
    - When does the recommended path recover its incremental economic burden versus the counterfactual?
@@ -80,7 +80,7 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
 
    A fragile case depends on a narrow set of favourable assumptions. A robust case survives a large error in the uncertain inputs.
 
-   *Done when:* the template records payback status/period, both threshold roles, the named counterfactual and competing option, the tested driver/basis, and the headroom from the base case.
+   *Done when:* the template records payback status/period, both threshold roles, the named counterfactual and competing option, each threshold's tested driver, scenario, appraisal basis and held-constant assumptions, and the headroom from the base case.
 
 6. **Separate programme value from component attribution**
    When several interventions create the outcome, model the programme result first. Then test whether the component being funded needs only a smaller attributable contribution to justify its incremental cost.
@@ -89,7 +89,14 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
 
    *Done when:* programme economics and component economics cannot be double-counted.
 
-7. **Decide what the next phase proves**
+7. **Test delivery feasibility and set governance**
+   Fill the template's Commercial and delivery feasibility section. Test the proposed path against vendors or partners, hardware and infrastructure, licences and contracts, procurement, delivery capacity and skills, operational support, lead times and sequencing. Record missing evidence as `UNKNOWN` or `UNAVAILABLE`; an attractive economic result does not prove the option can be delivered.
+
+   Name the executive, delivery, benefits and operational support owners. Add the material milestones and decision gates with their dates or windows, required evidence and exit conditions.
+
+   *Done when:* the recommendation has a credible, owned delivery path; every material commercial, capacity, support or timing constraint is evidenced or explicitly open; and later commitments cannot be confused with the current decision.
+
+8. **Decide what the next phase proves**
    A pilot should reduce uncertainty in the assumptions most likely to change the decision. Do not frame it as `find out whether there is any value` when the current model already supports investment.
 
    Prefer:
@@ -99,7 +106,7 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
 
    *Done when:* every pilot measure maps to a decision-driving assumption or operational risk.
 
-8. **Hand off to writing when prose is requested**
+9. **Hand off to writing when prose is requested**
    The decision model can run standalone. When the user wants a memo, report or presentation, resolve `writing-core` and `executive-writing` independently by skill name at this point.
 
    For each missing companion:

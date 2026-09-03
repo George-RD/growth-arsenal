@@ -74,7 +74,7 @@ Payback is when the recommended path has recovered its **incremental economic bu
 - **Counterfactual:** [normally Hold / do nothing, or state another]
 - **Scenario reported:** [Base; add Low/High when decision-relevant]
 - **Basis:** [cumulative incremental net cash flow / cumulative incremental present value]
-- **Payback period / date:** [period/date, NO PAYBACK WITHIN HORIZON, or UNKNOWN]
+- **Payback period / date:** [period/date, IMMEDIATE / FIRST-PERIOD PAYBACK, NO PAYBACK WITHIN HORIZON, or UNKNOWN]
 - **Calculation / source:** [show the recommended-minus-counterfactual cumulative calculation]
 
 | Scenario | Period | Recommended cash flow / PV | Counterfactual cash flow / PV | Incremental amount | Cumulative incremental amount |
@@ -88,7 +88,10 @@ Repeat period rows until payback occurs or the appraisal horizon ends. If requir
 Break-even is the point where the recommended path's **incremental net value versus the chosen counterfactual** reaches zero.
 
 - **Counterfactual:** [normally Hold / do nothing, or state another]
+- **Scenario:** [normally Base; state another when decision-relevant]
+- **Appraisal basis:** [horizon, currency/value basis and NPV treatment]
 - **Driver:** [e.g. affected productive time]
+- **Assumptions held constant:** [all non-tested inputs held at the named scenario values; list any exceptions]
 - **Break-even value:** [ ]
 - **Base-case value:** [ ]
 - **Headroom:** [ ]
@@ -99,7 +102,10 @@ Break-even is the point where the recommended path's **incremental net value ver
 Switching value is the point where a named competing option becomes preferable to the recommended option.
 
 - **Competing option:** [ ]
+- **Scenario:** [normally Base; state another when decision-relevant]
+- **Appraisal basis:** [horizon, currency/value basis and NPV treatment]
 - **Driver / assumption tested:** [ ]
+- **Assumptions held constant:** [all non-tested inputs held at the named scenario values; list any exceptions]
 - **Base-case value:** [ ]
 - **Switching value:** [ ]
 - **Distance / headroom:** [ ]
@@ -113,9 +119,30 @@ Switching value is the point where a named competing option becomes preferable t
 - **Programme-level effect that must not be assigned wholly to the component:** [ ]
 - **Component contribution required to justify its incremental cost:** [ ]
 
+## Commercial and delivery feasibility
+
+| Area | Requirement / dependency | Evidence / status | Owner | Lead time / constraint | Decision impact |
+|---|---|---|---|---|---|
+| Vendors / partners | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Hardware / infrastructure | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Licences / contracts / procurement | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Delivery capacity / skills | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Operational support model | [ ] | [ ] | [ ] | [ ] | [ ] |
+
 ## Risks and ownership
 
 | Risk | Why it matters | Mitigation / fallback | Owner | Decision trigger |
+|---|---|---|---|---|
+| [ ] | [ ] | [ ] | [ ] | [ ] |
+
+## Governance and delivery gates
+
+- **Executive owner:** [ ]
+- **Delivery owner:** [ ]
+- **Benefits owner:** [ ]
+- **Operational support owner:** [ ]
+
+| Milestone / decision gate | Owner | Date / window | Evidence required | Decision / exit condition |
 |---|---|---|---|---|
 | [ ] | [ ] | [ ] | [ ] | [ ] |
 

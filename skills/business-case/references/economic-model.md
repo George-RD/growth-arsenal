@@ -68,7 +68,7 @@ Cumulative incremental amount_t =
   sum of incremental amounts through period t
 ```
 
-Payback is the first period where the cumulative incremental amount reaches zero or becomes positive after an earlier negative balance.
+Payback is the first modelled period where the cumulative incremental amount is zero or positive. If it is already non-negative in period 1, report immediate or first-period payback according to the model's period definition. If it begins negative, payback is the first later period where it reaches zero or becomes positive.
 
 Use cumulative undiscounted incremental cash flow when discounting is not material. Use cumulative incremental present value when discounted payback is the approved basis. Always name the counterfactual and state which basis was used.
 
@@ -77,6 +77,7 @@ If payback does not occur before the appraisal horizon ends, record `NO PAYBACK 
 ## Break-even
 
 Break-even asks where the recommended path's **incremental net value versus the chosen counterfactual** reaches zero.
+Record the scenario used, normally Base; the appraisal basis; and the non-tested assumptions held constant at that scenario's values. List any exceptions so the threshold and headroom can be reproduced.
 
 Define:
 
@@ -125,6 +126,7 @@ A useful business-case slide often shows break-even before a large ROI estimate 
 ## Switching value
 
 A switching value is the value of an assumption where the recommended option and a **named competing option** have equal net value; beyond that point, the preferred option changes.
+Record the scenario used, normally Base; the appraisal basis; and the non-tested assumptions held constant at that scenario's values. List any exceptions so the crossover and headroom can be reproduced.
 
 Define:
 
