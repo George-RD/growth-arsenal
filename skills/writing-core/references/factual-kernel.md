@@ -8,6 +8,8 @@ The kernel is a semantic intermediate representation. It separates **what the te
 
 Write fragments or terse sentences. Do not optimise style.
 
+For multi-claim, uncertain or contradictory work, copy [`../templates/factual-kernel.md`](../templates/factual-kernel.md) and fill every applicable field before drafting prose.
+
 ## Record each material claim
 
 | Field | Question |

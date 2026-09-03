@@ -68,11 +68,11 @@ Cumulative incremental amount_t =
   sum of incremental amounts through period t
 ```
 
-Identify the first period containing an incremental economic burden; leading periods where both options have zero economics cannot trigger payback. Calculate and display cumulative incremental value through the full appraisal horizon. Payback is the first period at or after the burden where cumulative value reaches zero or becomes positive. If the burden period aggregates cost and benefit and already qualifies, report immediate or first-period payback according to the period convention. If cumulative value later becomes negative, keep the first-crossing payback date and disclose the reversal period separately. If there is no incremental burden, start the search at the first non-zero incremental period.
+Identify the first period containing an incremental economic burden; leading periods where both options have zero economics cannot trigger payback. Calculate and display cumulative incremental value through the full appraisal horizon. If every incremental amount in the horizon is zero, record `NO INCREMENTAL ECONOMICS` and no payback date. Otherwise, payback is the first period at or after the burden where cumulative value reaches zero or becomes positive. If the burden period aggregates cost and benefit and already qualifies, report immediate or first-period payback according to the period convention. If cumulative value later becomes negative, keep the first-crossing payback date and disclose the reversal period separately. If there is no incremental burden but the schedule contains a non-zero amount, start the search at the first non-zero incremental period.
 
 Use cumulative undiscounted incremental cash flow when discounting is not material. Use cumulative incremental present value when discounted payback is the approved basis. Always name the candidate option and counterfactual, and state which basis was used.
 
-If payback does not occur before the appraisal horizon ends, record `NO PAYBACK WITHIN HORIZON`. Disclose any later reversal after a payback crossing. If the required timing or value inputs are unavailable, record `UNKNOWN` and identify the evidence needed rather than omitting payback.
+If payback does not occur by the end of the appraisal horizon, record `NO PAYBACK WITHIN HORIZON`. Disclose any later reversal after a payback crossing. If the required timing or value inputs are unavailable, record `UNKNOWN` and identify the evidence needed rather than omitting payback.
 
 ## Break-even
 
@@ -93,7 +93,7 @@ Always name the counterfactual. It is usually Hold / do nothing, but use the act
 
 ### Shortcut when the counterfactual has zero relevant economics
 
-If the chosen counterfactual has zero relevant benefit, cost and quantified dis-benefit on the appraisal basis, the tested driver changes only the candidate option, and every other attributable-benefit term is zero or cancels between the options, a shortcut is valid:
+If the chosen counterfactual has zero relevant benefit, cost and quantified dis-benefit on the appraisal basis, the tested driver changes only the candidate option, every other attributable-benefit term is zero or cancels between the options, and every non-tested formula term remains constant across the tested range, a shortcut is valid:
 
 ```text
 Break-even protected hours =
@@ -121,7 +121,7 @@ Affected-time break-even =
 
 Here each `burden` uses non-overlapping cost components: future incremental cost plus only separately quantified dis-benefits not already included in that cost.
 
-Use this only when the denominator is non-zero, every non-tested benefit difference is zero or cancels, and the simplified assumptions hold. Otherwise solve the two complete option cash-flow models directly.
+Use this only when the denominator is non-zero, both burden terms, `value_per_hour`, both recovery terms and every other non-tested formula term remain constant across the tested affected-time range, every non-tested benefit difference is zero or cancels, and the simplified assumptions hold. Otherwise solve the two complete option cash-flow models directly.
 
 A useful business-case slide often shows break-even before a large ROI estimate because it lets the audience judge how much benefit the candidate option must add over the counterfactual.
 
@@ -156,7 +156,7 @@ Affected-time switching value =
   ÷ [value_per_hour × (recovery_candidate - recovery_competing)]
 ```
 
-Use this only when the denominator is non-zero, every non-tested benefit difference is zero or cancels, and the simplified assumptions hold. Otherwise solve the two complete option cash-flow models directly.
+Use this only when the denominator is non-zero, both burden terms, `value_per_hour`, both recovery terms and every other non-tested formula term remain constant across the tested affected-time range, every non-tested benefit difference is zero or cancels, and the simplified assumptions hold. Otherwise solve the two complete option cash-flow models directly.
 
 ### Example: recovery-rate switching value
 
@@ -169,7 +169,7 @@ Recovery switching value for candidate option =
     ÷ (affected_time × value_per_hour)
 ```
 
-Use this shortcut only when `affected_time` and `value_per_hour` are both non-zero, every non-tested benefit difference is zero or cancels, and the simplified assumptions hold. Otherwise solve the complete option models directly.
+Use this shortcut only when `affected_time` and `value_per_hour` are both non-zero and constant, both burden terms, `recovery_competing` and every other non-tested formula term remain constant across the tested candidate-recovery range, every non-tested benefit difference is zero or cancels, and the simplified assumptions hold. Otherwise solve the complete option models directly.
 
 ### Example: maximum support cost
 

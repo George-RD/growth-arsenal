@@ -7,6 +7,7 @@
       "expected_output": "A factual kernel plus a short wiki explanation that preserves the observed count, sourced programme estimate, attribution unknown, provenance, and necessary technical terms without inventing causal links.",
       "expectations": [
         "The response builds or explicitly reasons from a factual kernel before polished prose.",
+        "Because the input has multiple material and uncertain claims, the factual kernel follows the copyable template fields rather than inventing a freeform record.",
         "The observed message count, the 30% estimate and the attribution unknown remain separate claims.",
         "Claim status is recorded separately from provenance; the 30% remains an estimate even though it has a named source.",
         "The response keeps NMEA 0183 and Redis Streams while simplifying surrounding language.",

@@ -22,6 +22,7 @@
         "The response records `SAME` for break-even and switching only when the option pair, tested driver or assumption, appraisal basis and equality being solved are all identical; the same option pair alone is insufficient.",
         "The response records the base-case value and the distance or headroom to the relevant threshold.",
         "Each break-even and switching threshold names the scenario, full appraisal basis including period convention, and assumptions held constant except for the tested driver.",
+        "A break-even or switching shortcut is used only when every non-tested formula term remains constant across the tested driver's range; otherwise the complete option models are solved directly.",
         "The 30% wider-programme recovery is not attributed wholesale to Holocron.",
         "If the selected or conditional path includes a pilot or further evidence stage, its measures map to assumptions, feasibility constraints or risks that affect the later decision; otherwise the section records `N/A` and why.",
         "Material non-financial and secondary benefits remain visible by option with evidence status and overlap treatment rather than being omitted or assigned speculative cash values.",
@@ -29,6 +30,7 @@
         "Governance names executive, delivery, benefits and operational support ownership and records material milestones or decision gates with required evidence and exit conditions.",
         "The recommendation follows the completed option economics and evidence; it records the selected option, recommendation status and deciding condition or missing evidence separately, and may select any option or remain conditional or `UNKNOWN` rather than treating the bounded pilot as a predetermined winner.",
         "If cumulative incremental value is non-negative in the first period containing the candidate's incremental burden, payback is reported as immediate or first-period payback rather than `NO PAYBACK WITHIN HORIZON`; leading periods where both options have zero economics do not trigger payback.",
+        "If every incremental amount through the horizon is zero, payback is recorded as `NO INCREMENTAL ECONOMICS` with no payback date rather than `UNKNOWN`, immediate payback or `NO PAYBACK WITHIN HORIZON`.",
         "The payback schedule continues through the horizon; a later negative balance is disclosed as a reversal without changing the required first-crossing payback date.",
         "Every conditional or unknown recommendation maps its deciding condition or missing evidence to the Next evidence table; `N/A` is reserved for a settled recommendation with no further evidence stage."
       ]

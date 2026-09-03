@@ -6,11 +6,9 @@
 - Personas: [names and one-line summaries]
 
 
-## Research Brief — The Living Document
+## Research Brief — The Rendered View
 
-The Research Brief is not a one-time dump. It's a structured working file that gets written to and read from throughout the entire workshop. You search for data when you need it, store it where it belongs, and reference it when making decisions.
-
-File: `{project-name}-research.md`
+The canonical research state lives in `{project-name}.arsenal.json` and grows throughout the workshop. Search for data when needed, apply source evidence to that workspace, and use it when making decisions. `{project-name}-research.md` is the rendered read-only view.
 
 Organized by what each phase actually needs. When you hit a phase, check the brief. If data's missing, research. If it's there, use it.
 
@@ -37,17 +35,17 @@ Updated: [date]
 
 Before running any web searches in Phase 0, ask the user:
 
-> *"Do you have existing research on this market? This could include competitor analysis, customer interviews, market data, forum threads, or notes. If yes, share it and I'll organize it into our Research Brief, then identify gaps. If not, I'll build it from scratch with targeted web searches."*
+> *"Do you have existing research on this market? This could include competitor analysis, customer interviews, market data, forum threads, or notes. If yes, share it and I'll organise it in our canonical research workspace, render the Research Brief, then identify gaps. If not, I'll build it from scratch with targeted web searches."*
 
-**If user provides research:** Store the source facts/evidence in the Research Brief, run gap analysis, search only for missing data. Do not turn raw evidence into narrative market claims before the Writing Generation Gate below.
+**If user provides research:** Apply the source facts/evidence to the canonical workspace, render the Research Brief, run gap analysis, and search only for missing data. Do not turn raw evidence into narrative market claims before the Writing Generation Gate below.
 
-**When there's no existing research:** Proceed with comprehensive web searches, storing source evidence in the Research Brief as data comes in.
+**When there's no existing research:** Proceed with comprehensive web searches, applying source evidence to the canonical workspace as it arrives and rendering the Research Brief when needed.
 
-**If partial:** Store what the user provides, gap-analyze, search for what's missing.
+**If partial:** Apply what the user provides to the canonical workspace, render, gap-analyse, and search for what's missing.
 
 ### Gap Analysis Protocol
 
-Before EACH phase, check the Research Brief against what that phase needs. Display the results:
+Before EACH phase, check the canonical research state through the rendered Research Brief against what that phase needs. Display the results:
 
 ```text
 === Gap Analysis: Phase [X] ===
@@ -82,7 +80,7 @@ If any item shows `[GAP]`, run targeted web searches or prompt the user before p
 
 ### Persona Evolution Protocol
 
-Personas are not static. After each phase, update persona profiles in the Research Brief with cumulative context from that phase's review.
+Personas are not static. After each phase, apply cumulative persona context from that phase's review to the canonical workspace, then render the Research Brief.
 
 ```text
 Phase 0: Base profile (demographics, pain points, current situation)
@@ -95,7 +93,7 @@ Phase 5: + "With this guarantee + name, I'd buy / final hesitation is X"
 
 This cumulative context gets passed to persona agents in each subsequent phase. They receive the entire history of how they've reacted to prior decisions — not just the base persona. This makes feedback progressively more informed and specific.
 
-**Update personas in the Research Brief after each phase review. Do not skip this.**
+**Update personas in the canonical workspace and render the Research Brief after each phase review. Do not skip this.**
 
 ---
 
@@ -124,7 +122,7 @@ After processing any user-provided research, run gap-targeted web searches. Defa
 4. **Pricing benchmarks**: `"[product/service type] pricing [audience segment]"`
 5. **Buying patterns**: `"[audience] buying behavior [market] survey OR report"`
 
-Store the raw/source findings in the Research Brief. Before synthesizing or presenting a human-readable market snapshot, run the **Writing Generation Gate** in the parent skill: resolve `writing-core`, build a factual kernel from the research evidence and approved discovery facts, then generate the snapshot from that kernel.
+Apply the raw/source findings to the canonical workspace. Before synthesising or presenting a human-readable market snapshot, run the **Writing Generation Gate** in the parent skill: resolve `writing-core`, build a factual kernel from the research evidence and approved discovery facts, then generate the snapshot from that kernel.
 
 If `writing-core` is unavailable, keep the source evidence and Phase 0 state, show the parent skill's install command, and pause only human-readable synthesis. Do not write a fallback market narrative.
 

@@ -22,6 +22,7 @@ Do not duplicate a missing companion's method as a local fallback.
 ## Sequence
 
 1. **Build the factual kernel**
+   For more than one material claim, or any uncertain or contradictory source, copy [`templates/factual-kernel.md`](templates/factual-kernel.md) and fill its brackets. Do not replace its fields with a freeform schema.
    Write the minimum complete meaning as rough statements before prose:
    - subject or owner;
    - action, state or claim;

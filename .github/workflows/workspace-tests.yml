@@ -61,6 +61,7 @@ jobs:
           test -f ".agents/skills/business-case/references/economic-model.md"
           test -f ".agents/skills/voice-calibration/templates/voice-profile.md"
           test -f ".agents/skills/writing-core/references/factual-kernel.md"
+          test -f ".agents/skills/writing-core/templates/factual-kernel.md"
       - name: Verify selective Skills CLI installs
         run: |
           set -euo pipefail
@@ -104,6 +105,7 @@ jobs:
           test -f "$RUNNER_TEMP/skills-selective-voice-calibration/.agents/skills/voice-calibration/evals/evals.json"
           test -f "$RUNNER_TEMP/skills-selective-voice-calibration/.agents/skills/voice-calibration/templates/voice-profile.md"
           test -f "$RUNNER_TEMP/skills-selective-writing-core/.agents/skills/writing-core/references/factual-kernel.md"
+          test -f "$RUNNER_TEMP/skills-selective-writing-core/.agents/skills/writing-core/templates/factual-kernel.md"
           test -f "$RUNNER_TEMP/skills-selective-writing-core/.agents/skills/writing-core/evals/evals.json"
       - name: Verify selective offer dependency negotiation contract
         run: |
