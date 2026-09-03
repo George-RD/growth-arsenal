@@ -39,11 +39,11 @@ Before running any web searches in Phase 0, ask the user:
 
 > *"Do you have existing research on this market? This could include competitor analysis, customer interviews, market data, forum threads, or notes. If yes, share it and I'll organize it into our Research Brief, then identify gaps. If not, I'll build it from scratch with targeted web searches."*
 
-**If user provides research:** Parse into Research Brief sections, run gap analysis, search only for missing data.
+**If user provides research:** Store the source facts/evidence in the Research Brief, run gap analysis, search only for missing data. Do not turn raw evidence into narrative market claims before the Writing Generation Gate below.
 
-**When there's no existing research:** Proceed with comprehensive web searches, filling the Research Brief as data comes in.
+**When there's no existing research:** Proceed with comprehensive web searches, storing source evidence in the Research Brief as data comes in.
 
-**If partial:** Fill what the user provides, gap-analyze, search for what's missing.
+**If partial:** Store what the user provides, gap-analyze, search for what's missing.
 
 ### Gap Analysis Protocol
 
@@ -124,11 +124,15 @@ After processing any user-provided research, run gap-targeted web searches. Defa
 4. **Pricing benchmarks**: `"[product/service type] pricing [audience segment]"`
 5. **Buying patterns**: `"[audience] buying behavior [market] survey OR report"`
 
-Write all findings into the Research Brief. Synthesize into a brief market snapshot and present to the user.
+Store the raw/source findings in the Research Brief. Before synthesizing or presenting a human-readable market snapshot, run the **Writing Generation Gate** in the parent skill: resolve `writing-core`, build a factual kernel from the research evidence and approved discovery facts, then generate the snapshot from that kernel.
+
+If `writing-core` is unavailable, keep the source evidence and Phase 0 state, show the parent skill's install command, and pause only human-readable synthesis. Do not write a fallback market narrative.
 
 ### Step 4: Build Customer Personas
 
-From research, construct 2-3 **distinct** customer personas. Each must include:
+First structure the persona evidence from the approved research: demographics or role where supported, specific pains, current solutions, spending evidence, objections, desired outcomes, channels and buying signals. Then use the same **Writing Generation Gate** before turning those fields into human-readable persona descriptions.
+
+From that source-bounded synthesis, construct 2-3 **distinct** customer personas. Each must include:
 
 | Field | Description |
 |-------|-------------|
@@ -159,10 +163,10 @@ Once personas are validated, confirm:
 
 ### Phase 0 Output
 
-1. Write initial `{project-name}-offer.md` with Phase 0 section
+1. Write initial `{project-name}-offer.md` with Phase 0 section from approved, source-bounded Phase 0 synthesis
 2. Create `{project-name}-settings.md` recording the confirmed spelling preference (read by the business-copy-style skill at copy time)
-3. Generate `{project-name}-research-dashboard.html` using the `templates/research-dashboard.md` spec, populated with Research Brief data. Open in browser: `open {project-name}-research-dashboard.html`
-4. Generate `{project-name}-workshop-progress.html` using the `templates/workshop-progress.md` spec. Open in browser.
+3. Generate `{project-name}-research-dashboard.html` from the canonical workspace after Phase 0 state is applied
+4. Generate `{project-name}-workshop-progress.html` from the canonical workspace after Phase 0 state is applied
 
 ---
 
