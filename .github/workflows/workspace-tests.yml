@@ -43,6 +43,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/skills-smoke"
           cd "$RUNNER_TEMP/skills-smoke"
           npx --yes skills@1.5.23 add "$GITHUB_WORKSPACE" --skill '*' -a codex -y --copy
+          # Keep this list exhaustive for every skill shipped by the plugin manifest.
           for skill in \
             business-case \
             business-copy-style \
