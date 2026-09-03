@@ -145,7 +145,7 @@ From that source-bounded synthesis, construct 2-3 **distinct** customer personas
 | **Where They Hang Out** | Specific platforms, communities, events |
 | **Buying Psychology** | What triggers their purchase decisions |
 
-Write personas to the Research Brief. **Present to user for validation.** Adjust based on their real-world customer knowledge — they know their market better than web research does.
+Keep the personas as structured candidate data and **present them to the user for validation**. Adjust them from the user's real customer knowledge. After approval, apply the persona data to the canonical workspace and render the Research Brief; do not write the generated view directly.
 
 ### Step 5: Confirm Team Roster
 
