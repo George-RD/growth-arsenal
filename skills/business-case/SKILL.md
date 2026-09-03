@@ -45,9 +45,9 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
    *Done when:* a sceptic can replace any assumption without rebuilding the model, and every material claim has explicit provenance or `UNAVAILABLE`.
 
 4. **Choose one appraisal horizon and model low, base and high cases**
-   Put every option on the same cash-flow timeline before comparing value. Schedule upfront CAPEX, recurring OPEX, quantified dis-benefits and benefits in the periods where they occur. If timing is material or Finance requires it, use the approved discount rate and compare NPV. Do not compare one year of benefit with lifecycle cost.
+   Put every option on the same appraisal horizon and period definitions before comparing value. Schedule upfront CAPEX, recurring OPEX, quantified dis-benefits and benefits in the periods where they occur. If timing is material or Finance requires it, use the approved discount rate and compare NPV. Do not compare one year of benefit with lifecycle cost.
 
-   Use ranges where uncertainty is material. Keep the base case as the best current estimate, not automatically the most conservative value.
+   Use ranges where uncertainty is material. Keep the base case as the best current estimate, not automatically the most conservative value. Cash-flow timing may vary across Low/Base/High when implementation delay, benefit ramp, cost slippage or another timing change is itself an explicit scenario assumption; keep the horizon and period basis consistent so the scenarios remain comparable.
 
    Separate:
    - primary financial outcome;
@@ -56,11 +56,11 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
    - historical sunk cost;
    - future incremental cost.
 
-   Quantify a dis-benefit when a defensible cost or time measure exists. Otherwise keep it visible as a non-financial negative effect in the option comparison. Never count the same effect twice.
+   Quantify a dis-benefit when a defensible cost or time measure exists. Keep the monetary fields non-overlapping: if an effect is already inside future incremental cost, do not also record it as a separate quantified dis-benefit. Otherwise keep it visible as a non-financial negative effect in the option comparison. Never count the same effect twice.
 
    Read [`references/economic-model.md`](references/economic-model.md) for appraisal-horizon, payback, break-even, switching and attribution rules.
 
-   *Done when:* every option and scenario uses the same horizon and cost basis, certain negative effects are included, and the recommendation can be tested across plausible conditions.
+   *Done when:* every option and scenario uses the same horizon and cost/value basis, intended timing assumptions are explicit, certain negative effects are included once, and the recommendation can be tested across plausible conditions.
 
 5. **Calculate payback, break-even and switching values**
    Calculate all three:
@@ -70,7 +70,7 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
 
    Use the same appraisal basis for payback as the option economics: cumulative net cash flow when discounting is not material, or cumulative present value when discounted payback is the approved basis. If payback does not occur within the horizon, record `NO PAYBACK WITHIN HORIZON`. If inputs are missing, record `UNKNOWN` and the evidence needed.
 
-   The counterfactual for break-even and payback is usually Hold / do nothing. The competing option for switching may instead be the minimum/slower-change path. If the counterfactual and competing option are genuinely the same, the two threshold values may coincide; record that explicitly rather than manufacturing a different number.
+   The counterfactual for break-even and payback is usually Hold / do nothing. The competing option for switching may instead be the minimum/slower-change path. Break-even and switching may be recorded as `SAME` only when the option comparison, tested driver/assumption, appraisal basis and equality being solved are all identical. The same option pair with a different driver is still a different threshold.
 
    Ask:
    - When does the recommended path recover its incremental economic burden versus the counterfactual?
@@ -80,7 +80,7 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
 
    A fragile case depends on a narrow set of favourable assumptions. A robust case survives a large error in the uncertain inputs.
 
-   *Done when:* the template records payback status/period, both threshold roles, the named counterfactual and competing option, and the headroom from the base case.
+   *Done when:* the template records payback status/period, both threshold roles, the named counterfactual and competing option, the tested driver/basis, and the headroom from the base case.
 
 6. **Separate programme value from component attribution**
    When several interventions create the outcome, model the programme result first. Then test whether the component being funded needs only a smaller attributable contribution to justify its incremental cost.
