@@ -51,7 +51,7 @@ Use the same appraisal horizon and cash-flow timing in all three scenarios so on
 
 ## Break-even
 
-Solve for the uncertain driver that makes net value zero on the same cost basis and appraisal horizon.
+Break-even asks when the recommended path reaches zero net value against the chosen counterfactual.
 
 Example:
 
@@ -67,15 +67,52 @@ A useful business-case slide often shows this number before a large ROI estimate
 
 ## Switching value
 
-A switching value is the point at which an assumption changes the preferred option.
+A switching value is **not another break-even calculation**. It is the value of an assumption where the recommended option and a named competing option have equal net value; beyond that point, the preferred option changes.
 
-Examples:
+Define:
 
-- minimum affected vessel-hours before the programme pays;
-- maximum annual support cost before a slower option wins;
-- minimum recovery rate needed for positive net value.
+```text
+Advantage(x) =
+  Net value of recommended option at x
+  - Net value of competing option at x
 
-Show the distance between the base assumption and switching value. Keep the underlying appraisal horizon unchanged while testing that assumption.
+Switching value = x where Advantage(x) = 0
+```
+
+Always name the competing option in the model.
+
+### Example: affected productive time
+
+If both options use the same value per protected hour and affected time, but have different attributable recovery and total economic burden:
+
+```text
+Total burden =
+  future incremental cost
+  + quantified dis-benefits
+
+Affected-time switching value =
+  (burden_recommended - burden_competing)
+  ÷ [value_per_hour × (recovery_recommended - recovery_competing)]
+```
+
+Use this only when the denominator is non-zero and the simplified assumptions hold. Otherwise solve the two complete option cash-flow models directly.
+
+### Example: recovery-rate switching value
+
+For a fixed affected-time base:
+
+```text
+Recovery switching value for recommended option =
+  recovery_competing
+  + (burden_recommended - burden_competing)
+    ÷ (affected_time × value_per_hour)
+```
+
+### Example: maximum support cost
+
+Solve for the recommended option's support cost where its net value equals the competing option's net value. This is an option-crossover threshold, not the point where the recommended option merely reaches zero.
+
+Show the distance between the base assumption and the switching value. Keep the underlying appraisal horizon unchanged while testing that assumption.
 
 ## Attribution
 
