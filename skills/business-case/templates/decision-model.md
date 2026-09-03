@@ -33,7 +33,7 @@ Every material input needs a claim status and evidence provenance. `Owner` is se
 
 ## Cash-flow schedule
 
-Use one row per **scenario, option and period**. For a one-period appraisal, include Low/Base/High rows for each option. For a multi-period appraisal, repeat each scenario/option across every material period needed to reproduce NPV and payback.
+Use one row per **scenario, option and period**. For a one-period appraisal, include Low/Base/High rows for each option. For a multi-period appraisal, repeat each scenario/option across every material period needed to reproduce NPV and payback. Keep the appraisal horizon and period definitions consistent across scenarios; allow timing to differ when implementation delay, benefit ramp, cost slippage or another timing change is itself an explicit scenario assumption.
 
 | Scenario | Period | Option | Attributable benefit | Future incremental cost | Quantified dis-benefits | Net cash flow | Discount factor | Present value |
 |---|---|---|---:|---:|---:|---:|---:|---:|
@@ -99,12 +99,12 @@ Break-even is the point where the recommended path's **incremental net value ver
 Switching value is the point where a named competing option becomes preferable to the recommended option.
 
 - **Competing option:** [ ]
-- **Driver:** [ ]
+- **Driver / assumption tested:** [ ]
 - **Base-case value:** [ ]
 - **Switching value:** [ ]
 - **Distance / headroom:** [ ]
 - **Calculation / source:** [show equality/crossover using both option models]
-- **Relationship to break-even:** [different threshold, or SAME because counterfactual = competing option]
+- **Relationship to break-even:** [different threshold, or SAME only when the counterfactual/competitor, tested driver or assumption, appraisal basis and calculation are all identical]
 
 ## Programme and component attribution
 
