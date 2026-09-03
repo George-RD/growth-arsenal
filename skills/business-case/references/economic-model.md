@@ -7,9 +7,11 @@ Put costs and benefits on the same time basis before comparing them.
 1. Choose the appraisal horizon that matches the decision: for example a 12-month pilot or a multi-year operating life.
 2. Schedule upfront CAPEX when it occurs.
 3. Schedule recurring OPEX, quantified dis-benefits and benefits in the periods when they occur.
-4. Use the same units and time basis across every option.
+4. Use the same units and period definitions across every option and scenario.
 5. When timing is material or Finance requires it, discount future cash flows using the approved rate and compare net present value (NPV), not undiscounted totals from different periods.
-6. Calculate payback from cumulative **incremental** cash flow or present value of the recommended option versus the named counterfactual on that same schedule.
+6. Calculate payback from cumulative **incremental** cash flow or present value of the recommended option versus the named counterfactual on that same appraisal basis.
+
+Keep the appraisal horizon and period definitions constant across Low/Base/High. Cash-flow timing **may vary** when implementation delay, benefit ramp, cost slippage or another timing change is itself an explicit scenario assumption. Do not force identical timing and thereby hide a material uncertainty.
 
 Do not compare one year of benefit with lifecycle cost, or lifecycle benefit with one year of cost.
 
@@ -21,10 +23,12 @@ Within the chosen appraisal horizon:
 Net value =
   attributable benefit
   - future incremental cost
-  - quantified dis-benefits
+  - separately quantified dis-benefits
 ```
 
-If a dis-benefit is already included in future incremental cost, do not subtract it again. Keep material dis-benefits that cannot be defensibly monetised visible in the option comparison rather than assigning a speculative cash value.
+The cost components must be non-overlapping. `Separately quantified dis-benefits` means only dis-benefits **not already included** in future incremental cost. If a source cost bundles a training, transition or parallel-running impact, either split the bundle into non-overlapping fields or set the separate dis-benefit amount for that effect to zero. Never count the same effect twice.
+
+Keep material dis-benefits that cannot be defensibly monetised visible in the option comparison rather than assigning a speculative cash value.
 
 For recovered productive time:
 
@@ -47,7 +51,7 @@ Use three scenarios when uncertainty is material:
 
 Do not make the low case absurdly pessimistic or the high case aspirational.
 
-Use the same appraisal horizon and cash-flow timing in all three scenarios so only the intended assumptions change.
+Use the same appraisal horizon, period definitions and cost/value basis in all three scenarios. Allow the values **and timing** of cash flows to vary when those changes are explicit scenario assumptions.
 
 ## Payback
 
@@ -97,7 +101,7 @@ Break-even protected hours =
 
 Total economic burden =
   future incremental cost
-  + quantified dis-benefits
+  + separately quantified dis-benefits not already included in that cost
 ```
 
 Do not use this shortcut when the counterfactual has its own material benefit, cost, dis-benefit or response to the tested driver.
@@ -111,6 +115,8 @@ Affected-time break-even =
   (burden_recommended - burden_counterfactual)
   ÷ [value_per_hour × (recovery_recommended - recovery_counterfactual)]
 ```
+
+Here each `burden` uses non-overlapping cost components: future incremental cost plus only separately quantified dis-benefits not already included in that cost.
 
 Use this only when the denominator is non-zero and the simplified assumptions hold. Otherwise solve the two complete option cash-flow models directly.
 
@@ -139,7 +145,7 @@ If both options use the same value per protected hour and affected time, but hav
 ```text
 Total burden =
   future incremental cost
-  + quantified dis-benefits
+  + separately quantified dis-benefits not already included in that cost
 
 Affected-time switching value =
   (burden_recommended - burden_competing)
@@ -159,6 +165,8 @@ Recovery switching value for recommended option =
     ÷ (affected_time × value_per_hour)
 ```
 
+Use this shortcut only when `affected_time` and `value_per_hour` are both non-zero and the simplified assumptions hold. Otherwise solve the complete option models directly.
+
 ### Example: maximum support cost
 
 Solve for the recommended option's support cost where its net value equals the competing option's net value. This is an option-crossover threshold, not the point where the recommended option merely reaches zero.
@@ -167,7 +175,7 @@ Show the distance between the base assumption and the switching value. Keep the 
 
 ### When break-even and switching coincide
 
-If the named counterfactual for break-even is also the named competing option for switching, the same option-crossover equation can produce the same threshold. Record that relationship explicitly. Do not manufacture a different switching value merely to make the table contain two numbers.
+Record `SAME` only when the threshold calculations are genuinely identical: the break-even counterfactual and switching competitor are the same option, the tested driver or assumption is the same, the appraisal basis is the same, and the same equality is being solved. If any of those differ, calculate and record separate thresholds even when the option pair is identical.
 
 ## Attribution
 
