@@ -161,3 +161,45 @@ jobs:
       - name: Compile Python scripts
         run: |
           python -m py_compile skills/growth-arsenal-workspace/scripts/*.py
+          python -m py_compile skills/business-copy-style/scripts/copy-compare.py
+      - name: Run workspace tests
+        run: python -m unittest discover -s skills/growth-arsenal-workspace/tests -v
+      - name: Run copy comparison tests
+        run: python -m unittest discover -s skills/business-copy-style/tests -v
+      - name: Render workspace fixture
+        run: |
+          cp skills/growth-arsenal-workspace/assets/fixtures/demo-workspace.json /tmp/demo.arsenal.json
+          python skills/growth-arsenal-workspace/scripts/arsenal.py render \
+            --workspace /tmp/demo.arsenal.json \
+            --surface all \
+            --output-dir /tmp/growth-arsenal-reports
+          ! grep -R -E '\{\{[A-Z_]+\}\}' /tmp/growth-arsenal-reports/*.html
+      - name: Reproduce landing copy comparisons
+        run: |
+          python skills/business-copy-style/scripts/copy-compare.py \
+            --baseline evaluations/fixtures/landing-page-old.txt \
+            --candidate evaluations/fixtures/landing-page-new.txt \
+            --baseline-label "Variant A" \
+            --candidate-label "Variant B" \
+            --format json > /tmp/old-vs-new.json
+          python skills/business-copy-style/scripts/copy-compare.py \
+            --baseline evaluations/fixtures/landing-page-new.txt \
+            --candidate evaluations/fixtures/landing-page-hybrid.txt \
+            --baseline-label "Variant B" \
+            --candidate-label "Variant C" \
+            --format json > /tmp/new-vs-hybrid.json
+          sh skills/business-copy-style/scripts/copy-lint.sh \
+            evaluations/fixtures/landing-page-hybrid-hero.txt
+          python - <<'PY'
+          import json
+          with open('/tmp/old-vs-new.json', encoding='utf-8') as handle:
+              first = json.load(handle)
+          with open('/tmp/new-vs-hybrid.json', encoding='utf-8') as handle:
+              second = json.load(handle)
+          assert first['winner'] is None
+          assert second['winner'] is None
+          assert first['baseline']['em_dashes'] == 0
+          assert first['candidate']['em_dashes'] == 0
+          assert second['candidate']['em_dashes'] == 0
+          assert second['candidate']['flesch_kincaid_grade'] <= second['baseline']['flesch_kincaid_grade']
+          PY
