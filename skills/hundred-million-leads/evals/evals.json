@@ -26,10 +26,10 @@
     {
       "id": 3,
       "name": "Writing and copy dependencies available",
-      "prompt": "writing-core and business-copy-style are installed and resolvable by skill name. Start a $100M Leads workshop for my bookkeeping firm, complete Phase 0 discovery and the offer audit including the Lead Gen Landscape report, then take me into Phase 1 through the first point where you need customer-facing copy.",
-      "expected_output": "Normal Leads workshop behavior that gathers raw evidence first, uses writing-core for the Phase 0 research synthesis and later first customer-facing candidate, then uses business-copy-style only at the customer-facing copy checkpoint without install prompts or degraded status.",
+      "prompt": "writing-core and business-copy-style are installed and resolvable by skill name. Start a $100M Leads workshop for my bookkeeping firm, complete Phase 0 discovery and the offer audit including the Lead Gen Landscape report and narrative customer personas, then take me into Phase 1 through the first point where you need customer-facing copy.",
+      "expected_output": "Normal Leads workshop behavior that gathers raw and structured evidence first, uses writing-core for the Phase 0 report, persona synthesis and later first customer-facing candidate, then uses business-copy-style only at the customer-facing copy checkpoint without install prompts or degraded status.",
       "expectations": [
-        "The output may gather raw Phase 0 research evidence before invoking writing-core, but the human-readable Lead Gen Landscape report is generated through writing-core.",
+        "The output may gather raw Phase 0 research and structured persona evidence before invoking writing-core, but the human-readable Lead Gen Landscape report and narrative persona descriptions are generated through writing-core.",
         "The output does not ask to install writing-core when the Phase 0 research synthesis begins because it is available.",
         "The output does not prompt about business-copy-style merely for the internal Phase 0 research report.",
         "At the first customer-facing copy checkpoint in Phase 1, writing-core generates the candidate from approved meaning and business-copy-style then reviews that candidate without an install prompt.",
@@ -54,11 +54,11 @@
     {
       "id": 5,
       "name": "Missing writing-core during Phase 0 synthesis",
-      "prompt": "I already supplied discovery facts and you gathered raw web evidence for my bookkeeping lead-generation market. We are about to turn that evidence into the Phase 0 Lead Gen Landscape report, but writing-core cannot be resolved by skill name. Continue from this exact state without discarding the research.",
-      "expected_output": "The workshop preserves raw evidence and approved discovery/offer-audit state, pauses only human-readable synthesis, gives the writing-core install command, and resumes the Phase 0 report from the same evidence after installation rather than writing a fallback report.",
+      "prompt": "I already supplied discovery facts and you gathered raw web evidence plus structured persona facts for my bookkeeping lead-generation market. We are about to turn that evidence into the Phase 0 Lead Gen Landscape report and narrative customer personas, but writing-core cannot be resolved by skill name. Continue from this exact state without discarding the research.",
+      "expected_output": "The workshop preserves raw evidence, structured persona facts and approved discovery/offer-audit state, pauses only human-readable report and persona synthesis, gives the writing-core install command, and resumes Phase 0 from the same evidence after installation rather than writing fallback prose.",
       "expectations": [
-        "The output does not produce the Lead Gen Landscape prose while writing-core is unavailable.",
-        "The output preserves the raw research evidence and structured discovery/offer-audit decisions.",
+        "The output does not produce the Lead Gen Landscape report or narrative persona prose while writing-core is unavailable.",
+        "The output preserves the raw research evidence, structured persona facts and discovery/offer-audit decisions.",
         "The output shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
         "The output says the Phase 0 synthesis can resume from the same evidence after writing-core becomes available.",
         "The output does not recreate writing-core locally or postpone the requirement until Phase 1 customer copy."

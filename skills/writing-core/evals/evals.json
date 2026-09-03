@@ -38,6 +38,19 @@
         "The response says modelling can resume from the preserved evidence after installation.",
         "The response does not recreate business-case guidance locally."
       ]
+    },
+    {
+      "id": 3,
+      "name": "Missing customer-copy quality dependency",
+      "prompt": "writing-core has produced a useful customer-facing candidate from an approved factual kernel, but business-copy-style cannot be resolved by skill name. Explain the options, then assume I explicitly choose to continue without installing it.",
+      "expected_output": "The response offers installation or degraded continuation, shows the standard business-copy-style command, honours the explicit degraded choice with minimum safety checks, and labels the copy degraded/unverified without imitating the missing method.",
+      "expectations": [
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill business-copy-style`.",
+        "The response offers installation or degraded continuation before following the explicit choice.",
+        "The response labels the affected copy `degraded/unverified` and does not claim the quality gate passed.",
+        "The degraded path keeps claims grounded in the approved kernel, uses plain language and surfaces unknowns.",
+        "The response does not reproduce business-copy-style lint thresholds, rubrics or reader-panel method."
+      ]
     }
   ]
 }

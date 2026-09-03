@@ -28,6 +28,8 @@ Every material input needs a claim status and evidence provenance. `Owner` is se
 ## Appraisal basis
 
 - **Horizon:** [e.g. 12 months / 3 years]
+- **Period anchor and interval:** [start date / t0; month, quarter or year]
+- **Cash-flow timing convention:** [period start / mid-period / period end]
 - **Currency / value basis:** [ ]
 - **Discount rate / NPV treatment:** [rate or NOT MATERIAL]
 - **Sunk costs excluded from next-decision economics:** [ ]
@@ -35,9 +37,9 @@ Every material input needs a claim status and evidence provenance. `Owner` is se
 
 ## Cash-flow schedule
 
-Use one row per **scenario, option and period**. For a one-period appraisal, include Low/Base/High rows for each option. For a multi-period appraisal, repeat each scenario/option across every material period needed to reproduce NPV and payback. Keep the appraisal horizon and period definitions consistent across scenarios; allow timing to differ when implementation delay, benefit ramp, cost slippage or another timing change is itself an explicit scenario assumption.
+Use one row per **scenario, option and period**. For a one-period appraisal, include Low/Base/High rows for each option. For a multi-period appraisal, repeat each scenario/option across every period needed to reproduce NPV and payback through the full horizon. Keep the appraisal horizon, period anchor, interval and cash-flow timing convention consistent across scenarios; allow timing to differ when implementation delay, benefit ramp, cost slippage or another timing change is itself an explicit scenario assumption.
 
-| Scenario | Period | Option | Attributable benefit | Future incremental cost | Quantified dis-benefits | Net cash flow | Discount factor | Present value |
+| Scenario | Period | Option | Attributable benefit | Future incremental cost | Separately quantified dis-benefits not in incremental cost | Net cash flow | Discount factor | Present value |
 |---|---|---|---:|---:|---:|---:|---:|---:|
 | Low | [ ] | Hold / do nothing | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 | Low | [ ] | Minimum / slower change | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
@@ -53,7 +55,7 @@ Use one row per **scenario, option and period**. For a one-period appraisal, inc
 
 Use the same appraisal horizon and cost basis for every row. Totals are undiscounted for a one-period case or NPV when discounting is material. These totals must reconcile to the cash-flow schedule above.
 
-| Option | Scenario | Attributable benefit | Future incremental cost | Quantified dis-benefits | Net value / NPV | Key assumptions changed |
+| Option | Scenario | Attributable benefit | Future incremental cost | Separately quantified dis-benefits not in incremental cost | Net value / NPV | Key assumptions changed |
 |---|---|---:|---:|---:|---:|---|
 | Hold / do nothing | Low | [ ] | [ ] | [ ] | [ ] | [ ] |
 | Hold / do nothing | Base | [ ] | [ ] | [ ] | [ ] | [ ] |
@@ -83,15 +85,18 @@ Payback is when the candidate option under appraisal has recovered its **increme
 - **Counterfactual:** [normally Hold / do nothing, or state another]
 - **Scenario reported:** [Base; add Low/High when decision-relevant]
 - **Basis:** [cumulative incremental net cash flow / cumulative incremental present value]
+- **Period convention:** [anchor, interval and cash-flow timing]
 - **First incremental burden period:** [period/date, or NONE]
-- **Payback period / date:** [period/date, IMMEDIATE / FIRST-PERIOD PAYBACK, NO PAYBACK WITHIN HORIZON, or UNKNOWN]
+- **Payback period / date:** [first period at or after the burden where cumulative value reaches zero or becomes positive; IMMEDIATE / FIRST-PERIOD PAYBACK; NO PAYBACK WITHIN HORIZON; or UNKNOWN]
+- **Later reversal:** [NONE, or first later period/date cumulative value becomes negative again]
+- **End-of-horizon cumulative amount:** [ ]
 - **Calculation / source:** [show the candidate-minus-counterfactual cumulative calculation]
 
 | Scenario | Period | Candidate cash flow / PV | Counterfactual cash flow / PV | Incremental amount | Cumulative incremental amount |
 |---|---|---:|---:|---:|---:|
 | Base | [ ] | [ ] | [ ] | [ ] | [ ] |
 
-Ignore any leading periods where both options have zero economics. Repeat rows from the first incremental burden period until payback occurs or the appraisal horizon ends. If there is no incremental burden, start at the first non-zero incremental period. If required inputs are unavailable, record `UNKNOWN` and name the evidence needed instead of omitting this section.
+Ignore any leading periods where both options have zero economics when identifying the first burden, but retain every non-zero period and every later period through the full appraisal horizon in this table. Payback is the first period at or after the burden where cumulative value reaches zero or becomes positive. If it later becomes negative, keep the first-crossing payback date and disclose the reversal period separately. If there is no incremental burden, start the search at the first non-zero incremental period. If required inputs are unavailable, record `UNKNOWN` and name the evidence needed instead of omitting this section.
 
 ## Break-even
 
@@ -100,7 +105,7 @@ Break-even is the point where the candidate option under appraisal's **increment
 - **Candidate option under appraisal:** [ ]
 - **Counterfactual:** [normally Hold / do nothing, or state another]
 - **Scenario:** [normally Base; state another when decision-relevant]
-- **Appraisal basis:** [horizon, currency/value basis and NPV treatment]
+- **Appraisal basis:** [horizon, period convention, currency/value basis and NPV treatment]
 - **Driver:** [e.g. affected productive time]
 - **Assumptions held constant:** [all non-tested inputs held at the named scenario values; list any exceptions]
 - **Break-even value:** [ ]
@@ -115,7 +120,7 @@ Switching value is the point where a named competing option becomes preferable t
 - **Candidate option under appraisal:** [ ]
 - **Competing option:** [ ]
 - **Scenario:** [normally Base; state another when decision-relevant]
-- **Appraisal basis:** [horizon, currency/value basis and NPV treatment]
+- **Appraisal basis:** [horizon, period convention, currency/value basis and NPV treatment]
 - **Driver / assumption tested:** [ ]
 - **Assumptions held constant:** [all non-tested inputs held at the named scenario values; list any exceptions]
 - **Base-case value:** [ ]
@@ -160,10 +165,14 @@ Switching value is the point where a named competing option becomes preferable t
 
 ## Recommendation
 
-- **Selected option / status:** [named option, CONDITIONAL, or UNKNOWN]
+- **Selected option:** [named option, or UNKNOWN]
+- **Recommendation status:** [RECOMMEND / CONDITIONAL / UNKNOWN]
+- **Deciding condition or missing evidence:** [N/A, or the condition/evidence that would settle the result]
 - **Reason:** [why this result follows from option-by-option economics, low/base/high, dis-benefits, payback, break-even, switching values and delivery feasibility]
 
 ## Next evidence to replace
+
+Every `CONDITIONAL` or `UNKNOWN` recommendation requires a row for its deciding condition or missing evidence. Record `N/A` only for a settled recommendation with no further evidence stage.
 
 | Assumption / risk | Evidence to collect | Owner | When | Decision it can change |
 |---|---|---|---|---|

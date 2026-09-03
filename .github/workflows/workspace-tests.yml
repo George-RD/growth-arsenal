@@ -159,7 +159,7 @@ jobs:
           assert workspace_command in workspace_expectations
           assert "does not offer a degraded or fallback workspace mode" in workspace_expectations
           assert writing_command in writing_expectations
-          assert "does not generate customer-facing copy" in writing_expectations
+          assert "does not generate the Phase 0 market snapshot" in writing_expectations
           assert copy_command in copy_expectations
           assert "degraded/unverified" in copy_expectations
           assert "never claims" in copy_expectations
