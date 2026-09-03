@@ -7,7 +7,7 @@ description: Business and executive prose for managers, stakeholders, presentati
 
 Turn a correct factual kernel into writing a manager can skim, hear and repeat.
 
-## Companion resolution
+## 0. Resolve the `writing-core` companion
 
 `writing-core` is a hard dependency because this skill adapts meaning; it should not invent the underlying meaning itself. At first use, resolve `writing-core` by skill name and read it.
 
