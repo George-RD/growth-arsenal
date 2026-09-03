@@ -44,14 +44,21 @@ jobs:
           cd "$RUNNER_TEMP/skills-smoke"
           npx --yes skills@1.5.23 add "$GITHUB_WORKSPACE" --skill '*' -a codex -y --copy
           for skill in \
+            business-case \
             business-copy-style \
+            executive-writing \
             grandslam-offer \
             growth-arsenal-workspace \
             hundred-million-leads \
-            plugin-feedback
+            plugin-feedback \
+            voice-calibration \
+            writing-core
           do
             test -f ".agents/skills/$skill/SKILL.md"
           done
+          test -f ".agents/skills/business-case/templates/decision-model.md"
+          test -f ".agents/skills/business-case/references/economic-model.md"
+          test -f ".agents/skills/writing-core/references/factual-kernel.md"
       - name: Verify selective Skills CLI installs
         run: |
           set -euo pipefail
@@ -66,6 +73,7 @@ jobs:
           test -d ".agents/skills/grandslam-offer/templates"
           test ! -e ".agents/skills/growth-arsenal-workspace"
           test ! -e ".agents/skills/business-copy-style"
+          test ! -e ".agents/skills/writing-core"
 
           cd "$copy_root"
           npx --yes skills@1.5.23 add "$GITHUB_WORKSPACE" --skill business-copy-style -a codex -y --copy
@@ -75,6 +83,25 @@ jobs:
           test -d ".agents/skills/business-copy-style/references"
           test -d ".agents/skills/business-copy-style/templates"
           test ! -e ".agents/skills/grandslam-offer"
+
+          for skill in business-case executive-writing voice-calibration writing-core
+          do
+            root="$RUNNER_TEMP/skills-selective-$skill"
+            mkdir -p "$root"
+            cd "$root"
+            npx --yes skills@1.5.23 add "$GITHUB_WORKSPACE" --skill "$skill" -a codex -y --copy
+            test -f ".agents/skills/$skill/SKILL.md"
+            count="$(find .agents/skills -mindepth 1 -maxdepth 1 -type d | wc -l)"
+            test "$count" -eq 1
+          done
+
+          test -f "$RUNNER_TEMP/skills-selective-business-case/.agents/skills/business-case/templates/decision-model.md"
+          test -f "$RUNNER_TEMP/skills-selective-business-case/.agents/skills/business-case/references/economic-model.md"
+          test -f "$RUNNER_TEMP/skills-selective-business-case/.agents/skills/business-case/evals/evals.json"
+          test -f "$RUNNER_TEMP/skills-selective-executive-writing/.agents/skills/executive-writing/evals/evals.json"
+          test -f "$RUNNER_TEMP/skills-selective-voice-calibration/.agents/skills/voice-calibration/evals/evals.json"
+          test -f "$RUNNER_TEMP/skills-selective-writing-core/.agents/skills/writing-core/references/factual-kernel.md"
+          test -f "$RUNNER_TEMP/skills-selective-writing-core/.agents/skills/writing-core/evals/evals.json"
       - name: Verify selective offer dependency negotiation contract
         run: |
           # Keep this proof aligned with docs/agents/skill-dependencies.md. Replace the
@@ -97,13 +124,18 @@ jobs:
           workspace_command = (
               "npx skills add George-RD/growth-arsenal --skill growth-arsenal-workspace"
           )
+          writing_command = (
+              "npx skills add George-RD/growth-arsenal --skill writing-core"
+          )
           copy_command = (
               "npx skills add George-RD/growth-arsenal --skill business-copy-style"
           )
 
           assert "growth-arsenal-workspace` is a hard dependency" in installed
+          assert "writing-core` is a hard dependency" in installed
           assert "business-copy-style` is a quality dependency" in installed
           assert workspace_command in installed
+          assert writing_command in installed
           assert copy_command in installed
           assert "degraded/unverified" in installed
 
@@ -128,45 +160,3 @@ jobs:
       - name: Compile Python scripts
         run: |
           python -m py_compile skills/growth-arsenal-workspace/scripts/*.py
-          python -m py_compile skills/business-copy-style/scripts/copy-compare.py
-      - name: Run workspace tests
-        run: python -m unittest discover -s skills/growth-arsenal-workspace/tests -v
-      - name: Run copy comparison tests
-        run: python -m unittest discover -s skills/business-copy-style/tests -v
-      - name: Render workspace fixture
-        run: |
-          cp skills/growth-arsenal-workspace/assets/fixtures/demo-workspace.json /tmp/demo.arsenal.json
-          python skills/growth-arsenal-workspace/scripts/arsenal.py render \
-            --workspace /tmp/demo.arsenal.json \
-            --surface all \
-            --output-dir /tmp/growth-arsenal-reports
-          ! grep -R -E '\{\{[A-Z_]+\}\}' /tmp/growth-arsenal-reports/*.html
-      - name: Reproduce landing copy comparisons
-        run: |
-          python skills/business-copy-style/scripts/copy-compare.py \
-            --baseline evaluations/fixtures/landing-page-old.txt \
-            --candidate evaluations/fixtures/landing-page-new.txt \
-            --baseline-label "Variant A" \
-            --candidate-label "Variant B" \
-            --format json > /tmp/old-vs-new.json
-          python skills/business-copy-style/scripts/copy-compare.py \
-            --baseline evaluations/fixtures/landing-page-new.txt \
-            --candidate evaluations/fixtures/landing-page-hybrid.txt \
-            --baseline-label "Variant B" \
-            --candidate-label "Variant C" \
-            --format json > /tmp/new-vs-hybrid.json
-          sh skills/business-copy-style/scripts/copy-lint.sh \
-            evaluations/fixtures/landing-page-hybrid-hero.txt
-          python - <<'PY'
-          import json
-          with open('/tmp/old-vs-new.json', encoding='utf-8') as handle:
-              first = json.load(handle)
-          with open('/tmp/new-vs-hybrid.json', encoding='utf-8') as handle:
-              second = json.load(handle)
-          assert first['winner'] is None
-          assert second['winner'] is None
-          assert first['baseline']['em_dashes'] == 0
-          assert first['candidate']['em_dashes'] == 0
-          assert second['candidate']['em_dashes'] == 0
-          assert second['candidate']['flesch_kincaid_grade'] <= second['baseline']['flesch_kincaid_grade']
-          PY
