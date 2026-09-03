@@ -6,17 +6,15 @@
 - Personas: [names and one-line summaries]
 
 
-## Research Brief — The Living Document
+## Research Brief — The Rendered View
 
-The Research Brief is not a one-time dump. It's a structured working file that gets written to and read from throughout the entire workshop. You search for data when you need it, store it where it belongs, and reference it when making decisions.
-
-File: `{project-name}-research.md`
+The canonical research state lives in `{project-name}.arsenal.json` and grows throughout the workshop. Search for data when needed, apply source evidence to that workspace, and use it when making decisions. `{project-name}-research.md` is the rendered read-only view.
 
 Organized by what each phase actually needs. When you hit a phase, check the brief. If data's missing, research. If it's there, use it.
 
-### Template Structure
+### Canonical research state
 
-Write this template to `{project-name}-research.md` at the start of Phase 0, then fill sections as research comes in. Also create `{project-name}-settings.md` with a `## Preferences` block (Spelling: British default / American) at the same time, so load-bearing config is captured once and read lightly by the business-copy-style skill.
+Initialise `{project-name}.arsenal.json` through `growth-arsenal-workspace`. Apply each research update to that canonical state with `arsenal.py apply`, then render `{project-name}-research.md`; never hand-edit the generated view. Create `{project-name}-settings.md` separately with a `## Preferences` block (Spelling: British default / American), so load-bearing copy config is captured once and read lightly by the `business-copy-style` skill.
 
 ```text
 # Research Brief — [Business Name]
@@ -37,17 +35,17 @@ Updated: [date]
 
 Before running any web searches in Phase 0, ask the user:
 
-> *"Do you have existing research on this market? This could include competitor analysis, customer interviews, market data, forum threads, or notes. If yes, share it and I'll organize it into our Research Brief, then identify gaps. If not, I'll build it from scratch with targeted web searches."*
+> *"Do you have existing research on this market? This could include competitor analysis, customer interviews, market data, forum threads, or notes. If yes, share it and I'll organise it in our canonical research workspace, render the Research Brief, then identify gaps. If not, I'll build it from scratch with targeted web searches."*
 
-**If user provides research:** Parse into Research Brief sections, run gap analysis, search only for missing data.
+**If user provides research:** Apply the source facts/evidence to the canonical workspace, render the Research Brief, run gap analysis, and search only for missing data. Do not turn raw evidence into narrative market claims before the Writing Generation Gate below.
 
-**When there's no existing research:** Proceed with comprehensive web searches, filling the Research Brief as data comes in.
+**When there's no existing research:** Proceed with comprehensive web searches, applying source evidence to the canonical workspace as it arrives and rendering the Research Brief when needed.
 
-**If partial:** Fill what the user provides, gap-analyze, search for what's missing.
+**If partial:** Apply what the user provides to the canonical workspace, render, gap-analyse, and search for what's missing.
 
 ### Gap Analysis Protocol
 
-Before EACH phase, check the Research Brief against what that phase needs. Display the results:
+Before EACH phase, check the canonical research state through the rendered Research Brief against what that phase needs. Display the results:
 
 ```text
 === Gap Analysis: Phase [X] ===
@@ -82,7 +80,7 @@ If any item shows `[GAP]`, run targeted web searches or prompt the user before p
 
 ### Persona Evolution Protocol
 
-Personas are not static. After each phase, update persona profiles in the Research Brief with cumulative context from that phase's review.
+Personas are not static. After each phase, apply cumulative persona context from that phase's review to the canonical workspace, then render the Research Brief.
 
 ```text
 Phase 0: Base profile (demographics, pain points, current situation)
@@ -95,7 +93,7 @@ Phase 5: + "With this guarantee + name, I'd buy / final hesitation is X"
 
 This cumulative context gets passed to persona agents in each subsequent phase. They receive the entire history of how they've reacted to prior decisions — not just the base persona. This makes feedback progressively more informed and specific.
 
-**Update personas in the Research Brief after each phase review. Do not skip this.**
+**Update personas in the canonical workspace and render the Research Brief after each phase review. Do not skip this.**
 
 ---
 
@@ -124,11 +122,15 @@ After processing any user-provided research, run gap-targeted web searches. Defa
 4. **Pricing benchmarks**: `"[product/service type] pricing [audience segment]"`
 5. **Buying patterns**: `"[audience] buying behavior [market] survey OR report"`
 
-Write all findings into the Research Brief. Synthesize into a brief market snapshot and present to the user.
+Apply the raw/source findings to the canonical workspace. Before synthesising or presenting a human-readable market snapshot, run the **Writing Generation Gate** in the parent skill: resolve `writing-core`, build a factual kernel from the research evidence and approved discovery facts, then generate the snapshot from that kernel.
+
+If `writing-core` is unavailable, keep the source evidence and Phase 0 state, show the parent skill's install command, and pause only human-readable synthesis. Do not write a fallback market narrative.
 
 ### Step 4: Build Customer Personas
 
-From research, construct 2-3 **distinct** customer personas. Each must include:
+First structure the persona evidence from the approved research: demographics or role where supported, specific pains, current solutions, spending evidence, objections, desired outcomes, channels and buying signals. Then use the same **Writing Generation Gate** before turning those fields into human-readable persona descriptions.
+
+From that source-bounded synthesis, construct 2-3 **distinct** customer personas. Each must include:
 
 | Field | Description |
 |-------|-------------|
@@ -141,7 +143,7 @@ From research, construct 2-3 **distinct** customer personas. Each must include:
 | **Where They Hang Out** | Specific platforms, communities, events |
 | **Buying Psychology** | What triggers their purchase decisions |
 
-Write personas to the Research Brief. **Present to user for validation.** Adjust based on their real-world customer knowledge — they know their market better than web research does.
+Keep the personas as structured candidate data and **present them to the user for validation**. Adjust them from the user's real customer knowledge, then retain the adjusted personas in the complete candidate Phase 0 payload; do not apply a partial persona update or write the generated Research Brief directly.
 
 ### Step 5: Confirm Team Roster
 
@@ -155,14 +157,14 @@ Once personas are validated, confirm:
 > - *[Persona 2 Name] — your [segment 2] customer*
 > - *[Persona 3 Name] — your [segment 3] customer (if applicable)*
 >
-> *This team will attack your offer at every phase. Ready for Phase 1?"*
+> *This team will attack your offer at every phase."*
 
 ### Phase 0 Output
 
-1. Write initial `{project-name}-offer.md` with Phase 0 section
-2. Create `{project-name}-settings.md` recording the confirmed spelling preference (read by the business-copy-style skill at copy time)
-3. Generate `{project-name}-research-dashboard.html` using the `templates/research-dashboard.md` spec, populated with Research Brief data. Open in browser: `open {project-name}-research-dashboard.html`
-4. Generate `{project-name}-workshop-progress.html` using the `templates/workshop-progress.md` spec. Open in browser.
+1. Return the candidate discovery decisions, research, personas and team roster to the parent workflow as one complete structured Phase 0 payload.
+2. Create `{project-name}-settings.md` separately to record the confirmed spelling preference for `business-copy-style`.
+3. Delegate persistence to the parent workflow: apply the candidate payload, attach the independent reviews, gate the revision, resolve or record accepted risk, record approval, then render all surfaces.
+4. Only after that sequence completes, show the approved Phase 0 decision and ask: *"Phase 0 complete. [Discovery summary]. Ready for Phase 1: The Starving Crowd?"*
 
 ---
 

@@ -62,10 +62,9 @@ Max 2 revision cycles.
 
 ### Phase 3 Output
 
-1. Update `{project-name}-offer.md` with Phase 3 section
-2. Update Research Brief: value equation data + persona evolution
-3. Regenerate `{project-name}-workshop-progress.html`. Open in browser.
-4. **Phase gate:** *"Phase 3 complete. [Value equation summary]. Ready for Phase 4: Offer Creation?"*
+1. Return the candidate value-equation decision, supporting data and persona evolution to the parent workflow as a structured Phase 3 payload.
+2. Delegate persistence to the parent workflow: apply the candidate payload, attach the independent reviews, gate the revision, resolve or record accepted risk, record approval, then render all surfaces. `{project-name}-offer.md`, the Research Brief and the HTML reports are read-only generated views.
+3. Only after that sequence completes, show the approved decision and ask: *"Phase 3 complete. [Value equation summary]. Ready for Phase 4: Offer Creation?"*
 
 ---
 

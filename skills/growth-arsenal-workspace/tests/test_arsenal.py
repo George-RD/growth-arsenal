@@ -272,6 +272,40 @@ class WorkspaceTests(unittest.TestCase):
         self.assertNotIn("{{SCRIPT}}", progress)
         self.assertNotIn("{{NAV}}", progress)
 
+    def test_research_report_renders_complete_persona(self):
+        """The Research dashboard preserves every approved persona field."""
+
+        state = arsenal.load_state(self.workspace)
+        state["research"]["personas"] = [
+            {
+                "name": "Priya",
+                "snapshot": "Owner of a growing bookkeeping firm",
+                "pain_score": 8,
+                "pain_points": ["Late reconciliations", "Unclear cash position"],
+                "current_solutions": "Spreadsheets and weekend catch-up",
+                "budget": "GBP 500 per month",
+                "objections": ["Migration time", "Data access"],
+                "dream_outcome": "Close the books by day three",
+                "channels": ["ICAEW forum", "Local owner network"],
+                "buying_psychology": "Needs proof before switching <systems>",
+            }
+        ]
+
+        report = renderer.research_report(state)
+
+        for expected in (
+            "Priya",
+            "Late reconciliations; Unclear cash position",
+            "Spreadsheets and weekend catch-up",
+            "GBP 500 per month",
+            "Migration time; Data access",
+            "Close the books by day three",
+            "ICAEW forum; Local owner network",
+            "Needs proof before switching &lt;systems&gt;",
+        ):
+            self.assertIn(expected, report)
+        self.assertNotIn("<systems>", report)
+
     def test_validate_detects_manual_revision_drift(self):
         """Manual upstream revision edits invalidate approved dependants."""
 

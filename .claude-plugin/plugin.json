@@ -1,7 +1,7 @@
 {
   "name": "growth-arsenal",
-  "description": "Business growth workshops with adversarial agent teams: build irresistible offers, complete lead-generation systems, and plain-language customer-facing copy using Alex Hormozi's $100M Offers and $100M Leads methodologies.",
-  "version": "1.0.0",
+  "description": "Business growth workshops and composable writing skills for meaning-first prose, executive writing, business cases, voice calibration and copy review.",
+  "version": "1.1.0",
   "author": {
     "name": "George-RD"
   },
@@ -9,9 +9,13 @@
   "skills": [
     "./skills/grandslam-offer",
     "./skills/hundred-million-leads",
+    "./skills/writing-core",
+    "./skills/executive-writing",
+    "./skills/business-case",
+    "./skills/voice-calibration",
     "./skills/business-copy-style",
     "./skills/growth-arsenal-workspace",
     "./skills/plugin-feedback"
   ],
-  "keywords": ["business", "offers", "leads", "hormozi", "marketing", "copywriting", "agent-teams"]
+  "keywords": ["business", "offers", "leads", "writing", "business-case", "copywriting", "agent-teams"]
 }

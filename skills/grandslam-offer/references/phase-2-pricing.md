@@ -60,10 +60,9 @@ Max 2 revision cycles.
 
 ### Phase 2 Output
 
-1. Update `{project-name}-offer.md` with Phase 2 section
-2. Update Research Brief: pricing data + persona evolution
-3. Regenerate `{project-name}-workshop-progress.html`. Open in browser.
-4. **Phase gate:** *"Phase 2 complete. [Price + position summary]. Ready for Phase 3: Value Equation?"*
+1. Return the candidate pricing decision, supporting data and persona evolution to the parent workflow as a structured Phase 2 payload.
+2. Delegate persistence to the parent workflow: apply the candidate payload, attach the independent reviews, gate the revision, resolve or record accepted risk, record approval, then render all surfaces. `{project-name}-offer.md`, the Research Brief and the HTML reports are read-only generated views.
+3. Only after that sequence completes, show the approved decision and ask: *"Phase 2 complete. [Price + position summary]. Ready for Phase 3: Value Equation?"*
 
 ---
 

@@ -1,0 +1,57 @@
+{
+  "skill_name": "writing-core",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Turn these mixed technical notes into a short wiki explanation. First reason from a factual kernel. Notes: (1) Server logs show receiver A sent 1,240 GNSS messages on 18 Aug 2026; this is observed from server.log. (2) Neil estimates the wider mitigation programme reduced GNSS-related lost time by about 30%; the calculation method is not yet available. (3) We do not know how much of that recovery is attributable to the Holocron dashboard. (4) The system uses NMEA 0183 messages and Redis Streams; keep those technical terms because they are precise. Preserve the distinction between claim status and provenance.",
+      "expected_output": "A factual kernel plus a short wiki explanation that preserves the observed count, sourced programme estimate, attribution unknown, provenance, and necessary technical terms without inventing causal links.",
+      "expectations": [
+        "The response builds or explicitly reasons from a factual kernel before polished prose.",
+        "Because the input has multiple material and uncertain claims, the factual kernel follows the copyable template fields rather than inventing a freeform record.",
+        "The observed message count, the 30% estimate and the attribution unknown remain separate claims.",
+        "Claim status is recorded separately from provenance; the 30% remains an estimate even though it has a named source.",
+        "The response keeps NMEA 0183 and Redis Streams while simplifying surrounding language.",
+        "The response does not invent evidence that Holocron caused the wider programme recovery."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Missing executive delivery hard dependency",
+      "prompt": "Build and preserve the factual kernel for this manager briefing, then prepare executive delivery. executive-writing cannot be resolved by skill name.",
+      "expected_output": "The factual kernel is preserved, only executive delivery pauses, and the response shows the standard executive-writing selective-install command without recreating its method.",
+      "expectations": [
+        "The response completes or preserves the factual kernel before pausing the executive delivery path.",
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill executive-writing`.",
+        "The response does not produce the manager-facing delivery while executive-writing is unavailable.",
+        "The response says delivery can resume from the preserved kernel after installation.",
+        "The response does not recreate executive-writing guidance locally."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Missing business-case hard dependency",
+      "prompt": "Use these operational figures to build an investment decision model before drafting prose. No completed business-case model is supplied, and business-case cannot be resolved by skill name.",
+      "expected_output": "The source evidence and any factual-kernel work are preserved, business-case modelling pauses, and the response shows the standard business-case selective-install command without inventing the missing model.",
+      "expectations": [
+        "The response preserves the source evidence and any completed factual-kernel work.",
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill business-case`.",
+        "The response does not draft the decision prose or create a substitute investment model while business-case is unavailable.",
+        "The response says modelling can resume from the preserved evidence after installation.",
+        "The response does not recreate business-case guidance locally."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Missing long-form customer-copy quality dependency",
+      "prompt": "writing-core has produced a useful long-form customer-facing landing-page draft from an approved factual kernel, but business-copy-style cannot be resolved by skill name. Explain the options, then assume I explicitly choose to continue without installing it.",
+      "expected_output": "The response offers installation or degraded continuation, shows the standard business-copy-style command, honours the explicit degraded choice with minimum safety checks, and labels the copy degraded/unverified without imitating the missing method.",
+      "expectations": [
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill business-copy-style`.",
+        "The response offers installation or degraded continuation before following the explicit choice.",
+        "The response labels the affected copy `degraded/unverified` and does not claim the quality gate passed.",
+        "The degraded path keeps claims grounded in the approved kernel, uses plain language and surfaces unknowns.",
+        "The response does not reproduce business-copy-style lint thresholds, rubrics or reader-panel method."
+      ]
+    }
+  ]
+}

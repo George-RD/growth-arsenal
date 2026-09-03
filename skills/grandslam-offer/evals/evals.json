@@ -28,12 +28,14 @@
     {
       "id": 3,
       "name": "Companion skills available",
-      "prompt": "Both growth-arsenal-workspace and business-copy-style are installed and resolvable by skill name. I run a small bookkeeping firm. Start the Grand Slam Offer workshop and take me through the first workspace operation and the first customer-facing copy checkpoint.",
-      "expected_output": "Normal Grand Slam Offer workshop behavior that uses both available companion skills without dependency warnings, install prompts or degraded copy status.",
+      "prompt": "growth-arsenal-workspace, writing-core and business-copy-style are installed and resolvable by skill name. I run a small bookkeeping firm. Start the Grand Slam Offer workshop and take me through the first workspace operation and the first customer-facing copy checkpoint.",
+      "expected_output": "Normal Grand Slam Offer workshop behavior that uses all available companion skills without dependency warnings, install prompts or degraded copy status.",
       "expectations": [
         "The output proceeds through the workspace path using growth-arsenal-workspace without asking the user to install it.",
-        "The output uses business-copy-style at the copy checkpoint without asking the user to install it.",
-        "The output does not show a companion-skill npx install command when both skills are available.",
+        "The output applies Phase 0 research to the canonical JSON workspace and renders the research Markdown view instead of writing or filling that generated view directly.",
+        "The output uses writing-core for the Phase 0 market snapshot and persona synthesis and before the first customer-facing copy, without asking the user to install it.",
+        "The output uses business-copy-style after a useful candidate exists without asking the user to install it.",
+        "The output does not show a companion-skill npx install command when all three required companions are available.",
         "The output does not mark copy degraded or unverified when the copy-quality gate is available and completed."
       ]
     },
@@ -53,9 +55,10 @@
     {
       "id": 5,
       "name": "Missing copy quality dependency",
-      "prompt": "We are at the first customer-facing copy gate in a Grand Slam Offer workshop, but business-copy-style cannot be resolved by skill name. Explain my options, then assume I explicitly choose to continue without installing it for now.",
+      "prompt": "writing-core is installed and has already produced the first useful customer-facing candidate, but business-copy-style cannot be resolved by skill name. We are at the first customer-facing copy gate in a Grand Slam Offer workshop. Explain my options, then assume I explicitly choose to continue without installing it for now.",
       "expected_output": "The workshop explains the unavailable copy-quality checks, gives the standard selective-install command, offers install-or-degraded continuation, then honors the explicit degraded-continuation choice with only minimum safety checks and keeps the copy status degraded/unverified rather than claiming the gate passed.",
       "expectations": [
+        "The output does not ask to install writing-core because a useful candidate already exists from that available generation layer.",
         "The output names the unavailable deterministic lint and qualitative tests, and notes that the blind reader panel is unavailable for high-stakes copy.",
         "The output shows exactly `npx skills add George-RD/growth-arsenal --skill business-copy-style`.",
         "The output explicitly offers installation or degraded continuation before following the requested degraded path.",
@@ -63,6 +66,57 @@
         "The output never claims the business-copy-style gate passed or was verified while the skill is missing.",
         "The degraded path uses only minimum safety checks such as avoiding unsupported claims, using plain language grounded in approved facts, and surfacing unknowns instead of fabricating specifics.",
         "The output does not reproduce business-copy-style lint thresholds, qualitative rubrics or reader-panel methodology."
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Missing writing generation hard dependency",
+      "prompt": "growth-arsenal-workspace is available and the offer strategy/phase decisions are already valid. We have reached the Phase 0 market-snapshot and persona synthesis step, but writing-core cannot be resolved by skill name. Continue from this exact state.",
+      "expected_output": "The workshop preserves the approved strategy and workspace state, pauses human-readable Phase 0 synthesis, gives the writing-core selective-install command, and resumes from the same phase after installation instead of drafting through a fallback method.",
+      "expectations": [
+        "The output does not generate the Phase 0 market snapshot, persona prose or customer-facing copy while writing-core is unavailable.",
+        "The output shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
+        "The output preserves the approved offer decisions and current workspace/phase state.",
+        "The output says the prose-generation step can resume from the same phase after writing-core becomes available.",
+        "The output does not recreate the writing-core method locally or substitute business-copy-style as the first-draft author."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Phase output persistence sequence",
+      "prompt": "The Phase 3 value-equation work has produced a complete candidate payload and all companion skills are available. Finish this phase and ask whether to advance.",
+      "expected_output": "The candidate payload follows the canonical apply, independent-review, gate, risk-resolution, approval and render sequence before the approved decision is shown and the user is asked whether to advance.",
+      "expectations": [
+        "The output delegates persistence to the parent workflow and applies the candidate payload to the canonical JSON workspace before attaching at least two independent reviews, gating the revision, resolving or accepting remaining risk, recording approval and rendering.",
+        "The output shows the approved decision and asks whether to advance only after the full persistence sequence completes.",
+        "The output does not write, fill, update or append the generated offer Markdown, Research Brief or HTML reports directly.",
+        "The output preserves the canonical workspace as the only source of truth for generated views."
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Phase Zero completion lifecycle",
+      "prompt": "Discovery research, personas and the reviewer roster now form a complete Phase 0 candidate payload. All companion skills are available. Complete Phase 0 and ask whether to enter Phase 1.",
+      "expected_output": "The complete discovery payload follows the canonical apply, independent-review, gate, risk-resolution, approval and render lifecycle before the approved Phase 0 decision is shown and the user is asked whether to advance.",
+      "expectations": [
+        "The output keeps research, personas and the team roster in one complete Phase 0 candidate payload rather than applying partial persona updates.",
+        "The parent workflow applies the candidate payload, attaches at least two independent reviews, gates the revision, resolves or accepts remaining risk, records approval and renders.",
+        "The output asks whether to enter Phase 1 only after the full lifecycle completes.",
+        "The spelling preference is stored separately in `{project-name}-settings.md`.",
+        "The output does not write or update a generated Research Brief, offer Markdown or HTML report directly."
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Research patch revalidates phase",
+      "prompt": "A Phase 2 candidate revision already has two reviews, but one review exposes an unanswered competitor-pricing question. New source evidence is now available. Incorporate it and complete the phase without editing generated views.",
+      "expected_output": "The new evidence is merged into a complete revised phase payload and sent through a fresh full review, gate, risk-resolution, approval and render lifecycle because applying the revision invalidates the prior reviews.",
+      "expectations": [
+        "The revised payload preserves the candidate phase data, summary and evidence references while adding the new source evidence as a `research_patch`.",
+        "The output treats every earlier review as invalid after applying the revision and reruns at least two independent reviews.",
+        "The output normalises issues, gates the new revision, resolves or accepts remaining risk, records approval and renders again.",
+        "The output does not apply a patch-only payload that would replace the existing phase data with an empty object.",
+        "The output does not edit the generated Research Brief or offer views directly."
       ]
     }
   ]

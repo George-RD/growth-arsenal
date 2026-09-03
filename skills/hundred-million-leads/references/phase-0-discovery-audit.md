@@ -44,11 +44,15 @@ Run 4-5 web searches in parallel:
 4. **Content consumption**: `"[target audience] podcast newsletter influencer follows"`
 5. **Ad costs**: `"[industry] Facebook ads cost per lead CPL benchmarks [current year]"`
 
-Synthesize into a Lead Gen Landscape report. Present to user.
+Keep the raw research evidence separate from prose. Before synthesizing or presenting the **Lead Gen Landscape report**, run the Prose Generation Gate in the parent skill: resolve `writing-core`, build a factual kernel from the research evidence and approved discovery facts, then generate the report from that kernel.
+
+If `writing-core` is unavailable, preserve the raw evidence and Phase 0 state, show the standard install command from the parent skill, and pause only the human-readable synthesis. Do not draft a fallback report.
 
 ### Step 4: Build Customer Personas (Lead-Gen Focused)
 
-From research, construct 2-3 **distinct** customer personas with lead-gen-specific fields:
+First structure the persona evidence from the research. Before turning those fields into human-readable persona descriptions, use the same Prose Generation Gate: pass the structured evidence through `writing-core` rather than inventing narrative connective detail directly from the research.
+
+From that source-bounded synthesis, construct 2-3 **distinct** customer personas with lead-gen-specific fields:
 
 | Field | Description |
 |-------|-------------|

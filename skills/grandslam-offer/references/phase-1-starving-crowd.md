@@ -66,10 +66,9 @@ Spawn all agents in **parallel** with these prompts (fill in `[BRACKETS]` with a
 
 ### Phase 1 Output
 
-1. Update `{project-name}-offer.md` with Phase 1 section
-2. Update Research Brief: Starving Crowd scores + persona evolution
-3. Regenerate `{project-name}-workshop-progress.html`. Open in browser.
-4. **Phase gate:** *"Phase 1 complete. [Summary of market selection + scores]. Ready for Phase 2: Pricing?"*
+1. Return the candidate market decision, Starving Crowd scores and persona evolution to the parent workflow as a structured Phase 1 payload.
+2. Delegate persistence to the parent workflow: apply the candidate payload, attach the independent reviews, gate the revision, resolve or record accepted risk, record approval, then render all surfaces. `{project-name}-offer.md`, the Research Brief and the HTML reports are read-only generated views.
+3. Only after that sequence completes, show the approved decision and ask: *"Phase 1 complete. [Summary of market selection + scores]. Ready for Phase 2: Pricing?"*
 
 ---
 

@@ -89,7 +89,7 @@ At each phase checkpoint:
 
 ### When to Add Extra Research
 
-If an adversarial review reveals a knowledge gap (e.g., "I don't know what competitors charge" or "Is this market really growing?"), pause and run WebSearch before continuing. Market data beats opinions. Update the Research Brief with findings.
+If an adversarial review reveals a knowledge gap (e.g., "I don't know what competitors charge" or "Is this market really growing?"), pause and run WebSearch before continuing. Market data beats opinions. Merge the findings into a complete revised phase payload that preserves the candidate `data`, summary and evidence references while adding the `research_patch`. Send that revision through the parent workflow's full apply, independent-review, gate, risk-resolution, approval and render sequence; applying it invalidates every earlier review. Do not edit the generated Research Brief.
 
 ---
 

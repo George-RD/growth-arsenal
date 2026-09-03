@@ -1,0 +1,34 @@
+{
+  "skill_name": "voice-calibration",
+  "evals": [
+    {
+      "id": 0,
+      "name": "Approved cross-genre calibration with writing-core available",
+      "prompt": "writing-core is installed and resolvable by skill name. Calibrate a voice profile from this explicitly approved set: [APPROVED CHAT] 'I think the simplest version is probably the right one. The extra explanation just makes it sound less certain.' [APPROVED EDITED EMAIL] AI draft: 'We are delighted to share the following comprehensive proposal.' User version: 'Attached is the proposal for the two-week sprint. The fixed fee is AED 30,000.' [APPROVED PRESENTATION REWRITE] AI title: 'Holocron creates a resilient regional decision capability.' User title: 'Holocron shows the ROC when GNSS interference starts and stops.' [APPROVED SOCIAL POST] 'BEFORE: 2.1B tokens for $20. AFTER: 700M. That's a 67% reduction.' Also available but NOT APPROVED for calibration: [SENSITIVE PRIVATE NOTE] 'I am worried about a family medical issue and do not want this reused anywhere.' The user has not asked to persist the raw sample corpus. There is no existing canonical voice-profile format in this workspace.",
+      "expected_output": "A compact filled voice-profile template derived only from approved samples, separating stable preferences from genre-specific behaviour and excluding the sensitive unapproved note and raw-sample persistence.",
+      "expectations": [
+        "The response does not ask to install writing-core because it is explicitly available.",
+        "The response uses only the explicitly approved chat, email, presentation and social samples for inference.",
+        "The unapproved sensitive private note does not affect the profile and is not repeated into durable guidance.",
+        "Stable preferences are separated from presentation, email, social or other genre-specific behaviour.",
+        "The rejected-draft versus user-rewrite pairs are used to infer generative causes rather than a simple banned-word list.",
+        "The structured calibration findings are passed through writing-core before durable profile prose is drafted.",
+        "Because no canonical profile format exists, the durable output follows templates/voice-profile.md rather than inventing a free-form structure.",
+        "Raw sample text is not persisted because the user did not request corpus retention.",
+        "The profile extracts structural principles rather than copying distinctive phrases as reusable style rules."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Missing writing-core hard dependency",
+      "prompt": "I explicitly approved these two samples for voice calibration, but writing-core cannot be resolved by skill name: [APPROVED] 'Put the number first.' [APPROVED] 'The extra explanation just makes it sound less certain.' Calibrate as far as you safely can without losing the approved findings.",
+      "expected_output": "Structured calibration findings only, with no durable profile prose; the response gives the writing-core install command and preserves the findings for later profile generation.",
+      "expectations": [
+        "The response may return structured calibration findings but does not produce durable voice-profile prose while writing-core is unavailable.",
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
+        "The approved findings are preserved so profile generation can resume after installation.",
+        "The response does not recreate writing-core locally or silently persist raw sample text."
+      ]
+    }
+  ]
+}
