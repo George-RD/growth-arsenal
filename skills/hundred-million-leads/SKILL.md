@@ -77,6 +77,7 @@ Optionally, maintain `{project-name}-decisions.md` with timestamped, type-tagged
 At the first point raw evidence or approved decisions must become human-readable prose, resolve `writing-core` by skill name. This includes:
 
 - Phase 0 Lead Gen Landscape research report;
+- Phase 0 offer-audit diagnosis and recommendation;
 - narrative customer/persona descriptions derived from research;
 - lead magnet names/descriptions;
 - calls-to-action and outreach scripts;

@@ -28,7 +28,9 @@ Value = ────────────────────────
           Time Delay  ×  Effort & Sacrifice
 ```
 
-Rate each variable 1-10. If overall Value Score < 6/10:
+Rate each variable 1-10 and record the scores and supporting user facts as structured audit evidence. Before presenting a diagnosis, recommendation or note on what to strengthen, run the Prose Generation Gate in the parent skill: build a factual kernel from that evidence, then generate only the audit prose from the kernel. If `writing-core` is unavailable, preserve the structured audit and pause its human-readable presentation; do not improvise a diagnosis.
+
+If overall Value Score < 6/10:
 
 > *"Your offer needs work before we build a lead system around it. Here's why: [specific weaknesses]. I recommend running the Grand Slam Offer workshop first. But if you want to proceed, know that great lead gen on a mediocre offer is like pouring water into a leaky bucket."*
 
