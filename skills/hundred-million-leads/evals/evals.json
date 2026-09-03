@@ -25,30 +25,43 @@
     },
     {
       "id": 3,
-      "name": "Copy quality dependency available",
-      "prompt": "business-copy-style is installed and resolvable by skill name. Start a $100M Leads workshop for my bookkeeping firm, complete Phase 0 discovery and the offer audit, then take me into Phase 1 through the first point where you need to produce or approve customer-facing copy.",
-      "expected_output": "Normal Leads workshop behavior that does not preflight the copy dependency during Phase 0, then uses the available business-copy-style quality gate at the first customer-facing copy checkpoint without an install prompt or degraded status.",
+      "name": "Writing and copy dependencies available",
+      "prompt": "writing-core and business-copy-style are installed and resolvable by skill name. Start a $100M Leads workshop for my bookkeeping firm, complete Phase 0 discovery and the offer audit including the Lead Gen Landscape report, then take me into Phase 1 through the first point where you need customer-facing copy.",
+      "expected_output": "Normal Leads workshop behavior that gathers raw evidence first, uses writing-core for the Phase 0 research synthesis and later first customer-facing candidate, then uses business-copy-style only at the customer-facing copy checkpoint without install prompts or degraded status.",
       "expectations": [
-        "The output does not prompt about business-copy-style during Phase 0 discovery or offer-audit work that does not require customer-facing copy.",
-        "At the first customer-facing copy checkpoint in Phase 1, the output uses business-copy-style without asking the user to install it.",
-        "The output does not show `npx skills add George-RD/growth-arsenal --skill business-copy-style` when the skill is available.",
+        "The output may gather raw Phase 0 research evidence before invoking writing-core, but the human-readable Lead Gen Landscape report is generated through writing-core.",
+        "The output does not ask to install writing-core when the Phase 0 research synthesis begins because it is available.",
+        "The output does not prompt about business-copy-style merely for the internal Phase 0 research report.",
+        "At the first customer-facing copy checkpoint in Phase 1, writing-core generates the candidate from approved meaning and business-copy-style then reviews that candidate without an install prompt.",
         "The output does not mark the affected copy degraded or unverified when the copy-quality gate is available and completed."
       ]
     },
     {
       "id": 4,
       "name": "Missing copy quality dependency",
-      "prompt": "business-copy-style cannot be resolved by skill name. Start a $100M Leads workshop for my bookkeeping firm, complete Phase 0 discovery and the offer audit without dependency prompts, then enter Phase 1 and reach the first customer-facing copy checkpoint. Explain my options and assume I explicitly choose to continue without installing it for now.",
-      "expected_output": "The workshop checks lazily at the first copy-producing or approval point, explains the unavailable shared copy-quality capability, shows the standard selective-install command, offers install-or-degraded continuation, and after the explicit degraded choice keeps the affected copy degraded/unverified with only minimum safety checks.",
+      "prompt": "writing-core is installed and resolvable, so Phase 0 research synthesis and the first Phase 1 customer-facing candidate can be generated normally. business-copy-style cannot be resolved by skill name. Reach the first customer-facing copy checkpoint, explain my options, then assume I explicitly choose to continue without installing business-copy-style for now.",
+      "expected_output": "The workshop uses writing-core for internal synthesis and candidate generation, checks business-copy-style lazily only at the customer-facing review point, shows the standard selective-install command, offers install-or-degraded continuation, and after the explicit degraded choice keeps the affected copy degraded/unverified with only minimum safety checks.",
       "expectations": [
-        "The output does not prompt about business-copy-style during Phase 0 discovery or offer-audit work before customer-facing copy is needed.",
-        "At the first customer-facing copy checkpoint in Phase 1, the output explains that the shared plain-language and de-AI copy-quality gate cannot be verified while business-copy-style is unavailable.",
+        "The output does not ask to install writing-core because it is available for Phase 0 synthesis and candidate generation.",
+        "The output does not prompt about business-copy-style while producing the internal Phase 0 research report.",
+        "At the first customer-facing copy checkpoint, the output explains that the shared copy-quality gate cannot be verified while business-copy-style is unavailable.",
         "The output shows exactly `npx skills add George-RD/growth-arsenal --skill business-copy-style`.",
         "The output explicitly offers installation or degraded continuation before following the requested degraded path.",
-        "The output marks the affected copy status `degraded/unverified`.",
-        "The output never claims the business-copy-style gate passed or was verified while the skill is missing.",
-        "The degraded path uses only minimum safety checks such as avoiding unsupported claims, using plain language grounded in approved facts, and surfacing assumptions or unknowns instead of fabricating specifics.",
-        "The output does not reproduce business-copy-style lint thresholds, qualitative rubrics, reader-panel methodology or other full copy-method guidance."
+        "The output marks the affected copy status `degraded/unverified` and never claims the missing gate passed.",
+        "The degraded path uses only minimum safety checks rather than reproducing the missing skill's full methodology."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Missing writing-core during Phase 0 synthesis",
+      "prompt": "I already supplied discovery facts and you gathered raw web evidence for my bookkeeping lead-generation market. We are about to turn that evidence into the Phase 0 Lead Gen Landscape report, but writing-core cannot be resolved by skill name. Continue from this exact state without discarding the research.",
+      "expected_output": "The workshop preserves raw evidence and approved discovery/offer-audit state, pauses only human-readable synthesis, gives the writing-core install command, and resumes the Phase 0 report from the same evidence after installation rather than writing a fallback report.",
+      "expectations": [
+        "The output does not produce the Lead Gen Landscape prose while writing-core is unavailable.",
+        "The output preserves the raw research evidence and structured discovery/offer-audit decisions.",
+        "The output shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
+        "The output says the Phase 0 synthesis can resume from the same evidence after writing-core becomes available.",
+        "The output does not recreate writing-core locally or postpone the requirement until Phase 1 customer copy."
       ]
     }
   ]
