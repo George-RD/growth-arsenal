@@ -63,6 +63,19 @@
         "The output says the Phase 0 synthesis can resume from the same evidence after writing-core becomes available.",
         "The output does not recreate writing-core locally or postpone the requirement until Phase 1 customer copy."
       ]
+    },
+    {
+      "id": 6,
+      "name": "Missing writing-core at offer-audit diagnosis",
+      "prompt": "I answered the Phase 0 offer-audit questions for my bookkeeping firm. The four Value Equation variables are scored with their supporting facts, and the structured audit is ready, but writing-core cannot be resolved by skill name. Present the audit result and tell me whether to continue.",
+      "expected_output": "The workshop preserves the structured offer-audit scores and supporting facts, withholds the human-readable diagnosis, recommendation and strengthening note, gives the writing-core install command, and can resume from the same Phase 0 state after installation.",
+      "expectations": [
+        "The output preserves the structured Value Equation scores and supporting user facts rather than discarding or narratively rewriting them.",
+        "The output does not produce an offer-audit diagnosis, recommendation or note on what to strengthen while writing-core is unavailable.",
+        "The output shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
+        "The output says the offer-audit presentation can resume from the same structured Phase 0 state after writing-core becomes available.",
+        "The output does not recreate writing-core locally or continue to later human-readable Phase 0 outputs."
+      ]
     }
   ]
 }
