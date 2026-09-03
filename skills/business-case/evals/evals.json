@@ -4,15 +4,17 @@
     {
       "id": 0,
       "prompt": "Build the decision model for this internal investment case before writing any deck copy. Facts and estimates: annual software hosting/support is expected to be AED 120,000, sourced from the current run-cost estimate and owned by the software service owner for later confirmation. A Commercial proxy values productive vessel time at AED 12,000 per hour; Finance has not yet approved that measure, and Finance is the owner responsible for replacing it. DOME data are incomplete, but two recent projects recorded 18 and 31 GNSS-affected productive hours. A technical lead estimates the wider mitigation programme recovers about 30% of GNSS-affected time; this includes antennas, procedures and software, so Holocron's share is unknown. The bounded pilot is expected to require 40 hours of ROC/technical training and two weeks of parallel running; these are expected transition impacts, not uncertain risks. Options are hold current state, controlled expansion, or a bounded regional pilot. Build credible low/base/high cases, show break-even and a switching value, identify material dis-benefits, and identify what the pilot should measure. Do not choose assumptions merely to make the pilot positive.",
-      "expected_output": "A decision model that uses labelled assumptions with source provenance separate from owner, low/base/high economics, explicit material dis-benefits, break-even and switching-value analysis, keeps programme recovery separate from Holocron attribution, and uses the pilot to replace decision-driving assumptions.",
+      "expected_output": "A filled business-case decision model that uses labelled assumptions with source provenance separate from owner, low/base/high economics, explicit material dis-benefits, distinct break-even and option-crossover switching analysis, keeps programme recovery separate from Holocron attribution, and uses the pilot to replace decision-driving assumptions.",
       "expectations": [
+        "The response follows the decision-model contract and does not silently omit required sections when an input is unknown.",
         "The model uses the incomplete internal data and labelled proxies rather than waiting for perfect data.",
         "Every material input keeps source provenance separate from the person or role that owns confirmation or replacement; an owner is never used as the source.",
         "Low, base and high cases are credible adverse, best-current and favourable cases rather than target-seeking scenarios.",
         "The model states one common appraisal horizon and cost basis before comparing options or scenarios.",
         "The response records the 40 training hours and parallel-running period as material dis-benefits or transition impacts rather than hiding them in generic risk language.",
         "The response calculates the protected hours required to cover AED 120,000 of annual incremental cost at the stated value proxy, while noting that any monetised dis-benefit would also enter the same break-even basis unless already included in cost.",
-        "At least one switching value is tied to an assumption that could change the preferred option.",
+        "The switching analysis names a competing option and solves for the point where the recommended and competing options have equal net value; it is not merely the zero-net-value break-even calculation repeated under another label.",
+        "The response records the base-case value and the distance or headroom to the switching threshold.",
         "The 30% wider-programme recovery is not attributed wholesale to Holocron.",
         "Pilot measures map to assumptions or risks that affect the later scale decision."
       ]
