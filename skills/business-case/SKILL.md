@@ -1,6 +1,6 @@
 ---
 name: business-case
-description: Build or review an internal business case, investment case, pilot case or decision proposal. Use before presentation copy. Creates the decision model first: options, costs, benefits, assumptions, scenarios, sensitivity and switching values, then hands the approved meaning to writing-core and executive-writing.
+description: "Build or review an internal business case, investment case, pilot case or decision proposal. Use before presentation copy. Creates the decision model first: options, costs, benefits, assumptions, scenarios, sensitivity and switching values, then hands the approved meaning to writing-core and executive-writing."
 ---
 
 # Business Case
@@ -31,13 +31,16 @@ Do the economics and decision logic before writing the deck.
    - value or range;
    - unit and period;
    - claim status: observed, estimate, assumption or scenario;
-   - source or owner, recorded separately from status;
+   - source: the named evidence/provenance, or `UNAVAILABLE` when no source exists;
+   - owner: the person or role responsible for confirming, replacing or managing the input, when applicable;
    - why the assumption is reasonable;
    - what evidence would change it.
 
+   Source and owner are different fields. An owner cannot substitute for evidence provenance.
+
    Use a best current estimate for the base case. Do not choose assumptions because they make the case positive.
 
-   *Done when:* a sceptic can replace any assumption without rebuilding the model.
+   *Done when:* a sceptic can replace any assumption without rebuilding the model, and every material claim has explicit provenance or `UNAVAILABLE`.
 
 4. **Choose one appraisal horizon and model low, base and high cases**
    Put every option on the same cash-flow timeline before comparing value. Schedule upfront CAPEX, recurring OPEX and benefits in the periods where they occur. If timing is material or Finance requires it, use the approved discount rate and compare NPV. Do not compare one year of benefit with lifecycle cost.
@@ -59,7 +62,7 @@ Do the economics and decision logic before writing the deck.
 
 5. **Calculate break-even and switching values**
    Ask:
-   - How much benefit is required to cover incremental cost on the chosen horizon?
+   - How much benefit is required to cover incremental cost and quantified dis-benefits on the chosen horizon?
    - Which single assumption matters most?
    - How far must that assumption move before the preferred option changes?
 
@@ -83,14 +86,15 @@ Do the economics and decision logic before writing the deck.
    *Done when:* every pilot measure maps to a decision-driving assumption or operational risk.
 
 8. **Hand off to writing when prose is requested**
-   The decision model can run standalone. When the user wants a memo, report or presentation, resolve `writing-core` and `executive-writing` by skill name at this point.
+   The decision model can run standalone. When the user wants a memo, report or presentation, resolve `writing-core` and `executive-writing` independently by skill name at this point.
 
-   If either is unavailable:
+   For each missing companion:
    - keep the completed decision model intact;
-   - show the relevant install command:
-     - `npx skills add George-RD/growth-arsenal --skill writing-core`
-     - `npx skills add George-RD/growth-arsenal --skill executive-writing`
-   - pause only the prose handoff rather than recreating the missing skill locally.
+   - show only that companion's install command:
+     - missing `writing-core` → `npx skills add George-RD/growth-arsenal --skill writing-core`
+     - missing `executive-writing` → `npx skills add George-RD/growth-arsenal --skill executive-writing`
+
+   Pause only the prose handoff until both required companions are available. Do not recreate a missing skill locally.
 
    When both are available, pass the completed decision model, assumptions and selected evidence to `writing-core`, then `executive-writing`. Mark the model as already completed so `writing-core` does not re-enter this workflow. Use `business-copy-style` only after the first useful prose exists.
 
@@ -117,7 +121,7 @@ Before prose, produce a compact decision model containing:
 
 - decision requested;
 - options;
-- assumption ledger;
+- assumption ledger with status, source and owner kept separate;
 - appraisal horizon and cost basis;
 - low/base/high economics;
 - material dis-benefits and transition impacts;
