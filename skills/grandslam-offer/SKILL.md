@@ -36,7 +36,7 @@ Phase 5  Enhancement     → bonuses, scarcity, urgency, guarantee and naming
 - Changing an upstream decision invalidates dependent phases. Never keep presenting them as approved.
 - Persist the result after every material state transition.
 - `growth-arsenal-workspace` is a hard dependency. Resolve it by name at the first workspace operation; if unavailable, pause only the workspace-dependent path and follow the Phase 0 install/resume flow below.
-- `writing-core` is a hard dependency at the first customer-facing generation step. Resolve it by name before drafting offer names, pitches, guarantees or other copy; if unavailable, pause only the copy-generation path and follow the Writing generation gate below.
+- `writing-core` is a hard dependency at the first **human-readable synthesis** from evidence or decisions. Raw research/source capture is exempt; Phase 0 market snapshots and persona prose, plus later offer names, pitches, guarantees and other copy, are not. If unavailable, pause only the synthesis/generation path and follow the Writing generation gate below.
 - `business-copy-style` is a quality dependency. Resolve it by name after a useful customer-facing candidate exists; if unavailable, follow the Copy gate install-or-degraded flow and keep the affected copy unverified until it is rechecked.
 - Generated Markdown and HTML are views. Never hand-edit them.
 
@@ -150,11 +150,11 @@ Before each phase:
 Action: fill the named gaps before proceeding.
 ```
 
-Use web research at Phase 0 and whenever a review finds missing external evidence. Prefer user-provided customer interviews and operating data when available. Record source URLs and evidence snippets in structured research state.
+Use web research at Phase 0 and whenever a review finds missing external evidence. Prefer user-provided customer interviews and operating data when available. Record source URLs and evidence snippets in structured research state. Raw/source evidence can be captured directly; run the Writing generation gate before converting it into a human-readable market snapshot, persona narrative, analysis or conclusion.
 
 ## Persona evolution
 
-Create two or three distinct customer personas from research in Phase 0. Present them to the user for correction. After every phase, append how each persona reacted to the approved decision.
+Create two or three distinct customer personas from structured research evidence in Phase 0. Generate their human-readable descriptions through `writing-core`, then present them to the user for correction. After every phase, append how each persona reacted to the approved decision; derived narrative updates also pass through `writing-core` before persistence.
 
 Pass the full cumulative persona record to later review agents. Do not reset them to a generic profile.
 
@@ -184,7 +184,14 @@ The gate counts distinct reviewers per key. Scores inform judgement but never ov
 
 ## Writing generation gate
 
-At the first point where the workshop must generate customer-facing language, resolve `writing-core` by skill name. Do not preflight it during discovery or strategy work that has not reached copy.
+At the first point where the workshop must turn evidence or approved decisions into **human-readable prose**, resolve `writing-core` by skill name. Do not preflight it while merely capturing raw/source evidence or deterministic configuration.
+
+This gate applies to:
+
+- Phase 0 market snapshots and research synthesis;
+- research-derived persona descriptions and narrative persona updates;
+- offer explanations and recommendations that will be persisted or presented;
+- lead-facing offer names, pitches, guarantees, headlines or other customer-facing copy.
 
 If `writing-core` cannot be resolved:
 
@@ -195,21 +202,21 @@ If `writing-core` cannot be resolved:
    npx skills add George-RD/growth-arsenal --skill writing-core
    ```
 
-3. pause only the customer-facing copy-generation path; preserve the approved strategy and workspace state;
+3. preserve raw evidence, approved decisions and workspace state, but pause the affected human-readable synthesis/generation path;
 4. resume from the same phase after the skill is available. Do not imitate `writing-core` as a local fallback.
 
 When `writing-core` is available:
 
 1. read it;
-2. build the factual kernel from approved phase decisions, research evidence, assumptions, the target buyer and the action the line must drive;
-3. generate the first useful candidate through that kernel;
-4. pass the resulting candidate to the Copy gate below.
+2. build the factual kernel from the relevant approved decisions, source evidence, assumptions, target reader/buyer and intended action;
+3. generate the first useful human-readable candidate from that kernel;
+4. for customer-facing copy, pass the resulting candidate to the Copy gate below.
 
-Do not generate polished offer names, guarantee names, headlines or pitches first and ask the copy critic to repair their underlying frame later.
+Do not generate polished market narratives, personas, offer names, guarantee names, headlines or pitches first and ask a later critic to repair their underlying frame.
 
 ## Copy gate
 
-At the first point where the workshop must approve customer-facing copy, resolve `business-copy-style` by skill name. Do not prompt for it during discovery or strategy work that does not yet need customer-facing copy.
+At the first point where the workshop must approve customer-facing copy, resolve `business-copy-style` by skill name. Do not prompt for it during research/strategy work or internal synthesis that does not yet need customer-facing copy.
 
 If `business-copy-style` cannot be resolved:
 
