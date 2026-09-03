@@ -1,6 +1,6 @@
 ---
 name: writing-core
-description: Proactive foundation for human-readable prose. Use before writing or substantially rewriting wiki pages, research notes, analyses, reports, documentation, presentation copy, emails, proposals, social copy, or other prose. Separates meaning from delivery: build a factual kernel first, then expand only where the reader needs context, causality, consequence, or action.
+description: "Proactive foundation for human-readable prose. Use before writing or substantially rewriting wiki pages, research notes, analyses, reports, documentation, presentation copy, emails, proposals, social copy, or other prose. Separates meaning from delivery: build a factual kernel first, then expand only where the reader needs context, causality, consequence, or action."
 ---
 
 # Writing Core
