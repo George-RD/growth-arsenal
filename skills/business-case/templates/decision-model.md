@@ -138,13 +138,13 @@ Switching value is the point where a named competing option becomes preferable t
 
 ## Commercial and delivery feasibility
 
-| Area | Requirement / dependency | Evidence / status | Owner | Lead time / constraint | Decision impact |
-|---|---|---|---|---|---|
-| Vendors / partners | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Hardware / infrastructure | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Licences / contracts / procurement | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Delivery capacity / skills | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Operational support model | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Option | Area | Requirement / dependency | Evidence / status | Owner | Lead time / constraint | Decision impact |
+|---|---|---|---|---|---|---|
+| [Named option] | Vendors / partners | [ ] | [ ] | [ ] | [ ] | [ ] |
+| [Named option] | Hardware / infrastructure | [ ] | [ ] | [ ] | [ ] | [ ] |
+| [Named option] | Licences / contracts / procurement | [ ] | [ ] | [ ] | [ ] | [ ] |
+| [Named option] | Delivery capacity / skills | [ ] | [ ] | [ ] | [ ] | [ ] |
+| [Named option] | Operational support model | [ ] | [ ] | [ ] | [ ] | [ ] |
 
 ## Risks and ownership
 
