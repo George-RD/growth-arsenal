@@ -22,9 +22,9 @@ Do the economics and decision logic before writing the deck.
    - minimum or slower change;
    - recommended path.
 
-   Add another option only when it changes the decision.
+   Add another option only when it changes the decision. Compare each option on the same criteria, including certain negative effects such as training load, parallel running, temporary productivity loss or transition disruption. Keep those **dis-benefits** separate from risks: a dis-benefit is expected to occur; a risk may occur.
 
-   *Done when:* every option is compared against the same criteria.
+   *Done when:* every option is compared against the same criteria and material dis-benefits are visible rather than hidden inside generic risk language.
 
 3. **Build the assumption ledger**
    For every material input record:
@@ -47,14 +47,15 @@ Do the economics and decision logic before writing the deck.
    Separate:
    - primary financial outcome;
    - secondary benefits that may overlap;
+   - material dis-benefits and transition impacts;
    - historical sunk cost;
    - future incremental cost.
 
-   Never count the same benefit twice.
+   Quantify a dis-benefit when a defensible cost or time measure exists. Otherwise keep it visible as a non-financial negative effect in the option comparison. Never count the same effect twice.
 
    Read [`references/economic-model.md`](references/economic-model.md) for appraisal-horizon, break-even and attribution rules.
 
-   *Done when:* every option and scenario uses the same horizon and cost basis, and the recommendation can be tested across plausible conditions.
+   *Done when:* every option and scenario uses the same horizon and cost basis, certain negative effects are included, and the recommendation can be tested across plausible conditions.
 
 5. **Calculate break-even and switching values**
    Ask:
@@ -119,6 +120,7 @@ Before prose, produce a compact decision model containing:
 - assumption ledger;
 - appraisal horizon and cost basis;
 - low/base/high economics;
+- material dis-benefits and transition impacts;
 - break-even value;
 - switching value;
 - major risks and ownership;
