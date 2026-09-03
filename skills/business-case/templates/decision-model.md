@@ -67,6 +67,22 @@ Use the same appraisal horizon and cost basis for every row. Totals are undiscou
 
 - [certain negative effect that is material but not defensibly monetised]
 
+## Payback
+
+Payback is when the recommended path has recovered its **incremental economic burden versus the named counterfactual** on the same cash-flow schedule. Use cumulative incremental net cash flow when discounting is not material; use cumulative incremental present value when discounted payback is the approved basis.
+
+- **Counterfactual:** [normally Hold / do nothing, or state another]
+- **Scenario reported:** [Base; add Low/High when decision-relevant]
+- **Basis:** [cumulative incremental net cash flow / cumulative incremental present value]
+- **Payback period / date:** [period/date, NO PAYBACK WITHIN HORIZON, or UNKNOWN]
+- **Calculation / source:** [show the recommended-minus-counterfactual cumulative calculation]
+
+| Scenario | Period | Recommended cash flow / PV | Counterfactual cash flow / PV | Incremental amount | Cumulative incremental amount |
+|---|---|---:|---:|---:|---:|
+| Base | [ ] | [ ] | [ ] | [ ] | [ ] |
+
+Repeat period rows until payback occurs or the appraisal horizon ends. If required inputs are unavailable, record `UNKNOWN` and name the evidence needed instead of omitting this section.
+
 ## Break-even
 
 Break-even is the point where the recommended path's **incremental net value versus the chosen counterfactual** reaches zero.
@@ -105,7 +121,7 @@ Switching value is the point where a named competing option becomes preferable t
 
 ## Recommendation
 
-[Recommended option and why it remains preferable after option-by-option economics, low/base/high, dis-benefits, break-even and switching-value tests.]
+[Recommended option and why it remains preferable after option-by-option economics, low/base/high, dis-benefits, payback, break-even and switching-value tests.]
 
 ## Next evidence to replace
 
