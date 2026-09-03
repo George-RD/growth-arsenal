@@ -31,15 +31,31 @@ Every material input needs a claim status and evidence provenance. `Owner` is se
 - **Sunk costs excluded from next-decision economics:** [ ]
 - **Benefit overlap treatment:** [how double counting is avoided]
 
-## Economics
+## Cash-flow schedule
 
-Use the same appraisal horizon and cost basis for all scenarios and options.
+Use one row per option per period. For a one-period appraisal, include one row for each option. For a multi-period appraisal, include every material period needed to reproduce NPV and payback.
 
-| Scenario | Attributable benefit | Future incremental cost | Quantified dis-benefits | Net value | Key assumptions changed |
-|---|---:|---:|---:|---:|---|
-| Low | [ ] | [ ] | [ ] | [ ] | [ ] |
-| Base | [ ] | [ ] | [ ] | [ ] | [ ] |
-| High | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Period | Option | Attributable benefit | Future incremental cost | Quantified dis-benefits | Net cash flow | Discount factor | Present value |
+|---|---|---:|---:|---:|---:|---:|---:|
+| [ ] | Hold / do nothing | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| [ ] | Minimum / slower change | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| [ ] | Recommended path | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+
+## Option economics
+
+Use the same appraisal horizon and cost basis for every row. Totals are undiscounted for a one-period case or NPV when discounting is material.
+
+| Option | Scenario | Attributable benefit | Future incremental cost | Quantified dis-benefits | Net value / NPV | Key assumptions changed |
+|---|---|---:|---:|---:|---:|---|
+| Hold / do nothing | Low | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Hold / do nothing | Base | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Hold / do nothing | High | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Minimum / slower change | Low | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Minimum / slower change | Base | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Minimum / slower change | High | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Recommended path | Low | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Recommended path | Base | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Recommended path | High | [ ] | [ ] | [ ] | [ ] | [ ] |
 
 ### Unquantified dis-benefits
 
@@ -49,6 +65,7 @@ Use the same appraisal horizon and cost basis for all scenarios and options.
 
 Break-even is the point where the recommended path reaches zero net value against the chosen counterfactual.
 
+- **Counterfactual:** [normally Hold / do nothing, or state another]
 - **Driver:** [e.g. protected vessel-hours]
 - **Break-even value:** [ ]
 - **Base-case value:** [ ]
@@ -64,7 +81,7 @@ Switching value is the point where a named competing option becomes preferable t
 - **Base-case value:** [ ]
 - **Switching value:** [ ]
 - **Distance / headroom:** [ ]
-- **Calculation / source:** [ ]
+- **Calculation / source:** [show equality/crossover using both option models]
 
 ## Programme and component attribution
 
@@ -81,7 +98,7 @@ Switching value is the point where a named competing option becomes preferable t
 
 ## Recommendation
 
-[Recommended option and why it remains preferable after low/base/high, dis-benefits, break-even and switching-value tests.]
+[Recommended option and why it remains preferable after option-by-option economics, low/base/high, dis-benefits, break-even and switching-value tests.]
 
 ## Next evidence to replace
 
