@@ -312,7 +312,7 @@ Max 2 revision cycles.
 ### Phase 5 Output
 
 1. Return the candidate enhancement decision, agent scores, elevator pitch, next steps and final persona evolution to the parent workflow as a structured Phase 5 payload.
-2. Delegate persistence to the parent workflow: apply the candidate payload, attach the final independent reviews, gate the revision, resolve or record accepted risk, record approval, then run `arsenal.py render --surface all`.
+2. Delegate persistence to the parent workflow: apply the candidate payload, attach the final independent reviews, gate the revision, resolve or record accepted risk, record approval, then run `arsenal.py render --workspace {project-name}.arsenal.json --surface all`.
 3. Only after that sequence completes, open the rendered HTML surfaces, validate the workspace and present the completed offer. `{project-name}-offer.md`, the Research Brief, the offer summary and the HTML reports are read-only generated views.
 
 ---

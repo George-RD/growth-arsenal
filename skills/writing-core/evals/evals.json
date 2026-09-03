@@ -42,8 +42,8 @@
     },
     {
       "id": 3,
-      "name": "Missing customer-copy quality dependency",
-      "prompt": "writing-core has produced a useful customer-facing candidate from an approved factual kernel, but business-copy-style cannot be resolved by skill name. Explain the options, then assume I explicitly choose to continue without installing it.",
+      "name": "Missing long-form customer-copy quality dependency",
+      "prompt": "writing-core has produced a useful long-form customer-facing landing-page draft from an approved factual kernel, but business-copy-style cannot be resolved by skill name. Explain the options, then assume I explicitly choose to continue without installing it.",
       "expected_output": "The response offers installation or degraded continuation, shows the standard business-copy-style command, honours the explicit degraded choice with minimum safety checks, and labels the copy degraded/unverified without imitating the missing method.",
       "expectations": [
         "The response shows exactly `npx skills add George-RD/growth-arsenal --skill business-copy-style`.",

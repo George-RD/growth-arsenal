@@ -84,6 +84,32 @@
         "The response does not show a writing-core install command because writing-core is available.",
         "The response says the handoff can resume after executive-writing is available."
       ]
+    },
+    {
+      "id": 5,
+      "name": "Payback terminal schedules",
+      "prompt": "Classify these independent three-period candidate-minus-Hold schedules on an undiscounted basis and show every period. A: [0, 0, 0]. B: period 1 contains AED 100 cost and AED 120 benefit, then [0, 0]. C: [-100, 150, -100]. D: [-100, 20, 20]. E: [0, 40, 40] with no incremental burden. Do not derive a recommendation.",
+      "expected_output": "Separate full-horizon payback schedules that distinguish no incremental economics, first-period payback, later payback with reversal, no payback within the horizon, and a non-zero benefit schedule with no prior burden.",
+      "expectations": [
+        "Case A reports `NO INCREMENTAL ECONOMICS` with no payback date.",
+        "Case B reports `IMMEDIATE` or `FIRST-PERIOD PAYBACK` because the first burden-and-benefit period is already cumulatively positive.",
+        "Case C reports payback in period 2, a reversal in period 3 and an end-of-horizon cumulative amount of -50 without erasing the first-crossing date.",
+        "Case D reports `NO PAYBACK WITHIN HORIZON`.",
+        "Case E ignores the leading zero period, starts at the first non-zero incremental period and reports period 2 rather than treating period 1 as payback.",
+        "Every case displays all three incremental and cumulative periods on the stated basis."
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Zero-value threshold denominator",
+      "prompt": "On a 12-month Base undiscounted appraisal, Hold has zero relevant economics. Candidate A has AED 100 fixed incremental burden and value per protected hour is AED 0. Candidate B has zero burden and the same zero value per protected hour. Calculate the protected-hours break-even results without changing the assumptions.",
+      "expected_output": "A denominator-safe threshold analysis that solves the option models directly instead of dividing by zero and distinguishes no finite threshold from equality at every tested value.",
+      "expectations": [
+        "The response does not use or attempt the protected-hours shortcut because its value denominator is zero.",
+        "Candidate A is recorded as having no finite protected-hours break-even on the stated basis.",
+        "Candidate B is recorded as equal to Hold at every tested protected-hours value rather than assigned a fabricated numeric threshold.",
+        "The response names the Base scenario, 12-month undiscounted appraisal basis and assumptions held constant."
+      ]
     }
   ]
 }

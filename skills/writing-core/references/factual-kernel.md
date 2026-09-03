@@ -60,7 +60,7 @@ Completed kernel:
 |---|---|---|---|---|---|---|---|---|
 | C1 | Receiver A | sent | GNSS messages | NONE | 1,240 messages on 18 August 2026 | OBSERVED | Receiver A server log, 18 August 2026 | Establish observed system activity |
 | C2 | Wider mitigation programme | is estimated to recover | GNSS-affected time | May reduce disruption across the programme | About 30%; calculation method unavailable | ESTIMATED | Named technical-lead estimate | Use only as an unverified programme scenario |
-| C3 | Holocron | has | an unmeasured share of the programme recovery | Dashboard benefit cannot yet be attributed | NONE | UNKNOWN | Project record; attribution evidence unavailable | Do not claim the 30% recovery for Holocron |
+| C3 | Whether Holocron contributed to programme recovery | is | unknown | Dashboard benefit cannot yet be attributed | NONE | UNKNOWN | Project record; attribution evidence unavailable | Do not claim the 30% recovery for Holocron |
 | C4 | System | uses | NMEA 0183 | NONE | NONE | OBSERVED | Technical system record | Preserve the exact protocol name |
 | C5 | System | uses | Redis Streams | NONE | NONE | OBSERVED | Technical system record | Preserve the exact component name |
 

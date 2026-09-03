@@ -15,7 +15,7 @@ Check a companion only when its capability is first needed.
 
 - **`executive-writing` is a hard dependency for executive, manager or presentation delivery.** If it is missing, keep the factual kernel, show `npx skills add George-RD/growth-arsenal --skill executive-writing`, and pause only that delivery path until it is available.
 - **`business-case` is a hard dependency when the task needs an investment/decision model and no completed model has been supplied.** If it is missing, keep the source evidence and kernel work, show `npx skills add George-RD/growth-arsenal --skill business-case`, and pause only the business-case modelling path.
-- **`business-copy-style` is a quality dependency for customer-facing short copy.** If it is missing, explain that the final de-slop/copy-quality gate cannot be verified, show `npx skills add George-RD/growth-arsenal --skill business-copy-style`, and ask whether to install it or continue degraded. If the user continues degraded, label the affected copy `degraded/unverified` and do not imitate the missing skill's full method.
+- **`business-copy-style` is a quality dependency for customer-facing copy.** If it is missing, explain that the final de-slop/copy-quality gate cannot be verified, show `npx skills add George-RD/growth-arsenal --skill business-copy-style`, and ask whether to install it or continue degraded. If the user continues degraded, label the affected copy `degraded/unverified` and do not imitate the missing skill's full method.
 
 Do not duplicate a missing companion's method as a local fallback.
 
@@ -46,7 +46,7 @@ Do not duplicate a missing companion's method as a local fallback.
    - executive/business writing: resolve `executive-writing`;
    - business case: if no completed `business-case` decision model has been supplied, resolve `business-case` before prose; if a completed model is already the input, use it and do not re-enter that workflow;
    - personal or public voice: use the user's approved voice profile if one exists;
-   - customer-facing short copy: run `business-copy-style` after drafting.
+   - customer-facing copy: run `business-copy-style` after drafting and let that skill select the checks for the surface.
 
    *Done when:* audience, purpose and required action are explicit.
 

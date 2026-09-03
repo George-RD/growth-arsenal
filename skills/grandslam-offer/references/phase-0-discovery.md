@@ -143,7 +143,7 @@ From that source-bounded synthesis, construct 2-3 **distinct** customer personas
 | **Where They Hang Out** | Specific platforms, communities, events |
 | **Buying Psychology** | What triggers their purchase decisions |
 
-Keep the personas as structured candidate data and **present them to the user for validation**. Adjust them from the user's real customer knowledge. After approval, apply the persona data to the canonical workspace and render the Research Brief; do not write the generated view directly.
+Keep the personas as structured candidate data and **present them to the user for validation**. Adjust them from the user's real customer knowledge, then retain the adjusted personas in the complete candidate Phase 0 payload; do not apply a partial persona update or write the generated Research Brief directly.
 
 ### Step 5: Confirm Team Roster
 
@@ -157,13 +157,14 @@ Once personas are validated, confirm:
 > - *[Persona 2 Name] — your [segment 2] customer*
 > - *[Persona 3 Name] — your [segment 3] customer (if applicable)*
 >
-> *This team will attack your offer at every phase. Ready for Phase 1?"*
+> *This team will attack your offer at every phase."*
 
 ### Phase 0 Output
 
-1. Apply the approved, source-bounded Phase 0 synthesis to the canonical workspace
-2. Create `{project-name}-settings.md` recording the confirmed spelling preference (read by the business-copy-style skill at copy time)
-3. Render `{project-name}-offer.md`, the other Markdown views and both HTML dashboards from the canonical workspace
+1. Return the candidate discovery decisions, research, personas and team roster to the parent workflow as one complete structured Phase 0 payload.
+2. Create `{project-name}-settings.md` separately to record the confirmed spelling preference for `business-copy-style`.
+3. Delegate persistence to the parent workflow: apply the candidate payload, attach the independent reviews, gate the revision, resolve or record accepted risk, record approval, then render all surfaces.
+4. Only after that sequence completes, show the approved Phase 0 decision and ask: *"Phase 0 complete. [Discovery summary]. Ready for Phase 1: The Starving Crowd?"*
 
 ---
 

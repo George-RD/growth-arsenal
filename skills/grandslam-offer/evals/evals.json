@@ -92,6 +92,32 @@
         "The output does not write, fill, update or append the generated offer Markdown, Research Brief or HTML reports directly.",
         "The output preserves the canonical workspace as the only source of truth for generated views."
       ]
+    },
+    {
+      "id": 8,
+      "name": "Phase Zero completion lifecycle",
+      "prompt": "Discovery research, personas and the reviewer roster now form a complete Phase 0 candidate payload. All companion skills are available. Complete Phase 0 and ask whether to enter Phase 1.",
+      "expected_output": "The complete discovery payload follows the canonical apply, independent-review, gate, risk-resolution, approval and render lifecycle before the approved Phase 0 decision is shown and the user is asked whether to advance.",
+      "expectations": [
+        "The output keeps research, personas and the team roster in one complete Phase 0 candidate payload rather than applying partial persona updates.",
+        "The parent workflow applies the candidate payload, attaches at least two independent reviews, gates the revision, resolves or accepts remaining risk, records approval and renders.",
+        "The output asks whether to enter Phase 1 only after the full lifecycle completes.",
+        "The spelling preference is stored separately in `{project-name}-settings.md`.",
+        "The output does not write or update a generated Research Brief, offer Markdown or HTML report directly."
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Research patch revalidates phase",
+      "prompt": "A Phase 2 candidate revision already has two reviews, but one review exposes an unanswered competitor-pricing question. New source evidence is now available. Incorporate it and complete the phase without editing generated views.",
+      "expected_output": "The new evidence is merged into a complete revised phase payload and sent through a fresh full review, gate, risk-resolution, approval and render lifecycle because applying the revision invalidates the prior reviews.",
+      "expectations": [
+        "The revised payload preserves the candidate phase data, summary and evidence references while adding the new source evidence as a `research_patch`.",
+        "The output treats every earlier review as invalid after applying the revision and reruns at least two independent reviews.",
+        "The output normalises issues, gates the new revision, resolves or accepts remaining risk, records approval and renders again.",
+        "The output does not apply a patch-only payload that would replace the existing phase data with an empty object.",
+        "The output does not edit the generated Research Brief or offer views directly."
+      ]
     }
   ]
 }
