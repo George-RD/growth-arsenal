@@ -81,9 +81,9 @@
       "id": 7,
       "name": "Resume preserved offer audit after installing writing-core",
       "prompt": "writing-core is now installed. Resume the paused Phase 0 offer-audit presentation from these preserved records without recollecting them: Dream Outcome 8 — monthly books ready by day 5; Perceived Likelihood 6 — two client testimonials but no measured baseline; Time Delay 4 — onboarding takes two weeks; Effort and Sacrifice 7 — clients upload bank statements monthly; guarantee — none.",
-      "expected_output": "The workshop builds a factual kernel from the preserved audit records, then produces only the human-readable diagnosis, recommendation or strengthening note needed to resume Phase 0 without changing the records or asking for them again.",
+      "expected_output": "The workshop fills the copyable writing-core factual-kernel schema from the preserved audit records with claim status separate from provenance, then produces only the human-readable diagnosis, recommendation or strengthening note needed to resume Phase 0 without changing the records or asking for them again.",
       "expectations": [
-        "The output shows that the factual kernel is built from all five preserved records before the human-readable offer-audit prose.",
+        "Before the human-readable offer-audit prose, the output fills the copyable writing-core factual-kernel schema from all five preserved records and records status and provenance separately for every material claim.",
         "The diagnosis and any recommendation or strengthening note preserve the supplied scores, facts and unknowns without inventing evidence.",
         "The output does not ask to install writing-core, recollect the audit answers or restart Phase 0.",
         "The output does not invoke business-copy-style for this internal audit prose."
