@@ -29,7 +29,7 @@
       "prompt": "writing-core and business-copy-style are installed and resolvable by skill name. Start a $100M Leads workshop for my bookkeeping firm, complete Phase 0 discovery and the offer audit including the Lead Gen Landscape report and narrative customer personas, then take me into Phase 1 through the first point where you need customer-facing copy.",
       "expected_output": "Normal Leads workshop behavior that gathers raw and structured evidence first, uses writing-core for the Phase 0 offer-audit diagnosis, research report, persona synthesis and later first customer-facing candidate, then uses business-copy-style only at the customer-facing copy checkpoint without install prompts or degraded status.",
       "expectations": [
-        "The output may gather raw Phase 0 research, structured offer-audit scores and structured persona evidence before invoking writing-core, but the human-readable offer-audit diagnosis, Lead Gen Landscape report and narrative persona descriptions are generated through writing-core.",
+        "The output gathers and records raw Phase 0 research, structured offer-audit scores and structured persona evidence before handing that evidence to writing-core; the response shows this structured handoff before the generated offer-audit diagnosis, Lead Gen Landscape report and narrative persona descriptions.",
         "The output does not ask to install writing-core when the Phase 0 research synthesis begins because it is available.",
         "The output does not prompt about business-copy-style merely for the internal Phase 0 research report.",
         "At the first customer-facing copy checkpoint in Phase 1, writing-core generates the candidate from approved meaning and business-copy-style then reviews that candidate without an install prompt.",
@@ -54,27 +54,39 @@
     {
       "id": 5,
       "name": "Missing writing-core during Phase 0 synthesis",
-      "prompt": "I already supplied discovery facts and you gathered raw web evidence plus structured persona facts for my bookkeeping lead-generation market. We are about to turn that evidence into the Phase 0 Lead Gen Landscape report and narrative customer personas, but writing-core cannot be resolved by skill name. Continue from this exact state without discarding the research.",
-      "expected_output": "The workshop preserves raw evidence, structured persona facts and approved discovery/offer-audit state, pauses only human-readable report and persona synthesis, gives the writing-core install command, and resumes Phase 0 from the same evidence after installation rather than writing fallback prose.",
+      "prompt": "I already supplied discovery facts and you gathered evidence for my bookkeeping lead-generation market. Preserve these exact records: discovery fact — monthly bookkeeping costs GBP 300, supplied by me; raw research record — Source A says competitors promote fixed monthly pricing; persona fact — an owner-led firm with 2-10 staff wants its monthly close by day 5. We are about to turn them into the Phase 0 Lead Gen Landscape report and narrative persona, but writing-core cannot be resolved by skill name. Continue from this exact state without discarding the research.",
+      "expected_output": "The workshop echoes the three exact records in a structured preserved-state block, pauses only human-readable report and persona synthesis, gives the writing-core install command, and says Phase 0 can resume from those same records after installation rather than writing fallback prose.",
       "expectations": [
         "The output does not produce the Lead Gen Landscape report or narrative persona prose while writing-core is unavailable.",
-        "The output preserves the raw research evidence, structured persona facts and discovery/offer-audit decisions.",
+        "A structured preserved-state block retains unchanged: monthly bookkeeping costs GBP 300 from the user; Source A says competitors promote fixed monthly pricing; and the owner-led 2-10-person firm wants its monthly close by day 5.",
         "The output shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
-        "The output says the Phase 0 synthesis can resume from the same evidence after writing-core becomes available.",
+        "The output says Phase 0 synthesis can resume from those same three records after writing-core becomes available.",
         "The output does not recreate writing-core locally or postpone the requirement until Phase 1 customer copy."
       ]
     },
     {
       "id": 6,
       "name": "Missing writing-core at offer-audit diagnosis",
-      "prompt": "I answered the Phase 0 offer-audit questions for my bookkeeping firm. The four Value Equation variables are scored with their supporting facts, and the structured audit is ready, but writing-core cannot be resolved by skill name. Present the audit result and tell me whether to continue.",
-      "expected_output": "The workshop preserves the structured offer-audit scores and supporting facts, withholds the human-readable diagnosis, recommendation and strengthening note, gives the writing-core install command, and can resume from the same Phase 0 state after installation.",
+      "prompt": "I answered the Phase 0 offer-audit questions for my bookkeeping firm. Preserve this structured audit exactly: Dream Outcome 8 — monthly books ready by day 5; Perceived Likelihood 6 — two client testimonials but no measured baseline; Time Delay 4 — onboarding takes two weeks; Effort and Sacrifice 7 — clients upload bank statements monthly; guarantee — none. writing-core cannot be resolved by skill name. Present the audit result and tell me whether to continue.",
+      "expected_output": "The workshop echoes the five exact audit records in a structured preserved-state block, withholds the human-readable diagnosis, recommendation and strengthening note, gives the writing-core install command, and says the offer-audit presentation can resume from those same records after installation.",
       "expectations": [
-        "The output preserves the structured Value Equation scores and supporting user facts rather than discarding or narratively rewriting them.",
+        "A structured preserved-state block retains all five records unchanged, including each score, supporting fact and the absence of a guarantee.",
         "The output does not produce an offer-audit diagnosis, recommendation or note on what to strengthen while writing-core is unavailable.",
         "The output shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
-        "The output says the offer-audit presentation can resume from the same structured Phase 0 state after writing-core becomes available.",
+        "The output says the offer-audit presentation can resume from those same structured records after writing-core becomes available.",
         "The output does not recreate writing-core locally or continue to later human-readable Phase 0 outputs."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Resume preserved offer audit after installing writing-core",
+      "prompt": "writing-core is now installed. Resume the paused Phase 0 offer-audit presentation from these preserved records without recollecting them: Dream Outcome 8 — monthly books ready by day 5; Perceived Likelihood 6 — two client testimonials but no measured baseline; Time Delay 4 — onboarding takes two weeks; Effort and Sacrifice 7 — clients upload bank statements monthly; guarantee — none.",
+      "expected_output": "The workshop builds a factual kernel from the preserved audit records, then produces only the human-readable diagnosis, recommendation or strengthening note needed to resume Phase 0 without changing the records or asking for them again.",
+      "expectations": [
+        "The output shows that the factual kernel is built from all five preserved records before the human-readable offer-audit prose.",
+        "The diagnosis and any recommendation or strengthening note preserve the supplied scores, facts and unknowns without inventing evidence.",
+        "The output does not ask to install writing-core, recollect the audit answers or restart Phase 0.",
+        "The output does not invoke business-copy-style for this internal audit prose."
       ]
     }
   ]
