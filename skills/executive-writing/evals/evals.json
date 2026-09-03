@@ -3,14 +3,28 @@
   "evals": [
     {
       "id": 0,
-      "prompt": "Write one management slide from this finding: a live dashboard shows GNSS interference to the ROC. Operators say it helps them diagnose events and judge when signals have stabilised. Neil estimates the wider GNSS mitigation programme recovered about 30% of GNSS-affected time, but that estimate combines antennas, procedures and software. Commercial has not yet approved a cash value per recovered hour. The current decision is whether to fund a bounded next phase, not fleet-wide scale. Visible caveat: the 30% is programme-level and must not be attributed to the dashboard. Secondary caveat for notes: the exact period used for Neil's estimate still needs confirmation.",
+      "name": "Management slide with writing-core available",
+      "prompt": "writing-core is installed and resolvable by skill name, and its factual kernel has already been built from the following finding. Write one management slide from it: a live dashboard shows GNSS interference to the ROC. Operators say it helps them diagnose events and judge when signals have stabilised. Neil estimates the wider GNSS mitigation programme recovered about 30% of GNSS-affected time, but that estimate combines antennas, procedures and software. Commercial has not yet approved a cash value per recovered hour. The current decision is whether to fund a bounded next phase, not fleet-wide scale. Visible caveat: the 30% is programme-level and must not be attributed to the dashboard. Secondary caveat for notes: the exact period used for Neil's estimate still needs confirmation.",
       "expected_output": "A sparse management-slide concept with the decision-relevant conclusion and programme-attribution caveat visible, while the secondary period caveat is kept in notes.",
       "expectations": [
+        "The response does not ask to install writing-core because the dependency is explicitly available and the factual kernel is supplied.",
         "The slide puts the current decision or recommendation before background detail.",
         "The programme-level attribution caveat is visible beside the 30% estimate because it changes interpretation.",
         "The exact-period caveat is treated as secondary method detail rather than crowding visible copy.",
         "The copy uses concrete operational evidence rather than strategic-sounding abstraction.",
         "The visible wording reads naturally aloud and does not rely on a tidy contrast or slogan."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Missing writing-core hard dependency",
+      "prompt": "I need this finding turned into a management slide, but writing-core cannot be resolved by skill name. Preserve the finding and continue only as far as this skill safely can: Holocron shows live GNSS interference to the ROC, and the current decision is whether to fund a bounded next phase.",
+      "expected_output": "The skill preserves the supplied meaning, pauses the delivery path, shows the writing-core selective-install command, and does not invent a local factual-kernel fallback or draft final slide prose.",
+      "expectations": [
+        "The response does not produce final management-slide prose while writing-core is unavailable.",
+        "The response shows exactly `npx skills add George-RD/growth-arsenal --skill writing-core`.",
+        "The supplied finding is preserved so work can resume after installation.",
+        "The response does not recreate writing-core's factual-kernel method as a local fallback."
       ]
     }
   ]
