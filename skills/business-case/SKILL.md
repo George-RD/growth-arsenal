@@ -64,17 +64,19 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
 
 5. **Calculate break-even and switching values**
    Calculate both:
-   - **Break-even:** where the recommended path reaches zero net value against the counterfactual.
-   - **Switching value:** where a named competing option becomes preferable to the recommended path.
+   - **Break-even:** where the recommended path's incremental net value versus the chosen counterfactual reaches zero.
+   - **Switching value:** where the recommended path and a named competing option have equal net value and the preferred option changes beyond that point.
+
+   The counterfactual for break-even is usually Hold / do nothing. The competing option for switching may instead be the minimum/slower-change path. If the counterfactual and competing option are genuinely the same, the two thresholds may coincide; record that explicitly rather than manufacturing a different number.
 
    Ask:
-   - How much benefit is required to cover incremental cost and quantified dis-benefits on the chosen horizon?
+   - How much benefit is required to cover the recommended path's incremental economic burden versus the counterfactual on the chosen horizon?
    - Which single assumption matters most?
    - How far must that assumption move before the preferred option changes?
 
    A fragile case depends on a narrow set of favourable assumptions. A robust case survives a large error in the uncertain inputs.
 
-   *Done when:* the template records both thresholds, the competing option for the switching value, and the headroom from the base case.
+   *Done when:* the template records both threshold roles, the named counterfactual and competing option, and the headroom from the base case.
 
 6. **Separate programme value from component attribution**
    When several interventions create the outcome, model the programme result first. Then test whether the component being funded needs only a smaller attributable contribution to justify its incremental cost.
