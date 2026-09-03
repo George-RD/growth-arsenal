@@ -6,7 +6,7 @@ Put costs and benefits on the same time basis before comparing them.
 
 1. Choose the appraisal horizon that matches the decision: for example a 12-month pilot or a multi-year operating life.
 2. Schedule upfront CAPEX when it occurs.
-3. Schedule recurring OPEX and benefits in the periods when they occur.
+3. Schedule recurring OPEX, quantified dis-benefits and benefits in the periods when they occur.
 4. Use the same units and time basis across every option.
 5. When timing is material or Finance requires it, discount future cash flows using the approved rate and compare net present value (NPV), not undiscounted totals from different periods.
 6. Calculate payback from cumulative net cash flow over that same schedule.
@@ -21,7 +21,10 @@ Within the chosen appraisal horizon:
 Net value =
   attributable benefit
   - future incremental cost
+  - quantified dis-benefits
 ```
+
+If a dis-benefit is already included in future incremental cost, do not subtract it again. Keep material dis-benefits that cannot be defensibly monetised visible in the option comparison rather than assigning a speculative cash value.
 
 For recovered productive time:
 
@@ -54,11 +57,11 @@ Example:
 
 ```text
 Break-even protected hours =
-  annual incremental cost
+  (annual incremental cost + annualised quantified dis-benefits)
   ÷ value per protected hour
 ```
 
-This annual form is valid only when the incremental cost is the annualised cost consistent with the per-hour benefit rate. For multi-year cases, solve against the scheduled or discounted cash flows instead.
+If quantified dis-benefits are already included in annual incremental cost, do not add them again. This annual form is valid only when the cost and quantified dis-benefits are annualised consistently with the per-hour benefit rate. For multi-year cases, solve against the scheduled or discounted cash flows instead.
 
 A useful business-case slide often shows this number before a large ROI estimate because it lets the audience judge robustness.
 
