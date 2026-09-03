@@ -163,10 +163,9 @@ Once personas are validated, confirm:
 
 ### Phase 0 Output
 
-1. Write initial `{project-name}-offer.md` with Phase 0 section from approved, source-bounded Phase 0 synthesis
+1. Apply the approved, source-bounded Phase 0 synthesis to the canonical workspace
 2. Create `{project-name}-settings.md` recording the confirmed spelling preference (read by the business-copy-style skill at copy time)
-3. Generate `{project-name}-research-dashboard.html` from the canonical workspace after Phase 0 state is applied
-4. Generate `{project-name}-workshop-progress.html` from the canonical workspace after Phase 0 state is applied
+3. Render `{project-name}-offer.md`, the other Markdown views and both HTML dashboards from the canonical workspace
 
 ---
 
