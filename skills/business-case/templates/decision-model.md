@@ -151,9 +151,9 @@ Switching value is the point where a named competing option becomes preferable t
 
 ## Risks and ownership
 
-| Risk | Why it matters | Mitigation / fallback | Owner | Decision trigger |
-|---|---|---|---|---|
-| [ ] | [ ] | [ ] | [ ] | [ ] |
+| Option | Risk | Why it matters | Mitigation / fallback | Owner | Decision trigger |
+|---|---|---|---|---|---|
+| [Named option] | [ ] | [ ] | [ ] | [ ] | [ ] |
 
 ## Governance and delivery gates
 

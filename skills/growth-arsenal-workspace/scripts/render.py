@@ -26,6 +26,20 @@ def esc(value: Any) -> str:
 
     return html.escape("" if value is None else str(value), quote=True)
 
+def display_value(value: Any, default: str = "Not recorded") -> str:
+    """Return a readable deterministic string for a report field."""
+
+    if value in (None, "", [], {}):
+        return default
+    if isinstance(value, list):
+        return "; ".join(str(item) for item in value)
+    if isinstance(value, dict):
+        return "; ".join(
+            f"{key.replace('_', ' ')}: {item}" for key, item in value.items()
+        )
+    return str(value)
+
+
 
 def pick(mapping: Any, *keys: str, default: Any = None) -> Any:
     """Return the first non-empty mapping value among candidate keys."""
@@ -302,8 +316,14 @@ def research_report(state: dict[str, Any]) -> str:
         f'<span>Customer record</span><h3>{esc(item.get("name", "Unnamed persona"))}'
         f'</h3></div><strong>{esc(item.get("pain_score", "—"))}/10 pain</strong>'
         f'</div><p>{esc(pick(item, "snapshot", "summary", default=""))}</p><dl>'
-        f'<div><dt>Budget</dt><dd>{esc(item.get("budget", "Not recorded"))}</dd>'
-        f'</div></dl></article>'
+        f'<div><dt>Pain points</dt><dd>{esc(display_value(pick(item, "pain_points", "specific_pain_points")))}</dd></div>'
+        f'<div><dt>Current solutions</dt><dd>{esc(display_value(pick(item, "current_solutions", "current_solution")))}</dd></div>'
+        f'<div><dt>Budget</dt><dd>{esc(display_value(pick(item, "budget", "spending_power")))}</dd></div>'
+        f'<div><dt>Objections</dt><dd>{esc(display_value(pick(item, "objections", "objection_patterns")))}</dd></div>'
+        f'<div><dt>Dream outcome</dt><dd>{esc(display_value(pick(item, "dream_outcome", "desired_outcome")))}</dd></div>'
+        f'<div><dt>Channels</dt><dd>{esc(display_value(pick(item, "channels", "where_they_hang_out")))}</dd></div>'
+        f'<div><dt>Buying psychology</dt><dd>{esc(display_value(pick(item, "buying_psychology", "buying_signals")))}</dd></div>'
+        f'</dl></article>'
         for item in research.get("personas", [])
         if isinstance(item, dict)
     ) or '<p class="empty-state">No personas recorded.</p>'

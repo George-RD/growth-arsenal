@@ -22,6 +22,7 @@ Do not store presentation HTML in phase data.
 The renderer accepts aliases and missing fields, but calling skills should converge on these keys:
 
 - `discovery`: `business`, `audience`, `problem`, `personas`
+
 - `market`: `core_market`, `niche`, `pain_score`, `purchasing_power_score`, `targeting_score`, `growth_score`
 - `pricing`: `price`, `position`, `ten_x_insight`, `delivery_cost`, `margin_notes`
 - `value`: `dream_outcome`, `dream_score`, `perceived_likelihood`, `likelihood_score`, `time_delay`, `time_score`, `effort_sacrifice`, `effort_score`
@@ -29,6 +30,8 @@ The renderer accepts aliases and missing fields, but calling skills should conve
 - `enhancement`: `offer_name`, `elevator_pitch`, `scarcity`, `urgency`, `guarantee`
 
 `guarantee` should contain `name`, `terms`, `type`, `category`, `target_fear` and optional `layers`.
+
+Each discovery persona uses `name`, `snapshot`, `pain_points`, `current_solutions`, `budget`, `objections`, `dream_outcome`, `channels` and `buying_psychology`; `pain_score` is optional. The Research dashboard renders every field.
 
 ## Review payload
 
