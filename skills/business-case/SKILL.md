@@ -58,25 +58,29 @@ Before analysis, copy [`templates/decision-model.md`](templates/decision-model.m
 
    Quantify a dis-benefit when a defensible cost or time measure exists. Otherwise keep it visible as a non-financial negative effect in the option comparison. Never count the same effect twice.
 
-   Read [`references/economic-model.md`](references/economic-model.md) for appraisal-horizon, break-even, switching and attribution rules.
+   Read [`references/economic-model.md`](references/economic-model.md) for appraisal-horizon, payback, break-even, switching and attribution rules.
 
    *Done when:* every option and scenario uses the same horizon and cost basis, certain negative effects are included, and the recommendation can be tested across plausible conditions.
 
-5. **Calculate break-even and switching values**
-   Calculate both:
-   - **Break-even:** where the recommended path's incremental net value versus the chosen counterfactual reaches zero.
+5. **Calculate payback, break-even and switching values**
+   Calculate all three:
+   - **Payback:** when the recommended path's cumulative incremental cash flow or present value versus the named counterfactual reaches zero or becomes positive.
+   - **Break-even:** where the recommended path's incremental net value versus the chosen counterfactual reaches zero for the tested driver.
    - **Switching value:** where the recommended path and a named competing option have equal net value and the preferred option changes beyond that point.
 
-   The counterfactual for break-even is usually Hold / do nothing. The competing option for switching may instead be the minimum/slower-change path. If the counterfactual and competing option are genuinely the same, the two thresholds may coincide; record that explicitly rather than manufacturing a different number.
+   Use the same appraisal basis for payback as the option economics: cumulative net cash flow when discounting is not material, or cumulative present value when discounted payback is the approved basis. If payback does not occur within the horizon, record `NO PAYBACK WITHIN HORIZON`. If inputs are missing, record `UNKNOWN` and the evidence needed.
+
+   The counterfactual for break-even and payback is usually Hold / do nothing. The competing option for switching may instead be the minimum/slower-change path. If the counterfactual and competing option are genuinely the same, the two threshold values may coincide; record that explicitly rather than manufacturing a different number.
 
    Ask:
-   - How much benefit is required to cover the recommended path's incremental economic burden versus the counterfactual on the chosen horizon?
+   - When does the recommended path recover its incremental economic burden versus the counterfactual?
+   - How much benefit is required to cover that burden on the chosen horizon?
    - Which single assumption matters most?
    - How far must that assumption move before the preferred option changes?
 
    A fragile case depends on a narrow set of favourable assumptions. A robust case survives a large error in the uncertain inputs.
 
-   *Done when:* the template records both threshold roles, the named counterfactual and competing option, and the headroom from the base case.
+   *Done when:* the template records payback status/period, both threshold roles, the named counterfactual and competing option, and the headroom from the base case.
 
 6. **Separate programme value from component attribution**
    When several interventions create the outcome, model the programme result first. Then test whether the component being funded needs only a smaller attributable contribution to justify its incremental cost.
@@ -127,6 +131,6 @@ If the only positive result requires a favourable scenario chosen to justify the
 
 ## Output contract
 
-The completed output is a filled copy of [`templates/decision-model.md`](templates/decision-model.md). Do not drop a section because the answer is unknown; record `UNKNOWN`, `UNAVAILABLE`, `N/A`, or the appropriate open state so omissions are visible.
+The completed output is a filled copy of [`templates/decision-model.md`](templates/decision-model.md). Do not drop a section because the answer is unknown; record `UNKNOWN`, `UNAVAILABLE`, `N/A`, `NO PAYBACK WITHIN HORIZON`, or the appropriate open state so omissions are visible.
 
 The workflow or user may keep that model private and publish only the decision-relevant parts.
