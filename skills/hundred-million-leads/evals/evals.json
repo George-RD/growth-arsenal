@@ -27,9 +27,9 @@
       "id": 3,
       "name": "Writing and copy dependencies available",
       "prompt": "writing-core and business-copy-style are installed and resolvable by skill name. Start a $100M Leads workshop for my bookkeeping firm, complete Phase 0 discovery and the offer audit including the Lead Gen Landscape report and narrative customer personas, then take me into Phase 1 through the first point where you need customer-facing copy.",
-      "expected_output": "Normal Leads workshop behavior that gathers raw and structured evidence first, uses writing-core for the Phase 0 report, persona synthesis and later first customer-facing candidate, then uses business-copy-style only at the customer-facing copy checkpoint without install prompts or degraded status.",
+      "expected_output": "Normal Leads workshop behavior that gathers raw and structured evidence first, uses writing-core for the Phase 0 offer-audit diagnosis, research report, persona synthesis and later first customer-facing candidate, then uses business-copy-style only at the customer-facing copy checkpoint without install prompts or degraded status.",
       "expectations": [
-        "The output may gather raw Phase 0 research and structured persona evidence before invoking writing-core, but the human-readable Lead Gen Landscape report and narrative persona descriptions are generated through writing-core.",
+        "The output may gather raw Phase 0 research, structured offer-audit scores and structured persona evidence before invoking writing-core, but the human-readable offer-audit diagnosis, Lead Gen Landscape report and narrative persona descriptions are generated through writing-core.",
         "The output does not ask to install writing-core when the Phase 0 research synthesis begins because it is available.",
         "The output does not prompt about business-copy-style merely for the internal Phase 0 research report.",
         "At the first customer-facing copy checkpoint in Phase 1, writing-core generates the candidate from approved meaning and business-copy-style then reviews that candidate without an install prompt.",
