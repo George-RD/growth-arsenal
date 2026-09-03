@@ -9,10 +9,12 @@ A business case is a decision model under uncertainty, not a proof dossier.
 
 Do the economics and decision logic before writing the deck.
 
+Before analysis, copy [`templates/decision-model.md`](templates/decision-model.md) and fill it as the model develops. The template is the deterministic decision record; later prose may expose only the fields the audience needs.
+
 ## Sequence
 
 1. **Name the decision**
-   Write one sentence: what is being decided now, by whom, and what remains a later decision.
+   Fill the template's Decision section: what is being decided now, by whom, the decision window, and what remains a later decision.
 
    *Done when:* approval of this case cannot be confused with approval of a later scale-up.
 
@@ -43,7 +45,7 @@ Do the economics and decision logic before writing the deck.
    *Done when:* a sceptic can replace any assumption without rebuilding the model, and every material claim has explicit provenance or `UNAVAILABLE`.
 
 4. **Choose one appraisal horizon and model low, base and high cases**
-   Put every option on the same cash-flow timeline before comparing value. Schedule upfront CAPEX, recurring OPEX and benefits in the periods where they occur. If timing is material or Finance requires it, use the approved discount rate and compare NPV. Do not compare one year of benefit with lifecycle cost.
+   Put every option on the same cash-flow timeline before comparing value. Schedule upfront CAPEX, recurring OPEX, quantified dis-benefits and benefits in the periods where they occur. If timing is material or Finance requires it, use the approved discount rate and compare NPV. Do not compare one year of benefit with lifecycle cost.
 
    Use ranges where uncertainty is material. Keep the base case as the best current estimate, not automatically the most conservative value.
 
@@ -56,11 +58,15 @@ Do the economics and decision logic before writing the deck.
 
    Quantify a dis-benefit when a defensible cost or time measure exists. Otherwise keep it visible as a non-financial negative effect in the option comparison. Never count the same effect twice.
 
-   Read [`references/economic-model.md`](references/economic-model.md) for appraisal-horizon, break-even and attribution rules.
+   Read [`references/economic-model.md`](references/economic-model.md) for appraisal-horizon, break-even, switching and attribution rules.
 
    *Done when:* every option and scenario uses the same horizon and cost basis, certain negative effects are included, and the recommendation can be tested across plausible conditions.
 
 5. **Calculate break-even and switching values**
+   Calculate both:
+   - **Break-even:** where the recommended path reaches zero net value against the counterfactual.
+   - **Switching value:** where a named competing option becomes preferable to the recommended path.
+
    Ask:
    - How much benefit is required to cover incremental cost and quantified dis-benefits on the chosen horizon?
    - Which single assumption matters most?
@@ -68,7 +74,7 @@ Do the economics and decision logic before writing the deck.
 
    A fragile case depends on a narrow set of favourable assumptions. A robust case survives a large error in the uncertain inputs.
 
-   *Done when:* the reader can see what must be true for the investment to be worthwhile without mixing periods or cost bases.
+   *Done when:* the template records both thresholds, the competing option for the switching value, and the headroom from the base case.
 
 6. **Separate programme value from component attribution**
    When several interventions create the outcome, model the programme result first. Then test whether the component being funded needs only a smaller attributable contribution to justify its incremental cost.
@@ -82,6 +88,8 @@ Do the economics and decision logic before writing the deck.
 
    Prefer:
    > The current case supports X. The pilot will replace assumptions A and B with measured data before scale.
+
+   Fill the template's Next evidence section so each proposed measurement states which decision it could change.
 
    *Done when:* every pilot measure maps to a decision-driving assumption or operational risk.
 
@@ -117,18 +125,6 @@ If the only positive result requires a favourable scenario chosen to justify the
 
 ## Output contract
 
-Before prose, produce a compact decision model containing:
-
-- decision requested;
-- options;
-- assumption ledger with status, source and owner kept separate;
-- appraisal horizon and cost basis;
-- low/base/high economics;
-- material dis-benefits and transition impacts;
-- break-even value;
-- switching value;
-- major risks and ownership;
-- recommendation;
-- next evidence to replace.
+The completed output is a filled copy of [`templates/decision-model.md`](templates/decision-model.md). Do not drop a section because the answer is unknown; record `UNKNOWN`, `UNAVAILABLE`, `N/A`, or the appropriate open state so omissions are visible.
 
 The workflow or user may keep that model private and publish only the decision-relevant parts.
