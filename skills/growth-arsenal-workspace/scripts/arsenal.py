@@ -204,28 +204,10 @@ def command_approve(args: argparse.Namespace) -> dict:
     """Approve a reviewed, current revision whose prerequisites and gate pass."""
 
     state = load_workspace(args.workspace)
-    require_predecessors_approved(state, args.track, args.phase)
-    phase = get_phase(state, args.track, args.phase)
-    if not phase.get("revision"):
-        raise ArsenalError("Cannot approve an untouched phase")
-    if phase.get("status") == "stale" or phase.get("stale_reason"):
-        raise ArsenalError("Cannot approve stale content; re-apply and re-review the phase")
-    if phase.get("status") != "in_review":
-        raise ArsenalError("Phase must be in review before approval")
-    expected_inputs = upstream_revisions(state, args.track, args.phase)
-    if phase.get("input_revisions", {}) != expected_inputs:
-        raise ArsenalError("Phase inputs changed; re-apply and re-review the phase")
-    if phase.get("data_hash") != checksum(phase.get("data", {})):
-        raise ArsenalError("Phase data changed outside the apply flow")
     gate = compute_gate(state, args.track, args.phase)
-    if not gate["review_requirement_met"]:
-        raise ArsenalError(
-            f"Need {gate['minimum_reviewers']} independent reviewers before approval"
-        )
     if not gate["can_approve"]:
-        raise ArsenalError(
-            "Blocked by: " + ", ".join(item["issue_key"] for item in gate["critical_open"])
-        )
+        raise ArsenalError(gate["blockers"][0]["message"])
+    phase = get_phase(state, args.track, args.phase)
 
     phase.update(status="approved", approved_at=utc_now(), stale_reason=None)
     order = phase_order(args.track)
