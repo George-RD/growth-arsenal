@@ -108,7 +108,13 @@ python3 scripts/arsenal.py gate \
   --phase market
 ```
 
-Exit `0` means the phase can be approved. Exit `1` means the independent-review requirement is incomplete or one or more unaccepted critical issues remain. At least two distinct reviewers are required. Two distinct reviewers using the same `issue_key` make that issue critical; an explicitly blocking issue is also critical.
+Exit `0` means the phase is ready for approval in the current state. Exit `1` means approval is blocked: inspect the returned `blockers` codes and messages before choosing the next action. An unknown phase or unreadable JSON input is an error with exit `2`.
+
+`can_approve` includes lifecycle checks as well as review consensus. A phase must be in review, have approved prerequisites, and have no stale marker, input-revision drift or phase-data hash drift. Already-approved work returns `can_approve: false` because it needs no further approval; that alone does not make the workspace invalid.
+
+`review_gate_passed` reports only the recorded review result. It can remain true for stale work and must never be used as permission to approve. At least two distinct reviewers are required. Two distinct reviewers using the same `issue_key` make that issue critical; an explicitly blocking issue is also critical.
+
+The gate is read-only. `approve` uses the same checks against the state it loads. See `references/state-contract.md` for blocker codes and recovery rules.
 
 ### 5. Resolve or explicitly accept risk
 
