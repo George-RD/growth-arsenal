@@ -108,7 +108,7 @@ python3 scripts/arsenal.py gate \
   --phase market
 ```
 
-Exit `0` means the phase is ready for approval in the current state. Exit `1` means approval is blocked: inspect the returned `blockers` codes and messages before choosing the next action. An unknown phase or unreadable JSON input is an error with exit `2`.
+Exit `0` means the phase is ready for approval in the current state. Exit `1` means approval is blocked: inspect the returned `blockers` codes and messages before choosing the next action. An unknown phase, missing workspace or JSON syntax error exits `2`.
 
 `can_approve` includes lifecycle checks as well as review consensus. A phase must be in review, have approved prerequisites, and have no stale marker, input-revision drift or phase-data hash drift. Already-approved work returns `can_approve: false` because it needs no further approval; that alone does not make the workspace invalid.
 
