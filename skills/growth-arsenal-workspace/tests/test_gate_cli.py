@@ -217,6 +217,90 @@ class GateCliTests(unittest.TestCase):
         gate = self.assert_blocked("discovery", "critical-issues")
         self.assertFalse(gate["issues"][0]["accepted_risk"])
 
+    def test_blockers_follow_documented_recovery_order(self):
+        """Report prerequisite and lifecycle repairs before review actions."""
+
+        gate = self.assert_blocked("discovery", "untouched-phase")
+        self.assertEqual(
+            [item["code"] for item in gate["blockers"]],
+            ["untouched-phase", "phase-not-in-review", "reviewers-required"],
+        )
+        self.prepare("discovery")
+        self.apply("market")
+        self.review("market", [
+            {"reviewer": "marketer", "issues": [{"issue_key": "buyer-too-broad", "blocking": True}]},
+        ])
+        self.apply("discovery")
+        self.edit_phase("market", {"data": {"changed": True}})
+        expected = [
+            "predecessors-unapproved", "stale-phase", "upstream-revision-drift",
+            "phase-data-drift", "reviewers-required", "critical-issues",
+        ]
+        gate = self.assert_blocked("market", *expected)
+        self.assertEqual([item["code"] for item in gate["blockers"]], expected)
+
+        # A retained stale marker takes precedence over an edited approval status.
+        self.edit_phase("market", {"status": "approved"})
+        gate = self.assert_blocked("market", *expected)
+        self.assertEqual([item["code"] for item in gate["blockers"]], expected)
+
+    def test_accepted_risk_does_not_override_lifecycle_blockers(self):
+        """Accepted findings stay visible without granting lifecycle permission."""
+
+        self.prepare("discovery")
+        self.apply("market")
+        self.review("market", [
+            {"reviewer": "marketer", "issues": [{"issue_key": "buyer-too-broad", "blocking": True}]},
+            {"reviewer": "strategist", "issues": []},
+        ])
+        accepted = self.run_command(
+            "accept-risk", "--phase", "market", "--issue-key", "buyer-too-broad",
+            "--reason", "Pilot will test a narrower segment", "--confirmed-by", "user",
+        )
+        self.assertTrue(accepted["gate"]["can_approve"])
+        original = self.workspace.read_bytes()
+        cases = [
+            ("discovery", {"status": "in_review", "approved_at": None}, "predecessors-unapproved"),
+            ("discovery", {"revision": 9}, "upstream-revision-drift"),
+            ("market", {"status": "stale", "stale_reason": "Changed inputs"}, "stale-phase"),
+            ("market", {"status": "draft"}, "phase-not-in-review"),
+            ("market", {"status": "approved"}, "already-approved"),
+            ("market", {"data": {"changed": True}}, "phase-data-drift"),
+        ]
+        for phase, changes, code in cases:
+            with self.subTest(code=code):
+                self.workspace.write_bytes(original)
+                self.edit_phase(phase, changes)
+                gate = self.assert_blocked("market", code)
+                self.assertEqual([item["code"] for item in gate["blockers"]], [code])
+                self.assertTrue(gate["review_gate_passed"])
+                self.assertTrue(gate["issues"][0]["accepted_risk"])
+                self.assertEqual(gate["critical_open"], [])
+        self.workspace.write_bytes(original)
+        self.assert_ready_and_approve("market")
+        self.assertTrue(self.run_command("validate")["ok"])
+
+    def test_file_errors_are_not_readiness_results_and_leave_input_unchanged(self):
+        """Missing files and invalid JSON produce exit 2 without creating or editing state."""
+
+        self.workspace.unlink()
+        for command in ("gate", "approve"):
+            with self.subTest(command=command, case="missing"):
+                result = self.run_command(command, "--phase", "discovery", exit_code=2)
+                self.assertEqual(result, {
+                    "ok": False, "error": f"No such file: {self.workspace}",
+                })
+                self.assertFalse(self.workspace.exists())
+
+        invalid = b'{"schema_version": 1,\n'
+        self.workspace.write_bytes(invalid)
+        for command in ("gate", "approve"):
+            with self.subTest(command=command, case="invalid-json"):
+                result = self.run_command(command, "--phase", "discovery", exit_code=2)
+                self.assertFalse(result["ok"])
+                self.assertTrue(result["error"].startswith(f"Invalid JSON in {self.workspace}:"))
+                self.assertEqual(self.workspace.read_bytes(), invalid)
+
     def test_unknown_phase_is_an_error_not_a_readiness_result(self):
         """An invalid phase remains a domain error with no state changes."""
 
