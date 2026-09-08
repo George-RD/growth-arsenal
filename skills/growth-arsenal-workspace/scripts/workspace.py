@@ -355,6 +355,17 @@ def compute_gate(state: dict[str, Any], track: str, phase: str) -> dict[str, Any
         blockers.append(
             {"code": "phase-data-drift", "message": "Phase data changed outside the apply flow; re-apply and re-review the phase"}
         )
+    if any(
+        type(review.get("revision")) is not int
+        or review["revision"] != phase_state.get("revision")
+        for review in reviews
+    ):
+        blockers.append(
+            {
+                "code": "review-revision-drift",
+                "message": "Reviews do not match the current phase revision; re-apply and re-review the phase",
+            }
+        )
     if not review_requirement_met:
         blockers.append(
             {"code": "reviewers-required", "message": f"Need {MIN_INDEPENDENT_REVIEWERS} independent reviewers before approval"}
@@ -363,7 +374,11 @@ def compute_gate(state: dict[str, Any], track: str, phase: str) -> dict[str, Any
         blockers.append(
             {
                 "code": "critical-issues",
-                "message": "Blocked by: " + ", ".join(item["issue_key"] for item in critical_open),
+                "message": (
+                    "Blocked by: " + ", ".join(item["issue_key"] for item in critical_open)
+                    + ". Resolve findings and re-apply/re-review, or record explicit user acceptance "
+                    "for this revision with accept-risk."
+                ),
             }
         )
     return {
@@ -496,6 +511,14 @@ def validate_workspace(state: dict[str, Any]) -> list[dict[str, str]]:
                         }
                     )
                 gate = compute_gate(state, track, name)
+                if any(item["code"] == "review-revision-drift" for item in gate["blockers"]):
+                    findings.append(
+                        {
+                            "level": "error",
+                            "code": f"review-revision-{track}-{name}",
+                            "message": f"Approved {track}:{name} has reviews for a different or missing revision; re-apply and re-review the phase",
+                        }
+                    )
                 if not gate["review_requirement_met"]:
                     findings.append(
                         {
