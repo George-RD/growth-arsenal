@@ -30,13 +30,13 @@ Stale state is preserved for audit and comparison. It is not silently deleted an
 
 Applying a phase increments its own revision and clears its old reviews. All later phases with work are marked stale. Approval stores the current upstream revision map.
 
-`validate` fails when an approved phase's stored upstream revisions differ from current revisions. This catches manual or external state edits that bypassed `apply`.
+`validate` fails when an approved phase's stored upstream revisions differ from current revisions. It also reports `review-revision-{track}-{phase}` when an approved phase contains reviews with a missing, non-integer or different revision. Normal rendering refuses that invalid state. These checks catch manual or external state edits that bypassed `apply`.
 
 ## Approval gate
 
 `gate` reports eligibility for the next approval transition, not whether the phase was approved in the past. Its existing review fields remain available. The result also includes:
 
-- `review_gate_passed`: the recorded reviews meet the independent-reviewer requirement and have no unaccepted critical issues. This does not check lifecycle readiness.
+- `review_gate_passed`: the recorded reviews meet the independent-reviewer requirement and have no unaccepted critical issues. This does not check lifecycle readiness or review revision tags.
 - `blockers`: a deterministic list of objects with a `code` and an actionable `message`.
 - `can_approve`: true only when `blockers` is empty.
 
@@ -51,12 +51,15 @@ Blockers are returned in the following order when applicable. A stale marker tak
 | `phase-not-in-review` | Submit structured reviews for the applied phase. |
 | `upstream-revision-drift` | Re-apply content against current approved inputs and re-review. |
 | `phase-data-drift` | Re-apply the edited data through the CLI and re-review. |
+| `review-revision-drift` | Re-apply and obtain fresh reviews for the current phase revision. |
 | `reviewers-required` | Obtain reviews from at least two distinct reviewers. |
-| `critical-issues` | Resolve the findings, or record explicit user acceptance for this revision. |
+| `critical-issues` | Resolve findings and re-apply/re-review, or record explicit user acceptance for this revision with `accept-risk`. |
 
 The gate exits `0` when ready and `1` when blocked, without writing the workspace. An unknown phase, missing workspace or JSON syntax error exits `2`. `approve` evaluates the same gate on the state it loads; a blocked approval exits `2`, returns the first blocker message and leaves the workspace unchanged. A gate result is not a reservation against later state changes.
 
 Already-approved phases return `can_approve: false`; use their recorded status and `validate` to assess existing approvals. Report rendering continues to use the recorded status and review findings, not permission to approve again.
+
+Every recorded review must identify the current phase revision as an integer before approval. Missing tags, older or newer revisions, strings and booleans block approval even when the recorded consensus is clean. The gate leaves those reviews inspectable; re-apply the phase and obtain fresh reviews rather than editing their revision tags.
 
 After an upstream change, downstream review history remains inspectable and `review_gate_passed` may still be true. Approving the new upstream revision alone does not revive that downstream work. Re-apply each stale phase in dependency order, obtain fresh reviews, then approve it. Do not clear stale markers or edit hashes to bypass this flow.
 
