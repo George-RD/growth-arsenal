@@ -108,7 +108,13 @@ python3 scripts/arsenal.py gate \
   --phase market
 ```
 
-Exit `0` means the phase can be approved. Exit `1` means the independent-review requirement is incomplete or one or more unaccepted critical issues remain. At least two distinct reviewers are required. Two distinct reviewers using the same `issue_key` make that issue critical; an explicitly blocking issue is also critical.
+Exit `0` means the phase is ready for approval in the current state. Exit `1` means approval is blocked: inspect the returned `blockers` codes and messages before choosing the next action. An unknown phase, missing workspace or JSON syntax error exits `2`.
+
+`can_approve` includes lifecycle checks as well as review consensus. A phase must be in review, have approved prerequisites, and have no stale marker, input-revision drift or phase-data hash drift. Every recorded review must match the current phase revision. Already-approved work returns `can_approve: false` because it needs no further approval; that alone does not make the workspace invalid.
+
+`review_gate_passed` reports only the recorded review result, not whether its revision tags are current. It can remain true for stale work and must never be used as permission to approve. At least two distinct reviewers are required. Two distinct reviewers using the same `issue_key` make that issue critical; an explicitly blocking issue is also critical.
+
+The gate is read-only. `approve` uses the same checks against the state it loads. See `references/state-contract.md` for blocker codes and recovery rules.
 
 ### 5. Resolve or explicitly accept risk
 
@@ -139,7 +145,7 @@ python3 scripts/arsenal.py render \
   --surface all
 ```
 
-Approval is rejected when prerequisites are not approved, the phase is stale, its input revision snapshot has drifted, or fewer than two independent reviewers have submitted. Rendering writes the three HTML reports plus generated offer, research and decision Markdown views next to the workspace file.
+Approval is rejected when prerequisites are not approved, the phase is stale, its input revision snapshot has drifted, its reviews refer to another or missing revision, or fewer than two independent reviewers have submitted. Rendering writes the three HTML reports plus generated offer, research and decision Markdown views next to the workspace file.
 
 ### 7. Validate before handoff
 
@@ -148,7 +154,7 @@ python3 scripts/arsenal.py validate --workspace acme.arsenal.json
 python3 scripts/arsenal.py status --workspace acme.arsenal.json
 ```
 
-An approved phase whose recorded upstream revisions no longer match current state is invalid. Fix the state rather than editing the report.
+An approved phase whose recorded upstream revisions no longer match current state, or whose review revision tags do not match its current revision, is invalid. Normal rendering refuses that state. Re-apply and obtain fresh reviews rather than editing review tags or the report.
 
 ## Ownership boundary
 

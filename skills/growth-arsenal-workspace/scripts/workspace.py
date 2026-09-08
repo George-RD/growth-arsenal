@@ -275,7 +275,7 @@ def accepted_issue_keys(state: dict[str, Any], track: str, phase: str) -> set[st
 
 
 def compute_gate(state: dict[str, Any], track: str, phase: str) -> dict[str, Any]:
-    """Aggregate independent reviews into a deterministic approval gate."""
+    """Report review consensus and actual approval readiness without mutation."""
 
     grouped: dict[str, dict[str, Any]] = {}
     phase_state = get_phase(state, track, phase)
@@ -324,6 +324,63 @@ def compute_gate(state: dict[str, Any], track: str, phase: str) -> dict[str, Any
             critical_open.append(group)
     reviewers = sorted(distinct_reviewers)
     review_requirement_met = len(reviewers) >= MIN_INDEPENDENT_REVIEWERS
+
+    # Preserve review history as evidence, but never use it to bypass lifecycle checks.
+    blockers: list[dict[str, str]] = []
+    try:
+        require_predecessors_approved(state, track, phase)
+    except ArsenalError as exc:
+        blockers.append({"code": "predecessors-unapproved", "message": str(exc)})
+    if not phase_state.get("revision"):
+        blockers.append(
+            {"code": "untouched-phase", "message": "Cannot approve an untouched phase; apply its payload first"}
+        )
+    if phase_state.get("status") == "stale" or phase_state.get("stale_reason"):
+        blockers.append(
+            {"code": "stale-phase", "message": "Cannot approve stale content; re-apply and re-review the phase"}
+        )
+    elif phase_state.get("status") == "approved":
+        blockers.append(
+            {"code": "already-approved", "message": "Phase is already approved; continue to the next phase or re-apply changed content"}
+        )
+    elif phase_state.get("status") != "in_review":
+        blockers.append(
+            {"code": "phase-not-in-review", "message": "Phase must be in review before approval"}
+        )
+    if phase_state.get("input_revisions", {}) != upstream_revisions(state, track, phase):
+        blockers.append(
+            {"code": "upstream-revision-drift", "message": "Phase inputs changed; re-apply and re-review the phase"}
+        )
+    if phase_state.get("data_hash") != checksum(phase_state.get("data", {})):
+        blockers.append(
+            {"code": "phase-data-drift", "message": "Phase data changed outside the apply flow; re-apply and re-review the phase"}
+        )
+    if any(
+        type(review.get("revision")) is not int
+        or review["revision"] != phase_state.get("revision")
+        for review in reviews
+    ):
+        blockers.append(
+            {
+                "code": "review-revision-drift",
+                "message": "Reviews do not match the current phase revision; re-apply and re-review the phase",
+            }
+        )
+    if not review_requirement_met:
+        blockers.append(
+            {"code": "reviewers-required", "message": f"Need {MIN_INDEPENDENT_REVIEWERS} independent reviewers before approval"}
+        )
+    if critical_open:
+        blockers.append(
+            {
+                "code": "critical-issues",
+                "message": (
+                    "Blocked by: " + ", ".join(item["issue_key"] for item in critical_open)
+                    + ". Resolve findings and re-apply/re-review, or record explicit user acceptance "
+                    "for this revision with accept-risk."
+                ),
+            }
+        )
     return {
         "track": track,
         "phase": phase,
@@ -331,9 +388,11 @@ def compute_gate(state: dict[str, Any], track: str, phase: str) -> dict[str, Any
         "distinct_reviewers": reviewers,
         "minimum_reviewers": MIN_INDEPENDENT_REVIEWERS,
         "review_requirement_met": review_requirement_met,
+        "review_gate_passed": review_requirement_met and not critical_open,
         "issues": issues,
         "critical_open": critical_open,
-        "can_approve": review_requirement_met and not critical_open,
+        "blockers": blockers,
+        "can_approve": not blockers,
     }
 
 
@@ -452,6 +511,14 @@ def validate_workspace(state: dict[str, Any]) -> list[dict[str, str]]:
                         }
                     )
                 gate = compute_gate(state, track, name)
+                if any(item["code"] == "review-revision-drift" for item in gate["blockers"]):
+                    findings.append(
+                        {
+                            "level": "error",
+                            "code": f"review-revision-{track}-{name}",
+                            "message": f"Approved {track}:{name} has reviews for a different or missing revision; re-apply and re-review the phase",
+                        }
+                    )
                 if not gate["review_requirement_met"]:
                     findings.append(
                         {
