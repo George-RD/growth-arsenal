@@ -301,6 +301,68 @@ class GateCliTests(unittest.TestCase):
                 self.assertTrue(result["error"].startswith(f"Invalid JSON in {self.workspace}:"))
                 self.assertEqual(self.workspace.read_bytes(), invalid)
 
+    def test_phase_revision_change_cannot_reuse_earlier_reviews(self):
+        """Changing a phase revision requires fresh reviews, not historical consensus."""
+
+        self.apply("discovery")
+        self.review("discovery")
+        self.edit_phase("discovery", {"revision": 2})
+        gate = self.assert_blocked("discovery", "review-revision-drift")
+        self.assertTrue(gate["review_gate_passed"])
+        self.assertEqual(gate["review_count"], 2)
+        self.apply("discovery")
+        self.review("discovery")
+        self.assert_ready_and_approve("discovery")
+        self.assertTrue(self.run_command("validate")["ok"])
+
+    def test_mixed_or_missing_review_revisions_cannot_authorize_approval(self):
+        """Every recorded review must identify the current integer phase revision."""
+
+        self.apply("discovery")
+        self.review("discovery")
+        original = self.workspace.read_bytes()
+        for revision in (0, 2, None, True, "1"):
+            with self.subTest(review_revision=revision):
+                state = json.loads(original)
+                review = state["tracks"]["offer"]["phases"]["discovery"]["reviews"][0]
+                if revision is None:
+                    review.pop("revision")
+                else:
+                    review["revision"] = revision
+                self.workspace.write_text(json.dumps(state), encoding="utf-8")
+                gate = self.assert_blocked("discovery", "review-revision-drift")
+                self.assertTrue(gate["review_gate_passed"])
+                self.assertEqual(gate["review_count"], 2)
+
+    def test_approved_review_revision_drift_blocks_validation_and_rendering(self):
+        """An approved marker cannot turn reviews of another revision into valid output."""
+
+        self.prepare("discovery")
+        self.edit_phase("discovery", {"revision": 2})
+        before = self.workspace.read_bytes()
+        result = self.run_command("validate", exit_code=1)
+        self.assertFalse(result["ok"])
+        self.assertIn("review-revision-offer-discovery", [item["code"] for item in result["findings"]])
+        self.assertEqual(self.workspace.read_bytes(), before)
+        output = self.root / "reports"
+        rendered = self.run_command("render", "--output-dir", str(output), exit_code=2)
+        self.assertFalse(rendered["ok"])
+        self.assertFalse(output.exists())
+        self.assertEqual(self.workspace.read_bytes(), before)
+
+    def test_critical_issue_message_explains_both_recovery_paths(self):
+        """The approval error names fixes and revision-scoped explicit user acceptance."""
+
+        self.apply("discovery")
+        self.review("discovery", [
+            {"reviewer": "marketer", "issues": [{"issue_key": "buyer-too-broad", "blocking": True}]},
+            {"reviewer": "strategist", "issues": []},
+        ])
+        gate = self.assert_blocked("discovery", "critical-issues")
+        message = gate["blockers"][0]["message"]
+        for required in ("buyer-too-broad", "re-apply", "re-review", "accept-risk", "explicit user acceptance", "this revision"):
+            self.assertIn(required, message)
+
     def test_unknown_phase_is_an_error_not_a_readiness_result(self):
         """An invalid phase remains a domain error with no state changes."""
 
