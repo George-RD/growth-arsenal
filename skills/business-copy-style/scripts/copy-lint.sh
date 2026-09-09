@@ -8,7 +8,13 @@
 #   copy-lint.sh [--structure] [structural threshold flags] FILE
 #   copy-lint.sh --help
 #
-# Reads FILE, or stdin when FILE is "-". Pure POSIX sh + awk, no dependencies.
+# Reads exactly one FILE, or stdin when FILE is "-". Use -- before a filename
+# that starts with a dash. Input must contain analysable English words.
+# Pure POSIX sh + awk, no dependencies.
+#
+# Limits are finite non-negative decimals (no exponents); count limits are
+# integers. --similar-run-min must be an integer of at least 2.
+# Exit codes: 0 = gates pass; 1 = hard gate fails; 2 = input/usage error.
 #
 # Hard gates (failure -> exit 1):
 #   Flesch-Kincaid grade   <= --max-grade    (default 6)
@@ -41,25 +47,63 @@ require_value() {
   esac
 }
 
+require_number() {
+  require_value "$1" "${2-}"
+  kind="$3"
+  minimum="$4"
+  # Reject escapes before awk can interpret them in a -v assignment.
+  case "$value" in
+    *[!0123456789.]*) ;;
+    *)
+      if LC_ALL=C awk -v value="$value" -v kind="$kind" -v minimum="$minimum" '
+        BEGIN {
+          valid = value ~ /^([0-9]+([.][0-9]*)?|[.][0-9]+)$/
+          if (kind == "integer") valid = value ~ /^[0-9]+$/
+          number = value + 0
+          # Some awk variants compare infinities incorrectly; check their spelling.
+          finite = sprintf("%g", number) ~ /^[0-9.]+([eE][+-]?[0-9]+)?$/
+          exit !(valid && finite && number >= minimum)
+        }
+      '; then
+        return
+      fi
+      ;;
+  esac
+  echo "copy-lint: $option requires a finite $kind >= $minimum (got: $value)" >&2
+  exit 2
+}
+
+set_input() {
+  if [ -n "$file" ] || [ -z "$1" ]; then
+    echo "copy-lint: provide exactly one input file (use - for stdin)" >&2
+    exit 2
+  fi
+  file="$1"
+}
+
 while [ $# -gt 0 ]; do
   case "$1" in
-    --max-grade) require_value "$@"; max_grade="$2"; shift 2 ;;
-    --max-emdash) require_value "$@"; max_emdash="$2"; shift 2 ;;
-    --max-sentence) require_value "$@"; max_sentence="$2"; shift 2 ;;
+    --max-grade) require_number "$1" "${2-}" decimal 0; max_grade="$2"; shift 2 ;;
+    --max-emdash) require_number "$1" "${2-}" integer 0; max_emdash="$2"; shift 2 ;;
+    --max-sentence) require_number "$1" "${2-}" decimal 0; max_sentence="$2"; shift 2 ;;
     --structure) structure=1; shift ;;
     --similar-length-tolerance)
-      require_value "$@"; similar_length_tolerance="$2"; shift 2 ;;
-    --similar-run-min) require_value "$@"; similar_run_min="$2"; shift 2 ;;
+      require_number "$1" "${2-}" integer 0; similar_length_tolerance="$2"; shift 2 ;;
+    --similar-run-min) require_number "$1" "${2-}" integer 2; similar_run_min="$2"; shift 2 ;;
     --max-paragraph-words)
-      require_value "$@"; max_paragraph_words="$2"; shift 2 ;;
+      require_number "$1" "${2-}" integer 0; max_paragraph_words="$2"; shift 2 ;;
     --max-paragraph-sentences)
-      require_value "$@"; max_paragraph_sentences="$2"; shift 2 ;;
+      require_number "$1" "${2-}" integer 0; max_paragraph_sentences="$2"; shift 2 ;;
     -h|--help)
-      sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'
+      sed -n '2,/^$/s/^# \{0,1\}//p' "$0"
       exit 0 ;;
-    -) file="-"; shift ;;
+    --)
+      shift
+      while [ $# -gt 0 ]; do set_input "$1"; shift; done
+      ;;
+    -) set_input "$1"; shift ;;
     -*) echo "copy-lint: unknown option $1" >&2; exit 2 ;;
-    *) file="$1"; shift ;;
+    *) set_input "$1"; shift ;;
   esac
 done
 
@@ -69,13 +113,29 @@ if [ -z "$file" ]; then
 fi
 
 if [ "$file" = "-" ]; then
-  text="$(cat)"
+  if ! text="$(cat)"; then
+    echo "copy-lint: could not read stdin" >&2
+    exit 2
+  fi
 elif [ -f "$file" ]; then
-  text="$(cat "$file")"
+  if ! text="$(cat < "$file")"; then
+    echo "copy-lint: could not read file: $file" >&2
+    exit 2
+  fi
 else
   echo "copy-lint: no such file: $file" >&2
   exit 2
 fi
+
+# The readability model only counts English words; do not invent a passing
+# one-word document when none can be analysed.
+case "$text" in
+  *[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]*) ;;
+  *)
+    echo "copy-lint: input has no analysable English words; provide non-empty English copy" >&2
+    exit 2
+    ;;
+esac
 
 # Tier and advisory phrase lists kept in sync with references/de-ai-prose.md.
 # Base forms only; the matcher also catches -s/-d/-ed/-ing inflections.
