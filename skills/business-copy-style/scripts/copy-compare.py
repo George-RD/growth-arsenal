@@ -5,9 +5,11 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import math
 import re
 import sys
 from dataclasses import asdict, dataclass
+from functools import partial
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Iterable
@@ -124,11 +126,17 @@ def visible_text(raw: str, suffix: str = "") -> str:
 
 
 def read_copy(path: str | Path) -> str:
+    """Read analysable UTF-8 copy, reporting input failures with their path."""
     source = Path(path)
     try:
-        return visible_text(source.read_text(encoding="utf-8"), source.suffix)
+        text = visible_text(source.read_text(encoding="utf-8"), source.suffix)
     except FileNotFoundError as exc:
         raise ValueError(f"No such file: {source}") from exc
+    except (OSError, UnicodeError) as exc:
+        raise ValueError(f"Cannot read {source}: {exc}") from exc
+    if not re.search(r"[A-Za-z]", text):
+        raise ValueError(f"No analysable English words in: {source}")
+    return text
 
 
 def syllables(word: str) -> int:
@@ -361,21 +369,54 @@ def text_report(payload: dict[str, object]) -> str:
     return "\n".join(rows)
 
 
+def nonnegative_finite_float(value: str) -> float:
+    """Parse a finite, non-negative limit without allowing NaN gate bypasses."""
+    try:
+        number = float(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("must be a finite non-negative number") from exc
+    if not math.isfinite(number) or number < 0:
+        raise argparse.ArgumentTypeError("must be a finite non-negative number")
+    return number
+
+
+def integer_at_least(value: str, *, minimum: int = 0) -> int:
+    """Parse a count threshold and enforce its documented lower bound."""
+    try:
+        number = int(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(f"must be an integer >= {minimum}") from exc
+    if number < minimum:
+        raise argparse.ArgumentTypeError(f"must be an integer >= {minimum}")
+    return number
+
+
 def parser() -> argparse.ArgumentParser:
+    """Describe and enforce the comparison command's input contract."""
     command = argparse.ArgumentParser(
-        description="Compare deterministic copy signals without choosing a winner"
+        description="Compare deterministic copy signals without choosing a winner",
+        epilog=(
+            "Inputs must be UTF-8 files containing analysable English words after "
+            "HTML extraction. Grade and average-sentence limits must be finite and "
+            "non-negative. Count limits are non-negative integers; --similar-run-min >= 2. "
+            "Exit 0 means a comparison report was produced, even when hard gates fail. "
+            "Invalid input exits 2 with an error on stderr and no stdout report. "
+            "Structural signals remain advisory; no winner is chosen."
+        ),
     )
     command.add_argument("--baseline", required=True)
     command.add_argument("--candidate", required=True)
     command.add_argument("--baseline-label", default="Baseline")
     command.add_argument("--candidate-label", default="Candidate")
-    command.add_argument("--max-grade", type=float, default=6)
-    command.add_argument("--max-emdash", type=int, default=0)
-    command.add_argument("--max-sentence", type=float, default=15)
-    command.add_argument("--similar-length-tolerance", type=int, default=2)
-    command.add_argument("--similar-run-min", type=int, default=3)
-    command.add_argument("--max-paragraph-words", type=int, default=120)
-    command.add_argument("--max-paragraph-sentences", type=int, default=6)
+    command.add_argument("--max-grade", type=nonnegative_finite_float, default=6)
+    command.add_argument("--max-emdash", type=integer_at_least, default=0)
+    command.add_argument("--max-sentence", type=nonnegative_finite_float, default=15)
+    command.add_argument("--similar-length-tolerance", type=integer_at_least, default=2)
+    command.add_argument(
+        "--similar-run-min", type=partial(integer_at_least, minimum=2), default=3
+    )
+    command.add_argument("--max-paragraph-words", type=integer_at_least, default=120)
+    command.add_argument("--max-paragraph-sentences", type=integer_at_least, default=6)
     command.add_argument("--format", choices=["text", "json"], default="text")
     return command
 
